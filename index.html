@@ -36,6 +36,7 @@
             --accent: #38bdf8;
             --accent-2: #22c55e;
             --accent-3: #f59e0b;
+            --code: #a7f3d0;
             --danger: #fb7185;
             --shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
             --radius: 8px;
@@ -52,6 +53,7 @@
             --muted: #5d6677;
             --line: rgba(15, 23, 42, 0.14);
             --shadow: 0 18px 60px rgba(15, 23, 42, 0.11);
+            --code: #047857;
         }
 
         * {
@@ -64,6 +66,7 @@
         }
 
         body {
+            position: relative;
             margin: 0;
             min-height: 100vh;
             background:
@@ -73,6 +76,19 @@
             color: var(--text);
             font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             line-height: 1.65;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -2;
+            background-image:
+                linear-gradient(rgba(148, 163, 184, 0.055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, black, transparent 78%);
         }
 
         body.js-ready .reveal {
@@ -156,6 +172,7 @@
             gap: 10px;
             font-weight: 900;
             letter-spacing: 0;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
         }
 
         .brand-mark {
@@ -168,6 +185,7 @@
             background: var(--surface);
             color: var(--accent);
             font-size: 0.85rem;
+            box-shadow: inset 0 0 18px color-mix(in srgb, var(--accent) 14%, transparent);
         }
 
         .nav-links {
@@ -211,6 +229,34 @@
             color: var(--text);
         }
 
+        .language-switch {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            padding: 3px;
+            gap: 2px;
+        }
+
+        .lang-button {
+            min-width: 38px;
+            min-height: 32px;
+            border: 0;
+            border-radius: calc(var(--radius) - 3px);
+            background: transparent;
+            color: var(--muted);
+            font: inherit;
+            font-size: 0.84rem;
+            font-weight: 850;
+            cursor: pointer;
+        }
+
+        .lang-button.is-active {
+            background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+            color: var(--text);
+        }
+
         .button.primary {
             background: linear-gradient(135deg, var(--accent), #60a5fa);
             border-color: transparent;
@@ -220,12 +266,6 @@
 
         .button.secondary {
             background: transparent;
-        }
-
-        .button[data-copied="true"],
-        .contact-link[data-copied="true"] {
-            border-color: color-mix(in srgb, var(--accent-2) 65%, var(--line));
-            background: color-mix(in srgb, var(--accent-2) 13%, var(--surface));
         }
 
         .hero {
@@ -325,6 +365,23 @@
             font-weight: 650;
         }
 
+        .lab-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+            color: var(--code);
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+            font-size: 0.82rem;
+        }
+
+        .lab-chip {
+            border: 1px solid color-mix(in srgb, var(--accent-2) 28%, var(--line));
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--surface) 86%, transparent);
+            padding: 6px 9px;
+        }
+
         .profile-panel {
             position: relative;
             border: 1px solid var(--line);
@@ -332,6 +389,19 @@
             background: var(--surface);
             box-shadow: var(--shadow);
             padding: 18px;
+            overflow: hidden;
+        }
+
+        .profile-panel::before,
+        .card::before,
+        .timeline-item::before,
+        .feature-band::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 68%, transparent), color-mix(in srgb, var(--accent-2) 42%, transparent), transparent);
+            opacity: 0.75;
         }
 
         .profile-photo {
@@ -352,6 +422,53 @@
             display: grid;
             gap: 12px;
             margin-top: 16px;
+        }
+
+        .lab-terminal {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, #020617 58%, var(--surface));
+            margin-top: 16px;
+            overflow: hidden;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        }
+
+        .lab-terminal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+            padding: 8px 10px;
+            font-size: 0.78rem;
+        }
+
+        .lab-terminal-dots {
+            display: inline-flex;
+            gap: 5px;
+        }
+
+        .lab-terminal-dots span {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: var(--accent);
+            opacity: 0.72;
+        }
+
+        .lab-terminal-body {
+            display: grid;
+            gap: 6px;
+            padding: 11px 10px 12px;
+            color: var(--code);
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        .lab-terminal-body span::before {
+            content: "$ ";
+            color: var(--accent);
         }
 
         .meta-row {
@@ -420,6 +537,8 @@
         }
 
         .card {
+            position: relative;
+            overflow: hidden;
             border: 1px solid var(--line);
             border-radius: var(--radius);
             background: var(--surface);
@@ -431,6 +550,7 @@
         .card:hover {
             transform: translateY(-2px);
             border-color: color-mix(in srgb, var(--accent) 48%, var(--line));
+            background: color-mix(in srgb, var(--surface) 82%, rgba(56, 189, 248, 0.08));
         }
 
         .card h3 {
@@ -450,6 +570,8 @@
         }
 
         .timeline-item {
+            position: relative;
+            overflow: hidden;
             display: grid;
             grid-template-columns: minmax(140px, 0.28fr) minmax(0, 0.72fr);
             gap: 20px;
@@ -498,6 +620,7 @@
             font-size: 0.84rem;
             font-weight: 850;
             margin-bottom: 14px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
         }
 
         .project-card .tags {
@@ -506,6 +629,8 @@
         }
 
         .feature-band {
+            position: relative;
+            overflow: hidden;
             display: grid;
             grid-template-columns: minmax(0, 0.72fr) minmax(250px, 0.28fr);
             gap: 22px;
@@ -595,28 +720,6 @@
 
         .contact-link strong {
             white-space: nowrap;
-        }
-
-        .toast {
-            position: fixed;
-            left: 50%;
-            bottom: 22px;
-            transform: translateX(-50%) translateY(20px);
-            opacity: 0;
-            pointer-events: none;
-            z-index: 20;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: var(--surface-strong);
-            color: var(--text);
-            box-shadow: var(--shadow);
-            padding: 10px 14px;
-            transition: opacity 180ms ease, transform 180ms ease;
-        }
-
-        .toast.visible {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
         }
 
         footer {
@@ -745,12 +848,15 @@
                 <span>banas.dev</span>
             </a>
             <div class="nav-links">
-                <a href="#about">O mnie</a>
-                <a href="#english">English</a>
-                <a href="#experience">Doświadczenie</a>
-                <a href="#projects">Projekty</a>
-                <a href="#skills">Skills</a>
-                <a href="#contact">Kontakt</a>
+                <a href="#about" data-i18n="nav.about">O mnie</a>
+                <a href="#experience" data-i18n="nav.experience">Doświadczenie</a>
+                <a href="#projects" data-i18n="nav.projects">Projekty</a>
+                <a href="#skills" data-i18n="nav.skills">Umiejętności</a>
+                <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+                <div class="language-switch" aria-label="Wybór języka" data-i18n-attr="aria-label:langSwitch.label">
+                    <button class="lang-button is-active" type="button" data-lang="pl" aria-pressed="true">PL</button>
+                    <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+                </div>
                 <button class="icon-button" type="button" id="themeToggle" aria-label="Przełącz motyw" title="Przełącz motyw">◐</button>
             </div>
         </nav>
@@ -759,19 +865,19 @@
     <main id="main">
         <section class="page hero" id="top" aria-labelledby="hero-title">
             <div>
-                <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Technical Support Engineer / IT / Application Support</div>
+                <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> <span data-i18n="hero.eyebrow">Technical Support Engineer / IT / Application Support</span></div>
                 <h1 id="hero-title">Rafał Banaś</h1>
-                <p class="hero-subtitle">
+                <p class="hero-subtitle" data-i18n="hero.subtitle">
                     Technical Support Engineer w Motorola Solutions i student informatyki. Łączę praktyczne IT,
                     wsparcie aplikacji, troubleshooting systemów, automatyzację i analizę danych z rosnącym
                     zainteresowaniem AI oraz uczeniem maszynowym.
                 </p>
                 <div class="hero-actions">
-                    <a class="button primary" href="#projects">Zobacz projekty</a>
-                    <button class="button secondary" type="button" id="copyEmailHero">Skopiuj email</button>
+                    <a class="button primary" href="#projects" data-i18n="hero.projectsCta">Zobacz projekty</a>
                     <a class="button secondary" href="https://github.com/Rafalbanas" target="_blank" rel="noopener">GitHub</a>
+                    <a class="button secondary" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener">LinkedIn</a>
                 </div>
-                <ul class="hero-tags" aria-label="Główne obszary">
+                <ul class="hero-tags" aria-label="Główne obszary" data-i18n-attr="aria-label:hero.tagsAria">
                     <li class="tag">Windows Server</li>
                     <li class="tag">Microsoft 365</li>
                     <li class="tag">Active Directory</li>
@@ -781,30 +887,47 @@
                     <li class="tag">SQL Server / T-SQL</li>
                     <li class="tag">AI / ML</li>
                 </ul>
+                <div class="lab-strip" aria-label="Tryb pracy" data-i18n-attr="aria-label:hero.labAria">
+                    <span class="lab-chip" data-i18n="hero.lab1">buduj</span>
+                    <span class="lab-chip" data-i18n="hero.lab2">testuj</span>
+                    <span class="lab-chip" data-i18n="hero.lab3">automatyzuj</span>
+                    <span class="lab-chip" data-i18n="hero.lab4">mierz</span>
+                </div>
             </div>
 
-            <aside class="profile-panel" aria-label="Profil">
+            <aside class="profile-panel" aria-label="Profil" data-i18n-attr="aria-label:profile.aria">
                 <img src="cv_photo.webp" alt="Rafał Banaś" class="profile-photo" id="profilePhoto" fetchpriority="high">
                 <div class="profile-meta">
                     <div class="meta-row">
-                        <span>Lokalizacja</span>
-                        <span>Katowice, Polska</span>
+                        <span data-i18n="profile.locationLabel">Lokalizacja</span>
+                        <span data-i18n="profile.location">Katowice, Polska</span>
                     </div>
                     <div class="meta-row">
-                        <span>Aktualnie</span>
+                        <span data-i18n="profile.currentLabel">Aktualnie</span>
                         <span>Technical Support Engineer</span>
                     </div>
                     <div class="meta-row">
-                        <span>Firma</span>
+                        <span data-i18n="profile.companyLabel">Firma</span>
                         <span>Motorola Solutions</span>
                     </div>
                     <div class="meta-row">
-                        <span>Obszar</span>
+                        <span data-i18n="profile.areaLabel">Obszar</span>
                         <span>IT / Application Support</span>
                     </div>
                     <div class="meta-row">
-                        <span>Kierunek</span>
-                        <span>AI, Data Science, automatyzacja</span>
+                        <span data-i18n="profile.directionLabel">Kierunek</span>
+                        <span data-i18n="profile.direction">AI, Data Science, automatyzacja</span>
+                    </div>
+                </div>
+                <div class="lab-terminal" aria-label="Osobiste engineering lab" data-i18n-attr="aria-label:terminal.aria">
+                    <div class="lab-terminal-header">
+                        <span>~/banas.dev/lab</span>
+                        <span class="lab-terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </div>
+                    <div class="lab-terminal-body">
+                        <span data-i18n="terminal.line1">ops: wsparcie systemów i aplikacji</span>
+                        <span data-i18n="terminal.line2">data: telemetryka, SQL, eksperymenty ML</span>
+                        <span data-i18n="terminal.line3">automation: skrypty, workflowy, usługi</span>
                     </div>
                 </div>
             </aside>
@@ -812,10 +935,10 @@
 
         <section class="page section" id="about" aria-labelledby="about-title">
             <div class="section-heading">
-                <div class="section-kicker">About</div>
+                <div class="section-kicker" data-i18n="about.kicker">O mnie</div>
                 <div>
-                    <h2 id="about-title">Techniczne IT z ciekawością do danych i automatyzacji.</h2>
-                    <p class="section-lead">
+                    <h2 id="about-title" data-i18n="about.title">Techniczne IT z ciekawością do danych i automatyzacji.</h2>
+                    <p class="section-lead" data-i18n="about.lead">
                         Jestem studentem informatyki i pracuję w IT, rozwijając się w kierunku AI, Data Science
                         i automatyzacji. Najbliżej mi do praktycznego styku aplikacji, systemów, użytkowników
                         i procesów wsparcia: diagnozowania problemów, porządkowania informacji, dokumentowania
@@ -825,45 +948,26 @@
             </div>
             <div class="grid three">
                 <article class="card">
-                    <h3>Praktyczne wsparcie IT</h3>
-                    <p>Aplikacje, systemy, użytkownicy, infrastruktura, sieci i troubleshooting w codziennej pracy operacyjnej.</p>
+                    <h3 data-i18n="about.card1Title">Praktyczne wsparcie IT</h3>
+                    <p data-i18n="about.card1Text">Aplikacje, systemy, użytkownicy, infrastruktura, sieci i troubleshooting w codziennej pracy operacyjnej.</p>
                 </article>
                 <article class="card">
-                    <h3>Automatyzacja i skrypty</h3>
-                    <p>PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania warto zamieniać w procedury lub narzędzia.</p>
+                    <h3 data-i18n="about.card2Title">Automatyzacja i skrypty</h3>
+                    <p data-i18n="about.card2Text">PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania warto zamieniać w procedury lub narzędzia.</p>
                 </article>
                 <article class="card">
-                    <h3>Dane, AI i sport</h3>
-                    <p>Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako konkretny obszar pracy magisterskiej.</p>
+                    <h3 data-i18n="about.card3Title">Dane, AI i sport</h3>
+                    <p data-i18n="about.card3Text">Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako konkretny obszar pracy magisterskiej.</p>
                 </article>
-            </div>
-        </section>
-
-        <section class="page section" id="english" aria-labelledby="english-title">
-            <div class="section-heading">
-                <div class="section-kicker">English summary</div>
-                <div>
-                    <h2 id="english-title">International profile</h2>
-                    <p class="section-lead">
-                        I am an IT and application support specialist, currently working as a Technical Support Engineer
-                        at Motorola Solutions. I combine hands-on IT operations, systems troubleshooting, support processes,
-                        automation and a growing interest in AI, data science and machine learning.
-                    </p>
-                    <p>
-                        My academic work focuses on predicting cycling performance using telemetry data from sports devices.
-                        The main areas I work around are IT support, application support, automation, data analysis,
-                        machine learning and cycling telemetry.
-                    </p>
-                </div>
             </div>
         </section>
 
         <section class="page section" id="experience" aria-labelledby="experience-title">
             <div class="section-heading">
-                <div class="section-kicker">Experience</div>
+                <div class="section-kicker" data-i18n="experience.kicker">Doświadczenie</div>
                 <div>
-                    <h2 id="experience-title">Doświadczenie zawodowe</h2>
-                    <p class="section-lead">
+                    <h2 id="experience-title" data-i18n="experience.title">Doświadczenie zawodowe</h2>
+                    <p class="section-lead" data-i18n="experience.lead">
                         Pracowałem między innymi jako IT Specialist, Application Support i w obszarze IT Operations.
                         Od kwietnia 2026 pracuję jako Technical Support Engineer w Motorola Solutions.
                     </p>
@@ -872,29 +976,29 @@
 
             <div class="timeline">
                 <article class="timeline-item">
-                    <div class="period">od kwietnia 2026</div>
+                    <div class="period" data-i18n="experience.motorolaPeriod">od kwietnia 2026</div>
                     <div>
                         <h3>Technical Support Engineer</h3>
                         <p class="company">IT / Application Support</p>
                         <p class="company">Motorola Solutions</p>
                         <ul>
-                            <li>Praca w środowisku IT z naciskiem na wsparcie aplikacji, systemów i użytkowników.</li>
-                            <li>Analiza i rozwiązywanie problemów technicznych w oparciu o procesy wsparcia i dokumentację.</li>
-                            <li>Współpraca z systemami, zgłoszeniami, dokumentacją i informacjami potrzebnymi do diagnozy.</li>
-                            <li>Rozwijanie kompetencji w obszarach automatyzacji, analizy problemów i pracy z systemami.</li>
+                            <li data-i18n="experience.motorola1">Praca w środowisku IT z naciskiem na wsparcie aplikacji, systemów i użytkowników.</li>
+                            <li data-i18n="experience.motorola2">Analiza i rozwiązywanie problemów technicznych w oparciu o procesy wsparcia i dokumentację.</li>
+                            <li data-i18n="experience.motorola3">Współpraca z systemami, zgłoszeniami, dokumentacją i informacjami potrzebnymi do diagnozy.</li>
+                            <li data-i18n="experience.motorola4">Rozwijanie kompetencji w obszarach automatyzacji, analizy problemów i pracy z systemami.</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="timeline-item">
-                    <div class="period">październik 2025 - styczeń 2026</div>
+                    <div class="period" data-i18n="experience.madejPeriod">październik 2025 - styczeń 2026</div>
                     <div>
                         <h3>Madej Wróbel Sp. z o.o.</h3>
-                        <p class="company">Specjalista IT</p>
+                        <p class="company" data-i18n="experience.itSpecialist">Specjalista IT</p>
                         <ul>
-                            <li>Wsparcie użytkowników końcowych oraz rozwiązywanie problemów sprzętowych i programowych.</li>
-                            <li>Administracja systemami operacyjnymi i aplikacjami biurowymi.</li>
-                            <li>Utrzymanie ciągłości działania infrastruktury IT.</li>
+                            <li data-i18n="experience.madej1">Wsparcie użytkowników końcowych oraz rozwiązywanie problemów sprzętowych i programowych.</li>
+                            <li data-i18n="experience.madej2">Administracja systemami operacyjnymi i aplikacjami biurowymi.</li>
+                            <li data-i18n="experience.madej3">Utrzymanie ciągłości działania infrastruktury IT.</li>
                         </ul>
                     </div>
                 </article>
@@ -903,12 +1007,12 @@
                     <div class="period">2024 - 2025</div>
                     <div>
                         <h3>Elmiko Sp. z o.o.</h3>
-                        <p class="company">Specjalista IT</p>
+                        <p class="company" data-i18n="experience.itSpecialist">Specjalista IT</p>
                         <ul>
-                            <li>Utrzymanie i konfiguracja sprzętu IT oraz sieci komputerowych.</li>
-                            <li>Administracja kontami użytkowników i zarządzanie dostępem w Active Directory.</li>
-                            <li>Monitoring, troubleshooting, wsparcie użytkowników wewnętrznych i współpraca z dostawcami.</li>
-                            <li>Utrzymanie sieci, routery MikroTik, VPN i tunele.</li>
+                            <li data-i18n="experience.elmiko1">Utrzymanie i konfiguracja sprzętu IT oraz sieci komputerowych.</li>
+                            <li data-i18n="experience.elmiko2">Administracja kontami użytkowników i zarządzanie dostępem w Active Directory.</li>
+                            <li data-i18n="experience.elmiko3">Monitoring, troubleshooting, wsparcie użytkowników wewnętrznych i współpraca z dostawcami.</li>
+                            <li data-i18n="experience.elmiko4">Utrzymanie sieci, routery MikroTik, VPN i tunele.</li>
                         </ul>
                     </div>
                 </article>
@@ -917,10 +1021,10 @@
                     <div class="period">2023 - 2024</div>
                     <div>
                         <h3>Farby Kabe Sp. z o.o.</h3>
-                        <p class="company">Specjalista IT</p>
+                        <p class="company" data-i18n="experience.itSpecialist">Specjalista IT</p>
                         <ul>
-                            <li>Konfiguracja sprzętu IT, kont użytkowników i dostępów w Active Directory.</li>
-                            <li>Praca z VMware ESXi, Windows Server, MS SQL, MikroTik, VPN i FortiGate.</li>
+                            <li data-i18n="experience.kabe1">Konfiguracja sprzętu IT, kont użytkowników i dostępów w Active Directory.</li>
+                            <li data-i18n="experience.kabe2">Praca z VMware ESXi, Windows Server, MS SQL, MikroTik, VPN i FortiGate.</li>
                         </ul>
                     </div>
                 </article>
@@ -928,11 +1032,11 @@
                 <article class="timeline-item">
                     <div class="period">2021 - 2022</div>
                     <div>
-                        <h3>Automatyka i robotyka</h3>
+                        <h3 data-i18n="experience.automationTitle">Automatyka i robotyka</h3>
                         <p class="company">Junior PLC Programmer / Junior Automation Engineer</p>
                         <ul>
-                            <li>Wizualizacje HMI, wsparcie projektów automatyki i robotyki oraz praca przy uruchomieniach.</li>
-                            <li>Doświadczenie inżynierskie, które pomaga mi patrzeć na IT systemowo i procesowo.</li>
+                            <li data-i18n="experience.automation1">Wizualizacje HMI, wsparcie projektów automatyki i robotyki oraz praca przy uruchomieniach.</li>
+                            <li data-i18n="experience.automation2">Doświadczenie inżynierskie, które pomaga mi patrzeć na IT systemowo i procesowo.</li>
                         </ul>
                     </div>
                 </article>
@@ -941,10 +1045,10 @@
 
         <section class="page section" id="projects" aria-labelledby="projects-title">
             <div class="section-heading">
-                <div class="section-kicker">Projects</div>
+                <div class="section-kicker" data-i18n="projects.kicker">Projekty</div>
                 <div>
-                    <h2 id="projects-title">Projekty i obszary pracy</h2>
-                    <p class="section-lead">
+                    <h2 id="projects-title" data-i18n="projects.title">Projekty i obszary pracy</h2>
+                    <p class="section-lead" data-i18n="projects.lead">
                         Zestaw obszarów, które pokazują praktyczne podejście do IT: od prostych aplikacji webowych
                         i backendu, przez computer vision, po automatyzacje, systemy i własną przestrzeń do testów.
                     </p>
@@ -955,7 +1059,7 @@
                 <article class="card project-card">
                     <div class="project-number">01</div>
                     <h3>Lanari Candle</h3>
-                    <p>Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.</p>
+                    <p data-i18n="projects.lanariText">Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.</p>
                     <ul class="tags" aria-label="Technologie Lanari Candle">
                         <li class="tag">Python</li>
                         <li class="tag">FastAPI</li>
@@ -966,7 +1070,7 @@
                 <article class="card project-card">
                     <div class="project-number">02</div>
                     <h3>Automatic License Plate Recognition</h3>
-                    <p>Projekt computer vision do rozpoznawania tablic rejestracyjnych z wykorzystaniem YOLO i OCR: detekcja obiektu, odczyt tekstu i obróbka wyniku.</p>
+                    <p data-i18n="projects.alprText">Projekt computer vision do rozpoznawania tablic rejestracyjnych z wykorzystaniem YOLO i OCR: detekcja obiektu, odczyt tekstu i obróbka wyniku.</p>
                     <ul class="tags" aria-label="Technologie ALPR">
                         <li class="tag">YOLO</li>
                         <li class="tag">OCR</li>
@@ -976,19 +1080,19 @@
 
                 <article class="card project-card">
                     <div class="project-number">03</div>
-                    <h3>Praca magisterska</h3>
-                    <p>Projekt badawczo-inżynierski: predykcja formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem ML.</p>
-                    <ul class="tags" aria-label="Obszary pracy magisterskiej">
+                    <h3 data-i18n="projects.thesisTitle">Praca magisterska</h3>
+                    <p data-i18n="projects.thesisText">Projekt badawczo-inżynierski: predykcja formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem ML.</p>
+                    <ul class="tags" aria-label="Obszary pracy magisterskiej" data-i18n-attr="aria-label:projects.thesisTagsAria">
                         <li class="tag">ML</li>
-                        <li class="tag">Telemetryka</li>
-                        <li class="tag">Cycling data</li>
+                        <li class="tag" data-i18n="tag.telemetry">Telemetryka</li>
+                        <li class="tag" data-i18n="tag.cyclingData">Dane kolarskie</li>
                     </ul>
                 </article>
 
                 <article class="card project-card">
                     <div class="project-number">04</div>
-                    <h3>Administracja i automatyzacja IT</h3>
-                    <p>PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.</p>
+                    <h3 data-i18n="projects.itAutomationTitle">Administracja i automatyzacja IT</h3>
+                    <p data-i18n="projects.itAutomationText">PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.</p>
                     <ul class="tags" aria-label="Obszary administracji IT">
                         <li class="tag">PowerShell</li>
                         <li class="tag">Linux</li>
@@ -999,21 +1103,21 @@
                 <article class="card project-card">
                     <div class="project-number">05</div>
                     <h3>Banas.dev</h3>
-                    <p>Własna przestrzeń na projekty, testy, automatyzacje i usługi. Statyczna strona, własne subdomeny i miejsce do praktycznego eksperymentowania.</p>
+                    <p data-i18n="projects.banasText">Własna przestrzeń na projekty, testy, automatyzacje i usługi. Statyczna strona, własne subdomeny i miejsce do praktycznego eksperymentowania.</p>
                     <ul class="tags" aria-label="Banas.dev">
                         <li class="tag">Portfolio</li>
-                        <li class="tag">Services</li>
-                        <li class="tag">Automation</li>
+                        <li class="tag" data-i18n="tag.services">Usługi</li>
+                        <li class="tag" data-i18n="tag.automation">Automatyzacja</li>
                     </ul>
                 </article>
 
                 <article class="card project-card">
                     <div class="project-number">06</div>
-                    <h3>Automatyzacje n8n</h3>
-                    <p>Instancja do testowania automatyzacji procesów, integracji narzędzi i prostych przepływów wspierających codzienną pracę techniczną.</p>
+                    <h3 data-i18n="projects.n8nTitle">Automatyzacje n8n</h3>
+                    <p data-i18n="projects.n8nText">Instancja do testowania automatyzacji procesów, integracji narzędzi i prostych przepływów wspierających codzienną pracę techniczną.</p>
                     <ul class="tags" aria-label="n8n">
                         <li class="tag"><a href="https://n8n.banas.dev" target="_blank" rel="noopener">n8n.banas.dev</a></li>
-                        <li class="tag">Integracje</li>
+                        <li class="tag" data-i18n="tag.integrations">Integracje</li>
                     </ul>
                 </article>
             </div>
@@ -1022,15 +1126,15 @@
         <section class="page section" id="thesis" aria-labelledby="thesis-title">
             <div class="feature-band">
                 <div>
-                    <div class="section-kicker">Thesis / Cycling data</div>
-                    <h2 id="thesis-title">Machine learning, telemetryka i forma kolarska.</h2>
-                    <p class="section-lead">
+                    <div class="section-kicker" data-i18n="thesis.kicker">Praca magisterska / dane kolarskie</div>
+                    <h2 id="thesis-title" data-i18n="thesis.title">Machine learning, telemetryka i forma kolarska.</h2>
+                    <p class="section-lead" data-i18n="thesis.lead">
                         Moja praca magisterska to projekt badawczo-inżynierski dotyczący predykcji formy kolarskiej
                         na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem uczenia maszynowego.
                         To połączenie sportu, danych, ML i praktycznej analizy wydolności, bez obietnicy gotowego
                         produktu komercyjnego.
                     </p>
-                    <p>
+                    <p data-i18n="thesis.gravel">
                         Gravel jest dla mnie naturalnym miejscem styku technologii i wytrzymałości: długie trasy,
                         eksploracja, moc, tętno, FTP, obciążenie treningowe i pytanie, jak z surowych danych
                         wyciągać wnioski, które mają sens nie tylko na wykresie, ale też w praktyce treningowej.
@@ -1039,15 +1143,15 @@
                 <div class="metrics" aria-label="Akcenty projektu">
                     <div class="metric">
                         <strong>ML</strong>
-                        <span>modelowanie i predykcja</span>
+                        <span data-i18n="thesis.metricMl">modelowanie i predykcja</span>
                     </div>
                     <div class="metric">
                         <strong>FTP</strong>
-                        <span>forma, obciążenie, wydolność</span>
+                        <span data-i18n="thesis.metricFtp">forma, obciążenie, wydolność</span>
                     </div>
                     <div class="metric">
                         <strong>GPS</strong>
-                        <span>trasy, czas, dystans, kontekst</span>
+                        <span data-i18n="thesis.metricGps">trasy, czas, dystans, kontekst</span>
                     </div>
                 </div>
             </div>
@@ -1055,10 +1159,10 @@
 
         <section class="page section" id="skills" aria-labelledby="skills-title">
             <div class="section-heading">
-                <div class="section-kicker">Skills</div>
+                <div class="section-kicker" data-i18n="skills.kicker">Umiejętności</div>
                 <div>
-                    <h2 id="skills-title">Technologie i narzędzia</h2>
-                    <p class="section-lead">
+                    <h2 id="skills-title" data-i18n="skills.title">Technologie i narzędzia</h2>
+                    <p class="section-lead" data-i18n="skills.lead">
                         Kompetencje zebrane z pracy w IT, studiów, automatyki oraz własnych projektów.
                     </p>
                 </div>
@@ -1066,7 +1170,7 @@
 
             <div class="skills-list">
                 <article class="card skill-group">
-                    <h3>Systemy</h3>
+                    <h3 data-i18n="skills.systems">Systemy</h3>
                     <ul>
                         <li>Windows Server</li>
                         <li>Microsoft 365</li>
@@ -1075,25 +1179,25 @@
                     </ul>
                 </article>
                 <article class="card skill-group">
-                    <h3>Automatyzacja</h3>
+                    <h3 data-i18n="skills.automation">Automatyzacja</h3>
                     <ul>
                         <li>PowerShell</li>
-                        <li>Python basics</li>
-                        <li>Bash basics</li>
+                        <li data-i18n="skills.pythonBasics">Podstawy Pythona</li>
+                        <li data-i18n="skills.bashBasics">Podstawy Bash</li>
                         <li>n8n</li>
                     </ul>
                 </article>
                 <article class="card skill-group">
-                    <h3>Dane i backend</h3>
+                    <h3 data-i18n="skills.dataBackend">Dane i backend</h3>
                     <ul>
                         <li>SQL Server</li>
                         <li>T-SQL</li>
                         <li>FastAPI</li>
-                        <li>AI / ML basics</li>
+                        <li data-i18n="skills.aiMlBasics">Podstawy AI / ML</li>
                     </ul>
                 </article>
                 <article class="card skill-group">
-                    <h3>Infrastruktura</h3>
+                    <h3 data-i18n="skills.infrastructure">Infrastruktura</h3>
                     <ul>
                         <li>VMware ESXi</li>
                         <li>Hyper-V</li>
@@ -1107,10 +1211,10 @@
 
         <section class="page section" id="education" aria-labelledby="education-title">
             <div class="section-heading">
-                <div class="section-kicker">Education</div>
+                <div class="section-kicker" data-i18n="education.kicker">Edukacja</div>
                 <div>
-                    <h2 id="education-title">Edukacja</h2>
-                    <p class="section-lead">
+                    <h2 id="education-title" data-i18n="education.title">Edukacja</h2>
+                    <p class="section-lead" data-i18n="education.lead">
                         Informatyka, systemy inteligentne oraz wcześniejsze zaplecze inżynierskie z automatyki i robotyki.
                     </p>
                 </div>
@@ -1119,15 +1223,15 @@
             <div class="grid two">
                 <article class="card">
                     <h3>Uniwersytet Ekonomiczny w Katowicach</h3>
-                    <p>Magister, Informatyka, Programowanie Systemów Inteligentnych. Studia od 2022.</p>
+                    <p data-i18n="education.uek">Magister, Informatyka, Programowanie Systemów Inteligentnych. Studia od 2022.</p>
                 </article>
                 <article class="card">
                     <h3>Politechnika Śląska</h3>
-                    <p>Inżynier, Automatyka i Robotyka, 2018-2022.</p>
+                    <p data-i18n="education.polsl">Inżynier, Automatyka i Robotyka, 2018-2022.</p>
                 </article>
                 <article class="card">
                     <h3>Śląskie Techniczne Zakłady Naukowe</h3>
-                    <p>Technik mechatronik, 2014-2018.</p>
+                    <p data-i18n="education.tzn">Technik mechatronik, 2014-2018.</p>
                 </article>
             </div>
         </section>
@@ -1135,18 +1239,13 @@
         <section class="page section" id="contact" aria-labelledby="contact-title">
             <div class="contact-layout">
                 <div>
-                    <div class="section-kicker">Contact</div>
-                    <h2 id="contact-title">Porozmawiajmy o IT, automatyzacji albo danych.</h2>
-                    <p class="section-lead">
-                        Najszybciej złapiesz mnie przez LinkedIn, GitHuba albo email w domenie banas.dev.
-                        Strava zostaje jako sportowy ślad projektów związanych z danymi treningowymi.
+                    <div class="section-kicker" data-i18n="contact.kicker">Kontakt</div>
+                    <h2 id="contact-title" data-i18n="contact.title">Porozmawiajmy o IT, automatyzacji albo danych.</h2>
+                    <p class="section-lead" data-i18n="contact.lead">
+                        Najłatwiej znaleźć mnie przez LinkedIn, GitHuba lub moje publiczne profile projektowe.
                     </p>
                 </div>
                 <div class="contact-links">
-                    <button class="contact-link" type="button" id="copyEmailContact">
-                        <strong>Email</strong>
-                        <span id="emailLabel">kontakt w domenie banas.dev</span>
-                    </button>
                     <a class="contact-link" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener">
                         <strong>LinkedIn</strong>
                         <span>linkedin.com/in/rafał-banaś-251583152</span>
@@ -1171,56 +1270,334 @@
     <footer>
         <div class="page">
             <span>&copy; 2026 Rafał Banaś. banas.dev</span>
-            <span>Statyczna strona bez analytics i trackerów. Motyw zapisuje się lokalnie w przeglądarce.</span>
+            <span data-i18n="footer.note">Statyczna strona bez analityki i trackerów. Motyw i język zapisują się lokalnie w przeglądarce.</span>
         </div>
     </footer>
-
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script>
         (() => {
             const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            const email = ["kontakt", "banas.dev"].join("@");
-            const toast = document.getElementById("toast");
-            const emailLabel = document.getElementById("emailLabel");
             const themeToggle = document.getElementById("themeToggle");
             const topbar = document.querySelector(".topbar");
             const hero = document.querySelector(".hero");
             const profilePhoto = document.getElementById("profilePhoto");
             const navLinks = [...document.querySelectorAll(".nav-links a[href^='#']")];
-            const copyButtons = [document.getElementById("copyEmailHero"), document.getElementById("copyEmailContact")].filter(Boolean);
+            const langButtons = [...document.querySelectorAll(".lang-button[data-lang]")];
             const photos = ["cv_photo.webp", "cv_photo2.webp"];
             let photoIndex = 0;
-            let toastTimer;
 
             document.body.classList.add("js-ready");
 
-            function showToast(message) {
-                if (!toast) return;
-                window.clearTimeout(toastTimer);
-                toast.textContent = message;
-                toast.classList.add("visible");
-                toastTimer = window.setTimeout(() => toast.classList.remove("visible"), 2600);
-            }
-
-            function markCopied(trigger) {
-                if (!trigger) return;
-                trigger.dataset.copied = "true";
-                window.setTimeout(() => {
-                    delete trigger.dataset.copied;
-                }, 1800);
-            }
-
-            async function copyEmail(event) {
-                const trigger = event.currentTarget;
-                try {
-                    await navigator.clipboard.writeText(email);
-                    if (emailLabel) emailLabel.textContent = email;
-                    markCopied(trigger);
-                    showToast("Skopiowano: " + email);
-                } catch (error) {
-                    window.location.href = "mailto:" + email;
+            const translations = {
+                pl: {
+                    meta: {
+                        title: "Rafał Banaś | Technical Support Engineer, IT & Data Science",
+                        description: "Portfolio Rafała Banasia: Technical Support Engineer, IT/Application Support, student informatyki rozwijający się w kierunku AI, Data Science, automatyzacji i systemów."
+                    },
+                    langSwitch: { label: "Wybór języka" },
+                    nav: {
+                        about: "O mnie",
+                        experience: "Doświadczenie",
+                        projects: "Projekty",
+                        skills: "Umiejętności",
+                        contact: "Kontakt"
+                    },
+                    hero: {
+                        eyebrow: "Technical Support Engineer / IT / Application Support",
+                        subtitle: "Technical Support Engineer w Motorola Solutions i student informatyki. Traktuję banas.dev jak osobiste engineering lab: miejsce do budowania, testowania i automatyzowania rozwiązań na styku IT, systemów, danych i sportu.",
+                        projectsCta: "Zobacz projekty",
+                        tagsAria: "Główne obszary",
+                        labAria: "Tryb pracy",
+                        lab1: "buduj",
+                        lab2: "testuj",
+                        lab3: "automatyzuj",
+                        lab4: "mierz"
+                    },
+                    terminal: {
+                        aria: "Personal engineering lab",
+                        line1: "ops: wsparcie systemów i aplikacji",
+                        line2: "data: telemetryka, SQL, eksperymenty ML",
+                        line3: "automation: skrypty, workflowy, usługi"
+                    },
+                    profile: {
+                        aria: "Profil",
+                        locationLabel: "Lokalizacja",
+                        location: "Katowice, Polska",
+                        currentLabel: "Aktualnie",
+                        companyLabel: "Firma",
+                        areaLabel: "Obszar",
+                        directionLabel: "Kierunek",
+                        direction: "AI, Data Science, automatyzacja"
+                    },
+                    about: {
+                        kicker: "O mnie",
+                        title: "Personal engineering lab: praktyczne IT, dane i automatyzacja.",
+                        lead: "Jestem studentem informatyki i pracuję w IT, rozwijając się w kierunku AI, Data Science i automatyzacji. Najbliżej mi do praktycznego styku aplikacji, systemów, użytkowników i procesów wsparcia: diagnozowania problemów, porządkowania informacji, dokumentowania rozwiązań oraz budowania małych narzędzi, które coś realnie usprawniają.",
+                        card1Title: "Praktyczne wsparcie IT",
+                        card1Text: "Aplikacje, systemy, użytkownicy, infrastruktura, sieci i troubleshooting w codziennej pracy operacyjnej.",
+                        card2Title: "Automatyzacja i prototypy",
+                        card2Text: "PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania trafiają do skryptów, workflowów albo checklist.",
+                        card3Title: "Dane, AI i sport",
+                        card3Text: "Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako praktyczne pole do eksperymentów z danymi."
+                    },
+                    experience: {
+                        kicker: "Doświadczenie",
+                        title: "Doświadczenie zawodowe",
+                        lead: "Pracowałem między innymi jako IT Specialist, Application Support i w obszarze IT Operations. Od kwietnia 2026 pracuję jako Technical Support Engineer w Motorola Solutions.",
+                        motorolaPeriod: "od kwietnia 2026",
+                        motorola1: "Praca w środowisku IT z naciskiem na wsparcie aplikacji, systemów i użytkowników.",
+                        motorola2: "Analiza i rozwiązywanie problemów technicznych w oparciu o procesy wsparcia i dokumentację.",
+                        motorola3: "Współpraca z systemami, zgłoszeniami, dokumentacją i informacjami potrzebnymi do diagnozy.",
+                        motorola4: "Rozwijanie kompetencji w obszarach automatyzacji, analizy problemów i pracy z systemami.",
+                        madejPeriod: "październik 2025 - styczeń 2026",
+                        itSpecialist: "Specjalista IT",
+                        madej1: "Wsparcie użytkowników końcowych oraz rozwiązywanie problemów sprzętowych i programowych.",
+                        madej2: "Administracja systemami operacyjnymi i aplikacjami biurowymi.",
+                        madej3: "Utrzymanie ciągłości działania infrastruktury IT.",
+                        elmiko1: "Utrzymanie i konfiguracja sprzętu IT oraz sieci komputerowych.",
+                        elmiko2: "Administracja kontami użytkowników i zarządzanie dostępem w Active Directory.",
+                        elmiko3: "Monitoring, troubleshooting, wsparcie użytkowników wewnętrznych i współpraca z dostawcami.",
+                        elmiko4: "Utrzymanie sieci, routery MikroTik, VPN i tunele.",
+                        kabe1: "Konfiguracja sprzętu IT, kont użytkowników i dostępów w Active Directory.",
+                        kabe2: "Praca z VMware ESXi, Windows Server, MS SQL, MikroTik, VPN i FortiGate.",
+                        automationTitle: "Automatyka i robotyka",
+                        automation1: "Wizualizacje HMI, wsparcie projektów automatyki i robotyki oraz praca przy uruchomieniach.",
+                        automation2: "Doświadczenie inżynierskie, które pomaga mi patrzeć na IT systemowo i procesowo."
+                    },
+                    projects: {
+                        kicker: "Projekty",
+                        title: "Projekty i obszary pracy",
+                        lead: "Zestaw obszarów, które pokazują praktyczne podejście do IT: od prostych aplikacji webowych i backendu, przez computer vision, po automatyzacje, systemy i własną przestrzeń do testów.",
+                        lanariText: "Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.",
+                        alprText: "Projekt computer vision do rozpoznawania tablic rejestracyjnych z wykorzystaniem YOLO i OCR: detekcja obiektu, odczyt tekstu i obróbka wyniku.",
+                        thesisTitle: "Praca magisterska",
+                        thesisText: "Projekt badawczo-inżynierski: predykcja formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem ML.",
+                        itAutomationTitle: "Administracja i automatyzacja IT",
+                        itAutomationText: "PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.",
+                        banasText: "Własna przestrzeń typu personal engineering lab: projekty, testy, automatyzacje, usługi, subdomeny i praktyczne eksperymenty bez ciężkiej infrastruktury.",
+                        n8nTitle: "Automatyzacje n8n",
+                        n8nText: "Instancja do testowania automatyzacji procesów, integracji narzędzi i prostych przepływów wspierających codzienną pracę techniczną.",
+                        thesisTagsAria: "Obszary pracy magisterskiej"
+                    },
+                    tag: {
+                        telemetry: "Telemetryka",
+                        integrations: "Integracje",
+                        services: "Usługi",
+                        automation: "Automatyzacja",
+                        cyclingData: "Dane kolarskie"
+                    },
+                    thesis: {
+                        kicker: "Praca magisterska / dane kolarskie",
+                        title: "Machine learning, telemetryka i forma kolarska.",
+                        lead: "Moja praca magisterska to projekt badawczo-inżynierski dotyczący predykcji formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem uczenia maszynowego. To połączenie sportu, danych, ML i praktycznej analizy wydolności, bez obietnicy gotowego produktu komercyjnego.",
+                        gravel: "Gravel jest dla mnie naturalnym miejscem styku technologii i wytrzymałości: długie trasy, eksploracja, moc, tętno, FTP, obciążenie treningowe i pytanie, jak z surowych danych wyciągać wnioski, które mają sens nie tylko na wykresie, ale też w praktyce treningowej.",
+                        metricMl: "modelowanie i predykcja",
+                        metricFtp: "forma, obciążenie, wydolność",
+                        metricGps: "trasy, czas, dystans, kontekst"
+                    },
+                    skills: {
+                        kicker: "Umiejętności",
+                        title: "Technologie i narzędzia",
+                        lead: "Kompetencje zebrane z pracy w IT, studiów, automatyki oraz własnych projektów.",
+                        systems: "Systemy",
+                        automation: "Automatyzacja",
+                        dataBackend: "Dane i backend",
+                        infrastructure: "Infrastruktura",
+                        pythonBasics: "Podstawy Pythona",
+                        bashBasics: "Podstawy Bash",
+                        aiMlBasics: "Podstawy AI / ML"
+                    },
+                    education: {
+                        kicker: "Edukacja",
+                        title: "Edukacja",
+                        lead: "Informatyka, systemy inteligentne oraz wcześniejsze zaplecze inżynierskie z automatyki i robotyki.",
+                        uek: "Magister, Informatyka, Programowanie Systemów Inteligentnych. Studia od 2022.",
+                        polsl: "Inżynier, Automatyka i Robotyka, 2018-2022.",
+                        tzn: "Technik mechatronik, 2014-2018."
+                    },
+                    contact: {
+                        kicker: "Kontakt",
+                        title: "Porozmawiajmy o IT, automatyzacji albo danych.",
+                        lead: "Najłatwiej znaleźć mnie przez LinkedIn, GitHuba lub moje publiczne profile projektowe."
+                    },
+                    footer: {
+                        note: "Statyczna strona bez analityki i trackerów. Motyw i język zapisują się lokalnie w przeglądarce."
+                    },
+                    theme: {
+                        lightTitle: "Przełącz na ciemny motyw",
+                        darkTitle: "Przełącz na jasny motyw"
+                    }
+                },
+                en: {
+                    meta: {
+                        title: "Rafał Banaś | Technical Support Engineer, IT & Data Science",
+                        description: "Rafał Banaś portfolio: Technical Support Engineer, IT/Application Support and computer science student growing toward AI, Data Science, automation and systems."
+                    },
+                    langSwitch: { label: "Language selection" },
+                    nav: {
+                        about: "About",
+                        experience: "Experience",
+                        projects: "Projects",
+                        skills: "Skills",
+                        contact: "Contact"
+                    },
+                    hero: {
+                        eyebrow: "Technical Support Engineer / IT / Application Support",
+                        subtitle: "Technical Support Engineer at Motorola Solutions and computer science student. I treat banas.dev as a personal engineering lab: a place to build, test and automate solutions at the intersection of IT, systems, data and sport.",
+                        projectsCta: "View projects",
+                        tagsAria: "Main areas",
+                        labAria: "Work mode",
+                        lab1: "build",
+                        lab2: "test",
+                        lab3: "automate",
+                        lab4: "measure"
+                    },
+                    terminal: {
+                        aria: "Personal engineering lab",
+                        line1: "ops: support systems and applications",
+                        line2: "data: telemetry, SQL, ML experiments",
+                        line3: "automation: scripts, workflows, services"
+                    },
+                    profile: {
+                        aria: "Profile",
+                        locationLabel: "Location",
+                        location: "Katowice, Poland",
+                        currentLabel: "Current role",
+                        companyLabel: "Company",
+                        areaLabel: "Area",
+                        directionLabel: "Direction",
+                        direction: "AI, Data Science, automation"
+                    },
+                    about: {
+                        kicker: "About",
+                        title: "Personal engineering lab: practical IT, data and automation.",
+                        lead: "I am a computer science student working in IT and growing toward AI, Data Science and automation. My strongest focus is the practical intersection of applications, systems, users and support processes: diagnosing issues, organizing information, documenting solutions and building small tools that improve real workflows.",
+                        card1Title: "Hands-on IT support",
+                        card1Text: "Applications, systems, users, infrastructure, networks and troubleshooting in day-to-day IT operations.",
+                        card2Title: "Automation and prototypes",
+                        card2Text: "PowerShell, Bash, Python basics and an approach where repetitive work becomes a script, workflow or checklist.",
+                        card3Title: "Data, AI and sport",
+                        card3Text: "Machine learning, training telemetry and cycling form analysis as a practical field for data experiments."
+                    },
+                    experience: {
+                        kicker: "Experience",
+                        title: "Professional experience",
+                        lead: "I have worked across IT Specialist, Application Support and IT Operations areas. Since April 2026, I have been working as a Technical Support Engineer at Motorola Solutions.",
+                        motorolaPeriod: "since April 2026",
+                        motorola1: "Working in an IT environment with a focus on supporting applications, systems and users.",
+                        motorola2: "Analyzing and resolving technical issues using support processes and documentation.",
+                        motorola3: "Working with systems, tickets, documentation and diagnostic information.",
+                        motorola4: "Developing skills in automation, problem analysis and practical systems work.",
+                        madejPeriod: "October 2025 - January 2026",
+                        itSpecialist: "IT Specialist",
+                        madej1: "End-user support and troubleshooting hardware and software issues.",
+                        madej2: "Administration of operating systems and office applications.",
+                        madej3: "Maintaining continuity of IT infrastructure operations.",
+                        elmiko1: "Maintaining and configuring IT equipment and computer networks.",
+                        elmiko2: "User account administration and access management in Active Directory.",
+                        elmiko3: "Monitoring, troubleshooting, internal user support and cooperation with vendors.",
+                        elmiko4: "Maintaining networks, MikroTik routers, VPN and tunnels.",
+                        kabe1: "Configuring IT equipment, user accounts and access in Active Directory.",
+                        kabe2: "Working with VMware ESXi, Windows Server, MS SQL, MikroTik, VPN and FortiGate.",
+                        automationTitle: "Automation and robotics",
+                        automation1: "HMI visualizations, support for automation and robotics projects, and commissioning-related work.",
+                        automation2: "Engineering experience that helps me look at IT from a systems and process perspective."
+                    },
+                    projects: {
+                        kicker: "Projects",
+                        title: "Projects and focus areas",
+                        lead: "A set of areas showing my practical approach to IT: from simple web applications and backend work, through computer vision, to automation, systems and my own testing space.",
+                        lanariText: "An e-commerce project with a Python/FastAPI backend and a simple frontend. Practice in API design, application logic, data validation and web integration.",
+                        alprText: "A computer vision project for automatic license plate recognition using YOLO and OCR: object detection, text extraction and result processing.",
+                        thesisTitle: "Master’s thesis",
+                        thesisText: "A research and engineering project: predicting cycling performance/form using telemetry data from sports devices with ML.",
+                        itAutomationTitle: "IT administration and automation",
+                        itAutomationText: "PowerShell, Linux, servers, monitoring, networks and scripts supporting diagnostics, configuration and repetitive administrative work.",
+                        banasText: "My personal engineering lab space: projects, tests, automation, services, subdomains and practical experiments without heavy infrastructure.",
+                        n8nTitle: "n8n automations",
+                        n8nText: "An instance for testing process automation, tool integrations and simple workflows supporting everyday technical work.",
+                        thesisTagsAria: "Master’s thesis areas"
+                    },
+                    tag: {
+                        telemetry: "Telemetry",
+                        integrations: "Integrations",
+                        services: "Services",
+                        automation: "Automation",
+                        cyclingData: "Cycling data"
+                    },
+                    thesis: {
+                        kicker: "Thesis / Cycling data",
+                        title: "Machine learning, telemetry and cycling performance.",
+                        lead: "My master’s thesis is a research and engineering project focused on predicting cycling performance/form using telemetry data from sports devices with machine learning. It combines sport, data, ML and practical performance analysis without promising a finished commercial product.",
+                        gravel: "Gravel cycling is a natural intersection of technology and endurance sport for me: long routes, exploration, power, heart rate, FTP, training load and the question of how to turn raw data into insights that make sense not only on a chart, but also in practical training analysis.",
+                        metricMl: "modeling and prediction",
+                        metricFtp: "form, load, performance",
+                        metricGps: "routes, time, distance, context"
+                    },
+                    skills: {
+                        kicker: "Skills",
+                        title: "Technologies and tools",
+                        lead: "Skills built through IT work, studies, automation engineering and personal projects.",
+                        systems: "Systems",
+                        automation: "Automation",
+                        dataBackend: "Data and backend",
+                        infrastructure: "Infrastructure",
+                        pythonBasics: "Python basics",
+                        bashBasics: "Bash basics",
+                        aiMlBasics: "AI / ML basics"
+                    },
+                    education: {
+                        kicker: "Education",
+                        title: "Education",
+                        lead: "Computer science, intelligent systems and an earlier engineering background in automation and robotics.",
+                        uek: "Master’s degree, Computer Science, Intelligent Systems Programming. Studying since 2022.",
+                        polsl: "Engineer’s degree, Automation and Robotics, 2018-2022.",
+                        tzn: "Mechatronics technician, 2014-2018."
+                    },
+                    contact: {
+                        kicker: "Contact",
+                        title: "Let’s talk about IT, automation or data.",
+                        lead: "The easiest way to reach me is through LinkedIn, GitHub or my public project profiles."
+                    },
+                    footer: {
+                        note: "Static website with no analytics or trackers. Theme and language are stored locally in the browser."
+                    },
+                    theme: {
+                        lightTitle: "Switch to dark theme",
+                        darkTitle: "Switch to light theme"
+                    }
                 }
+            };
+
+            function getValue(path, lang) {
+                return path.split(".").reduce((value, key) => value?.[key], translations[lang]);
+            }
+
+            function setLanguage(lang) {
+                const selected = translations[lang] ? lang : "pl";
+                document.documentElement.lang = selected;
+                localStorage.setItem("banas_lang", selected);
+                document.title = translations[selected].meta.title;
+                document.querySelector("meta[name='description']")?.setAttribute("content", translations[selected].meta.description);
+
+                document.querySelectorAll("[data-i18n]").forEach((element) => {
+                    const value = getValue(element.dataset.i18n, selected);
+                    if (value) element.textContent = value;
+                });
+
+                document.querySelectorAll("[data-i18n-attr]").forEach((element) => {
+                    element.dataset.i18nAttr.split(",").forEach((pair) => {
+                        const [attr, key] = pair.split(":").map((part) => part.trim());
+                        const value = getValue(key, selected);
+                        if (attr && value) element.setAttribute(attr, value);
+                    });
+                });
+
+                langButtons.forEach((button) => {
+                    const isActive = button.dataset.lang === selected;
+                    button.classList.toggle("is-active", isActive);
+                    button.setAttribute("aria-pressed", String(isActive));
+                });
             }
 
             function applyTheme(theme) {
@@ -1229,19 +1606,28 @@
                 if (themeToggle) {
                     themeToggle.textContent = isLight ? "☾" : "☼";
                     themeToggle.setAttribute("aria-pressed", String(isLight));
-                    themeToggle.setAttribute("title", isLight ? "Przełącz na ciemny motyw" : "Przełącz na jasny motyw");
+                    const lang = localStorage.getItem("banas_lang") || "pl";
+                    const label = isLight ? translations[lang].theme.lightTitle : translations[lang].theme.darkTitle;
+                    themeToggle.setAttribute("title", label);
+                    themeToggle.setAttribute("aria-label", label);
                 }
             }
 
+            setLanguage(localStorage.getItem("banas_lang") || "pl");
             applyTheme(localStorage.getItem("banas_theme") || "dark");
+
+            langButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    setLanguage(button.dataset.lang);
+                    applyTheme(document.body.classList.contains("light") ? "light" : "dark");
+                });
+            });
 
             themeToggle?.addEventListener("click", () => {
                 const nextTheme = document.body.classList.contains("light") ? "dark" : "light";
                 localStorage.setItem("banas_theme", nextTheme);
                 applyTheme(nextTheme);
             });
-
-            copyButtons.forEach((button) => button.addEventListener("click", copyEmail));
 
             navLinks.forEach((link) => {
                 link.addEventListener("click", (event) => {
