@@ -3,1409 +3,1102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Rafał Banaś 👨‍💻 IT Specialist & AI Automation</title>
-    
-    <meta name="description" content="Specjalista IT, Automatyk i pasjonat AI. Zobacz moje portfolio, projekty n8n oraz doświadczenie w administracji systemami i sieciami.">
+    <title>Rafał Banaś | IT Specialist, Application Support, AI & Data Science</title>
+    <meta name="description" content="Portfolio Rafała Banasia: IT Specialist, Application Support, student informatyki rozwijający się w kierunku AI, Data Science, automatyzacji i systemów.">
     <meta name="author" content="Rafał Banaś">
-    
-    <link rel="icon" type="image/png" href="favicon.png?v=3">
-    <link rel="shortcut icon" type="image/png" href="favicon.png?v=3">
-    <link rel="apple-touch-icon" href="favicon.png?v=3">
-    
+    <meta name="theme-color" content="#0f172a">
+
+    <link rel="icon" type="image/png" href="favicon.png?v=4">
+    <link rel="shortcut icon" type="image/png" href="favicon.png?v=4">
+    <link rel="apple-touch-icon" href="favicon.png?v=4">
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://banas.dev/">
-    <meta property="og:title" content="Rafał Banaś | IT & AI Automation Portfolio">
-    <meta property="og:description" content="Cześć! Jestem Specjalistą IT zajmującym się automatyzacją procesów (n8n, Python) i administracją. Sprawdź moje projekty i CV.">
+    <meta property="og:title" content="Rafał Banaś | IT, Application Support, AI & Data Science">
+    <meta property="og:description" content="Nowoczesne portfolio techniczne: IT, administracja systemami, automatyzacja, AI, Data Science i projekty webowe.">
     <meta property="og:image" content="https://banas.dev/cv_photo.webp">
-    
+
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Rafał Banaś | IT & AI Automation">
-    <meta name="twitter:description" content="Specjalista IT, Automatyk i pasjonat AI. Projekty n8n, Python, Home Lab.">
+    <meta name="twitter:title" content="Rafał Banaś | IT, AI & Data Science">
+    <meta name="twitter:description" content="IT Specialist / Application Support, student informatyki, projekty AI, automatyzacja i dane treningowe.">
     <meta name="twitter:image" content="https://banas.dev/cv_photo.webp">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         :root {
-            /* --- MOTYW JASNY (DOMYŚLNY) --- */
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #3498db;
-            --accent-hover: #2980b9;
-            --text-color: #333;
-            --text-light: #666;
-            --bg-color: #f0f2f5;
-            --card-bg: #ffffff;
-            --sidebar-bg: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
-            --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            --transition: all 0.3s ease;
+            color-scheme: dark;
+            --bg: #0b1020;
+            --bg-soft: #111827;
+            --surface: rgba(17, 24, 39, 0.82);
+            --surface-strong: #172033;
+            --text: #e5e7eb;
+            --muted: #a7b0c0;
+            --line: rgba(148, 163, 184, 0.22);
+            --accent: #38bdf8;
+            --accent-2: #22c55e;
+            --accent-3: #f59e0b;
+            --danger: #fb7185;
+            --shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+            --radius: 8px;
+            --max: 1160px;
         }
 
-        /* --- MOTYW CIEMNY --- */
-        body.dark-mode {
-            --primary-color: #ecf0f1;
-            --secondary-color: #bdc3c7;
-            --accent-color: #5dade2;
-            --accent-hover: #3498db;
-            --text-color: #e0e0e0;
-            --text-light: #aaa;
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --sidebar-bg: linear-gradient(180deg, #1a1a1a 0%, #2c2c2c 100%);
-            --card-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        body.light {
+            color-scheme: light;
+            --bg: #f6f7f9;
+            --bg-soft: #ffffff;
+            --surface: rgba(255, 255, 255, 0.9);
+            --surface-strong: #ffffff;
+            --text: #172033;
+            --muted: #5d6677;
+            --line: rgba(15, 23, 42, 0.14);
+            --shadow: 0 18px 60px rgba(15, 23, 42, 0.11);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 18% 8%, rgba(56, 189, 248, 0.18), transparent 34%),
+                radial-gradient(circle at 82% 0%, rgba(34, 197, 94, 0.10), transparent 32%),
+                linear-gradient(135deg, var(--bg), var(--bg-soft));
+            color: var(--text);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.65;
         }
 
-        /* --- LOGIKA JĘZYKOWA --- */
-        body.pl .lang-en { display: none !important; }
-        body.en .lang-pl { display: none !important; }
-
-        h1, h2, h3, h4 {
-            font-family: 'Poppins', sans-serif;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        /* Kontrolki (Język + Motyw) */
-        .controls-container {
+        a:hover {
+            color: var(--accent);
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .page {
+            width: min(100% - 32px, var(--max));
+            margin: 0 auto;
+        }
+
+        .skip-link {
             position: absolute;
-            top: 30px;
-            right: 40px;
-            z-index: 200;
-            display: flex;
-            gap: 15px;
-            align-items: center;
+            left: 16px;
+            top: -48px;
+            z-index: 10;
+            background: var(--accent);
+            color: #04111f;
+            padding: 10px 14px;
+            border-radius: var(--radius);
+            font-weight: 800;
         }
 
-        .lang-switch {
-            background: var(--card-bg);
-            padding: 5px 10px;
-            border-radius: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            gap: 10px;
-            font-size: 0.9em;
-            font-weight: 600;
-            color: var(--text-color);
+        .skip-link:focus {
+            top: 16px;
         }
 
-        .lang-btn {
-            cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 15px;
-            transition: var(--transition);
-            color: var(--text-light);
-        }
-
-        .lang-btn.active {
-            background-color: var(--accent-color);
-            color: white;
-            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
-        }
-
-        .theme-toggle-btn {
-            background: var(--card-bg);
-            border: none;
-            color: var(--text-color);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2em;
-            transition: var(--transition);
-        }
-
-        .theme-toggle-btn:hover {
-            transform: rotate(15deg) scale(1.1);
-            color: var(--accent-color);
-        }
-
-        /* Główny kontener */
-        .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            background: var(--card-bg);
-            box-shadow: var(--card-shadow);
-            border-radius: 15px;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            min-height: 90vh;
-            opacity: 0;
-            animation: fadeInPage 0.8s forwards;
-            position: relative;
-            transition: background-color 0.3s;
-        }
-
-        @keyframes fadeInPage {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- SIDEBAR --- */
-        .sidebar {
-            background: var(--sidebar-bg);
-            color: #ffffff;
-            padding: 40px 30px;
-            text-align: left;
-            position: relative;
-        }
-
-        .sidebar-content-wrapper {
+        .topbar {
             position: sticky;
-            top: 40px;
+            top: 0;
+            z-index: 5;
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(18px);
+            background: color-mix(in srgb, var(--bg) 78%, transparent);
         }
 
-        .profile-img-container {
-            text-align: center;
-            margin-bottom: 35px;
-            position: relative;
-        }
-
-        .profile-img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid rgba(255,255,255,0.2);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .profile-img:hover {
-            transform: scale(1.05) rotate(2deg);
-            border-color: var(--accent-color);
-        }
-
-        .img-hint {
-            font-size: 0.7em;
-            color: rgba(255,255,255,0.6);
-            margin-top: 5px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .profile-img-container:hover .img-hint {
-            opacity: 1;
-        }
-
-        .sidebar h3 {
-            color: #ffffff;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.2em;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-top: 40px;
-        }
-        
-        .sidebar h3:first-of-type { margin-top: 0; }
-
-        .contact-item, 
-        .nav-btn, 
-        .skill-tag {
+        .nav {
+            width: min(100% - 32px, var(--max));
+            min-height: 68px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
-            margin-bottom: 12px;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.95em;
-            text-decoration: none;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.05); 
-            background: rgba(255,255,255,0.05);
-            transition: var(--transition);
-            cursor: pointer;
+            justify-content: space-between;
+            gap: 18px;
         }
 
-        .skill-tag {
+        .brand {
             display: inline-flex;
-            margin: 3px;
-            font-size: 0.85em;
-            padding: 6px 12px;
+            align-items: center;
+            gap: 10px;
+            font-weight: 900;
+            letter-spacing: 0;
         }
-        
-        .nav-btn {
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-links a,
+        .icon-button,
+        .button {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            color: var(--text);
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
             justify-content: center;
-            margin-bottom: 30px;
-            font-weight: 600;
-            background: rgba(255,255,255,0.1);
+            gap: 8px;
+            padding: 9px 12px;
+            font: inherit;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
         }
 
-        .nav-btn i { margin-right: 10px; }
-
-        .contact-item:hover, 
-        .nav-btn:hover, 
-        .skill-tag:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        .nav-links a:hover,
+        .icon-button:hover,
+        .button:hover {
+            transform: translateY(-1px);
+            border-color: color-mix(in srgb, var(--accent) 60%, var(--line));
+            color: var(--text);
         }
 
-        .contact-item.strava:hover {
-            background: rgba(252, 76, 2, 0.8);
-            border-color: #fc4c02;
+        .button.primary {
+            background: linear-gradient(135deg, var(--accent), #60a5fa);
+            border-color: transparent;
+            color: #06111f;
+            font-weight: 850;
         }
 
-        .contact-item i, .skill-tag i {
-            margin-right: 12px;
-            color: var(--accent-color);
-            width: 20px;
-            text-align: center;
-            font-size: 1.1em;
-        }
-        
-        .contact-item a, .contact-item span {
-            color: rgba(255,255,255,0.95);
-            text-decoration: none;
-            word-break: break-word;
+        .button.secondary {
+            background: transparent;
         }
 
-        .skills-container {
+        .hero {
+            min-height: calc(100svh - 68px);
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+            align-items: center;
+            gap: 44px;
+            padding: 64px 0 42px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            color: var(--muted);
+            padding: 7px 10px;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: var(--accent-2);
+            box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent-2) 18%, transparent);
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
+        h1 {
+            margin: 22px 0 18px;
+            font-size: clamp(2.45rem, 7vw, 5.8rem);
+            line-height: 0.98;
+            letter-spacing: 0;
+        }
+
+        .hero-subtitle {
+            max-width: 720px;
+            color: var(--muted);
+            font-size: clamp(1.04rem, 2vw, 1.28rem);
+        }
+
+        .hero-actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: 10px;
+            margin: 28px 0;
         }
 
-        /* --- MAIN CONTENT --- */
-        .main-content {
-            padding: 50px;
-            position: relative;
-        }
-
-        .header-name {
-            margin-bottom: 50px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 30px;
-            padding-right: 100px;
-        }
-        
-        body.dark-mode .header-name, 
-        body.dark-mode .timeline-content-box {
-            border-color: #333;
-        }
-
-        .header-name h1 {
-            margin: 0;
-            font-size: 3em;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            line-height: 1;
-        }
-
-        .header-name h2 {
-            margin: 10px 0 0;
-            font-size: 1.4em;
-            color: var(--accent-color);
-            font-weight: 500;
-            height: 1.5em;
-        }
-        
-        .typing-cursor {
-            display: inline-block;
-            width: 3px;
-            background-color: var(--accent-color);
-            animation: blink 1s infinite;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        .section { margin-bottom: 50px; }
-
-        .section-title {
-            font-size: 1.6em;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            position: relative;
-            padding-left: 20px;
-            font-weight: 700;
-        }
-
-        .section-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 5px;
-            height: 25px;
-            width: 5px;
-            background: var(--accent-color);
-            border-radius: 5px;
-        }
-
-        /* Projekty */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 10px;
-            padding: 20px;
-            transition: var(--transition);
+        .hero-tags,
+        .tags {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
         }
 
-        body.dark-mode .project-card {
-            border: 1px solid #333;
-            background: #252525;
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            min-height: 32px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--surface) 82%, transparent);
+            color: var(--muted);
+            padding: 5px 9px;
+            font-size: 0.88rem;
+            font-weight: 650;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-color: var(--accent-color);
-        }
-
-        .project-icon {
-            font-size: 2em;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-        }
-
-        .project-card h4 {
-            margin: 0 0 10px 0;
-            color: var(--primary-color);
-        }
-
-        .project-card p {
-            font-size: 0.9em;
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-
-        .project-link {
-            display: inline-block;
-            padding: 8px 15px;
-            background-color: rgba(0,0,0,0.05);
-            color: var(--primary-color);
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 0.85em;
-            font-weight: 600;
-            transition: var(--transition);
-            text-align: center;
-        }
-        
-        body.dark-mode .project-link {
-            background-color: rgba(255,255,255,0.1);
-        }
-
-        .project-link:hover {
-            background-color: var(--accent-color);
-            color: white;
-        }
-
-        /* Timeline */
-        .timeline {
+        .profile-panel {
             position: relative;
-            padding-left: 10px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            padding: 18px;
         }
 
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            bottom: 0;
-            width: 2px;
-            background: #e0e0e0;
+        .profile-photo {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            cursor: pointer;
         }
-        
-        body.dark-mode .timeline::before {
-            background: #444;
+
+        .profile-meta {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .meta-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            border-top: 1px solid var(--line);
+            padding-top: 12px;
+        }
+
+        .meta-row span:first-child {
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        .meta-row span:last-child {
+            text-align: right;
+            font-weight: 750;
+        }
+
+        .section {
+            padding: 58px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .section-heading {
+            display: grid;
+            grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr);
+            gap: 32px;
+            align-items: start;
+            margin-bottom: 28px;
+        }
+
+        .section-kicker {
+            color: var(--accent);
+            font-weight: 850;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            line-height: 1.08;
+            letter-spacing: 0;
+        }
+
+        .section-lead {
+            color: var(--muted);
+            font-size: 1.04rem;
+        }
+
+        .grid {
+            display: grid;
+            gap: 14px;
+        }
+
+        .grid.two {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .grid.three {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .card {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            padding: 20px;
+            min-width: 0;
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+            font-size: 1.08rem;
+            line-height: 1.25;
+        }
+
+        .card p {
+            color: var(--muted);
+            margin-bottom: 0;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 14px;
         }
 
         .timeline-item {
-            margin-bottom: 35px;
-            position: relative;
-            padding-left: 30px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -6px;
-            top: 5px;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: var(--card-bg);
-            border: 3px solid var(--accent-color);
-            transition: var(--transition);
-            z-index: 1;
-        }
-
-        .timeline-item:hover::before {
-            background: var(--accent-color);
-            transform: scale(1.3);
-            box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
-        }
-
-        .timeline-content-box {
-            background: var(--card-bg);
+            display: grid;
+            grid-template-columns: minmax(140px, 0.28fr) minmax(0, 0.72fr);
+            gap: 20px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
             padding: 20px;
-            border-radius: 10px;
-            border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-            transition: var(--transition);
-        }
-        
-        body.dark-mode .timeline-content-box {
-            background: #252525;
-            border: 1px solid #333;
         }
 
-        .timeline-item:hover .timeline-content-box {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-color: var(--accent-color);
+        .period {
+            color: var(--accent);
+            font-weight: 850;
+            font-size: 0.92rem;
         }
 
-        .timeline-title {
-            font-weight: 700;
-            font-size: 1.2em;
-            color: var(--primary-color);
-            margin-bottom: 5px;
+        .timeline-item h3 {
+            margin-bottom: 4px;
+            font-size: 1.1rem;
         }
 
-        .timeline-subtitle {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 500;
-            color: var(--accent-color);
-            font-size: 0.95em;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .company {
+            color: var(--muted);
+            margin-bottom: 10px;
         }
 
-        .timeline-date {
-            font-size: 0.85em;
-            color: #888;
-            background: rgba(0,0,0,0.05);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: normal;
-        }
-        
-        body.dark-mode .timeline-date {
-             background: rgba(255,255,255,0.1);
-             color: #aaa;
-        }
-
-        .timeline-content ul {
-            padding-left: 20px;
+        .timeline-item ul {
             margin: 0;
-            color: var(--text-color);
+            padding-left: 18px;
+            color: var(--muted);
         }
 
-        .timeline-content li {
-            margin-bottom: 8px;
-            position: relative;
-        }
-        
-        .reveal-element {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .reveal-element.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .copy-tooltip {
-            position: fixed;
-            background: var(--primary-color);
-            color: var(--card-bg);
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            display: none;
-            z-index: 1000;
-            pointer-events: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        /* --- STYLE MODALA --- */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 2000; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.3s;
-        }
-
-        .modal-content {
-            background-color: var(--card-bg);
-            margin: 15% auto; 
-            padding: 30px;
-            border: 1px solid #888;
-            width: 90%;
-            max-width: 600px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            position: relative;
-            color: var(--text-color);
-        }
-
-        body.dark-mode .modal-content {
-            border: 1px solid #444;
-        }
-
-        .close-modal {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .close-modal:hover {
-            color: var(--accent-color);
-        }
-
-        .modal-text ul { padding-left: 20px; }
-
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-
-        /* --- TERMINAL (EASTER EGG) --- */
-        .terminal-overlay {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            backdrop-filter: blur(2px);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .terminal-window {
-            width: 800px;
-            max-width: 95%;
-            height: 500px;
-            background-color: #0c0c0c;
-            border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        .project-card {
             display: flex;
             flex-direction: column;
-            border: 1px solid #333;
-            font-family: 'Fira Code', 'Consolas', monospace;
-            overflow: hidden;
-            animation: popIn 0.3s ease-out;
+            min-height: 250px;
         }
 
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        .project-number {
+            color: var(--accent);
+            font-size: 0.84rem;
+            font-weight: 850;
+            margin-bottom: 14px;
         }
 
-        .terminal-header {
-            background: #1a1a1a;
-            padding: 8px 15px;
-            border-bottom: 1px solid #333;
+        .project-card .tags {
+            margin-top: auto;
+            padding-top: 18px;
+        }
+
+        .feature-band {
+            display: grid;
+            grid-template-columns: minmax(0, 0.72fr) minmax(250px, 0.28fr);
+            gap: 22px;
+            align-items: stretch;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background:
+                linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent 42%),
+                var(--surface);
+            padding: 24px;
+        }
+
+        .metrics {
+            display: grid;
+            gap: 10px;
+        }
+
+        .metric {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--surface-strong) 72%, transparent);
+            padding: 16px;
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .metric span {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .skill-group h3 {
+            color: var(--accent);
+        }
+
+        .skill-group ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            color: var(--muted);
+        }
+
+        .skill-group li + li {
+            margin-top: 6px;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.58fr) minmax(280px, 0.42fr);
+            gap: 20px;
+        }
+
+        .contact-links {
+            display: grid;
+            gap: 10px;
+        }
+
+        .contact-link {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            color: #bbb;
-            font-size: 0.9em;
+            gap: 16px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            padding: 14px 16px;
+            color: var(--text);
         }
 
-        .close-terminal {
-            cursor: pointer;
-            font-size: 1.2em;
-            color: #ff5f56; /* Mac close button style */
+        .contact-link span {
+            color: var(--muted);
         }
 
-        .terminal-body {
-            flex: 1;
-            padding: 15px;
-            color: #00ff00; /* Hacker green */
-            overflow-y: auto;
-            font-size: 0.95em;
-            line-height: 1.4;
+        .contact-link:hover {
+            border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+            color: var(--text);
         }
 
-        .terminal-input-line {
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 22px;
+            transform: translateX(-50%) translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 20;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface-strong);
+            color: var(--text);
+            box-shadow: var(--shadow);
+            padding: 10px 14px;
+            transition: opacity 180ms ease, transform 180ms ease;
+        }
+
+        .toast.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            padding: 26px 0 40px;
+            font-size: 0.92rem;
+        }
+
+        footer .page {
             display: flex;
             align-items: center;
-            margin-top: 10px;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
         }
 
-        .prompt {
-            color: #00ff00;
-            margin-right: 10px;
-            font-weight: bold;
-        }
-
-        #terminal-input {
-            background: transparent;
-            border: none;
-            color: #fff;
-            flex: 1;
-            font-family: inherit;
-            font-size: inherit;
-            outline: none;
-        }
-
-        .cmd-output { margin-bottom: 10px; color: #ccc; white-space: pre-wrap; }
-        .cmd-history { color: #00ff00; margin-bottom: 5px; }
-
-        @media (max-width: 900px) {
-            .container {
-                grid-template-columns: 1fr;
-                margin: 0;
-                border-radius: 0;
-                box-shadow: none;
+        @media (max-width: 920px) {
+            .nav {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 14px 0;
             }
-            .header-name { padding-right: 0; margin-top: 40px; }
-            .controls-container { top: 15px; right: 15px; }
-            .sidebar { text-align: center; padding: 40px 20px; }
-            .sidebar-content-wrapper { position: static; }
-            .contact-item { justify-content: center; }
-            .skills-container { justify-content: center; }
-            .main-content { padding: 30px 20px; }
-            .timeline-subtitle { flex-direction: column; align-items: flex-start; gap: 5px; }
+
+            .nav-links {
+                justify-content: flex-start;
+            }
+
+            .hero,
+            .section-heading,
+            .feature-band,
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 44px;
+            }
+
+            .profile-panel {
+                max-width: 440px;
+            }
+
+            .grid.two,
+            .grid.three,
+            .skills-list {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
-        @media print {
-            .controls-container, .nav-btn, .project-link, footer { display: none; }
-            body { background: white; color: black; }
-            .container { box-shadow: none; margin: 0; width: 100%; border-radius: 0; display: block; }
-            .sidebar { padding: 20px; background: #eee !important; color: #000 !important; -webkit-print-color-adjust: exact; }
-            .sidebar h3, .contact-item a, .contact-item span { color: #000 !important; }
-            .main-content { padding: 20px; }
-            .reveal-element { opacity: 1 !important; transform: none !important; }
+        @media (max-width: 620px) {
+            .page,
+            .nav {
+                width: min(100% - 22px, var(--max));
+            }
+
+            .nav-links a {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 34px;
+                gap: 28px;
+            }
+
+            .hero-actions .button {
+                width: 100%;
+            }
+
+            .grid.two,
+            .grid.three,
+            .skills-list,
+            .timeline-item {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 42px 0;
+            }
+
+            .contact-link {
+                flex-direction: column;
+                gap: 2px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
         }
     </style>
 </head>
-<body class="pl">
+<body>
+    <a class="skip-link" href="#main">Przejdź do treści</a>
 
-<div class="copy-tooltip" id="copyTooltip">Skopiowano!</div>
-
-<div id="terminal-overlay" class="terminal-overlay">
-    <div class="terminal-window">
-        <div class="terminal-header">
-            <span class="terminal-title">root@banas.dev:~ (bash)</span>
-            <span class="close-terminal" title="Close Terminal">✖</span>
-        </div>
-        <div class="terminal-body" id="terminal-body">
-            <div style="margin-bottom: 15px;">
-                Welcome to BanasOS v1.0.4 (LTS)<br>
-                Type <span style="color: #fff; font-weight: bold;">'help'</span> to see available commands.
-            </div>
-            
-            <div id="terminal-content"></div>
-
-            <div class="terminal-input-line">
-                <span class="prompt">root@banas.dev:~#</span>
-                <input type="text" id="terminal-input" autocomplete="off" spellcheck="false">
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    
-    <div class="controls-container">
-        <button class="theme-toggle-btn" id="themeToggle" title="Zmień motyw">
-            <i class="fas fa-moon"></i>
-        </button>
-
-        <div class="lang-switch">
-            <span class="lang-btn active" onclick="setLanguage('pl')" id="btn-pl">PL</span>
-            |
-            <span class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN</span>
-        </div>
-    </div>
-
-    <aside class="sidebar">
-        <div class="sidebar-content-wrapper">
-            <div class="profile-img-container">
-                <img src="cv_photo.webp" alt="Rafał Banaś" class="profile-img" id="profileImg">
-                <div class="img-hint">
-                    <span class="lang-pl">Kliknij, aby zmienić zdjęcie</span>
-                    <span class="lang-en">Click to change photo</span>
-                </div>
-            </div>
-
-            <a href="#projects" class="nav-btn">
-                <i class="fas fa-project-diagram"></i> 
-                <span class="lang-pl">Moje Projekty</span>
-                <span class="lang-en">My Projects</span>
+    <header class="topbar">
+        <nav class="nav" aria-label="Główna nawigacja">
+            <a class="brand" href="#top" aria-label="banas.dev">
+                <span class="brand-mark">RB</span>
+                <span>banas.dev</span>
             </a>
+            <div class="nav-links">
+                <a href="#about">O mnie</a>
+                <a href="#experience">Doświadczenie</a>
+                <a href="#projects">Projekty</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Kontakt</a>
+                <button class="icon-button" type="button" id="themeToggle" aria-label="Przełącz motyw" title="Przełącz motyw">◐</button>
+            </div>
+        </nav>
+    </header>
 
-            <div class="contact-info">
-                <h3>
-                    <span class="lang-pl">Kontakt</span>
-                    <span class="lang-en">Contact</span>
-                </h3>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i> <span>Katowice, Polska</span>
+    <main id="main">
+        <section class="page hero" id="top" aria-labelledby="hero-title">
+            <div>
+                <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> IT Specialist / Application Support / AI & Data Science</div>
+                <h1 id="hero-title">Rafał Banaś</h1>
+                <p class="hero-subtitle">
+                    Student informatyki pracujący w IT. Łączę administrację systemami, wsparcie aplikacji,
+                    automatyzację, podstawy programowania i analizę danych z praktycznym podejściem do problemów.
+                </p>
+                <div class="hero-actions">
+                    <a class="button primary" href="#projects">Zobacz projekty</a>
+                    <button class="button secondary" type="button" id="copyEmailHero">Skopiuj email</button>
+                    <a class="button secondary" href="https://github.com/Rafalbanas" target="_blank" rel="noopener">GitHub</a>
                 </div>
-                <div class="contact-item" id="emailContact" title="Kliknij, aby skopiować">
-                    <i class="fas fa-envelope"></i> 
-                    <span id="emailLabel">Wyślij wiadomość / Send message</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-linkedin"></i> 
-                    <a href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank">LinkedIn</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-github"></i> 
-                    <a href="https://github.com/Rafalbanas" target="_blank">GitHub</a>
-                </div>
-                <div class="contact-item strava">
-                    <i class="fab fa-strava"></i> 
-                    <a href="https://www.strava.com/athletes/9698049" target="_blank">Strava</a>
-                </div>
+                <ul class="hero-tags" aria-label="Główne obszary">
+                    <li class="tag">Windows Server</li>
+                    <li class="tag">Microsoft 365</li>
+                    <li class="tag">Active Directory</li>
+                    <li class="tag">Linux</li>
+                    <li class="tag">Python</li>
+                    <li class="tag">PowerShell</li>
+                    <li class="tag">SQL Server / T-SQL</li>
+                    <li class="tag">AI / ML</li>
+                </ul>
             </div>
 
-            <div class="skills-section">
-                <h3>
-                    <span class="lang-pl">Umiejętności</span>
-                    <span class="lang-en">Skills</span>
-                </h3>
-                <div class="skills-container">
-                    <span class="skill-tag"><i class="fas fa-brain"></i> AI & LLMs</span>
-                    <span class="skill-tag"><i class="fas fa-project-diagram"></i> n8n</span>
-                    
-                    <span class="skill-tag"><i class="fab fa-windows"></i> Windows / AD</span>
-                    <span class="skill-tag"><i class="fab fa-linux"></i> Linux</span>
-                    <span class="skill-tag"><i class="fab fa-apple"></i> MacOS</span>
-                    <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
-                    <span class="skill-tag"><i class="fas fa-terminal"></i> PowerShell</span>
-                    <span class="skill-tag"><i class="fas fa-code"></i> Bash</span>
-                    <span class="skill-tag"><i class="fas fa-database"></i> MS SQL</span>
-                    <span class="skill-tag"><i class="fas fa-network-wired"></i> Network & Mikrotik</span>
-                    <span class="skill-tag"><i class="fas fa-server"></i> VMware / Proxmox</span>
-                    <span class="skill-tag"><i class="fab fa-docker"></i> Docker</span>
-                    <span class="skill-tag"><i class="fas fa-hdd"></i> NAS</span>
-                    <span class="skill-tag"><i class="fas fa-language"></i> English (B2)</span>
+            <aside class="profile-panel" aria-label="Profil">
+                <img src="cv_photo.webp" alt="Rafał Banaś" class="profile-photo" id="profilePhoto" fetchpriority="high">
+                <div class="profile-meta">
+                    <div class="meta-row">
+                        <span>Lokalizacja</span>
+                        <span>Katowice, Polska</span>
+                    </div>
+                    <div class="meta-row">
+                        <span>Aktualnie</span>
+                        <span>Motorola Solutions</span>
+                    </div>
+                    <div class="meta-row">
+                        <span>Kierunek</span>
+                        <span>AI, Data Science, automatyzacja</span>
+                    </div>
                 </div>
-            </div>
-
-            <div class="hobbies-section">
-                <h3>
-                    <span class="lang-pl">Hobby</span>
-                    <span class="lang-en">Hobbies</span>
-                </h3>
-                <div class="contact-item"><i class="fas fa-bicycle"></i> 
-                    <span class="lang-pl">Rower</span><span class="lang-en">Cycling</span>
-                </div>
-                <div class="contact-item"><i class="fas fa-running"></i> 
-                    <span class="lang-pl">Bieganie</span><span class="lang-en">Running</span>
-                </div>
-                <div class="contact-item"><i class="fas fa-car"></i> 
-                    <span class="lang-pl">Motoryzacja</span><span class="lang-en">Automotive</span>
-                </div>
-                <div class="contact-item"><i class="fas fa-mountain"></i> 
-                    <span class="lang-pl">Wspinaczka</span><span class="lang-en">Climbing</span>
-                </div>
-            </div>
-        </div>
-    </aside>
-
-    <main class="main-content">
-        <header class="header-name reveal-element">
-            <h1>Rafał Banaś</h1>
-            <h2><span id="typing-text"></span><span class="typing-cursor"></span></h2>
-        </header>
-
-        <section class="section reveal-element" id="about">
-            <h3 class="section-title">
-                <span class="lang-pl">O mnie</span>
-                <span class="lang-en">About Me</span>
-            </h3>
-            <p style="font-size: 1.05em; color: var(--text-light);">
-                <span class="lang-pl">
-                    Ludzie opisują mnie jako osobę miłą, empatyczną i przyjazną. Uważam się za gracza zespołowego, <strong>pasjonata technologii (szczególnie Sztucznej Inteligencji)</strong> i sportu. Pomagając klientom wewnętrznym, koncentruję się na wypracowaniu rozwiązań i osiągnięciu wspólnego celu. Aktualnie zgłębiam możliwości modeli językowych (LLM) w automatyzacji.
-                </span>
-                <span class="lang-en">
-                    People describe me as a kind, empathetic and nice-to-be-around person. 
-                    I consider myself a team player, <strong>tech (especially AI)</strong> and sport geek. 
-                    While helping internal customers I focus on working out solutions and the common goal. Currently exploring Large Language Models (LLM) in automation.
-                </span>
-            </p>
+            </aside>
         </section>
 
-        <section class="section" id="experience">
-            <h3 class="section-title reveal-element">
-                <span class="lang-pl">Doświadczenie Zawodowe</span>
-                <span class="lang-en">Professional Experience</span>
-            </h3>
-            
+        <section class="page section" id="about" aria-labelledby="about-title">
+            <div class="section-heading">
+                <div class="section-kicker">About</div>
+                <div>
+                    <h2 id="about-title">Techniczne IT z ciekawością do danych i automatyzacji.</h2>
+                    <p class="section-lead">
+                        Jestem studentem informatyki i pracuję w IT, rozwijając się w kierunku AI, Data Science
+                        i automatyzacji. Lubię łączyć praktyczne wsparcie systemów, programowanie, analizę danych
+                        oraz narzędzia, które realnie skracają drogę od problemu do rozwiązania.
+                    </p>
+                </div>
+            </div>
+            <div class="grid three">
+                <article class="card">
+                    <h3>Praktyczne wsparcie IT</h3>
+                    <p>Systemy, aplikacje, użytkownicy, infrastruktura, sieci i troubleshooting w codziennej pracy operacyjnej.</p>
+                </article>
+                <article class="card">
+                    <h3>Automatyzacja i skrypty</h3>
+                    <p>PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania powinny pracować same.</p>
+                </article>
+                <article class="card">
+                    <h3>Dane, AI i sport</h3>
+                    <p>Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako obszar pracy magisterskiej.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="page section" id="experience" aria-labelledby="experience-title">
+            <div class="section-heading">
+                <div class="section-kicker">Experience</div>
+                <div>
+                    <h2 id="experience-title">Doświadczenie zawodowe</h2>
+                    <p class="section-lead">
+                        Pracowałem między innymi jako IT Specialist, Application Support i w obszarze IT Operations.
+                        Od kwietnia 2026 rozwijam doświadczenie w Motorola Solutions.
+                    </p>
+                </div>
+            </div>
+
             <div class="timeline">
-                
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Specjalista IT</span>
-                            <span class="lang-en">IT Specialist</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span>Madej Wróbel Sp. z o.o.</span>
-                            <span class="timeline-date">
-                                <span class="lang-pl">Październik 2025 - Obecnie</span>
-                                <span class="lang-en">October 2025 - Present</span>
-                            </span>
-                        </div>
-                        <div class="timeline-content">
-                            <ul>
-                                <li class="lang-pl">Wsparcie użytkowników końcowych (Helpdesk) oraz rozwiązywanie problemów sprzętowych i programowych.</li>
-                                <li class="lang-pl">Administracja systemami operacyjnymi i aplikacjami biurowymi.</li>
-                                <li class="lang-pl">Utrzymanie ciągłości działania infrastruktury IT.</li>
-
-                                <li class="lang-en">End-user support (Helpdesk) and troubleshooting hardware and software issues.</li>
-                                <li class="lang-en">Administration of operating systems and office applications.</li>
-                                <li class="lang-en">Maintaining IT infrastructure continuity.</li>
-                            </ul>
-                        </div>
+                <article class="timeline-item">
+                    <div class="period">od kwietnia 2026</div>
+                    <div>
+                        <h3>Motorola Solutions</h3>
+                        <p class="company">IT / Application Support</p>
+                        <ul>
+                            <li>Praca w środowisku IT z naciskiem na wsparcie aplikacji, systemów i użytkowników.</li>
+                            <li>Rozwijanie kompetencji w obszarach automatyzacji, analizy problemów i pracy z systemami.</li>
+                        </ul>
                     </div>
-                </div>
+                </article>
 
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Specjalista IT</span>
-                            <span class="lang-en">IT Specialist</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span>Elmiko Sp. z o.o.</span>
-                            <span class="timeline-date">
-                                <span class="lang-pl">Czerwiec 2024 - Sierpień 2025</span>
-                                <span class="lang-en"> June 2024 - August 2025</span>
-                            </span>
-                        </div>
-                        <div class="timeline-content">
-                            <ul>
-                                <li class="lang-pl">Utrzymanie i konfiguracja sprzętu IT oraz sieci komputerowych.</li>
-                                <li class="lang-pl">Administracja kontami użytkowników i zarządzanie dostępem w Active Directory.</li>
-                                <li class="lang-pl">Monitorowanie i rozwiązywanie problemów (troubleshooting).</li>
-                                <li class="lang-pl">Wsparcie użytkowników wewnętrznych i współpraca z dostawcami.</li>
-                                <li class="lang-pl">Utrzymanie sieci (routery Mikrotik, VPN, tunele).</li>
-
-                                <li class="lang-en"> Maintenance and configuration of IT equipment and computer networks.</li>
-                                <li class="lang-en"> Administration of user accounts and access management in Active Directory.</li>
-                                <li class="lang-en"> Monitoring and troubleshooting.</li>
-                                <li class="lang-en"> Supporting internal user & working with vendors.</li>
-                                <li class="lang-en"> Maintaining network (mikrotik routers, VPN, tunnels).</li>
-                            </ul>
-                        </div>
+                <article class="timeline-item">
+                    <div class="period">październik 2025 - styczeń 2026</div>
+                    <div>
+                        <h3>Madej Wróbel Sp. z o.o.</h3>
+                        <p class="company">Specjalista IT</p>
+                        <ul>
+                            <li>Wsparcie użytkowników końcowych oraz rozwiązywanie problemów sprzętowych i programowych.</li>
+                            <li>Administracja systemami operacyjnymi i aplikacjami biurowymi.</li>
+                            <li>Utrzymanie ciągłości działania infrastruktury IT.</li>
+                        </ul>
                     </div>
-                </div>
+                </article>
 
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Specjalista IT</span>
-                            <span class="lang-en">IT Specialist</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span>Farby Kabe Sp. z o.o.</span>
-                            <span class="timeline-date">
-                                <span class="lang-pl">Marzec 2023 - Maj 2024</span>
-                                <span class="lang-en"> March 2023 - May 2024</span>
-                            </span>
-                        </div>
-                        <div class="timeline-content">
-                            <ul>
-                                <li class="lang-pl">Utrzymanie i konfiguracja sprzętu IT.</li>
-                                <li class="lang-pl">Administracja kontami użytkowników (AD).</li>
-                                <li class="lang-pl">Konfiguracja nowych serwerów (VMware ESXi, Windows Server).</li>
-                                <li class="lang-pl">Tworzenie baz danych MS SQL i utrzymanie sieci (Mikrotik, VPN, Fortigate).</li>
-
-                                <li class="lang-en"> Maintenance and configuration of IT equipment and computer networks.</li>
-                                <li class="lang-en"> Administration of user accounts and access management in Active Directory.</li>
-                                <li class="lang-en"> Configuring new servers with VMware Esxi or Windows server.</li>
-                                <li class="lang-en"> Creating database in Ms SQL and maintaining network (mikrotik routers, VPN, fortigate).</li>
-                            </ul>
-                        </div>
+                <article class="timeline-item">
+                    <div class="period">2024 - 2025</div>
+                    <div>
+                        <h3>Elmiko Sp. z o.o.</h3>
+                        <p class="company">Specjalista IT</p>
+                        <ul>
+                            <li>Utrzymanie i konfiguracja sprzętu IT oraz sieci komputerowych.</li>
+                            <li>Administracja kontami użytkowników i zarządzanie dostępem w Active Directory.</li>
+                            <li>Monitoring, troubleshooting, wsparcie użytkowników wewnętrznych i współpraca z dostawcami.</li>
+                            <li>Utrzymanie sieci, routery MikroTik, VPN i tunele.</li>
+                        </ul>
                     </div>
-                </div>
+                </article>
 
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Młodszy Programista PLC</span>
-                            <span class="lang-en">Junior PLC Programmer</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span>ISP Polska Sp. z o.o.</span>
-                            <span class="timeline-date">
-                                <span class="lang-pl">Grudzień 2021 - Maj 2022</span>
-                                <span class="lang-en"> December 2021 - May 2022</span>
-                            </span>
-                        </div>
-                        <div class="timeline-content">
-                            <ul>
-                                <li class="lang-pl">Tworzenie wizualizacji HMI offline dla paneli sterowniczych.</li>
-                                <li class="lang-pl">Uruchomienie stacji transportu akumulatorów w fabryce VW Emden (Siemens S7-1500).</li>
-
-                                <li class="lang-en"> Creating HMI visualizations offline for control panels.</li>
-                                <li class="lang-en"> Commissioning of a battery transport station at the VW Emden factory using Siemens S7-1500 controllers.</li>
-                            </ul>
-                        </div>
+                <article class="timeline-item">
+                    <div class="period">2023 - 2024</div>
+                    <div>
+                        <h3>Farby Kabe Sp. z o.o.</h3>
+                        <p class="company">Specjalista IT</p>
+                        <ul>
+                            <li>Konfiguracja sprzętu IT, kont użytkowników i dostępów w Active Directory.</li>
+                            <li>Praca z VMware ESXi, Windows Server, MS SQL, MikroTik, VPN i FortiGate.</li>
+                        </ul>
                     </div>
-                </div>
+                </article>
 
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Młodszy Inżynier Automatyk</span>
-                            <span class="lang-en">Junior Automation Engineer</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span>Dgk Instal Sp z o.o.</span>
-                            <span class="timeline-date">
-                                <span class="lang-pl">Marzec 2021 - Grudzień 2021</span>
-                                <span class="lang-en"> March 2021 - December 2021</span>
-                            </span>
-                        </div>
-                        <div class="timeline-content">
-                            <ul>
-                                <li class="lang-pl">Wsparcie przy projektach z zakresu automatyki i robotyki.</li>
-                                <li class="lang-pl">Pomoc przy relokacji maszyn.</li>
-
-                                <li class="lang-en"> Assisted with automation and robotics projects.</li>
-                                <li class="lang-en"> Assisted with machine relocation tasks.</li>
-                            </ul>
-                        </div>
+                <article class="timeline-item">
+                    <div class="period">2021 - 2022</div>
+                    <div>
+                        <h3>Automatyka i robotyka</h3>
+                        <p class="company">Junior PLC Programmer / Junior Automation Engineer</p>
+                        <ul>
+                            <li>Wizualizacje HMI, wsparcie projektów automatyki i robotyki oraz praca przy uruchomieniach.</li>
+                            <li>Doświadczenie inżynierskie, które pomaga mi patrzeć na IT systemowo i procesowo.</li>
+                        </ul>
                     </div>
-                </div>
-
+                </article>
             </div>
         </section>
 
-        <section class="section reveal-element" id="projects">
-            <h3 class="section-title">
-                <span class="lang-pl">Moje Projekty</span>
-                <span class="lang-en">My Projects</span>
-            </h3>
-            
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-robot"></i></div>
-                    <h4>
-                        <span class="lang-pl">Projekt AI #1</span>
-                        <span class="lang-en">AI Project #1</span>
-                    </h4>
-                    <p>
-                        <span class="lang-pl">Tutaj wpisz krótki opis swojego projektu związanego z AI. Np. "Chatbot oparty o LLM wspierający Helpdesk".</span>
-                        <span class="lang-en">Short description of your AI project. E.g. "LLM-based chatbot supporting Helpdesk operations".</span>
+        <section class="page section" id="projects" aria-labelledby="projects-title">
+            <div class="section-heading">
+                <div class="section-kicker">Projects</div>
+                <div>
+                    <h2 id="projects-title">Projekty i obszary pracy</h2>
+                    <p class="section-lead">
+                        Zestaw obszarów, które dobrze pokazują połączenie IT, automatyzacji, webu,
+                        computer vision, danych i własnej infrastruktury.
                     </p>
-                    <a href="https://github.com/twoj-login/projekt1" target="_blank" class="project-link">
-                        <i class="fab fa-github"></i> GitHub / Demo
-                    </a>
                 </div>
+            </div>
 
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-server"></i></div>
-                    <h4>
-                        <span class="lang-pl">Home Lab</span>
-                        <span class="lang-en">Home Lab</span>
-                    </h4>
-                    <p>
-                        <span class="lang-pl">Konfiguracja serwera Proxmox, konteneryzacja usług, monitoring (Grafana + Prometheus).</span>
-                        <span class="lang-en">Proxmox server configuration, dockerized services, monitoring stack (Grafana + Prometheus).</span>
-                    </p>
-                    <a href="#" target="_blank" class="project-link">
-                        <i class="fas fa-external-link-alt"></i> 
-                        <span class="lang-pl">Więcej info</span><span class="lang-en">More info</span>
-                    </a>
-                </div>
+            <div class="grid three">
+                <article class="card project-card">
+                    <div class="project-number">01</div>
+                    <h3>Lanari Candle</h3>
+                    <p>Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji i integracji webowej.</p>
+                    <ul class="tags" aria-label="Technologie Lanari Candle">
+                        <li class="tag">Python</li>
+                        <li class="tag">FastAPI</li>
+                        <li class="tag">Frontend</li>
+                    </ul>
+                </article>
 
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-project-diagram"></i></div>
-                    <h4>
-                        <span class="lang-pl">Automatyzacja n8n</span>
-                        <span class="lang-en">n8n Automation</span>
-                    </h4>
-                    <p>
-                        <span class="lang-pl">Moja instancja n8n do automatyzacji procesów biznesowych i integracji AI.</span>
-                        <span class="lang-en">My self-hosted n8n instance for business process automation and AI integrations.</span>
-                    </p>
-                    <a href="https://n8n.banas.dev" target="_blank" class="project-link">
-                        <i class="fas fa-external-link-alt"></i> n8n.banas.dev
-                    </a>
-                </div>
+                <article class="card project-card">
+                    <div class="project-number">02</div>
+                    <h3>Automatic License Plate Recognition</h3>
+                    <p>Projekt computer vision do rozpoznawania tablic rejestracyjnych z wykorzystaniem YOLO i OCR.</p>
+                    <ul class="tags" aria-label="Technologie ALPR">
+                        <li class="tag">YOLO</li>
+                        <li class="tag">OCR</li>
+                        <li class="tag">Computer Vision</li>
+                    </ul>
+                </article>
+
+                <article class="card project-card">
+                    <div class="project-number">03</div>
+                    <h3>Praca magisterska</h3>
+                    <p>Projekt badawczo-inżynierski: predykcja formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem ML.</p>
+                    <ul class="tags" aria-label="Obszary pracy magisterskiej">
+                        <li class="tag">ML</li>
+                        <li class="tag">Telemetryka</li>
+                        <li class="tag">Cycling data</li>
+                    </ul>
+                </article>
+
+                <article class="card project-card">
+                    <div class="project-number">04</div>
+                    <h3>Administracja i automatyzacja IT</h3>
+                    <p>PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające powtarzalne zadania administracyjne.</p>
+                    <ul class="tags" aria-label="Obszary administracji IT">
+                        <li class="tag">PowerShell</li>
+                        <li class="tag">Linux</li>
+                        <li class="tag">Monitoring</li>
+                    </ul>
+                </article>
+
+                <article class="card project-card">
+                    <div class="project-number">05</div>
+                    <h3>Banas.dev</h3>
+                    <p>Własna przestrzeń na projekty, testy, automatyzacje i usługi. Statyczna strona, własne subdomeny i miejsce do praktycznego eksperymentowania.</p>
+                    <ul class="tags" aria-label="Banas.dev">
+                        <li class="tag">Portfolio</li>
+                        <li class="tag">Services</li>
+                        <li class="tag">Automation</li>
+                    </ul>
+                </article>
+
+                <article class="card project-card">
+                    <div class="project-number">06</div>
+                    <h3>Automatyzacje n8n</h3>
+                    <p>Instancja do testowania automatyzacji procesów i integracji narzędzi. Link zostaje dostępny jako część własnej przestrzeni technicznej.</p>
+                    <ul class="tags" aria-label="n8n">
+                        <li class="tag"><a href="https://n8n.banas.dev" target="_blank" rel="noopener">n8n.banas.dev</a></li>
+                        <li class="tag">Integracje</li>
+                    </ul>
+                </article>
             </div>
         </section>
 
-        <section class="section" id="education">
-            <h3 class="section-title reveal-element">
-                <span class="lang-pl">Edukacja</span>
-                <span class="lang-en">Education</span>
-            </h3>
-            
-            <div class="timeline">
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Uniwersytet Ekonomiczny w Katowicach</span>
-                            <span class="lang-en">University of Economics in Katowice</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span class="lang-pl">Magister, Informatyka (Programowanie Systemów Inteligentnych)</span>
-                            <span class="lang-en"> Master's Degree, Computer Science (Intelligent Systems Programming)</span>
-                            <span class="timeline-date">
-                                <span class="lang-pl">2022 - Obecnie</span>
-                                <span class="lang-en">2022 - Present</span>
-                            </span>
-                        </div>
-                    </div>
+        <section class="page section" id="thesis" aria-labelledby="thesis-title">
+            <div class="feature-band">
+                <div>
+                    <div class="section-kicker">Thesis / Cycling data</div>
+                    <h2 id="thesis-title">Machine learning, telemetryka i forma kolarska.</h2>
+                    <p class="section-lead">
+                        Moja praca magisterska dotyczy predykcji formy kolarskiej na podstawie danych telemetrycznych
+                        z urządzeń sportowych. To eksperymentalny projekt badawczo-inżynierski łączący sport,
+                        dane treningowe, praktyczną analizę wydolności i uczenie maszynowe.
+                    </p>
+                    <p>
+                        Gravel jest dla mnie naturalnym miejscem styku technologii i wytrzymałości: długie trasy,
+                        eksploracja, FTP, obciążenie treningowe, tętno, moc i pytanie, jak z surowych danych
+                        wyciągać wnioski, które mają sens poza wykresem.
+                    </p>
                 </div>
-
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Politechnika Śląska</span>
-                            <span class="lang-en">Silesian University of Technology</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span class="lang-pl">Inżynier, Automatyka i Robotyka</span>
-                            <span class="lang-en"> Bachelor's Degree, Automation and Robotics</span>
-                            <span class="timeline-date">2018 - 2022</span>
-                        </div>
+                <div class="metrics" aria-label="Akcenty projektu">
+                    <div class="metric">
+                        <strong>ML</strong>
+                        <span>modelowanie i predykcja</span>
                     </div>
-                </div>
-
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Śląskie Techniczne Zakłady Naukowe</span>
-                            <span class="lang-en">Technical School No. 17 in Katowice "Śl.TZN"</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span class="lang-pl">Technik Mechatronik</span>
-                            <span class="lang-en"> Mechatronics</span>
-                            <span class="timeline-date">2014 - 2018</span>
-                        </div>
+                    <div class="metric">
+                        <strong>FTP</strong>
+                        <span>forma, obciążenie, wydolność</span>
+                    </div>
+                    <div class="metric">
+                        <strong>GPS</strong>
+                        <span>trasy, czas, dystans, kontekst</span>
                     </div>
                 </div>
             </div>
         </section>
 
+        <section class="page section" id="skills" aria-labelledby="skills-title">
+            <div class="section-heading">
+                <div class="section-kicker">Skills</div>
+                <div>
+                    <h2 id="skills-title">Technologie i narzędzia</h2>
+                    <p class="section-lead">
+                        Kompetencje zebrane z pracy w IT, studiów, automatyki oraz własnych projektów.
+                    </p>
+                </div>
+            </div>
+
+            <div class="skills-list">
+                <article class="card skill-group">
+                    <h3>Systemy</h3>
+                    <ul>
+                        <li>Windows Server</li>
+                        <li>Microsoft 365</li>
+                        <li>Active Directory</li>
+                        <li>Linux</li>
+                    </ul>
+                </article>
+                <article class="card skill-group">
+                    <h3>Automatyzacja</h3>
+                    <ul>
+                        <li>PowerShell</li>
+                        <li>Python basics</li>
+                        <li>Bash basics</li>
+                        <li>n8n</li>
+                    </ul>
+                </article>
+                <article class="card skill-group">
+                    <h3>Dane i backend</h3>
+                    <ul>
+                        <li>SQL Server</li>
+                        <li>T-SQL</li>
+                        <li>FastAPI</li>
+                        <li>AI / ML basics</li>
+                    </ul>
+                </article>
+                <article class="card skill-group">
+                    <h3>Infrastruktura</h3>
+                    <ul>
+                        <li>VMware ESXi</li>
+                        <li>Hyper-V</li>
+                        <li>Proxmox</li>
+                        <li>TCP/IP, DNS, DHCP, VPN</li>
+                        <li>MikroTik, FortiGate</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="page section" id="education" aria-labelledby="education-title">
+            <div class="section-heading">
+                <div class="section-kicker">Education</div>
+                <div>
+                    <h2 id="education-title">Edukacja</h2>
+                    <p class="section-lead">
+                        Informatyka, systemy inteligentne oraz wcześniejsze zaplecze inżynierskie z automatyki i robotyki.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid two">
+                <article class="card">
+                    <h3>Uniwersytet Ekonomiczny w Katowicach</h3>
+                    <p>Magister, Informatyka, Programowanie Systemów Inteligentnych. Studia od 2022.</p>
+                </article>
+                <article class="card">
+                    <h3>Politechnika Śląska</h3>
+                    <p>Inżynier, Automatyka i Robotyka, 2018-2022.</p>
+                </article>
+                <article class="card">
+                    <h3>Śląskie Techniczne Zakłady Naukowe</h3>
+                    <p>Technik mechatronik, 2014-2018.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="page section" id="contact" aria-labelledby="contact-title">
+            <div class="contact-layout">
+                <div>
+                    <div class="section-kicker">Contact</div>
+                    <h2 id="contact-title">Porozmawiajmy o IT, automatyzacji albo danych.</h2>
+                    <p class="section-lead">
+                        Najszybciej złapiesz mnie przez LinkedIn, GitHuba albo email w domenie banas.dev.
+                        Strava zostaje jako sportowy ślad projektów związanych z danymi treningowymi.
+                    </p>
+                </div>
+                <div class="contact-links">
+                    <button class="contact-link" type="button" id="copyEmailContact">
+                        <strong>Email</strong>
+                        <span id="emailLabel">kontakt w domenie banas.dev</span>
+                    </button>
+                    <a class="contact-link" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener">
+                        <strong>LinkedIn</strong>
+                        <span>linkedin.com/in/rafał-banaś-251583152</span>
+                    </a>
+                    <a class="contact-link" href="https://github.com/Rafalbanas" target="_blank" rel="noopener">
+                        <strong>GitHub</strong>
+                        <span>github.com/Rafalbanas</span>
+                    </a>
+                    <a class="contact-link" href="https://www.strava.com/athletes/9698049" target="_blank" rel="noopener">
+                        <strong>Strava</strong>
+                        <span>strava.com/athletes/9698049</span>
+                    </a>
+                    <a class="contact-link" href="https://n8n.banas.dev" target="_blank" rel="noopener">
+                        <strong>n8n</strong>
+                        <span>n8n.banas.dev</span>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer style="grid-column: 1 / -1; text-align: center; padding: 20px; font-size: 0.8em; opacity: 0.6;">
-        &copy; 2025 Rafał Banaś. 
-        <a href="#" id="privacyLink" style="color: inherit; text-decoration: underline; margin-right: 15px;">Polityka Prywatności / Privacy Policy</a>
-        <a href="#" id="openTerminal" title="Open Terminal" style="color: inherit; text-decoration: none; font-weight: bold;"><i class="fas fa-terminal"></i> >_</a>
+    <footer>
+        <div class="page">
+            <span>&copy; 2026 Rafał Banaś. banas.dev</span>
+            <span>Statyczna strona bez analytics i trackerów. Motyw zapisuje się lokalnie w przeglądarce.</span>
+        </div>
     </footer>
-</div>
 
-<div id="privacyModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h3>Polityka Prywatności / Privacy Policy</h3>
-        
-        <div class="modal-text pl">
-            <p><strong>Szanujemy Twoją prywatność.</strong></p>
-            <p>Ta strona <strong>nie używa</strong> ciasteczek śledzących (cookies) ani narzędzi analitycznych firm trzecich (np. Google Analytics).</p>
-            <p>Używamy mechanizmu <code>Local Storage</code> przeglądarki wyłącznie do zapamiętania Twoich preferencji:</p>
-            <ul>
-                <li>Wybranego motywu (Jasny/Ciemny)</li>
-                <li>Wybranego języka (PL/EN)</li>
-            </ul>
-            <p>Dane te są przechowywane tylko na Twoim urządzeniu i nie są nigdzie wysyłane.</p>
-        </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-        <div class="modal-text en" style="display:none; border-top: 1px solid #eee; margin-top: 15px; padding-top: 15px;">
-            <p><strong>We respect your privacy.</strong></p>
-            <p>This website <strong>does not use</strong> tracking cookies or third-party analytics tools (e.g., Google Analytics).</p>
-            <p>We use the browser's <code>Local Storage</code> mechanism solely to remember your preferences:</p>
-            <ul>
-                <li>Selected theme (Light/Dark)</li>
-                <li>Selected language (PL/EN)</li>
-            </ul>
-            <p>This data is stored only on your device and is not sent anywhere.</p>
-        </div>
-    </div>
-</div>
+    <script>
+        const emailUser = "kontakt";
+        const emailDomain = "banas.dev";
+        const email = emailUser + "@" + emailDomain;
+        const toast = document.getElementById("toast");
+        const emailLabel = document.getElementById("emailLabel");
+        const themeToggle = document.getElementById("themeToggle");
+        const profilePhoto = document.getElementById("profilePhoto");
+        const photos = ["cv_photo.webp", "cv_photo2.webp"];
+        let photoIndex = 0;
 
-<script>
-    const textPl = "Specjalista IT / Automatyk / AI Enthusiast";
-    const textEn = "IT Specialist / Automation / AI Enthusiast";
-    
-    // --- OBSŁUGA JĘZYKA ---
-    let currentLang = localStorage.getItem('cv_lang') || 'pl';
-    
-    function setLanguage(lang) {
-        currentLang = lang;
-        // Zachowaj klasę dark-mode jeśli istnieje
-        const isDark = document.body.classList.contains('dark-mode');
-        document.body.className = lang + (isDark ? ' dark-mode' : '');
-        
-        localStorage.setItem('cv_lang', lang);
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add("visible");
+            window.setTimeout(() => toast.classList.remove("visible"), 2600);
+        }
 
-        document.getElementById('btn-pl').classList.toggle('active', lang === 'pl');
-        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-
-        startTyping(lang === 'pl' ? textPl : textEn);
-    }
-
-    // --- OBSŁUGA MOTYWU ---
-    const themeBtn = document.getElementById('themeToggle');
-    const themeIcon = themeBtn.querySelector('i');
-
-    function toggleTheme() {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        
-        // Zapisz wybór
-        localStorage.setItem('cv_theme', isDark ? 'dark' : 'light');
-        
-        // Zmień ikonę
-        themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-    }
-
-    // Inicjalizacja motywu przy starcie
-    const savedTheme = localStorage.getItem('cv_theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        themeIcon.className = 'fas fa-sun';
-    }
-
-    themeBtn.addEventListener('click', toggleTheme);
-
-
-    // --- EFEKT PISANIA ---
-    let typeWriterTimeout;
-    function startTyping(text) {
-        const typingElement = document.getElementById('typing-text');
-        if (typeWriterTimeout) clearTimeout(typeWriterTimeout);
-        
-        typingElement.innerHTML = '';
-        let charIndex = 0;
-
-        function typeWriter() {
-            if (charIndex < text.length) {
-                typingElement.innerHTML += text.charAt(charIndex);
-                charIndex++;
-                typeWriterTimeout = setTimeout(typeWriter, 50);
+        async function copyEmail() {
+            try {
+                await navigator.clipboard.writeText(email);
+                emailLabel.textContent = email;
+                showToast("Skopiowano: " + email);
+            } catch (error) {
+                window.location.href = "mailto:" + email;
             }
         }
-        typeWriter();
-    }
-    
-    // --- GALERIA ZDJĘĆ ---
-    const photos = ['cv_photo.webp', 'cv_photo2.webp']; 
-    let photoIndex = 0;
-    
-    photos.forEach(src => {
-        const img = new Image();
-        img.src = src;
-    });
 
-    const profileImg = document.getElementById('profileImg');
-    if(profileImg) {
-        profileImg.addEventListener('click', () => {
-            photoIndex = (photoIndex + 1) % photos.length;
-            profileImg.style.opacity = 0;
-            setTimeout(() => {
-                profileImg.src = photos[photoIndex];
-                profileImg.style.opacity = 1;
-            }, 200);
+        document.getElementById("copyEmailHero").addEventListener("click", copyEmail);
+        document.getElementById("copyEmailContact").addEventListener("click", copyEmail);
+
+        const savedTheme = localStorage.getItem("banas_theme");
+        if (savedTheme === "light") {
+            document.body.classList.add("light");
+        }
+
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("light");
+            localStorage.setItem("banas_theme", document.body.classList.contains("light") ? "light" : "dark");
         });
-    }
 
+        photos.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        setLanguage(currentLang);
-
-        // --- SCROLL REVEAL ---
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: "0px 0px -50px 0px"
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal-element').forEach(el => observer.observe(el));
-
-        // --- BEZPIECZNE KOPIOWANIE EMAILA ---
-        const emailContact = document.getElementById('emailContact');
-        const tooltip = document.getElementById('copyTooltip');
-
-        if(emailContact) {
-            emailContact.addEventListener('click', function(e) {
-                // Rozbijamy email na części, żeby boty go nie odczytały w kodzie
-                const user = 'kontakt';
-                const domain = 'banas.dev';
-                const email = user + '@' + domain;
-                
-                navigator.clipboard.writeText(email).then(() => {
-                    tooltip.textContent = currentLang === 'pl' ? 'Skopiowano: ' + email : 'Copied: ' + email;
-                    tooltip.style.display = 'block';
-                    tooltip.style.left = e.clientX + 'px';
-                    tooltip.style.top = (e.clientY - 40) + 'px';
-                    
-                    // Opcjonalnie: Zmień tekst na stronie na ten skopiowany
-                    document.getElementById('emailLabel').textContent = email;
-                    
-                    setTimeout(() => {
-                        tooltip.style.display = 'none';
-                    }, 3000);
-                });
-            });
-        }
-        
-        // --- OBSŁUGA MODALA PRYWATNOŚCI ---
-        const modal = document.getElementById("privacyModal");
-        const btn = document.getElementById("privacyLink");
-        const span = document.getElementsByClassName("close-modal")[0];
-
-        if(btn) {
-            btn.onclick = function(e) {
-                e.preventDefault();
-                modal.style.display = "block";
-                const isPl = currentLang === 'pl';
-                document.querySelector('.modal-text.pl').style.display = 'block';
-                document.querySelector('.modal-text.en').style.display = 'block';
-            }
-        }
-        if(span) {
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-        }
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // --- TERMINAL EASTER EGG ---
-        const termOverlay = document.getElementById('terminal-overlay');
-        const openTermBtn = document.getElementById('openTerminal');
-        const closeTermBtn = document.querySelector('.close-terminal');
-        const termInput = document.getElementById('terminal-input');
-        const termBody = document.getElementById('terminal-body');
-        const termContent = document.getElementById('terminal-content');
-
-        if(openTermBtn) {
-            openTermBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                termOverlay.style.display = 'flex';
-                termInput.focus();
-            });
-        }
-
-        if(closeTermBtn) {
-            closeTermBtn.addEventListener('click', function() {
-                termOverlay.style.display = 'none';
-            });
-        }
-
-        if(termInput) {
-            termInput.addEventListener('keydown', function(e) {
-                if(e.key === 'Enter') {
-                    const cmd = this.value.trim().toLowerCase();
-                    const originalCmd = this.value;
-                    this.value = '';
-
-                    // Add command to history
-                    const historyLine = document.createElement('div');
-                    historyLine.className = 'cmd-history';
-                    historyLine.textContent = 'root@banas.dev:~# ' + originalCmd;
-                    termContent.appendChild(historyLine);
-
-                    // Process command
-                    const outputLine = document.createElement('div');
-                    outputLine.className = 'cmd-output';
-                    
-                    switch(cmd) {
-                        case 'help':
-                            outputLine.textContent = "Available commands:\n  about    - Who is this guy?\n  skills   - Technical stack\n  contact  - How to reach me\n  n8n      - Open my automation server\n  clear    - Clear terminal\n  exit     - Close terminal";
-                            break;
-                        case 'about':
-                            outputLine.textContent = "Name: Rafał Banaś\nRole: IT Specialist / Automation Engineer\nMission: Automating boring stuff with Python & AI.";
-                            break;
-                        case 'whoami':
-                            outputLine.textContent = "You are a curious visitor exploring my portfolio. Nice to meet you!";
-                            break;
-                        case 'skills':
-                            outputLine.textContent = "Core: Windows/AD, Linux, Python, Bash\nCloud/DevOps: Docker, Proxmox, VMware\nAutomation: n8n, AI Agents (LLM)\nNetworking: Mikrotik, VPN";
-                            break;
-                        case 'contact':
-                            // TELEFON USUNIĘTY Z TEGO WYJŚCIA
-                            outputLine.textContent = "Email: kontakt@banas.dev\nLinkedIn: linkedin.com/in/rafał-banaś-251583152";
-                            break;
-                        case 'n8n':
-                            outputLine.textContent = "Opening n8n.banas.dev...";
-                            window.open('https://n8n.banas.dev', '_blank');
-                            break;
-                        case 'clear':
-                            termContent.innerHTML = '';
-                            return; // Don't append empty output
-                        case 'exit':
-                            termOverlay.style.display = 'none';
-                            return;
-                        case '':
-                            break;
-                        default:
-                            outputLine.textContent = "Command not found: " + cmd + ". Type 'help' for list.";
-                    }
-                    
-                    if(cmd !== 'clear') {
-                        termContent.appendChild(outputLine);
-                    }
-                    
-                    // Auto scroll to bottom
-                    termBody.scrollTop = termBody.scrollHeight;
-                }
-            });
-        }
-        
-        console.log("%c CV Rafała Banasia wczytane pomyślnie. ", "background: #3498db; color: #fff; padding: 5px; border-radius: 5px;");
-    });
-</script>
-
+        profilePhoto.addEventListener("click", () => {
+            photoIndex = (photoIndex + 1) % photos.length;
+            profilePhoto.src = photos[photoIndex];
+        });
+    </script>
 </body>
 </html>
