@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafał Banaś | IT Specialist, Application Support, AI & Data Science</title>
-    <meta name="description" content="Portfolio Rafała Banasia: IT Specialist, Application Support, student informatyki rozwijający się w kierunku AI, Data Science, automatyzacji i systemów.">
+    <title>Rafał Banaś | Technical Support Engineer, IT & Data Science</title>
+    <meta name="description" content="Portfolio Rafała Banasia: Technical Support Engineer, IT/Application Support, student informatyki rozwijający się w kierunku AI, Data Science, automatyzacji i systemów.">
     <meta name="author" content="Rafał Banaś">
     <meta name="theme-color" content="#0f172a">
 
@@ -14,13 +14,13 @@
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://banas.dev/">
-    <meta property="og:title" content="Rafał Banaś | IT, Application Support, AI & Data Science">
-    <meta property="og:description" content="Nowoczesne portfolio techniczne: IT, administracja systemami, automatyzacja, AI, Data Science i projekty webowe.">
+    <meta property="og:title" content="Rafał Banaś | Technical Support Engineer, IT & Data Science">
+    <meta property="og:description" content="Portfolio techniczne: IT/Application Support, troubleshooting, automatyzacja, AI, Data Science i projekty webowe.">
     <meta property="og:image" content="https://banas.dev/cv_photo.webp">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Rafał Banaś | IT, AI & Data Science">
-    <meta name="twitter:description" content="IT Specialist / Application Support, student informatyki, projekty AI, automatyzacja i dane treningowe.">
+    <meta name="twitter:title" content="Rafał Banaś | Technical Support Engineer">
+    <meta name="twitter:description" content="Technical Support Engineer, student informatyki, projekty AI, automatyzacja i dane treningowe.">
     <meta name="twitter:image" content="https://banas.dev/cv_photo.webp">
 
     <style>
@@ -60,6 +60,7 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 86px;
         }
 
         body {
@@ -74,6 +75,17 @@
             line-height: 1.65;
         }
 
+        body.js-ready .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 520ms ease, transform 520ms ease;
+        }
+
+        body.js-ready .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         a {
             color: inherit;
             text-decoration: none;
@@ -81,6 +93,12 @@
 
         a:hover {
             color: var(--accent);
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid color-mix(in srgb, var(--accent) 70%, white);
+            outline-offset: 3px;
         }
 
         img {
@@ -116,6 +134,10 @@
             border-bottom: 1px solid var(--line);
             backdrop-filter: blur(18px);
             background: color-mix(in srgb, var(--bg) 78%, transparent);
+        }
+
+        .topbar.is-scrolled {
+            box-shadow: 0 16px 42px rgba(0, 0, 0, 0.22);
         }
 
         .nav {
@@ -183,6 +205,12 @@
             color: var(--text);
         }
 
+        .nav-links a.is-active {
+            border-color: color-mix(in srgb, var(--accent) 68%, var(--line));
+            background: color-mix(in srgb, var(--accent) 13%, var(--surface));
+            color: var(--text);
+        }
+
         .button.primary {
             background: linear-gradient(135deg, var(--accent), #60a5fa);
             border-color: transparent;
@@ -194,13 +222,36 @@
             background: transparent;
         }
 
+        .button[data-copied="true"],
+        .contact-link[data-copied="true"] {
+            border-color: color-mix(in srgb, var(--accent-2) 65%, var(--line));
+            background: color-mix(in srgb, var(--accent-2) 13%, var(--surface));
+        }
+
         .hero {
+            --hero-glow-x: 50%;
+            --hero-glow-y: 42%;
+            position: relative;
             min-height: calc(100svh - 68px);
             display: grid;
             grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
             align-items: center;
             gap: 44px;
             padding: 64px 0 42px;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 34px -4vw auto auto;
+            width: min(440px, 58vw);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle at var(--hero-glow-x) var(--hero-glow-y), rgba(56, 189, 248, 0.20), rgba(34, 197, 94, 0.08) 34%, transparent 68%);
+            filter: blur(18px);
+            opacity: 0.86;
+            pointer-events: none;
+            z-index: -1;
         }
 
         .eyebrow {
@@ -290,6 +341,11 @@
             border-radius: var(--radius);
             border: 1px solid var(--line);
             cursor: pointer;
+            transition: opacity 180ms ease, transform 180ms ease;
+        }
+
+        .profile-photo:hover {
+            transform: translateY(-2px);
         }
 
         .profile-meta {
@@ -369,6 +425,12 @@
             background: var(--surface);
             padding: 20px;
             min-width: 0;
+            transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: color-mix(in srgb, var(--accent) 48%, var(--line));
         }
 
         .card h3 {
@@ -395,6 +457,12 @@
             border-radius: var(--radius);
             background: var(--surface);
             padding: 20px;
+            transition: border-color 180ms ease, transform 180ms ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-2px);
+            border-color: color-mix(in srgb, var(--accent) 48%, var(--line));
         }
 
         .period {
@@ -525,6 +593,10 @@
             color: var(--text);
         }
 
+        .contact-link strong {
+            white-space: nowrap;
+        }
+
         .toast {
             position: fixed;
             left: 50%;
@@ -602,8 +674,20 @@
                 width: min(100% - 22px, var(--max));
             }
 
-            .nav-links a {
-                display: none;
+            .nav-links {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 4px;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                scrollbar-width: thin;
+            }
+
+            .nav-links a,
+            .nav-links button {
+                flex: 0 0 auto;
+                min-height: 38px;
+                font-size: 0.86rem;
             }
 
             .hero {
@@ -639,6 +723,15 @@
                 scroll-behavior: auto !important;
                 transition: none !important;
             }
+
+            body.js-ready .reveal {
+                opacity: 1;
+                transform: none;
+            }
+
+            .hero::before {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -653,6 +746,7 @@
             </a>
             <div class="nav-links">
                 <a href="#about">O mnie</a>
+                <a href="#english">English</a>
                 <a href="#experience">Doświadczenie</a>
                 <a href="#projects">Projekty</a>
                 <a href="#skills">Skills</a>
@@ -665,11 +759,12 @@
     <main id="main">
         <section class="page hero" id="top" aria-labelledby="hero-title">
             <div>
-                <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> IT Specialist / Application Support / AI & Data Science</div>
+                <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Technical Support Engineer / IT / Application Support</div>
                 <h1 id="hero-title">Rafał Banaś</h1>
                 <p class="hero-subtitle">
-                    Student informatyki pracujący w IT. Łączę administrację systemami, wsparcie aplikacji,
-                    automatyzację, podstawy programowania i analizę danych z praktycznym podejściem do problemów.
+                    Technical Support Engineer w Motorola Solutions i student informatyki. Łączę praktyczne IT,
+                    wsparcie aplikacji, troubleshooting systemów, automatyzację i analizę danych z rosnącym
+                    zainteresowaniem AI oraz uczeniem maszynowym.
                 </p>
                 <div class="hero-actions">
                     <a class="button primary" href="#projects">Zobacz projekty</a>
@@ -697,7 +792,15 @@
                     </div>
                     <div class="meta-row">
                         <span>Aktualnie</span>
+                        <span>Technical Support Engineer</span>
+                    </div>
+                    <div class="meta-row">
+                        <span>Firma</span>
                         <span>Motorola Solutions</span>
+                    </div>
+                    <div class="meta-row">
+                        <span>Obszar</span>
+                        <span>IT / Application Support</span>
                     </div>
                     <div class="meta-row">
                         <span>Kierunek</span>
@@ -714,24 +817,44 @@
                     <h2 id="about-title">Techniczne IT z ciekawością do danych i automatyzacji.</h2>
                     <p class="section-lead">
                         Jestem studentem informatyki i pracuję w IT, rozwijając się w kierunku AI, Data Science
-                        i automatyzacji. Lubię łączyć praktyczne wsparcie systemów, programowanie, analizę danych
-                        oraz narzędzia, które realnie skracają drogę od problemu do rozwiązania.
+                        i automatyzacji. Najbliżej mi do praktycznego styku aplikacji, systemów, użytkowników
+                        i procesów wsparcia: diagnozowania problemów, porządkowania informacji, dokumentowania
+                        rozwiązań i szukania miejsc, w których skrypt albo automatyzacja oszczędza czas.
                     </p>
                 </div>
             </div>
             <div class="grid three">
                 <article class="card">
                     <h3>Praktyczne wsparcie IT</h3>
-                    <p>Systemy, aplikacje, użytkownicy, infrastruktura, sieci i troubleshooting w codziennej pracy operacyjnej.</p>
+                    <p>Aplikacje, systemy, użytkownicy, infrastruktura, sieci i troubleshooting w codziennej pracy operacyjnej.</p>
                 </article>
                 <article class="card">
                     <h3>Automatyzacja i skrypty</h3>
-                    <p>PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania powinny pracować same.</p>
+                    <p>PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania warto zamieniać w procedury lub narzędzia.</p>
                 </article>
                 <article class="card">
                     <h3>Dane, AI i sport</h3>
-                    <p>Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako obszar pracy magisterskiej.</p>
+                    <p>Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako konkretny obszar pracy magisterskiej.</p>
                 </article>
+            </div>
+        </section>
+
+        <section class="page section" id="english" aria-labelledby="english-title">
+            <div class="section-heading">
+                <div class="section-kicker">English summary</div>
+                <div>
+                    <h2 id="english-title">International profile</h2>
+                    <p class="section-lead">
+                        I am an IT and application support specialist, currently working as a Technical Support Engineer
+                        at Motorola Solutions. I combine hands-on IT operations, systems troubleshooting, support processes,
+                        automation and a growing interest in AI, data science and machine learning.
+                    </p>
+                    <p>
+                        My academic work focuses on predicting cycling performance using telemetry data from sports devices.
+                        The main areas I work around are IT support, application support, automation, data analysis,
+                        machine learning and cycling telemetry.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -742,7 +865,7 @@
                     <h2 id="experience-title">Doświadczenie zawodowe</h2>
                     <p class="section-lead">
                         Pracowałem między innymi jako IT Specialist, Application Support i w obszarze IT Operations.
-                        Od kwietnia 2026 rozwijam doświadczenie w Motorola Solutions.
+                        Od kwietnia 2026 pracuję jako Technical Support Engineer w Motorola Solutions.
                     </p>
                 </div>
             </div>
@@ -751,10 +874,13 @@
                 <article class="timeline-item">
                     <div class="period">od kwietnia 2026</div>
                     <div>
-                        <h3>Motorola Solutions</h3>
+                        <h3>Technical Support Engineer</h3>
                         <p class="company">IT / Application Support</p>
+                        <p class="company">Motorola Solutions</p>
                         <ul>
                             <li>Praca w środowisku IT z naciskiem na wsparcie aplikacji, systemów i użytkowników.</li>
+                            <li>Analiza i rozwiązywanie problemów technicznych w oparciu o procesy wsparcia i dokumentację.</li>
+                            <li>Współpraca z systemami, zgłoszeniami, dokumentacją i informacjami potrzebnymi do diagnozy.</li>
                             <li>Rozwijanie kompetencji w obszarach automatyzacji, analizy problemów i pracy z systemami.</li>
                         </ul>
                     </div>
@@ -819,8 +945,8 @@
                 <div>
                     <h2 id="projects-title">Projekty i obszary pracy</h2>
                     <p class="section-lead">
-                        Zestaw obszarów, które dobrze pokazują połączenie IT, automatyzacji, webu,
-                        computer vision, danych i własnej infrastruktury.
+                        Zestaw obszarów, które pokazują praktyczne podejście do IT: od prostych aplikacji webowych
+                        i backendu, przez computer vision, po automatyzacje, systemy i własną przestrzeń do testów.
                     </p>
                 </div>
             </div>
@@ -829,7 +955,7 @@
                 <article class="card project-card">
                     <div class="project-number">01</div>
                     <h3>Lanari Candle</h3>
-                    <p>Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji i integracji webowej.</p>
+                    <p>Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.</p>
                     <ul class="tags" aria-label="Technologie Lanari Candle">
                         <li class="tag">Python</li>
                         <li class="tag">FastAPI</li>
@@ -840,7 +966,7 @@
                 <article class="card project-card">
                     <div class="project-number">02</div>
                     <h3>Automatic License Plate Recognition</h3>
-                    <p>Projekt computer vision do rozpoznawania tablic rejestracyjnych z wykorzystaniem YOLO i OCR.</p>
+                    <p>Projekt computer vision do rozpoznawania tablic rejestracyjnych z wykorzystaniem YOLO i OCR: detekcja obiektu, odczyt tekstu i obróbka wyniku.</p>
                     <ul class="tags" aria-label="Technologie ALPR">
                         <li class="tag">YOLO</li>
                         <li class="tag">OCR</li>
@@ -862,7 +988,7 @@
                 <article class="card project-card">
                     <div class="project-number">04</div>
                     <h3>Administracja i automatyzacja IT</h3>
-                    <p>PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające powtarzalne zadania administracyjne.</p>
+                    <p>PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.</p>
                     <ul class="tags" aria-label="Obszary administracji IT">
                         <li class="tag">PowerShell</li>
                         <li class="tag">Linux</li>
@@ -884,7 +1010,7 @@
                 <article class="card project-card">
                     <div class="project-number">06</div>
                     <h3>Automatyzacje n8n</h3>
-                    <p>Instancja do testowania automatyzacji procesów i integracji narzędzi. Link zostaje dostępny jako część własnej przestrzeni technicznej.</p>
+                    <p>Instancja do testowania automatyzacji procesów, integracji narzędzi i prostych przepływów wspierających codzienną pracę techniczną.</p>
                     <ul class="tags" aria-label="n8n">
                         <li class="tag"><a href="https://n8n.banas.dev" target="_blank" rel="noopener">n8n.banas.dev</a></li>
                         <li class="tag">Integracje</li>
@@ -899,14 +1025,15 @@
                     <div class="section-kicker">Thesis / Cycling data</div>
                     <h2 id="thesis-title">Machine learning, telemetryka i forma kolarska.</h2>
                     <p class="section-lead">
-                        Moja praca magisterska dotyczy predykcji formy kolarskiej na podstawie danych telemetrycznych
-                        z urządzeń sportowych. To eksperymentalny projekt badawczo-inżynierski łączący sport,
-                        dane treningowe, praktyczną analizę wydolności i uczenie maszynowe.
+                        Moja praca magisterska to projekt badawczo-inżynierski dotyczący predykcji formy kolarskiej
+                        na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem uczenia maszynowego.
+                        To połączenie sportu, danych, ML i praktycznej analizy wydolności, bez obietnicy gotowego
+                        produktu komercyjnego.
                     </p>
                     <p>
                         Gravel jest dla mnie naturalnym miejscem styku technologii i wytrzymałości: długie trasy,
-                        eksploracja, FTP, obciążenie treningowe, tętno, moc i pytanie, jak z surowych danych
-                        wyciągać wnioski, które mają sens poza wykresem.
+                        eksploracja, moc, tętno, FTP, obciążenie treningowe i pytanie, jak z surowych danych
+                        wyciągać wnioski, które mają sens nie tylko na wykresie, ale też w praktyce treningowej.
                     </p>
                 </div>
                 <div class="metrics" aria-label="Akcenty projektu">
@@ -1051,54 +1178,147 @@
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script>
-        const emailUser = "kontakt";
-        const emailDomain = "banas.dev";
-        const email = emailUser + "@" + emailDomain;
-        const toast = document.getElementById("toast");
-        const emailLabel = document.getElementById("emailLabel");
-        const themeToggle = document.getElementById("themeToggle");
-        const profilePhoto = document.getElementById("profilePhoto");
-        const photos = ["cv_photo.webp", "cv_photo2.webp"];
-        let photoIndex = 0;
+        (() => {
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const email = ["kontakt", "banas.dev"].join("@");
+            const toast = document.getElementById("toast");
+            const emailLabel = document.getElementById("emailLabel");
+            const themeToggle = document.getElementById("themeToggle");
+            const topbar = document.querySelector(".topbar");
+            const hero = document.querySelector(".hero");
+            const profilePhoto = document.getElementById("profilePhoto");
+            const navLinks = [...document.querySelectorAll(".nav-links a[href^='#']")];
+            const copyButtons = [document.getElementById("copyEmailHero"), document.getElementById("copyEmailContact")].filter(Boolean);
+            const photos = ["cv_photo.webp", "cv_photo2.webp"];
+            let photoIndex = 0;
+            let toastTimer;
 
-        function showToast(message) {
-            toast.textContent = message;
-            toast.classList.add("visible");
-            window.setTimeout(() => toast.classList.remove("visible"), 2600);
-        }
+            document.body.classList.add("js-ready");
 
-        async function copyEmail() {
-            try {
-                await navigator.clipboard.writeText(email);
-                emailLabel.textContent = email;
-                showToast("Skopiowano: " + email);
-            } catch (error) {
-                window.location.href = "mailto:" + email;
+            function showToast(message) {
+                if (!toast) return;
+                window.clearTimeout(toastTimer);
+                toast.textContent = message;
+                toast.classList.add("visible");
+                toastTimer = window.setTimeout(() => toast.classList.remove("visible"), 2600);
             }
-        }
 
-        document.getElementById("copyEmailHero").addEventListener("click", copyEmail);
-        document.getElementById("copyEmailContact").addEventListener("click", copyEmail);
+            function markCopied(trigger) {
+                if (!trigger) return;
+                trigger.dataset.copied = "true";
+                window.setTimeout(() => {
+                    delete trigger.dataset.copied;
+                }, 1800);
+            }
 
-        const savedTheme = localStorage.getItem("banas_theme");
-        if (savedTheme === "light") {
-            document.body.classList.add("light");
-        }
+            async function copyEmail(event) {
+                const trigger = event.currentTarget;
+                try {
+                    await navigator.clipboard.writeText(email);
+                    if (emailLabel) emailLabel.textContent = email;
+                    markCopied(trigger);
+                    showToast("Skopiowano: " + email);
+                } catch (error) {
+                    window.location.href = "mailto:" + email;
+                }
+            }
 
-        themeToggle.addEventListener("click", () => {
-            document.body.classList.toggle("light");
-            localStorage.setItem("banas_theme", document.body.classList.contains("light") ? "light" : "dark");
-        });
+            function applyTheme(theme) {
+                const isLight = theme === "light";
+                document.body.classList.toggle("light", isLight);
+                if (themeToggle) {
+                    themeToggle.textContent = isLight ? "☾" : "☼";
+                    themeToggle.setAttribute("aria-pressed", String(isLight));
+                    themeToggle.setAttribute("title", isLight ? "Przełącz na ciemny motyw" : "Przełącz na jasny motyw");
+                }
+            }
 
-        photos.forEach((src) => {
-            const img = new Image();
-            img.src = src;
-        });
+            applyTheme(localStorage.getItem("banas_theme") || "dark");
 
-        profilePhoto.addEventListener("click", () => {
-            photoIndex = (photoIndex + 1) % photos.length;
-            profilePhoto.src = photos[photoIndex];
-        });
+            themeToggle?.addEventListener("click", () => {
+                const nextTheme = document.body.classList.contains("light") ? "dark" : "light";
+                localStorage.setItem("banas_theme", nextTheme);
+                applyTheme(nextTheme);
+            });
+
+            copyButtons.forEach((button) => button.addEventListener("click", copyEmail));
+
+            navLinks.forEach((link) => {
+                link.addEventListener("click", (event) => {
+                    const target = document.querySelector(link.getAttribute("href"));
+                    if (!target) return;
+                    event.preventDefault();
+                    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+                    history.replaceState(null, "", link.getAttribute("href"));
+                });
+            });
+
+            function updateTopbar() {
+                topbar?.classList.toggle("is-scrolled", window.scrollY > 12);
+            }
+
+            updateTopbar();
+            window.addEventListener("scroll", updateTopbar, { passive: true });
+
+            const revealTargets = document.querySelectorAll(".section-heading, .card, .timeline-item, .feature-band, .profile-panel");
+            revealTargets.forEach((element) => element.classList.add("reveal"));
+
+            if ("IntersectionObserver" in window && !reduceMotion) {
+                const revealObserver = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("is-visible");
+                            revealObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: "0px 0px -48px 0px" });
+
+                revealTargets.forEach((element) => revealObserver.observe(element));
+            } else {
+                revealTargets.forEach((element) => element.classList.add("is-visible"));
+            }
+
+            const sectionTargets = navLinks
+                .map((link) => document.querySelector(link.getAttribute("href")))
+                .filter(Boolean);
+
+            if ("IntersectionObserver" in window) {
+                const navObserver = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) return;
+                        navLinks.forEach((link) => {
+                            link.classList.toggle("is-active", link.getAttribute("href") === "#" + entry.target.id);
+                        });
+                    });
+                }, { threshold: 0.32, rootMargin: "-20% 0px -55% 0px" });
+
+                sectionTargets.forEach((section) => navObserver.observe(section));
+            }
+
+            photos.forEach((src) => {
+                const img = new Image();
+                img.src = src;
+            });
+
+            profilePhoto?.addEventListener("click", () => {
+                photoIndex = (photoIndex + 1) % photos.length;
+                profilePhoto.style.opacity = "0";
+                window.setTimeout(() => {
+                    profilePhoto.src = photos[photoIndex];
+                    profilePhoto.style.opacity = "1";
+                }, reduceMotion ? 0 : 160);
+            });
+
+            if (hero && !reduceMotion) {
+                hero.addEventListener("pointermove", (event) => {
+                    const rect = hero.getBoundingClientRect();
+                    const x = ((event.clientX - rect.left) / rect.width) * 100;
+                    const y = ((event.clientY - rect.top) / rect.height) * 100;
+                    hero.style.setProperty("--hero-glow-x", x.toFixed(1) + "%");
+                    hero.style.setProperty("--hero-glow-y", y.toFixed(1) + "%");
+                }, { passive: true });
+            }
+        })();
     </script>
 </body>
 </html>
