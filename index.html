@@ -120,6 +120,7 @@
         img {
             display: block;
             max-width: 100%;
+            height: auto;
         }
 
         .page {
@@ -196,6 +197,12 @@
             justify-content: flex-end;
         }
 
+        .nav-actions {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .nav-links a,
         .icon-button,
         .button {
@@ -203,7 +210,7 @@
             border-radius: var(--radius);
             background: var(--surface);
             color: var(--text);
-            min-height: 40px;
+            min-height: 44px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -213,6 +220,56 @@
             font-size: 0.92rem;
             cursor: pointer;
             transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+        }
+
+        .icon-button {
+            min-width: 44px;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+        }
+
+        .menu-icon {
+            position: relative;
+            width: 18px;
+            height: 2px;
+            border-radius: 999px;
+            background: currentColor;
+        }
+
+        .menu-icon::before,
+        .menu-icon::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 18px;
+            height: 2px;
+            border-radius: inherit;
+            background: currentColor;
+            transition: transform 180ms ease, top 180ms ease;
+        }
+
+        .menu-icon::before {
+            top: -6px;
+        }
+
+        .menu-icon::after {
+            top: 6px;
+        }
+
+        .nav.is-menu-open .menu-icon {
+            background: transparent;
+        }
+
+        .nav.is-menu-open .menu-icon::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        .nav.is-menu-open .menu-icon::after {
+            top: 0;
+            transform: rotate(-45deg);
         }
 
         .nav-links a:hover,
@@ -232,6 +289,7 @@
         .language-switch {
             display: inline-flex;
             align-items: center;
+            min-height: 44px;
             border: 1px solid var(--line);
             border-radius: var(--radius);
             background: var(--surface);
@@ -240,8 +298,8 @@
         }
 
         .lang-button {
-            min-width: 38px;
-            min-height: 32px;
+            min-width: 44px;
+            min-height: 36px;
             border: 0;
             border-radius: calc(var(--radius) - 3px);
             background: transparent;
@@ -324,7 +382,7 @@
 
         h1 {
             margin: 22px 0 18px;
-            font-size: clamp(2.45rem, 7vw, 5.8rem);
+            font-size: clamp(2.35rem, 7vw, 5.8rem);
             line-height: 0.98;
             letter-spacing: 0;
         }
@@ -355,6 +413,7 @@
         .tag {
             display: inline-flex;
             align-items: center;
+            max-width: 100%;
             min-height: 32px;
             border: 1px solid var(--line);
             border-radius: var(--radius);
@@ -363,6 +422,7 @@
             padding: 5px 9px;
             font-size: 0.88rem;
             font-weight: 650;
+            overflow-wrap: anywhere;
         }
 
         .lab-strip {
@@ -390,6 +450,7 @@
             box-shadow: var(--shadow);
             padding: 18px;
             overflow: hidden;
+            min-width: 0;
         }
 
         .profile-panel::before,
@@ -488,6 +549,7 @@
         .meta-row span:last-child {
             text-align: right;
             font-weight: 750;
+            overflow-wrap: anywhere;
         }
 
         .section {
@@ -544,6 +606,7 @@
             background: var(--surface);
             padding: 20px;
             min-width: 0;
+            overflow-wrap: anywhere;
             transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
         }
 
@@ -707,10 +770,12 @@
             background: var(--surface);
             padding: 14px 16px;
             color: var(--text);
+            min-width: 0;
         }
 
         .contact-link span {
             color: var(--muted);
+            overflow-wrap: anywhere;
         }
 
         .contact-link:hover {
@@ -738,14 +803,63 @@
         }
 
         @media (max-width: 920px) {
+            html {
+                scroll-padding-top: 76px;
+            }
+
             .nav {
-                align-items: flex-start;
-                flex-direction: column;
-                padding: 14px 0;
+                position: relative;
+                min-height: 60px;
+                gap: 10px;
+                padding: 8px 0;
+            }
+
+            .brand {
+                min-height: 44px;
+            }
+
+            .nav-actions {
+                margin-left: auto;
             }
 
             .nav-links {
-                justify-content: flex-start;
+                position: absolute;
+                top: calc(100% + 8px);
+                left: 0;
+                right: 0;
+                z-index: 6;
+                display: grid;
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+                gap: 8px;
+                width: 100%;
+                padding: 10px;
+                border: 1px solid var(--line);
+                border-radius: var(--radius);
+                background: color-mix(in srgb, var(--bg) 94%, transparent);
+                box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+                backdrop-filter: blur(18px);
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(-6px);
+                visibility: hidden;
+                transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+            }
+
+            .nav.is-menu-open .nav-links {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
+                visibility: visible;
+            }
+
+            .nav-links a {
+                width: 100%;
+                min-height: 42px;
+                text-align: center;
+            }
+
+            .mobile-menu-toggle {
+                display: inline-flex;
             }
 
             .hero,
@@ -758,10 +872,12 @@
             .hero {
                 min-height: auto;
                 padding-top: 44px;
+                gap: 34px;
             }
 
             .profile-panel {
                 max-width: 440px;
+                justify-self: center;
             }
 
             .grid.two,
@@ -772,34 +888,126 @@
         }
 
         @media (max-width: 620px) {
+            html {
+                scroll-padding-top: 74px;
+            }
+
             .page,
             .nav {
-                width: min(100% - 22px, var(--max));
+                width: min(100% - 24px, var(--max));
+            }
+
+            body {
+                line-height: 1.58;
+            }
+
+            body::before {
+                background-size: 34px 34px;
+            }
+
+            .nav {
+                min-height: 58px;
+                gap: 8px;
+            }
+
+            .brand {
+                gap: 8px;
+            }
+
+            .brand-mark {
+                width: 32px;
+                height: 32px;
+            }
+
+            .nav-actions {
+                gap: 6px;
             }
 
             .nav-links {
-                width: 100%;
-                overflow-x: auto;
-                padding-bottom: 4px;
-                flex-wrap: nowrap;
-                justify-content: flex-start;
-                scrollbar-width: thin;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-            .nav-links a,
-            .nav-links button {
-                flex: 0 0 auto;
-                min-height: 38px;
-                font-size: 0.86rem;
+            .nav-links a {
+                min-height: 42px;
+                font-size: 0.84rem;
+                width: 100%;
+                padding: 8px 7px;
+                text-align: center;
+            }
+
+            .language-switch {
+                min-height: 40px;
+            }
+
+            .lang-button {
+                min-width: 34px;
+                min-height: 32px;
+                padding: 0 6px;
+            }
+
+            .icon-button {
+                min-width: 40px;
+                min-height: 40px;
+                padding: 8px 10px;
             }
 
             .hero {
-                padding-top: 34px;
-                gap: 28px;
+                padding: 30px 0 34px;
+                gap: 24px;
+            }
+
+            .hero::before {
+                width: 62vw;
+                inset: 16px 0 auto auto;
+                filter: blur(12px);
+                opacity: 0.5;
+            }
+
+            h1 {
+                margin: 18px 0 14px;
+                font-size: clamp(2.2rem, 16vw, 3.35rem);
+                line-height: 1.02;
+            }
+
+            h2 {
+                font-size: clamp(1.62rem, 10vw, 2.15rem);
+                line-height: 1.12;
+            }
+
+            .hero-subtitle,
+            .section-lead {
+                font-size: 1rem;
+                line-height: 1.62;
+            }
+
+            .hero-actions {
+                display: grid;
+                grid-template-columns: 1fr;
+                margin: 22px 0;
             }
 
             .hero-actions .button {
                 width: 100%;
+            }
+
+            .profile-panel {
+                width: min(100%, 320px);
+                padding: 14px;
+            }
+
+            .profile-photo {
+                aspect-ratio: 1;
+                max-height: 180px;
+                object-position: center top;
+            }
+
+            .profile-meta {
+                gap: 8px;
+                margin-top: 12px;
+            }
+
+            .lab-terminal {
+                display: none;
             }
 
             .grid.two,
@@ -810,12 +1018,101 @@
             }
 
             .section {
-                padding: 42px 0;
+                padding: 38px 0;
+            }
+
+            .section-heading {
+                gap: 14px;
+                margin-bottom: 20px;
+            }
+
+            .card,
+            .timeline-item,
+            .feature-band {
+                padding: 16px;
+            }
+
+            .project-card {
+                min-height: 0;
+            }
+
+            .tag {
+                line-height: 1.35;
             }
 
             .contact-link {
                 flex-direction: column;
                 gap: 2px;
+            }
+
+            .meta-row {
+                display: grid;
+                gap: 2px;
+                padding-top: 8px;
+            }
+
+            .meta-row span:first-child,
+            .meta-row span:last-child {
+                text-align: left;
+            }
+
+            .meta-row span:first-child {
+                font-size: 0.76rem;
+            }
+
+            .meta-row span:last-child {
+                font-size: 0.9rem;
+                line-height: 1.35;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .nav-links {
+                grid-template-columns: 1fr;
+            }
+
+            .brand {
+                gap: 6px;
+                font-size: 0.88rem;
+            }
+
+            .brand-mark {
+                width: 30px;
+                height: 30px;
+                font-size: 0.78rem;
+            }
+
+            .nav-actions {
+                gap: 4px;
+            }
+
+            .lang-button {
+                min-width: 31px;
+                padding: 0 4px;
+            }
+
+            .icon-button {
+                min-width: 38px;
+                padding: 8px;
+            }
+
+            h1 {
+                font-size: clamp(2rem, 14vw, 2.65rem);
+            }
+        }
+
+        @media (hover: none), (pointer: coarse) {
+            .nav-links a:hover,
+            .icon-button:hover,
+            .button:hover,
+            .card:hover,
+            .timeline-item:hover,
+            .profile-photo:hover {
+                transform: none;
+            }
+
+            .topbar {
+                backdrop-filter: blur(10px);
             }
         }
 
@@ -835,6 +1132,12 @@
             .hero::before {
                 display: none;
             }
+
+            .menu-icon::before,
+            .menu-icon::after,
+            .nav-links {
+                transition: none !important;
+            }
         }
     </style>
 </head>
@@ -847,17 +1150,22 @@
                 <span class="brand-mark">RB</span>
                 <span>banas.dev</span>
             </a>
-            <div class="nav-links">
+            <div class="nav-links" id="primaryNavigation">
                 <a href="#about" data-i18n="nav.about">O mnie</a>
                 <a href="#experience" data-i18n="nav.experience">Doświadczenie</a>
                 <a href="#projects" data-i18n="nav.projects">Projekty</a>
                 <a href="#skills" data-i18n="nav.skills">Umiejętności</a>
                 <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+            </div>
+            <div class="nav-actions">
                 <div class="language-switch" aria-label="Wybór języka" data-i18n-attr="aria-label:langSwitch.label">
-                    <button class="lang-button is-active" type="button" data-lang="pl" aria-pressed="true">PL</button>
-                    <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+                    <button class="lang-button is-active" type="button" data-lang="pl" aria-label="Polski" aria-pressed="true">PL</button>
+                    <button class="lang-button" type="button" data-lang="en" aria-label="English" aria-pressed="false">EN</button>
                 </div>
                 <button class="icon-button" type="button" id="themeToggle" aria-label="Przełącz motyw" title="Przełącz motyw">◐</button>
+                <button class="icon-button mobile-menu-toggle" type="button" id="mobileMenuToggle" aria-label="Otwórz menu" aria-controls="primaryNavigation" aria-expanded="false">
+                    <span class="menu-icon" aria-hidden="true"></span>
+                </button>
             </div>
         </nav>
     </header>
@@ -1277,12 +1585,17 @@
     <script>
         (() => {
             const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const canUsePointerGlow = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
             const themeToggle = document.getElementById("themeToggle");
+            const mobileMenuToggle = document.getElementById("mobileMenuToggle");
             const topbar = document.querySelector(".topbar");
+            const nav = document.querySelector(".nav");
+            const navLinksContainer = document.getElementById("primaryNavigation");
             const hero = document.querySelector(".hero");
             const profilePhoto = document.getElementById("profilePhoto");
             const navLinks = [...document.querySelectorAll(".nav-links a[href^='#']")];
             const langButtons = [...document.querySelectorAll(".lang-button[data-lang]")];
+            const mobileMenuQuery = window.matchMedia("(max-width: 920px)");
             const photos = ["cv_photo.webp", "cv_photo2.webp"];
             let photoIndex = 0;
 
@@ -1301,6 +1614,10 @@
                         projects: "Projekty",
                         skills: "Umiejętności",
                         contact: "Kontakt"
+                    },
+                    menu: {
+                        open: "Otwórz menu",
+                        close: "Zamknij menu"
                     },
                     hero: {
                         eyebrow: "Technical Support Engineer / IT / Application Support",
@@ -1440,6 +1757,10 @@
                         projects: "Projects",
                         skills: "Skills",
                         contact: "Contact"
+                    },
+                    menu: {
+                        open: "Open menu",
+                        close: "Close menu"
                     },
                     hero: {
                         eyebrow: "Technical Support Engineer / IT / Application Support",
@@ -1598,6 +1919,36 @@
                     button.classList.toggle("is-active", isActive);
                     button.setAttribute("aria-pressed", String(isActive));
                 });
+
+                updateMenuButtonLabel(selected);
+            }
+
+            function updateMenuButtonLabel(lang = document.documentElement.lang || "pl") {
+                if (!mobileMenuToggle) return;
+                const selected = translations[lang] ? lang : "pl";
+                const isOpen = nav?.classList.contains("is-menu-open");
+                mobileMenuToggle.setAttribute("aria-label", isOpen ? translations[selected].menu.close : translations[selected].menu.open);
+            }
+
+            function setMobileMenu(open) {
+                if (!nav || !mobileMenuToggle || !navLinksContainer) return;
+                const shouldOpen = Boolean(open && mobileMenuQuery.matches);
+                nav.classList.toggle("is-menu-open", shouldOpen);
+                mobileMenuToggle.setAttribute("aria-expanded", String(shouldOpen));
+                navLinksContainer.setAttribute("aria-hidden", String(mobileMenuQuery.matches && !shouldOpen));
+                updateMenuButtonLabel();
+            }
+
+            function syncMobileMenuState() {
+                if (!navLinksContainer) return;
+                if (mobileMenuQuery.matches) {
+                    setMobileMenu(nav?.classList.contains("is-menu-open"));
+                } else {
+                    nav?.classList.remove("is-menu-open");
+                    mobileMenuToggle?.setAttribute("aria-expanded", "false");
+                    navLinksContainer.setAttribute("aria-hidden", "false");
+                    updateMenuButtonLabel();
+                }
             }
 
             function applyTheme(theme) {
@@ -1629,15 +1980,41 @@
                 applyTheme(nextTheme);
             });
 
+            mobileMenuToggle?.addEventListener("click", () => {
+                setMobileMenu(!nav?.classList.contains("is-menu-open"));
+            });
+
             navLinks.forEach((link) => {
                 link.addEventListener("click", (event) => {
                     const target = document.querySelector(link.getAttribute("href"));
                     if (!target) return;
                     event.preventDefault();
+                    setMobileMenu(false);
                     target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
                     history.replaceState(null, "", link.getAttribute("href"));
+                    navLinks.forEach((item) => {
+                        item.classList.toggle("is-active", item === link);
+                    });
                 });
             });
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape") setMobileMenu(false);
+            });
+
+            document.addEventListener("click", (event) => {
+                if (!mobileMenuQuery.matches || !nav?.classList.contains("is-menu-open")) return;
+                if (nav.contains(event.target)) return;
+                setMobileMenu(false);
+            });
+
+            if (typeof mobileMenuQuery.addEventListener === "function") {
+                mobileMenuQuery.addEventListener("change", syncMobileMenuState);
+            } else {
+                mobileMenuQuery.addListener(syncMobileMenuState);
+            }
+
+            syncMobileMenuState();
 
             function updateTopbar() {
                 topbar?.classList.toggle("is-scrolled", window.scrollY > 12);
@@ -1695,7 +2072,7 @@
                 }, reduceMotion ? 0 : 160);
             });
 
-            if (hero && !reduceMotion) {
+            if (hero && !reduceMotion && canUsePointerGlow) {
                 hero.addEventListener("pointermove", (event) => {
                     const rect = hero.getBoundingClientRect();
                     const x = ((event.clientX - rect.left) / rect.width) * 100;
