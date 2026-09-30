@@ -1462,7 +1462,7 @@
                         <li class="tag">Computer Vision</li>
                     </ul>
                     <div class="project-actions">
-                        <a class="button" data-project-link="plates" aria-disabled="true" tabindex="-1" data-i18n="projects.platesCta" data-i18n-attr="aria-label:projects.platesUnavailableAria">W przygotowaniu</a>
+                        <a class="button" data-project-link="plates" aria-disabled="true" tabindex="-1" data-i18n="projects.platesCta" data-i18n-attr="aria-label:projects.platesLinkAria">Zobacz projekt</a>
                     </div>
                 </article>
             </div>
@@ -1778,8 +1778,8 @@
                         n8nCta: "Otwórz n8n",
                         platesTitle: "Rozpoznawanie tablic rejestracyjnych / Plates",
                         platesText: "Projekt wykrywania tablic i odczytywania numerów ze zdjęć, wykorzystujący YOLO i OCR do detekcji obiektu, odczytu tekstu i obróbki wyniku.",
-                        platesCta: "W przygotowaniu",
-                        platesUnavailableAria: "Projekt Plates jest w przygotowaniu — link nie jest jeszcze aktywny",
+                        platesCta: "Zobacz projekt",
+                        platesLinkAria: "Zobacz projekt Plates — status: w przygotowaniu",
                         preparing: "W przygotowaniu",
                         moreTitle: "Pozostałe projekty i obszary",
                         lanariText: "Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.",
@@ -1931,8 +1931,8 @@
                         n8nCta: "Open n8n",
                         platesTitle: "License plate recognition / Plates",
                         platesText: "A project for detecting license plates and reading their numbers from images, using YOLO and OCR for object detection, text extraction and result processing.",
-                        platesCta: "Coming soon",
-                        platesUnavailableAria: "The Plates project is in progress — the link is not active yet",
+                        platesCta: "View project",
+                        platesLinkAria: "View the Plates project — status: in progress",
                         preparing: "Coming soon",
                         moreTitle: "Other projects and focus areas",
                         lanariText: "An e-commerce project with a Python/FastAPI backend and a simple frontend. Practice in API design, application logic, data validation and web integration.",
@@ -1995,9 +1995,8 @@
                 }
             };
 
-            // To publish Plates later, set this value to "https://plates.banas.dev".
             const projectLinks = {
-                plates: ""
+                plates: "https://plates.banas.dev"
             };
 
             document.querySelectorAll("[data-project-link]").forEach((link) => {
