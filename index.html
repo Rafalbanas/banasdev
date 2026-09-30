@@ -691,6 +691,59 @@
             padding-top: 18px;
         }
 
+        .project-card--actionable .tags {
+            margin-top: 0;
+        }
+
+        .project-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .project-status {
+            flex: 0 0 auto;
+            border: 1px solid color-mix(in srgb, var(--accent-3) 52%, var(--line));
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--accent-3) 12%, transparent);
+            color: var(--accent-3);
+            padding: 4px 9px;
+            font-size: 0.74rem;
+            font-weight: 850;
+            line-height: 1.25;
+        }
+
+        .project-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 20px;
+        }
+
+        .project-actions .button {
+            width: fit-content;
+            font-weight: 800;
+        }
+
+        .project-actions .button[aria-disabled="true"] {
+            border-color: var(--line);
+            background: color-mix(in srgb, var(--surface-strong) 64%, transparent);
+            color: var(--muted);
+            cursor: not-allowed;
+            opacity: 0.78;
+        }
+
+        .project-group-title {
+            margin: 32px 0 14px;
+            color: var(--muted);
+            font-size: 0.84rem;
+            font-weight: 850;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
         .feature-band {
             position: relative;
             overflow: hidden;
@@ -1036,6 +1089,10 @@
                 min-height: 0;
             }
 
+            .project-actions .button {
+                width: 100%;
+            }
+
             .tag {
                 line-height: 1.35;
             }
@@ -1364,8 +1421,56 @@
             </div>
 
             <div class="grid three">
-                <article class="card project-card">
+                <article class="card project-card project-card--actionable">
                     <div class="project-number">01</div>
+                    <h3>Cycling</h3>
+                    <p data-i18n="projects.cyclingText">Interaktywna prezentacja projektu analizy formy kolarskiej, porównanie wyników modeli, wykresy i kalkulator FTP.</p>
+                    <ul class="tags" aria-label="Obszary projektu Cycling" data-i18n-attr="aria-label:projects.cyclingTagsAria">
+                        <li class="tag" data-i18n="tag.cyclingData">Dane kolarskie</li>
+                        <li class="tag" data-i18n="tag.charts">Wykresy</li>
+                        <li class="tag">FTP</li>
+                    </ul>
+                    <div class="project-actions">
+                        <a class="button primary" href="https://cycling.banas.dev" target="_blank" rel="noopener" data-i18n="projects.cyclingCta">Zobacz projekt</a>
+                    </div>
+                </article>
+
+                <article class="card project-card project-card--actionable">
+                    <div class="project-number">02</div>
+                    <h3 data-i18n="projects.n8nTitle">Automatyzacje / n8n</h3>
+                    <p data-i18n="projects.n8nText">Środowisko automatyzacji procesów i integracji usług, wykorzystywane do testowania przepływów wspierających codzienną pracę techniczną.</p>
+                    <ul class="tags" aria-label="n8n">
+                        <li class="tag">n8n</li>
+                        <li class="tag" data-i18n="tag.integrations">Integracje</li>
+                        <li class="tag" data-i18n="tag.automation">Automatyzacja</li>
+                    </ul>
+                    <div class="project-actions">
+                        <a class="button primary" href="https://n8n.banas.dev" target="_blank" rel="noopener" data-i18n="projects.n8nCta">Otwórz n8n</a>
+                    </div>
+                </article>
+
+                <article class="card project-card project-card--actionable">
+                    <div class="project-card-header">
+                        <div class="project-number">03</div>
+                        <span class="project-status" data-i18n="projects.preparing">W przygotowaniu</span>
+                    </div>
+                    <h3 data-i18n="projects.platesTitle">Rozpoznawanie tablic rejestracyjnych / Plates</h3>
+                    <p data-i18n="projects.platesText">Projekt wykrywania tablic i odczytywania numerów ze zdjęć, wykorzystujący YOLO i OCR do detekcji obiektu, odczytu tekstu i obróbki wyniku.</p>
+                    <ul class="tags" aria-label="Technologie Plates">
+                        <li class="tag">YOLO</li>
+                        <li class="tag">OCR</li>
+                        <li class="tag">Computer Vision</li>
+                    </ul>
+                    <div class="project-actions">
+                        <a class="button" data-project-link="plates" aria-disabled="true" tabindex="-1" data-i18n="projects.platesCta" data-i18n-attr="aria-label:projects.platesUnavailableAria">W przygotowaniu</a>
+                    </div>
+                </article>
+            </div>
+
+            <h3 class="project-group-title" data-i18n="projects.moreTitle">Pozostałe projekty i obszary</h3>
+            <div class="grid two">
+                <article class="card project-card">
+                    <div class="project-number">04</div>
                     <h3>Lanari Candle</h3>
                     <p data-i18n="projects.lanariText">Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.</p>
                     <ul class="tags" aria-label="Technologie Lanari Candle">
@@ -1376,18 +1481,7 @@
                 </article>
 
                 <article class="card project-card">
-                    <div class="project-number">02</div>
-                    <h3>Automatic License Plate Recognition</h3>
-                    <p data-i18n="projects.alprText">Projekt computer vision do rozpoznawania tablic rejestracyjnych z wykorzystaniem YOLO i OCR: detekcja obiektu, odczyt tekstu i obróbka wyniku.</p>
-                    <ul class="tags" aria-label="Technologie ALPR">
-                        <li class="tag">YOLO</li>
-                        <li class="tag">OCR</li>
-                        <li class="tag">Computer Vision</li>
-                    </ul>
-                </article>
-
-                <article class="card project-card">
-                    <div class="project-number">03</div>
+                    <div class="project-number">05</div>
                     <h3 data-i18n="projects.thesisTitle">Praca magisterska</h3>
                     <p data-i18n="projects.thesisText">Projekt badawczo-inżynierski: predykcja formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem ML.</p>
                     <ul class="tags" aria-label="Obszary pracy magisterskiej" data-i18n-attr="aria-label:projects.thesisTagsAria">
@@ -1398,7 +1492,7 @@
                 </article>
 
                 <article class="card project-card">
-                    <div class="project-number">04</div>
+                    <div class="project-number">06</div>
                     <h3 data-i18n="projects.itAutomationTitle">Administracja i automatyzacja IT</h3>
                     <p data-i18n="projects.itAutomationText">PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.</p>
                     <ul class="tags" aria-label="Obszary administracji IT">
@@ -1409,7 +1503,7 @@
                 </article>
 
                 <article class="card project-card">
-                    <div class="project-number">05</div>
+                    <div class="project-number">07</div>
                     <h3>Banas.dev</h3>
                     <p data-i18n="projects.banasText">Własna przestrzeń na projekty, testy, automatyzacje i usługi. Statyczna strona, własne subdomeny i miejsce do praktycznego eksperymentowania.</p>
                     <ul class="tags" aria-label="Banas.dev">
@@ -1419,15 +1513,6 @@
                     </ul>
                 </article>
 
-                <article class="card project-card">
-                    <div class="project-number">06</div>
-                    <h3 data-i18n="projects.n8nTitle">Automatyzacje n8n</h3>
-                    <p data-i18n="projects.n8nText">Instancja do testowania automatyzacji procesów, integracji narzędzi i prostych przepływów wspierających codzienną pracę techniczną.</p>
-                    <ul class="tags" aria-label="n8n">
-                        <li class="tag"><a href="https://n8n.banas.dev" target="_blank" rel="noopener">n8n.banas.dev</a></li>
-                        <li class="tag" data-i18n="tag.integrations">Integracje</li>
-                    </ul>
-                </article>
             </div>
         </section>
 
@@ -1685,15 +1770,24 @@
                         kicker: "Projekty",
                         title: "Projekty i obszary pracy",
                         lead: "Zestaw obszarów, które pokazują praktyczne podejście do IT: od prostych aplikacji webowych i backendu, przez computer vision, po automatyzacje, systemy i własną przestrzeń do testów.",
+                        cyclingText: "Interaktywna prezentacja projektu analizy formy kolarskiej, porównanie wyników modeli, wykresy i kalkulator FTP.",
+                        cyclingCta: "Zobacz projekt",
+                        cyclingTagsAria: "Obszary projektu Cycling",
+                        n8nTitle: "Automatyzacje / n8n",
+                        n8nText: "Środowisko automatyzacji procesów i integracji usług, wykorzystywane do testowania przepływów wspierających codzienną pracę techniczną.",
+                        n8nCta: "Otwórz n8n",
+                        platesTitle: "Rozpoznawanie tablic rejestracyjnych / Plates",
+                        platesText: "Projekt wykrywania tablic i odczytywania numerów ze zdjęć, wykorzystujący YOLO i OCR do detekcji obiektu, odczytu tekstu i obróbki wyniku.",
+                        platesCta: "W przygotowaniu",
+                        platesUnavailableAria: "Projekt Plates jest w przygotowaniu — link nie jest jeszcze aktywny",
+                        preparing: "W przygotowaniu",
+                        moreTitle: "Pozostałe projekty i obszary",
                         lanariText: "Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.",
-                        alprText: "Projekt computer vision do rozpoznawania tablic rejestracyjnych z wykorzystaniem YOLO i OCR: detekcja obiektu, odczyt tekstu i obróbka wyniku.",
                         thesisTitle: "Praca magisterska",
                         thesisText: "Projekt badawczo-inżynierski: predykcja formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem ML.",
                         itAutomationTitle: "Administracja i automatyzacja IT",
                         itAutomationText: "PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.",
                         banasText: "Własna przestrzeń typu personal engineering lab: projekty, testy, automatyzacje, usługi, subdomeny i praktyczne eksperymenty bez ciężkiej infrastruktury.",
-                        n8nTitle: "Automatyzacje n8n",
-                        n8nText: "Instancja do testowania automatyzacji procesów, integracji narzędzi i prostych przepływów wspierających codzienną pracę techniczną.",
                         thesisTagsAria: "Obszary pracy magisterskiej"
                     },
                     tag: {
@@ -1701,7 +1795,8 @@
                         integrations: "Integracje",
                         services: "Usługi",
                         automation: "Automatyzacja",
-                        cyclingData: "Dane kolarskie"
+                        cyclingData: "Dane kolarskie",
+                        charts: "Wykresy"
                     },
                     thesis: {
                         kicker: "Praca magisterska / dane kolarskie",
@@ -1828,15 +1923,24 @@
                         kicker: "Projects",
                         title: "Projects and focus areas",
                         lead: "A set of areas showing my practical approach to IT: from simple web applications and backend work, through computer vision, to automation, systems and my own testing space.",
+                        cyclingText: "An interactive presentation of the cycling performance analysis project, including model result comparisons, charts and an FTP calculator.",
+                        cyclingCta: "View project",
+                        cyclingTagsAria: "Cycling project areas",
+                        n8nTitle: "Automation / n8n",
+                        n8nText: "An environment for process automation and service integrations, used to test workflows supporting everyday technical work.",
+                        n8nCta: "Open n8n",
+                        platesTitle: "License plate recognition / Plates",
+                        platesText: "A project for detecting license plates and reading their numbers from images, using YOLO and OCR for object detection, text extraction and result processing.",
+                        platesCta: "Coming soon",
+                        platesUnavailableAria: "The Plates project is in progress — the link is not active yet",
+                        preparing: "Coming soon",
+                        moreTitle: "Other projects and focus areas",
                         lanariText: "An e-commerce project with a Python/FastAPI backend and a simple frontend. Practice in API design, application logic, data validation and web integration.",
-                        alprText: "A computer vision project for automatic license plate recognition using YOLO and OCR: object detection, text extraction and result processing.",
                         thesisTitle: "Master’s thesis",
                         thesisText: "A research and engineering project: predicting cycling performance/form using telemetry data from sports devices with ML.",
                         itAutomationTitle: "IT administration and automation",
                         itAutomationText: "PowerShell, Linux, servers, monitoring, networks and scripts supporting diagnostics, configuration and repetitive administrative work.",
                         banasText: "My personal engineering lab space: projects, tests, automation, services, subdomains and practical experiments without heavy infrastructure.",
-                        n8nTitle: "n8n automations",
-                        n8nText: "An instance for testing process automation, tool integrations and simple workflows supporting everyday technical work.",
                         thesisTagsAria: "Master’s thesis areas"
                     },
                     tag: {
@@ -1844,7 +1948,8 @@
                         integrations: "Integrations",
                         services: "Services",
                         automation: "Automation",
-                        cyclingData: "Cycling data"
+                        cyclingData: "Cycling data",
+                        charts: "Charts"
                     },
                     thesis: {
                         kicker: "Thesis / Cycling data",
@@ -1889,6 +1994,22 @@
                     }
                 }
             };
+
+            // To publish Plates later, set this value to "https://plates.banas.dev".
+            const projectLinks = {
+                plates: ""
+            };
+
+            document.querySelectorAll("[data-project-link]").forEach((link) => {
+                const url = projectLinks[link.dataset.projectLink];
+                if (!url) return;
+                link.href = url;
+                link.target = "_blank";
+                link.rel = "noopener";
+                link.removeAttribute("aria-disabled");
+                link.removeAttribute("tabindex");
+                link.classList.add("primary");
+            });
 
             function getValue(path, lang) {
                 return path.split(".").reduce((value, key) => value?.[key], translations[lang]);
