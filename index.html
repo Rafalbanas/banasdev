@@ -627,6 +627,114 @@
             margin-bottom: 0;
         }
 
+        .weather-widget {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            padding: 22px;
+        }
+
+        .weather-widget::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
+        }
+
+        .weather-summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .weather-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid color-mix(in srgb, var(--accent-2) 38%, var(--line));
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--accent-2) 10%, var(--surface));
+            padding: 6px 10px;
+            color: var(--text);
+            font-size: 0.86rem;
+            font-weight: 800;
+        }
+
+        .weather-status::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-2);
+        }
+
+        .weather-readings {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .weather-reading {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--surface-strong) 82%, transparent);
+            padding: 16px;
+            min-width: 0;
+        }
+
+        .weather-reading span {
+            display: block;
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        .weather-reading strong {
+            display: block;
+            margin-top: 5px;
+            font-size: clamp(1.28rem, 3vw, 1.8rem);
+            line-height: 1.15;
+        }
+
+        .weather-reading--pm strong {
+            color: var(--accent);
+        }
+
+        .weather-norm {
+            height: 6px;
+            margin-top: 12px;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--line) 72%, transparent);
+            overflow: hidden;
+        }
+
+        .weather-norm span {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--accent-2), var(--accent-3));
+            transition: width 300ms ease;
+        }
+
+        .weather-meta {
+            margin: 16px 0 0;
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .weather-widget[data-state="error"] .weather-status {
+            border-color: color-mix(in srgb, var(--danger) 42%, var(--line));
+        }
+
+        .weather-widget[data-state="error"] .weather-status::before {
+            background: var(--danger);
+        }
+
         .timeline {
             display: grid;
             gap: 14px;
@@ -935,7 +1043,8 @@
 
             .grid.two,
             .grid.three,
-            .skills-list {
+            .skills-list,
+            .weather-readings {
                 grid-template-columns: 1fr 1fr;
             }
         }
@@ -1066,8 +1175,19 @@
             .grid.two,
             .grid.three,
             .skills-list,
-            .timeline-item {
+            .timeline-item,
+            .weather-readings {
                 grid-template-columns: 1fr;
+            }
+
+            .weather-widget {
+                padding: 16px;
+            }
+
+            .weather-summary {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 10px;
             }
 
             .section {
@@ -1324,6 +1444,55 @@
                     <h3 data-i18n="about.card3Title">Dane, AI i sport</h3>
                     <p data-i18n="about.card3Text">Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako konkretny obszar pracy magisterskiej.</p>
                 </article>
+            </div>
+        </section>
+
+        <section class="page section" id="weather" aria-labelledby="weather-title">
+            <div class="section-heading">
+                <div class="section-kicker" data-i18n="weather.kicker">Kato na żywo</div>
+                <div>
+                    <h2 id="weather-title" data-i18n="weather.title">Temperatura i jakość powietrza w Katowicach (Kato)</h2>
+                    <p class="section-lead" data-i18n="weather.lead">Aktualne odczyty z czujników stacji KAT04BAPP, odświeżane automatycznie co godzinę.</p>
+                </div>
+            </div>
+
+            <div class="weather-widget" id="weatherWidget" data-state="loading" aria-live="polite">
+                <div class="weather-summary">
+                    <div>
+                        <div class="section-kicker" data-i18n="weather.station">Katowice · Brzozowa</div>
+                        <strong class="weather-status" id="weatherStatus" data-i18n="weather.loading">Pobieranie danych…</strong>
+                    </div>
+                    <span class="tag">InPost Air Sensor · KAT04BAPP</span>
+                </div>
+
+                <div class="weather-readings">
+                    <div class="weather-reading">
+                        <span data-i18n="weather.temperature">Temperatura</span>
+                        <strong data-weather="temperature">—</strong>
+                    </div>
+                    <div class="weather-reading">
+                        <span data-i18n="weather.humidity">Wilgotność</span>
+                        <strong data-weather="humidity">—</strong>
+                    </div>
+                    <div class="weather-reading">
+                        <span data-i18n="weather.pressure">Ciśnienie</span>
+                        <strong data-weather="pressure">—</strong>
+                    </div>
+                    <div class="weather-reading weather-reading--pm">
+                        <span>PM2.5</span>
+                        <strong data-weather="pm25">—</strong>
+                        <span data-weather-norm="pm25">—</span>
+                        <div class="weather-norm" aria-hidden="true"><span data-weather-bar="pm25"></span></div>
+                    </div>
+                    <div class="weather-reading weather-reading--pm">
+                        <span>PM10</span>
+                        <strong data-weather="pm10">—</strong>
+                        <span data-weather-norm="pm10">—</span>
+                        <div class="weather-norm" aria-hidden="true"><span data-weather-bar="pm10"></span></div>
+                    </div>
+                </div>
+
+                <p class="weather-meta" id="weatherUpdated" data-i18n="weather.waiting">Oczekiwanie na aktualne dane.</p>
             </div>
         </section>
 
@@ -1681,8 +1850,13 @@
             const navLinks = [...document.querySelectorAll(".nav-links a[href^='#']")];
             const langButtons = [...document.querySelectorAll(".lang-button[data-lang]")];
             const mobileMenuQuery = window.matchMedia("(max-width: 920px)");
+            const weatherWidget = document.getElementById("weatherWidget");
+            const weatherStatus = document.getElementById("weatherStatus");
+            const weatherUpdated = document.getElementById("weatherUpdated");
             const photos = ["cv_photo.webp", "cv_photo2.webp"];
             let photoIndex = 0;
+            let weatherData = null;
+            let weatherLoadFailed = false;
 
             document.body.classList.add("js-ready");
 
@@ -1741,6 +1915,29 @@
                         card2Text: "PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania trafiają do skryptów, workflowów albo checklist.",
                         card3Title: "Dane, AI i sport",
                         card3Text: "Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako praktyczne pole do eksperymentów z danymi."
+                    },
+                    weather: {
+                        kicker: "Kato na żywo",
+                        title: "Temperatura i jakość powietrza w Katowicach (Kato)",
+                        lead: "Aktualne odczyty z czujników stacji KAT04BAPP, odświeżane automatycznie co godzinę.",
+                        station: "Katowice · Brzozowa",
+                        loading: "Pobieranie danych…",
+                        waiting: "Oczekiwanie na aktualne dane.",
+                        temperature: "Temperatura",
+                        humidity: "Wilgotność",
+                        pressure: "Ciśnienie",
+                        norm: "{percent}% normy ({value} {unit})",
+                        updated: "Aktualizacja: {date} · Źródło: InPost",
+                        error: "Dane są chwilowo niedostępne",
+                        levels: {
+                            VERY_GOOD: "Bardzo dobra jakość powietrza",
+                            GOOD: "Dobra jakość powietrza",
+                            MODERATE: "Umiarkowana jakość powietrza",
+                            SUFFICIENT: "Dostateczna jakość powietrza",
+                            BAD: "Zła jakość powietrza",
+                            VERY_BAD: "Bardzo zła jakość powietrza",
+                            UNKNOWN: "Brak oceny jakości powietrza"
+                        }
                     },
                     experience: {
                         kicker: "Doświadczenie",
@@ -1895,6 +2092,29 @@
                         card3Title: "Data, AI and sport",
                         card3Text: "Machine learning, training telemetry and cycling form analysis as a practical field for data experiments."
                     },
+                    weather: {
+                        kicker: "Kato live",
+                        title: "Temperature and air quality in Katowice (Kato)",
+                        lead: "Current readings from the KAT04BAPP station sensors, refreshed automatically every hour.",
+                        station: "Katowice · Brzozowa",
+                        loading: "Loading data…",
+                        waiting: "Waiting for current data.",
+                        temperature: "Temperature",
+                        humidity: "Humidity",
+                        pressure: "Pressure",
+                        norm: "{percent}% of the norm ({value} {unit})",
+                        updated: "Updated: {date} · Source: InPost",
+                        error: "Data is temporarily unavailable",
+                        levels: {
+                            VERY_GOOD: "Very good air quality",
+                            GOOD: "Good air quality",
+                            MODERATE: "Moderate air quality",
+                            SUFFICIENT: "Sufficient air quality",
+                            BAD: "Poor air quality",
+                            VERY_BAD: "Very poor air quality",
+                            UNKNOWN: "No air quality rating"
+                        }
+                    },
                     experience: {
                         kicker: "Experience",
                         title: "Professional experience",
@@ -2014,6 +2234,77 @@
                 return path.split(".").reduce((value, key) => value?.[key], translations[lang]);
             }
 
+            function interpolate(template, values) {
+                return Object.entries(values).reduce(
+                    (text, [key, value]) => text.replace(`{${key}}`, value),
+                    template
+                );
+            }
+
+            function renderWeather(lang = document.documentElement.lang || "pl") {
+                if (!weatherWidget || !weatherStatus || !weatherUpdated) return;
+                const selected = translations[lang] ? lang : "pl";
+                const copy = translations[selected].weather;
+
+                if (weatherLoadFailed) {
+                    weatherWidget.dataset.state = "error";
+                    weatherStatus.textContent = copy.error;
+                    weatherUpdated.textContent = copy.error;
+                    return;
+                }
+                if (!weatherData) return;
+
+                weatherWidget.dataset.state = "ready";
+                const numberFormat = new Intl.NumberFormat(selected === "pl" ? "pl-PL" : "en-GB", {
+                    maximumFractionDigits: 1
+                });
+                const formatReading = (sensor) => `${numberFormat.format(sensor.value)} ${sensor.unit}`;
+
+                ["temperature", "humidity", "pressure", "pm25", "pm10"].forEach((name) => {
+                    const element = document.querySelector(`[data-weather="${name}"]`);
+                    if (element && weatherData[name]) element.textContent = formatReading(weatherData[name]);
+                });
+
+                ["pm25", "pm10"].forEach((name) => {
+                    const sensor = weatherData[name];
+                    if (!sensor) return;
+                    const norm = document.querySelector(`[data-weather-norm="${name}"]`);
+                    const bar = document.querySelector(`[data-weather-bar="${name}"]`);
+                    if (norm) {
+                        norm.textContent = interpolate(copy.norm, {
+                            percent: numberFormat.format(sensor.norm_percent),
+                            value: numberFormat.format(sensor.norm_value),
+                            unit: sensor.unit
+                        });
+                    }
+                    if (bar) bar.style.width = `${Math.min(Math.max(sensor.norm_percent, 0), 100)}%`;
+                });
+
+                weatherStatus.textContent = copy.levels[weatherData.air_index_level] || copy.levels.UNKNOWN;
+                const fetchedAt = new Date(weatherData.fetched_at);
+                const formattedDate = new Intl.DateTimeFormat(selected === "pl" ? "pl-PL" : "en-GB", {
+                    dateStyle: "medium",
+                    timeStyle: "short",
+                    timeZone: "Europe/Warsaw"
+                }).format(fetchedAt);
+                weatherUpdated.textContent = interpolate(copy.updated, { date: formattedDate });
+            }
+
+            async function loadWeather() {
+                try {
+                    const response = await fetch("data.json", { cache: "no-store" });
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    weatherData = await response.json();
+                    const required = ["temperature", "humidity", "pressure", "pm25", "pm10", "fetched_at"];
+                    if (!required.every((key) => weatherData[key])) throw new Error("Niepełne dane pogodowe");
+                    renderWeather();
+                } catch (error) {
+                    console.error("Nie udało się wczytać danych pogodowych:", error);
+                    weatherLoadFailed = true;
+                    renderWeather();
+                }
+            }
+
             function setLanguage(lang) {
                 const selected = translations[lang] ? lang : "pl";
                 document.documentElement.lang = selected;
@@ -2041,6 +2332,7 @@
                 });
 
                 updateMenuButtonLabel(selected);
+                renderWeather(selected);
             }
 
             function updateMenuButtonLabel(lang = document.documentElement.lang || "pl") {
@@ -2086,6 +2378,7 @@
 
             setLanguage(localStorage.getItem("banas_lang") || "pl");
             applyTheme(localStorage.getItem("banas_theme") || "dark");
+            loadWeather();
 
             langButtons.forEach((button) => {
                 button.addEventListener("click", () => {
