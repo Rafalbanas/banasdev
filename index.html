@@ -147,7 +147,7 @@
         .topbar {
             position: sticky;
             top: 0;
-            z-index: 5;
+            z-index: 100;
             border-bottom: 1px solid var(--line);
             backdrop-filter: blur(18px);
             background: color-mix(in srgb, var(--bg) 78%, transparent);
@@ -990,7 +990,7 @@
                 right: 0;
                 z-index: 6;
                 display: grid;
-                grid-template-columns: repeat(5, minmax(0, 1fr));
+                grid-template-columns: repeat(6, minmax(0, 1fr));
                 gap: 8px;
                 width: 100%;
                 padding: 10px;
@@ -1329,6 +1329,7 @@
             </a>
             <div class="nav-links" id="primaryNavigation">
                 <a href="#about" data-i18n="nav.about">O mnie</a>
+                <a href="#weather" data-i18n="nav.weather">Pogoda</a>
                 <a href="#experience" data-i18n="nav.experience">Doświadczenie</a>
                 <a href="#projects" data-i18n="nav.projects">Projekty</a>
                 <a href="#skills" data-i18n="nav.skills">Umiejętności</a>
@@ -1869,6 +1870,7 @@
                     langSwitch: { label: "Wybór języka" },
                     nav: {
                         about: "O mnie",
+                        weather: "Pogoda",
                         experience: "Doświadczenie",
                         projects: "Projekty",
                         skills: "Umiejętności",
@@ -2045,6 +2047,7 @@
                     langSwitch: { label: "Language selection" },
                     nav: {
                         about: "About",
+                        weather: "Weather",
                         experience: "Experience",
                         projects: "Projects",
                         skills: "Skills",
