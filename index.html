@@ -1598,7 +1598,7 @@
                     <div>
                         <h3 id="weather-history-title" data-i18n="weather.historyTitle">Historia 24-godzinna</h3>
                         <div class="weather-history-date" id="weatherHistoryDate" aria-live="polite"></div>
-                        <p class="weather-history-note" data-i18n="weather.historyNote">Punkty oznaczają rzeczywiste odczyty godzinowe; wartości pomiędzy nimi nie są interpolowane. Skala jest wspólna dla całej historii.</p>
+                        <p class="weather-history-note" data-i18n="weather.historyNote">Punkty oznaczają rzeczywiste odczyty godzinowe; wartości pomiędzy nimi nie są interpolowane. Stała skala temperatury obejmuje −20–40°C.</p>
                     </div>
                     <div class="weather-history-nav" aria-label="Nawigacja historii pogody" data-i18n-attr="aria-label:weather.historyNavigation">
                         <button class="button" id="weatherPreviousDay" type="button" data-i18n="weather.previousDay">← Poprzedni dzień</button>
@@ -2055,7 +2055,7 @@
                         humidity: "Wilgotność",
                         pressure: "Ciśnienie",
                         historyTitle: "Historia 24-godzinna",
-                        historyNote: "Punkty oznaczają rzeczywiste odczyty godzinowe; wartości pomiędzy nimi nie są interpolowane. Skala jest wspólna dla całej historii.",
+                        historyNote: "Punkty oznaczają rzeczywiste odczyty godzinowe; wartości pomiędzy nimi nie są interpolowane. Stała skala temperatury obejmuje −20–40°C.",
                         historyNavigation: "Nawigacja historii pogody",
                         previousDay: "← Poprzedni dzień",
                         today: "Dzisiaj",
@@ -2242,7 +2242,7 @@
                         humidity: "Humidity",
                         pressure: "Pressure",
                         historyTitle: "24-hour history",
-                        historyNote: "Points represent actual hourly readings; values between them are not interpolated. The scale is shared across the entire history.",
+                        historyNote: "Points represent actual hourly readings; values between them are not interpolated. The fixed temperature scale spans −20–40°C.",
                         historyNavigation: "Weather history navigation",
                         previousDay: "← Previous day",
                         today: "Today",
@@ -2471,14 +2471,25 @@
                 return date.toISOString().slice(0, 10);
             }
 
-            function stableChartScale(values, { step, minimumSpan, includeZero = false }) {
+            function stableChartScale(values, {
+                step,
+                minimumSpan,
+                includeZero = false,
+                baselineMin = null,
+                baselineMax = null
+            }) {
                 const finiteValues = values.map(Number).filter(Number.isFinite);
-                if (finiteValues.length === 0) return { min: 0, max: minimumSpan };
+                if (finiteValues.length === 0) {
+                    return {
+                        min: baselineMin ?? 0,
+                        max: baselineMax ?? minimumSpan
+                    };
+                }
 
                 const observedMin = Math.min(...finiteValues);
                 const observedMax = Math.max(...finiteValues);
-                let min = Math.floor(observedMin / step) * step;
-                let max = Math.ceil(observedMax / step) * step;
+                let min = baselineMin ?? Math.floor(observedMin / step) * step;
+                let max = baselineMax ?? Math.ceil(observedMax / step) * step;
 
                 if (includeZero) min = Math.min(0, min);
                 if (max - min < minimumSpan) {
@@ -2520,7 +2531,7 @@
                 const allReadings = Object.values(weatherHistory?.days || {}).flat();
                 const temperatureScale = stableChartScale(
                     allReadings.map((reading) => reading.temperature),
-                    { step: 5, minimumSpan: 10 }
+                    { step: 5, minimumSpan: 10, baselineMin: -20, baselineMax: 40 }
                 );
                 const particleScale = stableChartScale(
                     allReadings.flatMap((reading) => [reading.pm25, reading.pm10]),
