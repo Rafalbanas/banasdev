@@ -1,0 +1,31 @@
+{
+  "location": "Katowice (Kato)",
+  "station": "KAT04BAPP",
+  "fetched_at": "2026-10-02T09:07:27.290611Z",
+  "air_index_level": "GOOD",
+  "temperature": {
+    "value": 21.2,
+    "unit": "°C"
+  },
+  "humidity": {
+    "value": 62.9,
+    "unit": "%"
+  },
+  "pressure": {
+    "value": 999.9,
+    "unit": "hPa"
+  },
+  "pm25": {
+    "value": 15.2,
+    "unit": "µg/m³",
+    "norm_percent": 60.7,
+    "norm_value": 25.0
+  },
+  "pm10": {
+    "value": 20.5,
+    "unit": "µg/m³",
+    "norm_percent": 41.0,
+    "norm_value": 50.0
+  },
+  "source": "InPost"
+}

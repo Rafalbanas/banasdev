@@ -3,1410 +3,2793 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Rafał Banaś 👨‍💻 IT Specialist & AI Automation</title>
-    
-    <meta name="description" content="Specjalista IT, Automatyk i pasjonat AI. Zobacz moje portfolio, projekty n8n oraz doświadczenie w administracji systemami i sieciami.">
+    <title>Rafał Banaś | Technical Support Engineer, IT & Data Science</title>
+    <meta name="description" content="Portfolio Rafała Banasia: Technical Support Engineer, IT/Application Support, student informatyki rozwijający się w kierunku AI, Data Science, automatyzacji i systemów.">
     <meta name="author" content="Rafał Banaś">
-    
-    <link rel="icon" type="image/png" href="favicon.png?v=3">
-    <link rel="shortcut icon" type="image/png" href="favicon.png?v=3">
-    <link rel="apple-touch-icon" href="favicon.png?v=3">
-    
+    <meta name="theme-color" content="#0f172a">
+
+    <link rel="icon" type="image/png" href="favicon.png?v=4">
+    <link rel="shortcut icon" type="image/png" href="favicon.png?v=4">
+    <link rel="apple-touch-icon" href="favicon.png?v=4">
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://banas.dev/">
-    <meta property="og:title" content="Rafał Banaś | IT & AI Automation Portfolio">
-    <meta property="og:description" content="Cześć! Jestem Specjalistą IT zajmującym się automatyzacją procesów (n8n, Python) i administracją. Sprawdź moje projekty i CV.">
+    <meta property="og:title" content="Rafał Banaś | Technical Support Engineer, IT & Data Science">
+    <meta property="og:description" content="Portfolio techniczne: IT/Application Support, troubleshooting, automatyzacja, AI, Data Science i projekty webowe.">
     <meta property="og:image" content="https://banas.dev/cv_photo.webp">
-    
+
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Rafał Banaś | IT & AI Automation">
-    <meta name="twitter:description" content="Specjalista IT, Automatyk i pasjonat AI. Projekty n8n, Python, Home Lab.">
+    <meta name="twitter:title" content="Rafał Banaś | Technical Support Engineer">
+    <meta name="twitter:description" content="Technical Support Engineer, student informatyki, projekty AI, automatyzacja i dane treningowe.">
     <meta name="twitter:image" content="https://banas.dev/cv_photo.webp">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         :root {
-            /* --- MOTYW JASNY (DOMYŚLNY) --- */
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #3498db;
-            --accent-hover: #2980b9;
-            --text-color: #333;
-            --text-light: #666;
-            --bg-color: #f0f2f5;
-            --card-bg: #ffffff;
-            --sidebar-bg: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
-            --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            --transition: all 0.3s ease;
+            color-scheme: dark;
+            --bg: #0b1020;
+            --bg-soft: #111827;
+            --surface: rgba(17, 24, 39, 0.82);
+            --surface-strong: #172033;
+            --text: #e5e7eb;
+            --muted: #a7b0c0;
+            --line: rgba(148, 163, 184, 0.22);
+            --accent: #38bdf8;
+            --accent-2: #22c55e;
+            --accent-3: #f59e0b;
+            --code: #a7f3d0;
+            --danger: #fb7185;
+            --shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+            --radius: 8px;
+            --max: 1160px;
         }
 
-        /* --- MOTYW CIEMNY --- */
-        body.dark-mode {
-            --primary-color: #ecf0f1;
-            --secondary-color: #bdc3c7;
-            --accent-color: #5dade2;
-            --accent-hover: #3498db;
-            --text-color: #e0e0e0;
-            --text-light: #aaa;
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --sidebar-bg: linear-gradient(180deg, #1a1a1a 0%, #2c2c2c 100%);
-            --card-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        body.light {
+            color-scheme: light;
+            --bg: #f6f7f9;
+            --bg-soft: #ffffff;
+            --surface: rgba(255, 255, 255, 0.9);
+            --surface-strong: #ffffff;
+            --text: #172033;
+            --muted: #5d6677;
+            --line: rgba(15, 23, 42, 0.14);
+            --shadow: 0 18px 60px rgba(15, 23, 42, 0.11);
+            --code: #047857;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 86px;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            position: relative;
             margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 18% 8%, rgba(56, 189, 248, 0.18), transparent 34%),
+                radial-gradient(circle at 82% 0%, rgba(34, 197, 94, 0.10), transparent 32%),
+                linear-gradient(135deg, var(--bg), var(--bg-soft));
+            color: var(--text);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.65;
         }
 
-        /* --- LOGIKA JĘZYKOWA --- */
-        body.pl .lang-en { display: none !important; }
-        body.en .lang-pl { display: none !important; }
-
-        h1, h2, h3, h4 {
-            font-family: 'Poppins', sans-serif;
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -2;
+            background-image:
+                linear-gradient(rgba(148, 163, 184, 0.055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, black, transparent 78%);
         }
 
-        /* Kontrolki (Język + Motyw) */
-        .controls-container {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            z-index: 200;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .lang-switch {
-            background: var(--card-bg);
-            padding: 5px 10px;
-            border-radius: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            gap: 10px;
-            font-size: 0.9em;
-            font-weight: 600;
-            color: var(--text-color);
-        }
-
-        .lang-btn {
-            cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 15px;
-            transition: var(--transition);
-            color: var(--text-light);
-        }
-
-        .lang-btn.active {
-            background-color: var(--accent-color);
-            color: white;
-            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
-        }
-
-        .theme-toggle-btn {
-            background: var(--card-bg);
-            border: none;
-            color: var(--text-color);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2em;
-            transition: var(--transition);
-        }
-
-        .theme-toggle-btn:hover {
-            transform: rotate(15deg) scale(1.1);
-            color: var(--accent-color);
-        }
-
-        /* Główny kontener */
-        .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            background: var(--card-bg);
-            box-shadow: var(--card-shadow);
-            border-radius: 15px;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            min-height: 90vh;
+        body.js-ready .reveal {
             opacity: 0;
-            animation: fadeInPage 0.8s forwards;
-            position: relative;
-            transition: background-color 0.3s;
+            transform: translateY(18px);
+            transition: opacity 520ms ease, transform 520ms ease;
         }
 
-        @keyframes fadeInPage {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- SIDEBAR --- */
-        .sidebar {
-            background: var(--sidebar-bg);
-            color: #ffffff;
-            padding: 40px 30px;
-            text-align: left;
-            position: relative;
-        }
-
-        .sidebar-content-wrapper {
-            position: sticky;
-            top: 40px;
-        }
-
-        .profile-img-container {
-            text-align: center;
-            margin-bottom: 35px;
-            position: relative;
-        }
-
-        .profile-img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid rgba(255,255,255,0.2);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .profile-img:hover {
-            transform: scale(1.05) rotate(2deg);
-            border-color: var(--accent-color);
-        }
-
-        .img-hint {
-            font-size: 0.7em;
-            color: rgba(255,255,255,0.6);
-            margin-top: 5px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .profile-img-container:hover .img-hint {
-            opacity: 1;
-        }
-
-        .sidebar h3 {
-            color: #ffffff;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.2em;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-top: 40px;
-        }
-        
-        .sidebar h3:first-of-type { margin-top: 0; }
-
-        .contact-item, 
-        .nav-btn, 
-        .skill-tag {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.95em;
-            text-decoration: none;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.05); 
-            background: rgba(255,255,255,0.05);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .skill-tag {
-            display: inline-flex;
-            margin: 3px;
-            font-size: 0.85em;
-            padding: 6px 12px;
-        }
-        
-        .nav-btn {
-            justify-content: center;
-            margin-bottom: 30px;
-            font-weight: 600;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .nav-btn i { margin-right: 10px; }
-
-        .contact-item:hover, 
-        .nav-btn:hover, 
-        .skill-tag:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .contact-item.strava:hover {
-            background: rgba(252, 76, 2, 0.8);
-            border-color: #fc4c02;
-        }
-
-        .contact-item i, .skill-tag i {
-            margin-right: 12px;
-            color: var(--accent-color);
-            width: 20px;
-            text-align: center;
-            font-size: 1.1em;
-        }
-        
-        .contact-item a, .contact-item span {
-            color: rgba(255,255,255,0.95);
-            text-decoration: none;
-            word-break: break-word;
-        }
-
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-bottom: 12px;
-        }
-
-        /* --- MAIN CONTENT --- */
-        .main-content {
-            padding: 50px;
-            position: relative;
-        }
-
-        .header-name {
-            margin-bottom: 50px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 30px;
-            padding-right: 100px;
-        }
-        
-        body.dark-mode .header-name, 
-        body.dark-mode .timeline-content-box {
-            border-color: #333;
-        }
-
-        .header-name h1 {
-            margin: 0;
-            font-size: 3em;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            line-height: 1;
-        }
-
-        .header-name h2 {
-            margin: 10px 0 0;
-            font-size: 1.4em;
-            color: var(--accent-color);
-            font-weight: 500;
-            height: 1.5em;
-        }
-        
-        .typing-cursor {
-            display: inline-block;
-            width: 3px;
-            background-color: var(--accent-color);
-            animation: blink 1s infinite;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        .section { margin-bottom: 50px; }
-
-        .section-title {
-            font-size: 1.6em;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            position: relative;
-            padding-left: 20px;
-            font-weight: 700;
-        }
-
-        .section-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 5px;
-            height: 25px;
-            width: 5px;
-            background: var(--accent-color);
-            border-radius: 5px;
-        }
-
-        /* Projekty */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 10px;
-            padding: 20px;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        body.dark-mode .project-card {
-            border: 1px solid #333;
-            background: #252525;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-color: var(--accent-color);
-        }
-
-        .project-icon {
-            font-size: 2em;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-        }
-
-        .project-card h4 {
-            margin: 0 0 10px 0;
-            color: var(--primary-color);
-        }
-
-        .project-card p {
-            font-size: 0.9em;
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-
-        .project-link {
-            display: inline-block;
-            padding: 8px 15px;
-            background-color: rgba(0,0,0,0.05);
-            color: var(--primary-color);
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 0.85em;
-            font-weight: 600;
-            transition: var(--transition);
-            text-align: center;
-        }
-        
-        body.dark-mode .project-link {
-            background-color: rgba(255,255,255,0.1);
-        }
-
-        .project-link:hover {
-            background-color: var(--accent-color);
-            color: white;
-        }
-
-        /* Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 10px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            bottom: 0;
-            width: 2px;
-            background: #e0e0e0;
-        }
-        
-        body.dark-mode .timeline::before {
-            background: #444;
-        }
-
-        .timeline-item {
-            margin-bottom: 35px;
-            position: relative;
-            padding-left: 30px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -6px;
-            top: 5px;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: var(--card-bg);
-            border: 3px solid var(--accent-color);
-            transition: var(--transition);
-            z-index: 1;
-        }
-
-        .timeline-item:hover::before {
-            background: var(--accent-color);
-            transform: scale(1.3);
-            box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
-        }
-
-        .timeline-content-box {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-            transition: var(--transition);
-        }
-        
-        body.dark-mode .timeline-content-box {
-            background: #252525;
-            border: 1px solid #333;
-        }
-
-        .timeline-item:hover .timeline-content-box {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-color: var(--accent-color);
-        }
-
-        .timeline-title {
-            font-weight: 700;
-            font-size: 1.2em;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        .timeline-subtitle {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 500;
-            color: var(--accent-color);
-            font-size: 0.95em;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .timeline-date {
-            font-size: 0.85em;
-            color: #888;
-            background: rgba(0,0,0,0.05);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: normal;
-        }
-        
-        body.dark-mode .timeline-date {
-             background: rgba(255,255,255,0.1);
-             color: #aaa;
-        }
-
-        .timeline-content ul {
-            padding-left: 20px;
-            margin: 0;
-            color: var(--text-color);
-        }
-
-        .timeline-content li {
-            margin-bottom: 8px;
-            position: relative;
-        }
-        
-        .reveal-element {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .reveal-element.active {
+        body.js-ready .reveal.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .copy-tooltip {
-            position: fixed;
-            background: var(--primary-color);
-            color: var(--card-bg);
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            display: none;
-            z-index: 1000;
-            pointer-events: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        /* --- STYLE MODALA --- */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 2000; 
-            left: 0;
+        a:hover {
+            color: var(--accent);
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid color-mix(in srgb, var(--accent) 70%, white);
+            outline-offset: 3px;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .page {
+            width: min(100% - 32px, var(--max));
+            margin: 0 auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: 16px;
+            top: -48px;
+            z-index: 10;
+            background: var(--accent);
+            color: #04111f;
+            padding: 10px 14px;
+            border-radius: var(--radius);
+            font-weight: 800;
+        }
+
+        .skip-link:focus {
+            top: 16px;
+        }
+
+        .topbar {
+            position: sticky;
             top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.3s;
+            z-index: 100;
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(18px);
+            background: color-mix(in srgb, var(--bg) 78%, transparent);
         }
 
-        .modal-content {
-            background-color: var(--card-bg);
-            margin: 15% auto; 
-            padding: 30px;
-            border: 1px solid #888;
-            width: 90%;
-            max-width: 600px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            position: relative;
-            color: var(--text-color);
+        .topbar.is-scrolled {
+            box-shadow: 0 16px 42px rgba(0, 0, 0, 0.22);
         }
 
-        body.dark-mode .modal-content {
-            border: 1px solid #444;
+        .nav {
+            width: min(100% - 32px, var(--max));
+            min-height: 68px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
         }
 
-        .close-modal {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 900;
+            letter-spacing: 0;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
         }
 
-        .close-modal:hover {
-            color: var(--accent-color);
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            color: var(--accent);
+            font-size: 0.85rem;
+            box-shadow: inset 0 0 18px color-mix(in srgb, var(--accent) 14%, transparent);
         }
 
-        .modal-text ul { padding-left: 20px; }
-
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
-        /* --- TERMINAL (EASTER EGG) --- */
-        .terminal-overlay {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            backdrop-filter: blur(2px);
+        .nav-actions {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a,
+        .icon-button,
+        .button {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            color: var(--text);
+            min-height: 44px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+            padding: 9px 12px;
+            font: inherit;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
         }
 
-        .terminal-window {
-            width: 800px;
-            max-width: 95%;
-            height: 500px;
-            background-color: #0c0c0c;
-            border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        .icon-button {
+            min-width: 44px;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+        }
+
+        .menu-icon {
+            position: relative;
+            width: 18px;
+            height: 2px;
+            border-radius: 999px;
+            background: currentColor;
+        }
+
+        .menu-icon::before,
+        .menu-icon::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 18px;
+            height: 2px;
+            border-radius: inherit;
+            background: currentColor;
+            transition: transform 180ms ease, top 180ms ease;
+        }
+
+        .menu-icon::before {
+            top: -6px;
+        }
+
+        .menu-icon::after {
+            top: 6px;
+        }
+
+        .nav.is-menu-open .menu-icon {
+            background: transparent;
+        }
+
+        .nav.is-menu-open .menu-icon::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        .nav.is-menu-open .menu-icon::after {
+            top: 0;
+            transform: rotate(-45deg);
+        }
+
+        .nav-links a:hover,
+        .icon-button:hover,
+        .button:hover {
+            transform: translateY(-1px);
+            border-color: color-mix(in srgb, var(--accent) 60%, var(--line));
+            color: var(--text);
+        }
+
+        .nav-links a.is-active {
+            border-color: color-mix(in srgb, var(--accent) 68%, var(--line));
+            background: color-mix(in srgb, var(--accent) 13%, var(--surface));
+            color: var(--text);
+        }
+
+        .language-switch {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            padding: 3px;
+            gap: 2px;
+        }
+
+        .lang-button {
+            min-width: 44px;
+            min-height: 36px;
+            border: 0;
+            border-radius: calc(var(--radius) - 3px);
+            background: transparent;
+            color: var(--muted);
+            font: inherit;
+            font-size: 0.84rem;
+            font-weight: 850;
+            cursor: pointer;
+        }
+
+        .lang-button.is-active {
+            background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+            color: var(--text);
+        }
+
+        .button.primary {
+            background: linear-gradient(135deg, var(--accent), #60a5fa);
+            border-color: transparent;
+            color: #06111f;
+            font-weight: 850;
+        }
+
+        .button.secondary {
+            background: transparent;
+        }
+
+        .hero {
+            --hero-glow-x: 50%;
+            --hero-glow-y: 42%;
+            position: relative;
+            min-height: calc(100svh - 68px);
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+            align-items: center;
+            gap: 44px;
+            padding: 64px 0 42px;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 34px -4vw auto auto;
+            width: min(440px, 58vw);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle at var(--hero-glow-x) var(--hero-glow-y), rgba(56, 189, 248, 0.20), rgba(34, 197, 94, 0.08) 34%, transparent 68%);
+            filter: blur(18px);
+            opacity: 0.86;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            color: var(--muted);
+            padding: 7px 10px;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: var(--accent-2);
+            box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent-2) 18%, transparent);
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
+        h1 {
+            margin: 22px 0 18px;
+            font-size: clamp(2.35rem, 7vw, 5.8rem);
+            line-height: 0.98;
+            letter-spacing: 0;
+        }
+
+        .hero-subtitle {
+            max-width: 720px;
+            color: var(--muted);
+            font-size: clamp(1.04rem, 2vw, 1.28rem);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 28px 0;
+        }
+
+        .hero-tags,
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            max-width: 100%;
+            min-height: 32px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--surface) 82%, transparent);
+            color: var(--muted);
+            padding: 5px 9px;
+            font-size: 0.88rem;
+            font-weight: 650;
+            overflow-wrap: anywhere;
+        }
+
+        .lab-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+            color: var(--code);
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+            font-size: 0.82rem;
+        }
+
+        .lab-chip {
+            border: 1px solid color-mix(in srgb, var(--accent-2) 28%, var(--line));
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--surface) 86%, transparent);
+            padding: 6px 9px;
+        }
+
+        .profile-panel {
+            position: relative;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            padding: 18px;
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        .profile-panel::before,
+        .card::before,
+        .timeline-item::before,
+        .feature-band::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 68%, transparent), color-mix(in srgb, var(--accent-2) 42%, transparent), transparent);
+            opacity: 0.75;
+        }
+
+        .profile-photo {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            cursor: pointer;
+            transition: opacity 180ms ease, transform 180ms ease;
+        }
+
+        .profile-photo:hover {
+            transform: translateY(-2px);
+        }
+
+        .profile-meta {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .lab-terminal {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, #020617 58%, var(--surface));
+            margin-top: 16px;
+            overflow: hidden;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        }
+
+        .lab-terminal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+            padding: 8px 10px;
+            font-size: 0.78rem;
+        }
+
+        .lab-terminal-dots {
+            display: inline-flex;
+            gap: 5px;
+        }
+
+        .lab-terminal-dots span {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: var(--accent);
+            opacity: 0.72;
+        }
+
+        .lab-terminal-body {
+            display: grid;
+            gap: 6px;
+            padding: 11px 10px 12px;
+            color: var(--code);
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        .lab-terminal-body span::before {
+            content: "$ ";
+            color: var(--accent);
+        }
+
+        .meta-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            border-top: 1px solid var(--line);
+            padding-top: 12px;
+        }
+
+        .meta-row span:first-child {
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        .meta-row span:last-child {
+            text-align: right;
+            font-weight: 750;
+            overflow-wrap: anywhere;
+        }
+
+        .section {
+            padding: 58px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .section-heading {
+            display: grid;
+            grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr);
+            gap: 32px;
+            align-items: start;
+            margin-bottom: 28px;
+        }
+
+        .section-kicker {
+            color: var(--accent);
+            font-weight: 850;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            line-height: 1.08;
+            letter-spacing: 0;
+        }
+
+        .section-lead {
+            color: var(--muted);
+            font-size: 1.04rem;
+        }
+
+        .grid {
+            display: grid;
+            gap: 14px;
+        }
+
+        .grid.two {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .grid.three {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            padding: 20px;
+            min-width: 0;
+            overflow-wrap: anywhere;
+            transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: color-mix(in srgb, var(--accent) 48%, var(--line));
+            background: color-mix(in srgb, var(--surface) 82%, rgba(56, 189, 248, 0.08));
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+            font-size: 1.08rem;
+            line-height: 1.25;
+        }
+
+        .card p {
+            color: var(--muted);
+            margin-bottom: 0;
+        }
+
+        .weather-widget {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            padding: 22px;
+        }
+
+        .weather-widget::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
+        }
+
+        .weather-summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .weather-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid color-mix(in srgb, var(--accent-2) 38%, var(--line));
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--accent-2) 10%, var(--surface));
+            padding: 6px 10px;
+            color: var(--text);
+            font-size: 0.86rem;
+            font-weight: 800;
+        }
+
+        .weather-status::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-2);
+        }
+
+        .weather-readings {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .weather-reading {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--surface-strong) 82%, transparent);
+            padding: 16px;
+            min-width: 0;
+        }
+
+        .weather-reading span {
+            display: block;
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        .weather-reading strong {
+            display: block;
+            margin-top: 5px;
+            font-size: clamp(1.28rem, 3vw, 1.8rem);
+            line-height: 1.15;
+        }
+
+        .weather-reading--pm strong {
+            color: var(--accent);
+        }
+
+        .weather-norm {
+            height: 6px;
+            margin-top: 12px;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--line) 72%, transparent);
+            overflow: hidden;
+        }
+
+        .weather-norm span {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--accent-2), var(--accent-3));
+            transition: width 300ms ease;
+        }
+
+        .weather-meta {
+            margin: 16px 0 0;
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .weather-widget[data-state="error"] .weather-status {
+            border-color: color-mix(in srgb, var(--danger) 42%, var(--line));
+        }
+
+        .weather-widget[data-state="error"] .weather-status::before {
+            background: var(--danger);
+        }
+
+        .weather-history {
+            margin-top: 16px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            padding: 22px;
+        }
+
+        .weather-history-header,
+        .weather-history-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .weather-history-header {
+            margin-bottom: 16px;
+        }
+
+        .weather-history-header h3 {
+            margin: 0;
+            font-size: 1.08rem;
+        }
+
+        .weather-history-date {
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 750;
+        }
+
+        .weather-history-nav {
+            justify-content: flex-start;
+        }
+
+        .weather-history-nav .button {
+            min-height: 38px;
+            padding: 7px 10px;
+            font-size: 0.82rem;
+        }
+
+        .weather-history-nav .button:disabled {
+            cursor: not-allowed;
+            opacity: 0.45;
+            transform: none;
+        }
+
+        .weather-chart-wrap {
+            position: relative;
+            width: 100%;
+            height: clamp(280px, 42vw, 410px);
+        }
+
+        .weather-chart-empty {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: none;
+            place-items: center;
+            color: var(--muted);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .weather-chart-wrap[data-empty="true"] .weather-chart-empty {
+            display: grid;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 14px;
+        }
+
+        .timeline-item {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: minmax(140px, 0.28fr) minmax(0, 0.72fr);
+            gap: 20px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            padding: 20px;
+            transition: border-color 180ms ease, transform 180ms ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-2px);
+            border-color: color-mix(in srgb, var(--accent) 48%, var(--line));
+        }
+
+        .period {
+            color: var(--accent);
+            font-weight: 850;
+            font-size: 0.92rem;
+        }
+
+        .timeline-item h3 {
+            margin-bottom: 4px;
+            font-size: 1.1rem;
+        }
+
+        .company {
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .timeline-item ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--muted);
+        }
+
+        .project-card {
             display: flex;
             flex-direction: column;
-            border: 1px solid #333;
-            font-family: 'Fira Code', 'Consolas', monospace;
+            min-height: 250px;
+        }
+
+        .project-number {
+            color: var(--accent);
+            font-size: 0.84rem;
+            font-weight: 850;
+            margin-bottom: 14px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        }
+
+        .project-card .tags {
+            margin-top: auto;
+            padding-top: 18px;
+        }
+
+        .project-card--actionable .tags {
+            margin-top: 0;
+        }
+
+        .project-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .project-status {
+            flex: 0 0 auto;
+            border: 1px solid color-mix(in srgb, var(--accent-3) 52%, var(--line));
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--accent-3) 12%, transparent);
+            color: var(--accent-3);
+            padding: 4px 9px;
+            font-size: 0.74rem;
+            font-weight: 850;
+            line-height: 1.25;
+        }
+
+        .project-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 20px;
+        }
+
+        .project-actions .button {
+            width: fit-content;
+            font-weight: 800;
+        }
+
+        .project-actions .button[aria-disabled="true"] {
+            border-color: var(--line);
+            background: color-mix(in srgb, var(--surface-strong) 64%, transparent);
+            color: var(--muted);
+            cursor: not-allowed;
+            opacity: 0.78;
+        }
+
+        .project-group-title {
+            margin: 32px 0 14px;
+            color: var(--muted);
+            font-size: 0.84rem;
+            font-weight: 850;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .feature-band {
+            position: relative;
             overflow: hidden;
-            animation: popIn 0.3s ease-out;
+            display: grid;
+            grid-template-columns: minmax(0, 0.72fr) minmax(250px, 0.28fr);
+            gap: 22px;
+            align-items: stretch;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background:
+                linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent 42%),
+                var(--surface);
+            padding: 24px;
         }
 
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        .metrics {
+            display: grid;
+            gap: 10px;
         }
 
-        .terminal-header {
-            background: #1a1a1a;
-            padding: 8px 15px;
-            border-bottom: 1px solid #333;
+        .metric {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--surface-strong) 72%, transparent);
+            padding: 16px;
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .metric span {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .skill-group h3 {
+            color: var(--accent);
+        }
+
+        .skill-group ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            color: var(--muted);
+        }
+
+        .skill-group li + li {
+            margin-top: 6px;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.58fr) minmax(280px, 0.42fr);
+            gap: 20px;
+        }
+
+        .contact-links {
+            display: grid;
+            gap: 10px;
+        }
+
+        .contact-link {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            color: #bbb;
-            font-size: 0.9em;
+            gap: 16px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            padding: 14px 16px;
+            color: var(--text);
+            min-width: 0;
         }
 
-        .close-terminal {
-            cursor: pointer;
-            font-size: 1.2em;
-            color: #ff5f56; /* Mac close button style */
+        .contact-link span {
+            color: var(--muted);
+            overflow-wrap: anywhere;
         }
 
-        .terminal-body {
-            flex: 1;
-            padding: 15px;
-            color: #00ff00; /* Hacker green */
-            overflow-y: auto;
-            font-size: 0.95em;
-            line-height: 1.4;
+        .contact-link:hover {
+            border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+            color: var(--text);
         }
 
-        .terminal-input-line {
+        .contact-link strong {
+            white-space: nowrap;
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            padding: 26px 0 40px;
+            font-size: 0.92rem;
+        }
+
+        footer .page {
             display: flex;
             align-items: center;
-            margin-top: 10px;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
         }
 
-        .prompt {
-            color: #00ff00;
-            margin-right: 10px;
-            font-weight: bold;
-        }
-
-        #terminal-input {
-            background: transparent;
-            border: none;
-            color: #fff;
-            flex: 1;
-            font-family: inherit;
-            font-size: inherit;
-            outline: none;
-        }
-
-        .cmd-output { margin-bottom: 10px; color: #ccc; white-space: pre-wrap; }
-        .cmd-history { color: #00ff00; margin-bottom: 5px; }
-
-        @media (max-width: 900px) {
-            .container {
-                grid-template-columns: 1fr;
-                margin: 0;
-                border-radius: 0;
-                box-shadow: none;
+        @media (max-width: 920px) {
+            html {
+                scroll-padding-top: 76px;
             }
-            .header-name { padding-right: 0; margin-top: 40px; }
-            .controls-container { top: 15px; right: 15px; }
-            .sidebar { text-align: center; padding: 40px 20px; }
-            .sidebar-content-wrapper { position: static; }
-            .contact-item { justify-content: center; }
-            .skills-container { justify-content: center; }
-            .main-content { padding: 30px 20px; }
-            .timeline-subtitle { flex-direction: column; align-items: flex-start; gap: 5px; }
+
+            .nav {
+                position: relative;
+                min-height: 60px;
+                gap: 10px;
+                padding: 8px 0;
+            }
+
+            .brand {
+                min-height: 44px;
+            }
+
+            .nav-actions {
+                margin-left: auto;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: calc(100% + 8px);
+                left: 0;
+                right: 0;
+                z-index: 6;
+                display: grid;
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+                gap: 8px;
+                width: 100%;
+                padding: 10px;
+                border: 1px solid var(--line);
+                border-radius: var(--radius);
+                background: color-mix(in srgb, var(--bg) 94%, transparent);
+                box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+                backdrop-filter: blur(18px);
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(-6px);
+                visibility: hidden;
+                transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+            }
+
+            .nav.is-menu-open .nav-links {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
+                visibility: visible;
+            }
+
+            .nav-links a {
+                width: 100%;
+                min-height: 42px;
+                text-align: center;
+            }
+
+            .mobile-menu-toggle {
+                display: inline-flex;
+            }
+
+            .hero,
+            .section-heading,
+            .feature-band,
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 44px;
+                gap: 34px;
+            }
+
+            .profile-panel {
+                max-width: 440px;
+                justify-self: center;
+            }
+
+            .grid.two,
+            .grid.three,
+            .skills-list,
+            .weather-readings {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
-        @media print {
-            .controls-container, .nav-btn, .project-link, footer { display: none; }
-            body { background: white; color: black; }
-            .container { box-shadow: none; margin: 0; width: 100%; border-radius: 0; display: block; }
-            .sidebar { padding: 20px; background: #eee !important; color: #000 !important; -webkit-print-color-adjust: exact; }
-            .sidebar h3, .contact-item a, .contact-item span { color: #000 !important; }
-            .main-content { padding: 20px; }
-            .reveal-element { opacity: 1 !important; transform: none !important; }
+        @media (max-width: 620px) {
+            html {
+                scroll-padding-top: 74px;
+            }
+
+            .page,
+            .nav {
+                width: min(100% - 24px, var(--max));
+            }
+
+            body {
+                line-height: 1.58;
+            }
+
+            body::before {
+                background-size: 34px 34px;
+            }
+
+            .nav {
+                min-height: 58px;
+                gap: 8px;
+            }
+
+            .brand {
+                gap: 8px;
+            }
+
+            .brand-mark {
+                width: 32px;
+                height: 32px;
+            }
+
+            .nav-actions {
+                gap: 6px;
+            }
+
+            .nav-links {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .nav-links a {
+                min-height: 42px;
+                font-size: 0.84rem;
+                width: 100%;
+                padding: 8px 7px;
+                text-align: center;
+            }
+
+            .language-switch {
+                min-height: 40px;
+            }
+
+            .lang-button {
+                min-width: 34px;
+                min-height: 32px;
+                padding: 0 6px;
+            }
+
+            .icon-button {
+                min-width: 40px;
+                min-height: 40px;
+                padding: 8px 10px;
+            }
+
+            .hero {
+                padding: 30px 0 34px;
+                gap: 24px;
+            }
+
+            .hero::before {
+                width: 62vw;
+                inset: 16px 0 auto auto;
+                filter: blur(12px);
+                opacity: 0.5;
+            }
+
+            h1 {
+                margin: 18px 0 14px;
+                font-size: clamp(2.2rem, 16vw, 3.35rem);
+                line-height: 1.02;
+            }
+
+            h2 {
+                font-size: clamp(1.62rem, 10vw, 2.15rem);
+                line-height: 1.12;
+            }
+
+            .hero-subtitle,
+            .section-lead {
+                font-size: 1rem;
+                line-height: 1.62;
+            }
+
+            .hero-actions {
+                display: grid;
+                grid-template-columns: 1fr;
+                margin: 22px 0;
+            }
+
+            .hero-actions .button {
+                width: 100%;
+            }
+
+            .profile-panel {
+                width: min(100%, 320px);
+                padding: 14px;
+            }
+
+            .profile-photo {
+                aspect-ratio: 1;
+                max-height: 180px;
+                object-position: center top;
+            }
+
+            .profile-meta {
+                gap: 8px;
+                margin-top: 12px;
+            }
+
+            .lab-terminal {
+                display: none;
+            }
+
+            .grid.two,
+            .grid.three,
+            .skills-list,
+            .timeline-item,
+            .weather-readings {
+                grid-template-columns: 1fr;
+            }
+
+            .weather-widget {
+                padding: 16px;
+            }
+
+            .weather-summary {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .weather-history {
+                padding: 16px;
+            }
+
+            .weather-history-nav {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                width: 100%;
+            }
+
+            .weather-history-nav .button {
+                width: 100%;
+            }
+
+            .weather-history-nav .button:nth-child(2) {
+                grid-column: 1 / -1;
+                grid-row: 1;
+            }
+
+            .section {
+                padding: 38px 0;
+            }
+
+            .section-heading {
+                gap: 14px;
+                margin-bottom: 20px;
+            }
+
+            .card,
+            .timeline-item,
+            .feature-band {
+                padding: 16px;
+            }
+
+            .project-card {
+                min-height: 0;
+            }
+
+            .project-actions .button {
+                width: 100%;
+            }
+
+            .tag {
+                line-height: 1.35;
+            }
+
+            .contact-link {
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .meta-row {
+                display: grid;
+                gap: 2px;
+                padding-top: 8px;
+            }
+
+            .meta-row span:first-child,
+            .meta-row span:last-child {
+                text-align: left;
+            }
+
+            .meta-row span:first-child {
+                font-size: 0.76rem;
+            }
+
+            .meta-row span:last-child {
+                font-size: 0.9rem;
+                line-height: 1.35;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .nav-links {
+                grid-template-columns: 1fr;
+            }
+
+            .brand {
+                gap: 6px;
+                font-size: 0.88rem;
+            }
+
+            .brand-mark {
+                width: 30px;
+                height: 30px;
+                font-size: 0.78rem;
+            }
+
+            .nav-actions {
+                gap: 4px;
+            }
+
+            .lang-button {
+                min-width: 31px;
+                padding: 0 4px;
+            }
+
+            .icon-button {
+                min-width: 38px;
+                padding: 8px;
+            }
+
+            h1 {
+                font-size: clamp(2rem, 14vw, 2.65rem);
+            }
+        }
+
+        @media (hover: none), (pointer: coarse) {
+            .nav-links a:hover,
+            .icon-button:hover,
+            .button:hover,
+            .card:hover,
+            .timeline-item:hover,
+            .profile-photo:hover {
+                transform: none;
+            }
+
+            .topbar {
+                backdrop-filter: blur(10px);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+
+            body.js-ready .reveal {
+                opacity: 1;
+                transform: none;
+            }
+
+            .hero::before {
+                display: none;
+            }
+
+            .menu-icon::before,
+            .menu-icon::after,
+            .nav-links {
+                transition: none !important;
+            }
         }
     </style>
 </head>
-<body class="pl">
+<body>
+    <a class="skip-link" href="#main">Przejdź do treści</a>
 
-<div class="copy-tooltip" id="copyTooltip">Skopiowano!</div>
-
-<div id="terminal-overlay" class="terminal-overlay">
-    <div class="terminal-window">
-        <div class="terminal-header">
-            <span class="terminal-title">root@banas.dev:~ (bash)</span>
-            <span class="close-terminal" title="Close Terminal">✖</span>
-        </div>
-        <div class="terminal-body" id="terminal-body">
-            <div style="margin-bottom: 15px;">
-                Welcome to BanasOS v1.0.4 (LTS)<br>
-                Type <span style="color: #fff; font-weight: bold;">'help'</span> to see available commands.
-            </div>
-            
-            <div id="terminal-content"></div>
-
-            <div class="terminal-input-line">
-                <span class="prompt">root@banas.dev:~#</span>
-                <input type="text" id="terminal-input" autocomplete="off" spellcheck="false">
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    
-    <div class="controls-container">
-        <button class="theme-toggle-btn" id="themeToggle" title="Zmień motyw">
-            <i class="fas fa-moon"></i>
-        </button>
-
-        <div class="lang-switch">
-            <span class="lang-btn active" onclick="setLanguage('pl')" id="btn-pl">PL</span>
-            |
-            <span class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN</span>
-        </div>
-    </div>
-
-    <aside class="sidebar">
-        <div class="sidebar-content-wrapper">
-            <div class="profile-img-container">
-                <img src="cv_photo.webp" alt="Rafał Banaś" class="profile-img" id="profileImg" fetchpriority="high">
-                <div class="img-hint">
-                    <span class="lang-pl">Kliknij, aby zmienić zdjęcie</span>
-                    <span class="lang-en">Click to change photo</span>
-                </div>
-            </div>
-
-            <a href="#projects" class="nav-btn">
-                <i class="fas fa-project-diagram"></i> 
-                <span class="lang-pl">Moje Projekty</span>
-                <span class="lang-en">My Projects</span>
+    <header class="topbar">
+        <nav class="nav" aria-label="Główna nawigacja">
+            <a class="brand" href="#top" aria-label="banas.dev">
+                <span class="brand-mark">RB</span>
+                <span>banas.dev</span>
             </a>
+            <div class="nav-links" id="primaryNavigation">
+                <a href="#about" data-i18n="nav.about">O mnie</a>
+                <a href="#weather" data-i18n="nav.weather">Pogoda</a>
+                <a href="#experience" data-i18n="nav.experience">Doświadczenie</a>
+                <a href="#projects" data-i18n="nav.projects">Projekty</a>
+                <a href="#skills" data-i18n="nav.skills">Umiejętności</a>
+                <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+            </div>
+            <div class="nav-actions">
+                <div class="language-switch" aria-label="Wybór języka" data-i18n-attr="aria-label:langSwitch.label">
+                    <button class="lang-button is-active" type="button" data-lang="pl" aria-label="Polski" aria-pressed="true">PL</button>
+                    <button class="lang-button" type="button" data-lang="en" aria-label="English" aria-pressed="false">EN</button>
+                </div>
+                <button class="icon-button" type="button" id="themeToggle" aria-label="Przełącz motyw" title="Przełącz motyw">◐</button>
+                <button class="icon-button mobile-menu-toggle" type="button" id="mobileMenuToggle" aria-label="Otwórz menu" aria-controls="primaryNavigation" aria-expanded="false">
+                    <span class="menu-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
 
-            <div class="contact-info">
-                <h3>
-                    <span class="lang-pl">Kontakt</span>
-                    <span class="lang-en">Contact</span>
-                </h3>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i> <span>Katowice, Polska</span>
+    <main id="main">
+        <section class="page hero" id="top" aria-labelledby="hero-title">
+            <div>
+                <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> <span data-i18n="hero.eyebrow">Technical Support Engineer / IT / Application Support</span></div>
+                <h1 id="hero-title">Rafał Banaś</h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">
+                    Technical Support Engineer w Motorola Solutions i student informatyki. Łączę praktyczne IT,
+                    wsparcie aplikacji, troubleshooting systemów, automatyzację i analizę danych z rosnącym
+                    zainteresowaniem AI oraz uczeniem maszynowym.
+                </p>
+                <div class="hero-actions">
+                    <a class="button primary" href="#projects" data-i18n="hero.projectsCta">Zobacz projekty</a>
+                    <a class="button secondary" href="https://github.com/Rafalbanas" target="_blank" rel="noopener">GitHub</a>
+                    <a class="button secondary" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener">LinkedIn</a>
                 </div>
-                <div class="contact-item" id="emailContact" title="Kliknij, aby skopiować">
-                    <i class="fas fa-envelope"></i> 
-                    <span id="emailLabel">Wyślij wiadomość / Send message</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-linkedin"></i> 
-                    <a href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank">LinkedIn</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-github"></i> 
-                    <a href="https://github.com/Rafalbanas" target="_blank">GitHub</a>
-                </div>
-                <div class="contact-item strava">
-                    <i class="fab fa-strava"></i> 
-                    <a href="https://www.strava.com/athletes/9698049" target="_blank">Strava</a>
+                <ul class="hero-tags" aria-label="Główne obszary" data-i18n-attr="aria-label:hero.tagsAria">
+                    <li class="tag">Windows Server</li>
+                    <li class="tag">Microsoft 365</li>
+                    <li class="tag">Active Directory</li>
+                    <li class="tag">Linux</li>
+                    <li class="tag">Python</li>
+                    <li class="tag">PowerShell</li>
+                    <li class="tag">SQL Server / T-SQL</li>
+                    <li class="tag">AI / ML</li>
+                </ul>
+                <div class="lab-strip" aria-label="Tryb pracy" data-i18n-attr="aria-label:hero.labAria">
+                    <span class="lab-chip" data-i18n="hero.lab1">buduj</span>
+                    <span class="lab-chip" data-i18n="hero.lab2">testuj</span>
+                    <span class="lab-chip" data-i18n="hero.lab3">automatyzuj</span>
+                    <span class="lab-chip" data-i18n="hero.lab4">mierz</span>
                 </div>
             </div>
 
-            <div class="skills-section">
-                <h3>
-                    <span class="lang-pl">Umiejętności</span>
-                    <span class="lang-en">Skills</span>
-                </h3>
-                <div class="skills-container">
-                    <span class="skill-tag"><i class="fas fa-brain"></i> AI & LLMs</span>
-                    <span class="skill-tag"><i class="fas fa-project-diagram"></i> n8n</span>
-                    
-                    <span class="skill-tag"><i class="fab fa-windows"></i> Windows / AD</span>
-                    <span class="skill-tag"><i class="fab fa-linux"></i> Linux</span>
-                    <span class="skill-tag"><i class="fab fa-apple"></i> MacOS</span>
-                    <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
-                    <span class="skill-tag"><i class="fas fa-terminal"></i> PowerShell</span>
-                    <span class="skill-tag"><i class="fas fa-code"></i> Bash</span>
-                    <span class="skill-tag"><i class="fas fa-database"></i> MS SQL</span>
-                    <span class="skill-tag"><i class="fas fa-network-wired"></i> Network & Mikrotik</span>
-                    <span class="skill-tag"><i class="fas fa-server"></i> VMware / Proxmox</span>
-                    <span class="skill-tag"><i class="fab fa-docker"></i> Docker</span>
-                    <span class="skill-tag"><i class="fas fa-hdd"></i> NAS</span>
-                    <span class="skill-tag"><i class="fas fa-language"></i> English (B2)</span>
+            <aside class="profile-panel" aria-label="Profil" data-i18n-attr="aria-label:profile.aria">
+                <img src="cv_photo.webp" alt="Rafał Banaś" class="profile-photo" id="profilePhoto" fetchpriority="high">
+                <div class="profile-meta">
+                    <div class="meta-row">
+                        <span data-i18n="profile.locationLabel">Lokalizacja</span>
+                        <span data-i18n="profile.location">Katowice, Polska</span>
+                    </div>
+                    <div class="meta-row">
+                        <span data-i18n="profile.currentLabel">Aktualnie</span>
+                        <span>Technical Support Engineer</span>
+                    </div>
+                    <div class="meta-row">
+                        <span data-i18n="profile.companyLabel">Firma</span>
+                        <span>Motorola Solutions</span>
+                    </div>
+                    <div class="meta-row">
+                        <span data-i18n="profile.areaLabel">Obszar</span>
+                        <span>IT / Application Support</span>
+                    </div>
+                    <div class="meta-row">
+                        <span data-i18n="profile.directionLabel">Kierunek</span>
+                        <span data-i18n="profile.direction">AI, Data Science, automatyzacja</span>
+                    </div>
                 </div>
-            </div>
-
-            <div class="hobbies-section">
-                <h3>
-                    <span class="lang-pl">Hobby</span>
-                    <span class="lang-en">Hobbies</span>
-                </h3>
-                <div class="contact-item"><i class="fas fa-bicycle"></i> 
-                    <span class="lang-pl">Rower</span><span class="lang-en">Cycling</span>
+                <div class="lab-terminal" aria-label="Osobiste engineering lab" data-i18n-attr="aria-label:terminal.aria">
+                    <div class="lab-terminal-header">
+                        <span>~/banas.dev/lab</span>
+                        <span class="lab-terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </div>
+                    <div class="lab-terminal-body">
+                        <span data-i18n="terminal.line1">ops: wsparcie systemów i aplikacji</span>
+                        <span data-i18n="terminal.line2">data: telemetryka, SQL, eksperymenty ML</span>
+                        <span data-i18n="terminal.line3">automation: skrypty, workflowy, usługi</span>
+                    </div>
                 </div>
-                <div class="contact-item"><i class="fas fa-running"></i> 
-                    <span class="lang-pl">Bieganie</span><span class="lang-en">Running</span>
-                </div>
-                <div class="contact-item"><i class="fas fa-car"></i> 
-                    <span class="lang-pl">Motoryzacja</span><span class="lang-en">Automotive</span>
-                </div>
-                <div class="contact-item"><i class="fas fa-mountain"></i> 
-                    <span class="lang-pl">Wspinaczka</span><span class="lang-en">Climbing</span>
-                </div>
-            </div>
-        </div>
-    </aside>
-
-    <main class="main-content">
-        <header class="header-name reveal-element">
-            <h1>Rafał Banaś</h1>
-            <h2><span id="typing-text"></span><span class="typing-cursor"></span></h2>
-        </header>
-
-        <section class="section reveal-element" id="about">
-            <h3 class="section-title">
-                <span class="lang-pl">O mnie</span>
-                <span class="lang-en">About Me</span>
-            </h3>
-            <p style="font-size: 1.05em; color: var(--text-light);">
-                <span class="lang-pl">
-                    Ludzie opisują mnie jako osobę miłą, empatyczną i przyjazną. Uważam się za gracza zespołowego, <strong>pasjonata technologii (szczególnie Sztucznej Inteligencji)</strong> i sportu. Pomagając klientom wewnętrznym, koncentruję się na wypracowaniu rozwiązań i osiągnięciu wspólnego celu. Aktualnie zgłębiam możliwości modeli językowych (LLM) w automatyzacji.
-                </span>
-                <span class="lang-en">
-                    People describe me as a kind, empathetic and nice-to-be-around person. 
-                    I consider myself a team player, <strong>tech (especially AI)</strong> and sport geek. 
-                    While helping internal customers I focus on working out solutions and the common goal. Currently exploring Large Language Models (LLM) in automation.
-                </span>
-            </p>
+            </aside>
         </section>
 
-        <section class="section" id="experience">
-            <h3 class="section-title reveal-element">
-                <span class="lang-pl">Doświadczenie Zawodowe</span>
-                <span class="lang-en">Professional Experience</span>
-            </h3>
-            
+        <section class="page section" id="about" aria-labelledby="about-title">
+            <div class="section-heading">
+                <div class="section-kicker" data-i18n="about.kicker">O mnie</div>
+                <div>
+                    <h2 id="about-title" data-i18n="about.title">Techniczne IT z ciekawością do danych i automatyzacji.</h2>
+                    <p class="section-lead" data-i18n="about.lead">
+                        Jestem studentem informatyki i pracuję w IT, rozwijając się w kierunku AI, Data Science
+                        i automatyzacji. Najbliżej mi do praktycznego styku aplikacji, systemów, użytkowników
+                        i procesów wsparcia: diagnozowania problemów, porządkowania informacji, dokumentowania
+                        rozwiązań i szukania miejsc, w których skrypt albo automatyzacja oszczędza czas.
+                    </p>
+                </div>
+            </div>
+            <div class="grid three">
+                <article class="card">
+                    <h3 data-i18n="about.card1Title">Praktyczne wsparcie IT</h3>
+                    <p data-i18n="about.card1Text">Aplikacje, systemy, użytkownicy, infrastruktura, sieci i troubleshooting w codziennej pracy operacyjnej.</p>
+                </article>
+                <article class="card">
+                    <h3 data-i18n="about.card2Title">Automatyzacja i skrypty</h3>
+                    <p data-i18n="about.card2Text">PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania warto zamieniać w procedury lub narzędzia.</p>
+                </article>
+                <article class="card">
+                    <h3 data-i18n="about.card3Title">Dane, AI i sport</h3>
+                    <p data-i18n="about.card3Text">Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako konkretny obszar pracy magisterskiej.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="page section" id="weather" aria-labelledby="weather-title">
+            <div class="section-heading">
+                <div class="section-kicker" data-i18n="weather.kicker">Kato na żywo</div>
+                <div>
+                    <h2 id="weather-title" data-i18n="weather.title">Temperatura i jakość powietrza w Katowicach (Kato)</h2>
+                    <p class="section-lead" data-i18n="weather.lead">Aktualne odczyty z czujników stacji KAT04BAPP, odświeżane automatycznie co godzinę.</p>
+                </div>
+            </div>
+
+            <div class="weather-widget" id="weatherWidget" data-state="loading" aria-live="polite">
+                <div class="weather-summary">
+                    <div>
+                        <div class="section-kicker" data-i18n="weather.station">Katowice · Brzozowa</div>
+                        <strong class="weather-status" id="weatherStatus" data-i18n="weather.loading">Pobieranie danych…</strong>
+                    </div>
+                    <span class="tag">InPost Air Sensor · KAT04BAPP</span>
+                </div>
+
+                <div class="weather-readings">
+                    <div class="weather-reading">
+                        <span data-i18n="weather.temperature">Temperatura</span>
+                        <strong data-weather="temperature">—</strong>
+                    </div>
+                    <div class="weather-reading">
+                        <span data-i18n="weather.humidity">Wilgotność</span>
+                        <strong data-weather="humidity">—</strong>
+                    </div>
+                    <div class="weather-reading">
+                        <span data-i18n="weather.pressure">Ciśnienie</span>
+                        <strong data-weather="pressure">—</strong>
+                    </div>
+                    <div class="weather-reading weather-reading--pm">
+                        <span>PM2.5</span>
+                        <strong data-weather="pm25">—</strong>
+                        <span data-weather-norm="pm25">—</span>
+                        <div class="weather-norm" aria-hidden="true"><span data-weather-bar="pm25"></span></div>
+                    </div>
+                    <div class="weather-reading weather-reading--pm">
+                        <span>PM10</span>
+                        <strong data-weather="pm10">—</strong>
+                        <span data-weather-norm="pm10">—</span>
+                        <div class="weather-norm" aria-hidden="true"><span data-weather-bar="pm10"></span></div>
+                    </div>
+                </div>
+
+                <p class="weather-meta" id="weatherUpdated" data-i18n="weather.waiting">Oczekiwanie na aktualne dane.</p>
+            </div>
+
+            <div class="weather-history" aria-labelledby="weather-history-title">
+                <div class="weather-history-header">
+                    <div>
+                        <h3 id="weather-history-title" data-i18n="weather.historyTitle">Historia 24-godzinna</h3>
+                        <div class="weather-history-date" id="weatherHistoryDate" aria-live="polite"></div>
+                    </div>
+                    <div class="weather-history-nav" aria-label="Nawigacja historii pogody" data-i18n-attr="aria-label:weather.historyNavigation">
+                        <button class="button" id="weatherPreviousDay" type="button" data-i18n="weather.previousDay">← Poprzedni dzień</button>
+                        <button class="button" id="weatherToday" type="button" data-i18n="weather.today">Dzisiaj</button>
+                        <button class="button" id="weatherNextDay" type="button" data-i18n="weather.nextDay">Następny dzień →</button>
+                    </div>
+                </div>
+                <div class="weather-chart-wrap" id="weatherChartWrap" data-empty="true">
+                    <div class="weather-chart-empty" id="weatherChartEmpty" data-i18n="weather.noHistory">Brak odczytów dla wybranego dnia.</div>
+                    <canvas id="weatherHistoryChart" role="img" aria-label="Wykres temperatury, PM2.5 i PM10 w ciągu 24 godzin" data-i18n-attr="aria-label:weather.chartAria"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="page section" id="experience" aria-labelledby="experience-title">
+            <div class="section-heading">
+                <div class="section-kicker" data-i18n="experience.kicker">Doświadczenie</div>
+                <div>
+                    <h2 id="experience-title" data-i18n="experience.title">Doświadczenie zawodowe</h2>
+                    <p class="section-lead" data-i18n="experience.lead">
+                        Pracowałem między innymi jako IT Specialist, Application Support i w obszarze IT Operations.
+                        Od kwietnia 2026 pracuję jako Technical Support Engineer w Motorola Solutions.
+                    </p>
+                </div>
+            </div>
+
             <div class="timeline">
-                
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Specjalista IT</span>
-                            <span class="lang-en">IT Specialist</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span>Madej Wróbel Sp. z o.o.</span>
-                            <span class="timeline-date">
-                                <span class="lang-pl">Październik 2025 - Obecnie</span>
-                                <span class="lang-en">October 2025 - Present</span>
-                            </span>
-                        </div>
-                        <div class="timeline-content">
-                            <ul>
-                                <li class="lang-pl">Wsparcie użytkowników końcowych (Helpdesk) oraz rozwiązywanie problemów sprzętowych i programowych.</li>
-                                <li class="lang-pl">Administracja systemami operacyjnymi i aplikacjami biurowymi.</li>
-                                <li class="lang-pl">Utrzymanie ciągłości działania infrastruktury IT.</li>
-
-                                <li class="lang-en">End-user support (Helpdesk) and troubleshooting hardware and software issues.</li>
-                                <li class="lang-en">Administration of operating systems and office applications.</li>
-                                <li class="lang-en">Maintaining IT infrastructure continuity.</li>
-                            </ul>
-                        </div>
+                <article class="timeline-item">
+                    <div class="period" data-i18n="experience.motorolaPeriod">od kwietnia 2026</div>
+                    <div>
+                        <h3>Technical Support Engineer</h3>
+                        <p class="company">IT / Application Support</p>
+                        <p class="company">Motorola Solutions</p>
+                        <ul>
+                            <li data-i18n="experience.motorola1">Praca w środowisku IT z naciskiem na wsparcie aplikacji, systemów i użytkowników.</li>
+                            <li data-i18n="experience.motorola2">Analiza i rozwiązywanie problemów technicznych w oparciu o procesy wsparcia i dokumentację.</li>
+                            <li data-i18n="experience.motorola3">Współpraca z systemami, zgłoszeniami, dokumentacją i informacjami potrzebnymi do diagnozy.</li>
+                            <li data-i18n="experience.motorola4">Rozwijanie kompetencji w obszarach automatyzacji, analizy problemów i pracy z systemami.</li>
+                        </ul>
                     </div>
-                </div>
+                </article>
 
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Specjalista IT</span>
-                            <span class="lang-en">IT Specialist</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span>Elmiko Sp. z o.o.</span>
-                            <span class="timeline-date">
-                                <span class="lang-pl">Czerwiec 2024 - Sierpień 2025</span>
-                                <span class="lang-en"> June 2024 - August 2025</span>
-                            </span>
-                        </div>
-                        <div class="timeline-content">
-                            <ul>
-                                <li class="lang-pl">Utrzymanie i konfiguracja sprzętu IT oraz sieci komputerowych.</li>
-                                <li class="lang-pl">Administracja kontami użytkowników i zarządzanie dostępem w Active Directory.</li>
-                                <li class="lang-pl">Monitorowanie i rozwiązywanie problemów (troubleshooting).</li>
-                                <li class="lang-pl">Wsparcie użytkowników wewnętrznych i współpraca z dostawcami.</li>
-                                <li class="lang-pl">Utrzymanie sieci (routery Mikrotik, VPN, tunele).</li>
-
-                                <li class="lang-en"> Maintenance and configuration of IT equipment and computer networks.</li>
-                                <li class="lang-en"> Administration of user accounts and access management in Active Directory.</li>
-                                <li class="lang-en"> Monitoring and troubleshooting.</li>
-                                <li class="lang-en"> Supporting internal user & working with vendors.</li>
-                                <li class="lang-en"> Maintaining network (mikrotik routers, VPN, tunnels).</li>
-                            </ul>
-                        </div>
+                <article class="timeline-item">
+                    <div class="period" data-i18n="experience.madejPeriod">październik 2025 - styczeń 2026</div>
+                    <div>
+                        <h3>Madej Wróbel Sp. z o.o.</h3>
+                        <p class="company" data-i18n="experience.itSpecialist">Specjalista IT</p>
+                        <ul>
+                            <li data-i18n="experience.madej1">Wsparcie użytkowników końcowych oraz rozwiązywanie problemów sprzętowych i programowych.</li>
+                            <li data-i18n="experience.madej2">Administracja systemami operacyjnymi i aplikacjami biurowymi.</li>
+                            <li data-i18n="experience.madej3">Utrzymanie ciągłości działania infrastruktury IT.</li>
+                        </ul>
                     </div>
-                </div>
+                </article>
 
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Specjalista IT</span>
-                            <span class="lang-en">IT Specialist</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span>Farby Kabe Sp. z o.o.</span>
-                            <span class="timeline-date">
-                                <span class="lang-pl">Marzec 2023 - Maj 2024</span>
-                                <span class="lang-en"> March 2023 - May 2024</span>
-                            </span>
-                        </div>
-                        <div class="timeline-content">
-                            <ul>
-                                <li class="lang-pl">Utrzymanie i konfiguracja sprzętu IT.</li>
-                                <li class="lang-pl">Administracja kontami użytkowników (AD).</li>
-                                <li class="lang-pl">Konfiguracja nowych serwerów (VMware ESXi, Windows Server).</li>
-                                <li class="lang-pl">Tworzenie baz danych MS SQL i utrzymanie sieci (Mikrotik, VPN, Fortigate).</li>
-
-                                <li class="lang-en"> Maintenance and configuration of IT equipment and computer networks.</li>
-                                <li class="lang-en"> Administration of user accounts and access management in Active Directory.</li>
-                                <li class="lang-en"> Configuring new servers with VMware Esxi or Windows server.</li>
-                                <li class="lang-en"> Creating database in Ms SQL and maintaining network (mikrotik routers, VPN, fortigate).</li>
-                            </ul>
-                        </div>
+                <article class="timeline-item">
+                    <div class="period">2024 - 2025</div>
+                    <div>
+                        <h3>Elmiko Sp. z o.o.</h3>
+                        <p class="company" data-i18n="experience.itSpecialist">Specjalista IT</p>
+                        <ul>
+                            <li data-i18n="experience.elmiko1">Utrzymanie i konfiguracja sprzętu IT oraz sieci komputerowych.</li>
+                            <li data-i18n="experience.elmiko2">Administracja kontami użytkowników i zarządzanie dostępem w Active Directory.</li>
+                            <li data-i18n="experience.elmiko3">Monitoring, troubleshooting, wsparcie użytkowników wewnętrznych i współpraca z dostawcami.</li>
+                            <li data-i18n="experience.elmiko4">Utrzymanie sieci, routery MikroTik, VPN i tunele.</li>
+                        </ul>
                     </div>
-                </div>
+                </article>
 
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Młodszy Programista PLC</span>
-                            <span class="lang-en">Junior PLC Programmer</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span>ISP Polska Sp. z o.o.</span>
-                            <span class="timeline-date">
-                                <span class="lang-pl">Grudzień 2021 - Maj 2022</span>
-                                <span class="lang-en"> December 2021 - May 2022</span>
-                            </span>
-                        </div>
-                        <div class="timeline-content">
-                            <ul>
-                                <li class="lang-pl">Tworzenie wizualizacji HMI offline dla paneli sterowniczych.</li>
-                                <li class="lang-pl">Uruchomienie stacji transportu akumulatorów w fabryce VW Emden (Siemens S7-1500).</li>
-
-                                <li class="lang-en"> Creating HMI visualizations offline for control panels.</li>
-                                <li class="lang-en"> Commissioning of a battery transport station at the VW Emden factory using Siemens S7-1500 controllers.</li>
-                            </ul>
-                        </div>
+                <article class="timeline-item">
+                    <div class="period">2023 - 2024</div>
+                    <div>
+                        <h3>Farby Kabe Sp. z o.o.</h3>
+                        <p class="company" data-i18n="experience.itSpecialist">Specjalista IT</p>
+                        <ul>
+                            <li data-i18n="experience.kabe1">Konfiguracja sprzętu IT, kont użytkowników i dostępów w Active Directory.</li>
+                            <li data-i18n="experience.kabe2">Praca z VMware ESXi, Windows Server, MS SQL, MikroTik, VPN i FortiGate.</li>
+                        </ul>
                     </div>
-                </div>
+                </article>
 
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Młodszy Inżynier Automatyk</span>
-                            <span class="lang-en">Junior Automation Engineer</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span>Dgk Instal Sp z o.o.</span>
-                            <span class="timeline-date">
-                                <span class="lang-pl">Marzec 2021 - Grudzień 2021</span>
-                                <span class="lang-en"> March 2021 - December 2021</span>
-                            </span>
-                        </div>
-                        <div class="timeline-content">
-                            <ul>
-                                <li class="lang-pl">Wsparcie przy projektach z zakresu automatyki i robotyki.</li>
-                                <li class="lang-pl">Pomoc przy relokacji maszyn.</li>
-
-                                <li class="lang-en"> Assisted with automation and robotics projects.</li>
-                                <li class="lang-en"> Assisted with machine relocation tasks.</li>
-                            </ul>
-                        </div>
+                <article class="timeline-item">
+                    <div class="period">2021 - 2022</div>
+                    <div>
+                        <h3 data-i18n="experience.automationTitle">Automatyka i robotyka</h3>
+                        <p class="company">Junior PLC Programmer / Junior Automation Engineer</p>
+                        <ul>
+                            <li data-i18n="experience.automation1">Wizualizacje HMI, wsparcie projektów automatyki i robotyki oraz praca przy uruchomieniach.</li>
+                            <li data-i18n="experience.automation2">Doświadczenie inżynierskie, które pomaga mi patrzeć na IT systemowo i procesowo.</li>
+                        </ul>
                     </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="page section" id="projects" aria-labelledby="projects-title">
+            <div class="section-heading">
+                <div class="section-kicker" data-i18n="projects.kicker">Projekty</div>
+                <div>
+                    <h2 id="projects-title" data-i18n="projects.title">Projekty i obszary pracy</h2>
+                    <p class="section-lead" data-i18n="projects.lead">
+                        Zestaw obszarów, które pokazują praktyczne podejście do IT: od prostych aplikacji webowych
+                        i backendu, przez computer vision, po automatyzacje, systemy i własną przestrzeń do testów.
+                    </p>
                 </div>
+            </div>
+
+            <div class="grid three">
+                <article class="card project-card project-card--actionable">
+                    <div class="project-number">01</div>
+                    <h3>Cycling</h3>
+                    <p data-i18n="projects.cyclingText">Interaktywna prezentacja projektu analizy formy kolarskiej, porównanie wyników modeli, wykresy i kalkulator FTP.</p>
+                    <ul class="tags" aria-label="Obszary projektu Cycling" data-i18n-attr="aria-label:projects.cyclingTagsAria">
+                        <li class="tag" data-i18n="tag.cyclingData">Dane kolarskie</li>
+                        <li class="tag" data-i18n="tag.charts">Wykresy</li>
+                        <li class="tag">FTP</li>
+                    </ul>
+                    <div class="project-actions">
+                        <a class="button primary" href="https://cycling.banas.dev" target="_blank" rel="noopener" data-i18n="projects.cyclingCta">Zobacz projekt</a>
+                    </div>
+                </article>
+
+                <article class="card project-card project-card--actionable">
+                    <div class="project-number">02</div>
+                    <h3 data-i18n="projects.n8nTitle">Automatyzacje / n8n</h3>
+                    <p data-i18n="projects.n8nText">Środowisko automatyzacji procesów i integracji usług, wykorzystywane do testowania przepływów wspierających codzienną pracę techniczną.</p>
+                    <ul class="tags" aria-label="n8n">
+                        <li class="tag">n8n</li>
+                        <li class="tag" data-i18n="tag.integrations">Integracje</li>
+                        <li class="tag" data-i18n="tag.automation">Automatyzacja</li>
+                    </ul>
+                    <div class="project-actions">
+                        <a class="button primary" href="https://n8n.banas.dev" target="_blank" rel="noopener" data-i18n="projects.n8nCta">Otwórz n8n</a>
+                    </div>
+                </article>
+
+                <article class="card project-card project-card--actionable">
+                    <div class="project-card-header">
+                        <div class="project-number">03</div>
+                        <span class="project-status" data-i18n="projects.preparing">W przygotowaniu</span>
+                    </div>
+                    <h3 data-i18n="projects.platesTitle">Rozpoznawanie tablic rejestracyjnych / Plates</h3>
+                    <p data-i18n="projects.platesText">Projekt wykrywania tablic i odczytywania numerów ze zdjęć, wykorzystujący YOLO i OCR do detekcji obiektu, odczytu tekstu i obróbki wyniku.</p>
+                    <ul class="tags" aria-label="Technologie Plates">
+                        <li class="tag">YOLO</li>
+                        <li class="tag">OCR</li>
+                        <li class="tag">Computer Vision</li>
+                    </ul>
+                    <div class="project-actions">
+                        <a class="button" data-project-link="plates" aria-disabled="true" tabindex="-1" data-i18n="projects.platesCta" data-i18n-attr="aria-label:projects.platesLinkAria">Zobacz projekt</a>
+                    </div>
+                </article>
+            </div>
+
+            <h3 class="project-group-title" data-i18n="projects.moreTitle">Pozostałe projekty i obszary</h3>
+            <div class="grid two">
+                <article class="card project-card">
+                    <div class="project-number">04</div>
+                    <h3>Lanari Candle</h3>
+                    <p data-i18n="projects.lanariText">Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.</p>
+                    <ul class="tags" aria-label="Technologie Lanari Candle">
+                        <li class="tag">Python</li>
+                        <li class="tag">FastAPI</li>
+                        <li class="tag">Frontend</li>
+                    </ul>
+                </article>
+
+                <article class="card project-card">
+                    <div class="project-number">05</div>
+                    <h3 data-i18n="projects.thesisTitle">Praca magisterska</h3>
+                    <p data-i18n="projects.thesisText">Projekt badawczo-inżynierski: predykcja formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem ML.</p>
+                    <ul class="tags" aria-label="Obszary pracy magisterskiej" data-i18n-attr="aria-label:projects.thesisTagsAria">
+                        <li class="tag">ML</li>
+                        <li class="tag" data-i18n="tag.telemetry">Telemetryka</li>
+                        <li class="tag" data-i18n="tag.cyclingData">Dane kolarskie</li>
+                    </ul>
+                </article>
+
+                <article class="card project-card">
+                    <div class="project-number">06</div>
+                    <h3 data-i18n="projects.itAutomationTitle">Administracja i automatyzacja IT</h3>
+                    <p data-i18n="projects.itAutomationText">PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.</p>
+                    <ul class="tags" aria-label="Obszary administracji IT">
+                        <li class="tag">PowerShell</li>
+                        <li class="tag">Linux</li>
+                        <li class="tag">Monitoring</li>
+                    </ul>
+                </article>
+
+                <article class="card project-card">
+                    <div class="project-number">07</div>
+                    <h3>Banas.dev</h3>
+                    <p data-i18n="projects.banasText">Własna przestrzeń na projekty, testy, automatyzacje i usługi. Statyczna strona, własne subdomeny i miejsce do praktycznego eksperymentowania.</p>
+                    <ul class="tags" aria-label="Banas.dev">
+                        <li class="tag">Portfolio</li>
+                        <li class="tag" data-i18n="tag.services">Usługi</li>
+                        <li class="tag" data-i18n="tag.automation">Automatyzacja</li>
+                    </ul>
+                </article>
 
             </div>
         </section>
 
-        <section class="section reveal-element" id="projects">
-            <h3 class="section-title">
-                <span class="lang-pl">Moje Projekty</span>
-                <span class="lang-en">My Projects</span>
-            </h3>
-            
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-robot"></i></div>
-                    <h4>
-                        <span class="lang-pl">Projekt AI #1</span>
-                        <span class="lang-en">AI Project #1</span>
-                    </h4>
-                    <p>
-                        <span class="lang-pl">Tutaj wpisz krótki opis swojego projektu związanego z AI. Np. "Chatbot oparty o LLM wspierający Helpdesk".</span>
-                        <span class="lang-en">Short description of your AI project. E.g. "LLM-based chatbot supporting Helpdesk operations".</span>
+        <section class="page section" id="thesis" aria-labelledby="thesis-title">
+            <div class="feature-band">
+                <div>
+                    <div class="section-kicker" data-i18n="thesis.kicker">Praca magisterska / dane kolarskie</div>
+                    <h2 id="thesis-title" data-i18n="thesis.title">Machine learning, telemetryka i forma kolarska.</h2>
+                    <p class="section-lead" data-i18n="thesis.lead">
+                        Moja praca magisterska to projekt badawczo-inżynierski dotyczący predykcji formy kolarskiej
+                        na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem uczenia maszynowego.
+                        To połączenie sportu, danych, ML i praktycznej analizy wydolności, bez obietnicy gotowego
+                        produktu komercyjnego.
                     </p>
-                    <a href="https://github.com/twoj-login/projekt1" target="_blank" class="project-link">
-                        <i class="fab fa-github"></i> GitHub / Demo
-                    </a>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-server"></i></div>
-                    <h4>
-                        <span class="lang-pl">Home Lab</span>
-                        <span class="lang-en">Home Lab</span>
-                    </h4>
-                    <p>
-                        <span class="lang-pl">Konfiguracja serwera Proxmox, konteneryzacja usług, monitoring (Grafana + Prometheus).</span>
-                        <span class="lang-en">Proxmox server configuration, dockerized services, monitoring stack (Grafana + Prometheus).</span>
+                    <p data-i18n="thesis.gravel">
+                        Gravel jest dla mnie naturalnym miejscem styku technologii i wytrzymałości: długie trasy,
+                        eksploracja, moc, tętno, FTP, obciążenie treningowe i pytanie, jak z surowych danych
+                        wyciągać wnioski, które mają sens nie tylko na wykresie, ale też w praktyce treningowej.
                     </p>
-                    <a href="#" target="_blank" class="project-link">
-                        <i class="fas fa-external-link-alt"></i> 
-                        <span class="lang-pl">Więcej info</span><span class="lang-en">More info</span>
-                    </a>
                 </div>
-
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-project-diagram"></i></div>
-                    <h4>
-                        <span class="lang-pl">Automatyzacja n8n</span>
-                        <span class="lang-en">n8n Automation</span>
-                    </h4>
-                    <p>
-                        <span class="lang-pl">Moja instancja n8n do automatyzacji procesów biznesowych i integracji AI.</span>
-                        <span class="lang-en">My self-hosted n8n instance for business process automation and AI integrations.</span>
-                    </p>
-                    <a href="https://n8n.banas.dev" target="_blank" class="project-link">
-                        <i class="fas fa-external-link-alt"></i> n8n.banas.dev
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="education">
-            <h3 class="section-title reveal-element">
-                <span class="lang-pl">Edukacja</span>
-                <span class="lang-en">Education</span>
-            </h3>
-            
-            <div class="timeline">
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Uniwersytet Ekonomiczny w Katowicach</span>
-                            <span class="lang-en">University of Economics in Katowice</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span class="lang-pl">Magister, Informatyka (Programowanie Systemów Inteligentnych)</span>
-                            <span class="lang-en"> Master's Degree, Computer Science (Intelligent Systems Programming)</span>
-                            <span class="timeline-date">
-                                <span class="lang-pl">2022 - Obecnie</span>
-                                <span class="lang-en">2022 - Present</span>
-                            </span>
-                        </div>
+                <div class="metrics" aria-label="Akcenty projektu">
+                    <div class="metric">
+                        <strong>ML</strong>
+                        <span data-i18n="thesis.metricMl">modelowanie i predykcja</span>
                     </div>
-                </div>
-
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Politechnika Śląska</span>
-                            <span class="lang-en">Silesian University of Technology</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span class="lang-pl">Inżynier, Automatyka i Robotyka</span>
-                            <span class="lang-en"> Bachelor's Degree, Automation and Robotics</span>
-                            <span class="timeline-date">2018 - 2022</span>
-                        </div>
+                    <div class="metric">
+                        <strong>FTP</strong>
+                        <span data-i18n="thesis.metricFtp">forma, obciążenie, wydolność</span>
                     </div>
-                </div>
-
-                <div class="timeline-item reveal-element">
-                    <div class="timeline-content-box">
-                        <div class="timeline-title">
-                            <span class="lang-pl">Śląskie Techniczne Zakłady Naukowe</span>
-                            <span class="lang-en">Technical School No. 17 in Katowice "Śl.TZN"</span>
-                        </div>
-                        <div class="timeline-subtitle">
-                            <span class="lang-pl">Technik Mechatronik</span>
-                            <span class="lang-en"> Mechatronics</span>
-                            <span class="timeline-date">2014 - 2018</span>
-                        </div>
+                    <div class="metric">
+                        <strong>GPS</strong>
+                        <span data-i18n="thesis.metricGps">trasy, czas, dystans, kontekst</span>
                     </div>
                 </div>
             </div>
         </section>
 
+        <section class="page section" id="skills" aria-labelledby="skills-title">
+            <div class="section-heading">
+                <div class="section-kicker" data-i18n="skills.kicker">Umiejętności</div>
+                <div>
+                    <h2 id="skills-title" data-i18n="skills.title">Technologie i narzędzia</h2>
+                    <p class="section-lead" data-i18n="skills.lead">
+                        Kompetencje zebrane z pracy w IT, studiów, automatyki oraz własnych projektów.
+                    </p>
+                </div>
+            </div>
+
+            <div class="skills-list">
+                <article class="card skill-group">
+                    <h3 data-i18n="skills.systems">Systemy</h3>
+                    <ul>
+                        <li>Windows Server</li>
+                        <li>Microsoft 365</li>
+                        <li>Active Directory</li>
+                        <li>Linux</li>
+                    </ul>
+                </article>
+                <article class="card skill-group">
+                    <h3 data-i18n="skills.automation">Automatyzacja</h3>
+                    <ul>
+                        <li>PowerShell</li>
+                        <li data-i18n="skills.pythonBasics">Podstawy Pythona</li>
+                        <li data-i18n="skills.bashBasics">Podstawy Bash</li>
+                        <li>n8n</li>
+                    </ul>
+                </article>
+                <article class="card skill-group">
+                    <h3 data-i18n="skills.dataBackend">Dane i backend</h3>
+                    <ul>
+                        <li>SQL Server</li>
+                        <li>T-SQL</li>
+                        <li>FastAPI</li>
+                        <li data-i18n="skills.aiMlBasics">Podstawy AI / ML</li>
+                    </ul>
+                </article>
+                <article class="card skill-group">
+                    <h3 data-i18n="skills.infrastructure">Infrastruktura</h3>
+                    <ul>
+                        <li>VMware ESXi</li>
+                        <li>Hyper-V</li>
+                        <li>Proxmox</li>
+                        <li>TCP/IP, DNS, DHCP, VPN</li>
+                        <li>MikroTik, FortiGate</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="page section" id="education" aria-labelledby="education-title">
+            <div class="section-heading">
+                <div class="section-kicker" data-i18n="education.kicker">Edukacja</div>
+                <div>
+                    <h2 id="education-title" data-i18n="education.title">Edukacja</h2>
+                    <p class="section-lead" data-i18n="education.lead">
+                        Informatyka, systemy inteligentne oraz wcześniejsze zaplecze inżynierskie z automatyki i robotyki.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid two">
+                <article class="card">
+                    <h3>Uniwersytet Ekonomiczny w Katowicach</h3>
+                    <p data-i18n="education.uek">Magister, Informatyka, Programowanie Systemów Inteligentnych. Ukończone w 2026 roku.</p>
+                </article>
+                <article class="card">
+                    <h3>Politechnika Śląska</h3>
+                    <p data-i18n="education.polsl">Inżynier, Automatyka i Robotyka. Ukończone w 2022 roku.</p>
+                </article>
+                <article class="card">
+                    <h3>Śląskie Techniczne Zakłady Naukowe</h3>
+                    <p data-i18n="education.tzn">Technik mechatronik. Ukończone w 2018 roku.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="page section" id="contact" aria-labelledby="contact-title">
+            <div class="contact-layout">
+                <div>
+                    <div class="section-kicker" data-i18n="contact.kicker">Kontakt</div>
+                    <h2 id="contact-title" data-i18n="contact.title">Porozmawiajmy o IT, automatyzacji albo danych.</h2>
+                    <p class="section-lead" data-i18n="contact.lead">
+                        Najłatwiej znaleźć mnie przez LinkedIn, GitHuba lub moje publiczne profile projektowe.
+                    </p>
+                </div>
+                <div class="contact-links">
+                    <a class="contact-link" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener">
+                        <strong>LinkedIn</strong>
+                        <span>linkedin.com/in/rafał-banaś-251583152</span>
+                    </a>
+                    <a class="contact-link" href="https://github.com/Rafalbanas" target="_blank" rel="noopener">
+                        <strong>GitHub</strong>
+                        <span>github.com/Rafalbanas</span>
+                    </a>
+                    <a class="contact-link" href="https://www.strava.com/athletes/9698049" target="_blank" rel="noopener">
+                        <strong>Strava</strong>
+                        <span>strava.com/athletes/9698049</span>
+                    </a>
+                    <a class="contact-link" href="https://n8n.banas.dev" target="_blank" rel="noopener">
+                        <strong>n8n</strong>
+                        <span>n8n.banas.dev</span>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer style="grid-column: 1 / -1; text-align: center; padding: 20px; font-size: 0.8em; opacity: 0.6;">
-        &copy; 2025 Rafał Banaś. 
-        <a href="#" id="privacyLink" style="color: inherit; text-decoration: underline; margin-right: 15px;">Polityka Prywatności / Privacy Policy</a>
-        <a href="#" id="openTerminal" title="Open Terminal" style="color: inherit; text-decoration: none; font-weight: bold;"><i class="fas fa-terminal"></i> >_</a>
+    <footer>
+        <div class="page">
+            <span>&copy; 2026 Rafał Banaś. banas.dev</span>
+            <span data-i18n="footer.note">Statyczna strona bez analityki i trackerów. Motyw i język zapisują się lokalnie w przeglądarce.</span>
+        </div>
     </footer>
-</div>
 
-<div id="privacyModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h3>Polityka Prywatności / Privacy Policy</h3>
-        
-        <div class="modal-text pl">
-            <p><strong>Szanujemy Twoją prywatność.</strong></p>
-            <p>Ta strona <strong>nie używa</strong> ciasteczek śledzących (cookies) ani narzędzi analitycznych firm trzecich (np. Google Analytics).</p>
-            <p>Używamy mechanizmu <code>Local Storage</code> przeglądarki wyłącznie do zapamiętania Twoich preferencji:</p>
-            <ul>
-                <li>Wybranego motywu (Jasny/Ciemny)</li>
-                <li>Wybranego języka (PL/EN)</li>
-            </ul>
-            <p>Dane te są przechowywane tylko na Twoim urządzeniu i nie są nigdzie wysyłane.</p>
-        </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script>
+        (() => {
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const canUsePointerGlow = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+            const themeToggle = document.getElementById("themeToggle");
+            const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+            const topbar = document.querySelector(".topbar");
+            const nav = document.querySelector(".nav");
+            const navLinksContainer = document.getElementById("primaryNavigation");
+            const hero = document.querySelector(".hero");
+            const profilePhoto = document.getElementById("profilePhoto");
+            const navLinks = [...document.querySelectorAll(".nav-links a[href^='#']")];
+            const langButtons = [...document.querySelectorAll(".lang-button[data-lang]")];
+            const mobileMenuQuery = window.matchMedia("(max-width: 920px)");
+            const weatherWidget = document.getElementById("weatherWidget");
+            const weatherStatus = document.getElementById("weatherStatus");
+            const weatherUpdated = document.getElementById("weatherUpdated");
+            const weatherHistoryDate = document.getElementById("weatherHistoryDate");
+            const weatherChartWrap = document.getElementById("weatherChartWrap");
+            const weatherChartCanvas = document.getElementById("weatherHistoryChart");
+            const weatherPreviousDay = document.getElementById("weatherPreviousDay");
+            const weatherToday = document.getElementById("weatherToday");
+            const weatherNextDay = document.getElementById("weatherNextDay");
+            const photos = ["cv_photo.webp", "cv_photo2.webp"];
+            let photoIndex = 0;
+            let weatherData = null;
+            let weatherLoadFailed = false;
+            let weatherHistory = null;
+            let weatherChart = null;
+            let selectedWeatherDate = null;
 
-        <div class="modal-text en" style="display:none; border-top: 1px solid #eee; margin-top: 15px; padding-top: 15px;">
-            <p><strong>We respect your privacy.</strong></p>
-            <p>This website <strong>does not use</strong> tracking cookies or third-party analytics tools (e.g., Google Analytics).</p>
-            <p>We use the browser's <code>Local Storage</code> mechanism solely to remember your preferences:</p>
-            <ul>
-                <li>Selected theme (Light/Dark)</li>
-                <li>Selected language (PL/EN)</li>
-            </ul>
-            <p>This data is stored only on your device and is not sent anywhere.</p>
-        </div>
-    </div>
-</div>
+            document.body.classList.add("js-ready");
 
-<script>
-    const textPl = "Specjalista IT / Automatyk / AI Enthusiast";
-    const textEn = "IT Specialist / Automation / AI Enthusiast";
-    
-    // --- OBSŁUGA JĘZYKA ---
-    let currentLang = localStorage.getItem('cv_lang') || 'pl';
-    
-    function setLanguage(lang) {
-        currentLang = lang;
-        // Zachowaj klasę dark-mode jeśli istnieje
-        const isDark = document.body.classList.contains('dark-mode');
-        document.body.className = lang + (isDark ? ' dark-mode' : '');
-        
-        localStorage.setItem('cv_lang', lang);
-
-        document.getElementById('btn-pl').classList.toggle('active', lang === 'pl');
-        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-
-        startTyping(lang === 'pl' ? textPl : textEn);
-    }
-
-    // --- OBSŁUGA MOTYWU ---
-    const themeBtn = document.getElementById('themeToggle');
-    const themeIcon = themeBtn.querySelector('i');
-
-    function toggleTheme() {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        
-        // Zapisz wybór
-        localStorage.setItem('cv_theme', isDark ? 'dark' : 'light');
-        
-        // Zmień ikonę
-        themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-    }
-
-    // Inicjalizacja motywu przy starcie
-    const savedTheme = localStorage.getItem('cv_theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        themeIcon.className = 'fas fa-sun';
-    }
-
-    themeBtn.addEventListener('click', toggleTheme);
-
-
-    // --- EFEKT PISANIA ---
-    let typeWriterTimeout;
-    function startTyping(text) {
-        const typingElement = document.getElementById('typing-text');
-        if (typeWriterTimeout) clearTimeout(typeWriterTimeout);
-        
-        typingElement.innerHTML = '';
-        let charIndex = 0;
-
-        function typeWriter() {
-            if (charIndex < text.length) {
-                typingElement.innerHTML += text.charAt(charIndex);
-                charIndex++;
-                typeWriterTimeout = setTimeout(typeWriter, 50);
-            }
-        }
-        typeWriter();
-    }
-    
-    // --- GALERIA ZDJĘĆ ---
-    const photos = ['cv_photo.webp', 'cv_photo2.webp']; 
-    let photoIndex = 0;
-    
-    photos.forEach(src => {
-        const img = new Image();
-        img.src = src;
-    });
-
-    const profileImg = document.getElementById('profileImg');
-    if(profileImg) {
-        profileImg.addEventListener('click', () => {
-            photoIndex = (photoIndex + 1) % photos.length;
-            profileImg.style.opacity = 0;
-            setTimeout(() => {
-                profileImg.src = photos[photoIndex];
-                profileImg.style.opacity = 1;
-            }, 200);
-        });
-    }
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-        setLanguage(currentLang);
-
-        // --- SCROLL REVEAL ---
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: "0px 0px -50px 0px"
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
+            const translations = {
+                pl: {
+                    meta: {
+                        title: "Rafał Banaś | Technical Support Engineer, IT & Data Science",
+                        description: "Portfolio Rafała Banasia: Technical Support Engineer, IT/Application Support, student informatyki rozwijający się w kierunku AI, Data Science, automatyzacji i systemów."
+                    },
+                    langSwitch: { label: "Wybór języka" },
+                    nav: {
+                        about: "O mnie",
+                        weather: "Pogoda",
+                        experience: "Doświadczenie",
+                        projects: "Projekty",
+                        skills: "Umiejętności",
+                        contact: "Kontakt"
+                    },
+                    menu: {
+                        open: "Otwórz menu",
+                        close: "Zamknij menu"
+                    },
+                    hero: {
+                        eyebrow: "Technical Support Engineer / IT / Application Support",
+                        subtitle: "Technical Support Engineer w Motorola Solutions i student informatyki. Traktuję banas.dev jak osobiste engineering lab: miejsce do budowania, testowania i automatyzowania rozwiązań na styku IT, systemów, danych i sportu.",
+                        projectsCta: "Zobacz projekty",
+                        tagsAria: "Główne obszary",
+                        labAria: "Tryb pracy",
+                        lab1: "buduj",
+                        lab2: "testuj",
+                        lab3: "automatyzuj",
+                        lab4: "mierz"
+                    },
+                    terminal: {
+                        aria: "Personal engineering lab",
+                        line1: "ops: wsparcie systemów i aplikacji",
+                        line2: "data: telemetryka, SQL, eksperymenty ML",
+                        line3: "automation: skrypty, workflowy, usługi"
+                    },
+                    profile: {
+                        aria: "Profil",
+                        locationLabel: "Lokalizacja",
+                        location: "Katowice, Polska",
+                        currentLabel: "Aktualnie",
+                        companyLabel: "Firma",
+                        areaLabel: "Obszar",
+                        directionLabel: "Kierunek",
+                        direction: "AI, Data Science, automatyzacja"
+                    },
+                    about: {
+                        kicker: "O mnie",
+                        title: "Personal engineering lab: praktyczne IT, dane i automatyzacja.",
+                        lead: "Jestem studentem informatyki i pracuję w IT, rozwijając się w kierunku AI, Data Science i automatyzacji. Najbliżej mi do praktycznego styku aplikacji, systemów, użytkowników i procesów wsparcia: diagnozowania problemów, porządkowania informacji, dokumentowania rozwiązań oraz budowania małych narzędzi, które coś realnie usprawniają.",
+                        card1Title: "Praktyczne wsparcie IT",
+                        card1Text: "Aplikacje, systemy, użytkownicy, infrastruktura, sieci i troubleshooting w codziennej pracy operacyjnej.",
+                        card2Title: "Automatyzacja i prototypy",
+                        card2Text: "PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania trafiają do skryptów, workflowów albo checklist.",
+                        card3Title: "Dane, AI i sport",
+                        card3Text: "Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako praktyczne pole do eksperymentów z danymi."
+                    },
+                    weather: {
+                        kicker: "Kato na żywo",
+                        title: "Temperatura i jakość powietrza w Katowicach (Kato)",
+                        lead: "Aktualne odczyty z czujników stacji KAT04BAPP, odświeżane automatycznie co godzinę.",
+                        station: "Katowice · Brzozowa",
+                        loading: "Pobieranie danych…",
+                        waiting: "Oczekiwanie na aktualne dane.",
+                        temperature: "Temperatura",
+                        humidity: "Wilgotność",
+                        pressure: "Ciśnienie",
+                        historyTitle: "Historia 24-godzinna",
+                        historyNavigation: "Nawigacja historii pogody",
+                        previousDay: "← Poprzedni dzień",
+                        today: "Dzisiaj",
+                        nextDay: "Następny dzień →",
+                        noHistory: "Brak odczytów dla wybranego dnia.",
+                        chartAria: "Wykres temperatury, PM2.5 i PM10 w ciągu 24 godzin",
+                        temperatureDataset: "Temperatura (°C)",
+                        timeAxis: "Czas",
+                        norm: "{percent}% normy ({value} {unit})",
+                        updated: "Aktualizacja: {date} · Źródło: InPost",
+                        error: "Dane są chwilowo niedostępne",
+                        levels: {
+                            VERY_GOOD: "Bardzo dobra jakość powietrza",
+                            GOOD: "Dobra jakość powietrza",
+                            MODERATE: "Umiarkowana jakość powietrza",
+                            SUFFICIENT: "Dostateczna jakość powietrza",
+                            BAD: "Zła jakość powietrza",
+                            VERY_BAD: "Bardzo zła jakość powietrza",
+                            UNKNOWN: "Brak oceny jakości powietrza"
+                        }
+                    },
+                    experience: {
+                        kicker: "Doświadczenie",
+                        title: "Doświadczenie zawodowe",
+                        lead: "Pracowałem między innymi jako IT Specialist, Application Support i w obszarze IT Operations. Od kwietnia 2026 pracuję jako Technical Support Engineer w Motorola Solutions.",
+                        motorolaPeriod: "od kwietnia 2026",
+                        motorola1: "Praca w środowisku IT z naciskiem na wsparcie aplikacji, systemów i użytkowników.",
+                        motorola2: "Analiza i rozwiązywanie problemów technicznych w oparciu o procesy wsparcia i dokumentację.",
+                        motorola3: "Współpraca z systemami, zgłoszeniami, dokumentacją i informacjami potrzebnymi do diagnozy.",
+                        motorola4: "Rozwijanie kompetencji w obszarach automatyzacji, analizy problemów i pracy z systemami.",
+                        madejPeriod: "październik 2025 - styczeń 2026",
+                        itSpecialist: "Specjalista IT",
+                        madej1: "Wsparcie użytkowników końcowych oraz rozwiązywanie problemów sprzętowych i programowych.",
+                        madej2: "Administracja systemami operacyjnymi i aplikacjami biurowymi.",
+                        madej3: "Utrzymanie ciągłości działania infrastruktury IT.",
+                        elmiko1: "Utrzymanie i konfiguracja sprzętu IT oraz sieci komputerowych.",
+                        elmiko2: "Administracja kontami użytkowników i zarządzanie dostępem w Active Directory.",
+                        elmiko3: "Monitoring, troubleshooting, wsparcie użytkowników wewnętrznych i współpraca z dostawcami.",
+                        elmiko4: "Utrzymanie sieci, routery MikroTik, VPN i tunele.",
+                        kabe1: "Konfiguracja sprzętu IT, kont użytkowników i dostępów w Active Directory.",
+                        kabe2: "Praca z VMware ESXi, Windows Server, MS SQL, MikroTik, VPN i FortiGate.",
+                        automationTitle: "Automatyka i robotyka",
+                        automation1: "Wizualizacje HMI, wsparcie projektów automatyki i robotyki oraz praca przy uruchomieniach.",
+                        automation2: "Doświadczenie inżynierskie, które pomaga mi patrzeć na IT systemowo i procesowo."
+                    },
+                    projects: {
+                        kicker: "Projekty",
+                        title: "Projekty i obszary pracy",
+                        lead: "Zestaw obszarów, które pokazują praktyczne podejście do IT: od prostych aplikacji webowych i backendu, przez computer vision, po automatyzacje, systemy i własną przestrzeń do testów.",
+                        cyclingText: "Interaktywna prezentacja projektu analizy formy kolarskiej, porównanie wyników modeli, wykresy i kalkulator FTP.",
+                        cyclingCta: "Zobacz projekt",
+                        cyclingTagsAria: "Obszary projektu Cycling",
+                        n8nTitle: "Automatyzacje / n8n",
+                        n8nText: "Środowisko automatyzacji procesów i integracji usług, wykorzystywane do testowania przepływów wspierających codzienną pracę techniczną.",
+                        n8nCta: "Otwórz n8n",
+                        platesTitle: "Rozpoznawanie tablic rejestracyjnych / Plates",
+                        platesText: "Projekt wykrywania tablic i odczytywania numerów ze zdjęć, wykorzystujący YOLO i OCR do detekcji obiektu, odczytu tekstu i obróbki wyniku.",
+                        platesCta: "Zobacz projekt",
+                        platesLinkAria: "Zobacz projekt Plates — status: w przygotowaniu",
+                        preparing: "W przygotowaniu",
+                        moreTitle: "Pozostałe projekty i obszary",
+                        lanariText: "Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.",
+                        thesisTitle: "Praca magisterska",
+                        thesisText: "Projekt badawczo-inżynierski: predykcja formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem ML.",
+                        itAutomationTitle: "Administracja i automatyzacja IT",
+                        itAutomationText: "PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.",
+                        banasText: "Własna przestrzeń typu personal engineering lab: projekty, testy, automatyzacje, usługi, subdomeny i praktyczne eksperymenty bez ciężkiej infrastruktury.",
+                        thesisTagsAria: "Obszary pracy magisterskiej"
+                    },
+                    tag: {
+                        telemetry: "Telemetryka",
+                        integrations: "Integracje",
+                        services: "Usługi",
+                        automation: "Automatyzacja",
+                        cyclingData: "Dane kolarskie",
+                        charts: "Wykresy"
+                    },
+                    thesis: {
+                        kicker: "Praca magisterska / dane kolarskie",
+                        title: "Machine learning, telemetryka i forma kolarska.",
+                        lead: "Moja praca magisterska to projekt badawczo-inżynierski dotyczący predykcji formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem uczenia maszynowego. To połączenie sportu, danych, ML i praktycznej analizy wydolności, bez obietnicy gotowego produktu komercyjnego.",
+                        gravel: "Gravel jest dla mnie naturalnym miejscem styku technologii i wytrzymałości: długie trasy, eksploracja, moc, tętno, FTP, obciążenie treningowe i pytanie, jak z surowych danych wyciągać wnioski, które mają sens nie tylko na wykresie, ale też w praktyce treningowej.",
+                        metricMl: "modelowanie i predykcja",
+                        metricFtp: "forma, obciążenie, wydolność",
+                        metricGps: "trasy, czas, dystans, kontekst"
+                    },
+                    skills: {
+                        kicker: "Umiejętności",
+                        title: "Technologie i narzędzia",
+                        lead: "Kompetencje zebrane z pracy w IT, studiów, automatyki oraz własnych projektów.",
+                        systems: "Systemy",
+                        automation: "Automatyzacja",
+                        dataBackend: "Dane i backend",
+                        infrastructure: "Infrastruktura",
+                        pythonBasics: "Podstawy Pythona",
+                        bashBasics: "Podstawy Bash",
+                        aiMlBasics: "Podstawy AI / ML"
+                    },
+                    education: {
+                        kicker: "Edukacja",
+                        title: "Edukacja",
+                        lead: "Informatyka, systemy inteligentne oraz wcześniejsze zaplecze inżynierskie z automatyki i robotyki.",
+                        uek: "Magister, Informatyka, Programowanie Systemów Inteligentnych. Ukończone w 2026 roku.",
+                        polsl: "Inżynier, Automatyka i Robotyka. Ukończone w 2022 roku.",
+                        tzn: "Technik mechatronik. Ukończone w 2018 roku."
+                    },
+                    contact: {
+                        kicker: "Kontakt",
+                        title: "Porozmawiajmy o IT, automatyzacji albo danych.",
+                        lead: "Najłatwiej znaleźć mnie przez LinkedIn, GitHuba lub moje publiczne profile projektowe."
+                    },
+                    footer: {
+                        note: "Statyczna strona bez analityki i trackerów. Motyw i język zapisują się lokalnie w przeglądarce."
+                    },
+                    theme: {
+                        lightTitle: "Przełącz na ciemny motyw",
+                        darkTitle: "Przełącz na jasny motyw"
+                    }
+                },
+                en: {
+                    meta: {
+                        title: "Rafał Banaś | Technical Support Engineer, IT & Data Science",
+                        description: "Rafał Banaś portfolio: Technical Support Engineer, IT/Application Support and computer science student growing toward AI, Data Science, automation and systems."
+                    },
+                    langSwitch: { label: "Language selection" },
+                    nav: {
+                        about: "About",
+                        weather: "Weather",
+                        experience: "Experience",
+                        projects: "Projects",
+                        skills: "Skills",
+                        contact: "Contact"
+                    },
+                    menu: {
+                        open: "Open menu",
+                        close: "Close menu"
+                    },
+                    hero: {
+                        eyebrow: "Technical Support Engineer / IT / Application Support",
+                        subtitle: "Technical Support Engineer at Motorola Solutions and computer science student. I treat banas.dev as a personal engineering lab: a place to build, test and automate solutions at the intersection of IT, systems, data and sport.",
+                        projectsCta: "View projects",
+                        tagsAria: "Main areas",
+                        labAria: "Work mode",
+                        lab1: "build",
+                        lab2: "test",
+                        lab3: "automate",
+                        lab4: "measure"
+                    },
+                    terminal: {
+                        aria: "Personal engineering lab",
+                        line1: "ops: support systems and applications",
+                        line2: "data: telemetry, SQL, ML experiments",
+                        line3: "automation: scripts, workflows, services"
+                    },
+                    profile: {
+                        aria: "Profile",
+                        locationLabel: "Location",
+                        location: "Katowice, Poland",
+                        currentLabel: "Current role",
+                        companyLabel: "Company",
+                        areaLabel: "Area",
+                        directionLabel: "Direction",
+                        direction: "AI, Data Science, automation"
+                    },
+                    about: {
+                        kicker: "About",
+                        title: "Personal engineering lab: practical IT, data and automation.",
+                        lead: "I am a computer science student working in IT and growing toward AI, Data Science and automation. My strongest focus is the practical intersection of applications, systems, users and support processes: diagnosing issues, organizing information, documenting solutions and building small tools that improve real workflows.",
+                        card1Title: "Hands-on IT support",
+                        card1Text: "Applications, systems, users, infrastructure, networks and troubleshooting in day-to-day IT operations.",
+                        card2Title: "Automation and prototypes",
+                        card2Text: "PowerShell, Bash, Python basics and an approach where repetitive work becomes a script, workflow or checklist.",
+                        card3Title: "Data, AI and sport",
+                        card3Text: "Machine learning, training telemetry and cycling form analysis as a practical field for data experiments."
+                    },
+                    weather: {
+                        kicker: "Kato live",
+                        title: "Temperature and air quality in Katowice (Kato)",
+                        lead: "Current readings from the KAT04BAPP station sensors, refreshed automatically every hour.",
+                        station: "Katowice · Brzozowa",
+                        loading: "Loading data…",
+                        waiting: "Waiting for current data.",
+                        temperature: "Temperature",
+                        humidity: "Humidity",
+                        pressure: "Pressure",
+                        historyTitle: "24-hour history",
+                        historyNavigation: "Weather history navigation",
+                        previousDay: "← Previous day",
+                        today: "Today",
+                        nextDay: "Next day →",
+                        noHistory: "No readings for the selected day.",
+                        chartAria: "24-hour temperature, PM2.5 and PM10 chart",
+                        temperatureDataset: "Temperature (°C)",
+                        timeAxis: "Time",
+                        norm: "{percent}% of the norm ({value} {unit})",
+                        updated: "Updated: {date} · Source: InPost",
+                        error: "Data is temporarily unavailable",
+                        levels: {
+                            VERY_GOOD: "Very good air quality",
+                            GOOD: "Good air quality",
+                            MODERATE: "Moderate air quality",
+                            SUFFICIENT: "Sufficient air quality",
+                            BAD: "Poor air quality",
+                            VERY_BAD: "Very poor air quality",
+                            UNKNOWN: "No air quality rating"
+                        }
+                    },
+                    experience: {
+                        kicker: "Experience",
+                        title: "Professional experience",
+                        lead: "I have worked across IT Specialist, Application Support and IT Operations areas. Since April 2026, I have been working as a Technical Support Engineer at Motorola Solutions.",
+                        motorolaPeriod: "since April 2026",
+                        motorola1: "Working in an IT environment with a focus on supporting applications, systems and users.",
+                        motorola2: "Analyzing and resolving technical issues using support processes and documentation.",
+                        motorola3: "Working with systems, tickets, documentation and diagnostic information.",
+                        motorola4: "Developing skills in automation, problem analysis and practical systems work.",
+                        madejPeriod: "October 2025 - January 2026",
+                        itSpecialist: "IT Specialist",
+                        madej1: "End-user support and troubleshooting hardware and software issues.",
+                        madej2: "Administration of operating systems and office applications.",
+                        madej3: "Maintaining continuity of IT infrastructure operations.",
+                        elmiko1: "Maintaining and configuring IT equipment and computer networks.",
+                        elmiko2: "User account administration and access management in Active Directory.",
+                        elmiko3: "Monitoring, troubleshooting, internal user support and cooperation with vendors.",
+                        elmiko4: "Maintaining networks, MikroTik routers, VPN and tunnels.",
+                        kabe1: "Configuring IT equipment, user accounts and access in Active Directory.",
+                        kabe2: "Working with VMware ESXi, Windows Server, MS SQL, MikroTik, VPN and FortiGate.",
+                        automationTitle: "Automation and robotics",
+                        automation1: "HMI visualizations, support for automation and robotics projects, and commissioning-related work.",
+                        automation2: "Engineering experience that helps me look at IT from a systems and process perspective."
+                    },
+                    projects: {
+                        kicker: "Projects",
+                        title: "Projects and focus areas",
+                        lead: "A set of areas showing my practical approach to IT: from simple web applications and backend work, through computer vision, to automation, systems and my own testing space.",
+                        cyclingText: "An interactive presentation of the cycling performance analysis project, including model result comparisons, charts and an FTP calculator.",
+                        cyclingCta: "View project",
+                        cyclingTagsAria: "Cycling project areas",
+                        n8nTitle: "Automation / n8n",
+                        n8nText: "An environment for process automation and service integrations, used to test workflows supporting everyday technical work.",
+                        n8nCta: "Open n8n",
+                        platesTitle: "License plate recognition / Plates",
+                        platesText: "A project for detecting license plates and reading their numbers from images, using YOLO and OCR for object detection, text extraction and result processing.",
+                        platesCta: "View project",
+                        platesLinkAria: "View the Plates project — status: in progress",
+                        preparing: "Coming soon",
+                        moreTitle: "Other projects and focus areas",
+                        lanariText: "An e-commerce project with a Python/FastAPI backend and a simple frontend. Practice in API design, application logic, data validation and web integration.",
+                        thesisTitle: "Master’s thesis",
+                        thesisText: "A research and engineering project: predicting cycling performance/form using telemetry data from sports devices with ML.",
+                        itAutomationTitle: "IT administration and automation",
+                        itAutomationText: "PowerShell, Linux, servers, monitoring, networks and scripts supporting diagnostics, configuration and repetitive administrative work.",
+                        banasText: "My personal engineering lab space: projects, tests, automation, services, subdomains and practical experiments without heavy infrastructure.",
+                        thesisTagsAria: "Master’s thesis areas"
+                    },
+                    tag: {
+                        telemetry: "Telemetry",
+                        integrations: "Integrations",
+                        services: "Services",
+                        automation: "Automation",
+                        cyclingData: "Cycling data",
+                        charts: "Charts"
+                    },
+                    thesis: {
+                        kicker: "Thesis / Cycling data",
+                        title: "Machine learning, telemetry and cycling performance.",
+                        lead: "My master’s thesis is a research and engineering project focused on predicting cycling performance/form using telemetry data from sports devices with machine learning. It combines sport, data, ML and practical performance analysis without promising a finished commercial product.",
+                        gravel: "Gravel cycling is a natural intersection of technology and endurance sport for me: long routes, exploration, power, heart rate, FTP, training load and the question of how to turn raw data into insights that make sense not only on a chart, but also in practical training analysis.",
+                        metricMl: "modeling and prediction",
+                        metricFtp: "form, load, performance",
+                        metricGps: "routes, time, distance, context"
+                    },
+                    skills: {
+                        kicker: "Skills",
+                        title: "Technologies and tools",
+                        lead: "Skills built through IT work, studies, automation engineering and personal projects.",
+                        systems: "Systems",
+                        automation: "Automation",
+                        dataBackend: "Data and backend",
+                        infrastructure: "Infrastructure",
+                        pythonBasics: "Python basics",
+                        bashBasics: "Bash basics",
+                        aiMlBasics: "AI / ML basics"
+                    },
+                    education: {
+                        kicker: "Education",
+                        title: "Education",
+                        lead: "Computer science, intelligent systems and an earlier engineering background in automation and robotics.",
+                        uek: "Master’s degree, Computer Science, Intelligent Systems Programming. Graduated in 2026.",
+                        polsl: "Engineer’s degree, Automation and Robotics. Graduated in 2022.",
+                        tzn: "Mechatronics technician. Graduated in 2018."
+                    },
+                    contact: {
+                        kicker: "Contact",
+                        title: "Let’s talk about IT, automation or data.",
+                        lead: "The easiest way to reach me is through LinkedIn, GitHub or my public project profiles."
+                    },
+                    footer: {
+                        note: "Static website with no analytics or trackers. Theme and language are stored locally in the browser."
+                    },
+                    theme: {
+                        lightTitle: "Switch to dark theme",
+                        darkTitle: "Switch to light theme"
+                    }
                 }
+            };
+
+            const projectLinks = {
+                plates: "https://plates.banas.dev"
+            };
+
+            document.querySelectorAll("[data-project-link]").forEach((link) => {
+                const url = projectLinks[link.dataset.projectLink];
+                if (!url) return;
+                link.href = url;
+                link.target = "_blank";
+                link.rel = "noopener";
+                link.removeAttribute("aria-disabled");
+                link.removeAttribute("tabindex");
+                link.classList.add("primary");
             });
-        }, observerOptions);
 
-        document.querySelectorAll('.reveal-element').forEach(el => observer.observe(el));
+            function getValue(path, lang) {
+                return path.split(".").reduce((value, key) => value?.[key], translations[lang]);
+            }
 
-        // --- BEZPIECZNE KOPIOWANIE EMAILA ---
-        const emailContact = document.getElementById('emailContact');
-        const tooltip = document.getElementById('copyTooltip');
+            function interpolate(template, values) {
+                return Object.entries(values).reduce(
+                    (text, [key, value]) => text.replace(`{${key}}`, value),
+                    template
+                );
+            }
 
-        if(emailContact) {
-            emailContact.addEventListener('click', function(e) {
-                // Rozbijamy email na części, żeby boty go nie odczytały w kodzie
-                const user = 'kontakt';
-                const domain = 'banas.dev';
-                const email = user + '@' + domain;
-                
-                navigator.clipboard.writeText(email).then(() => {
-                    tooltip.textContent = currentLang === 'pl' ? 'Skopiowano: ' + email : 'Copied: ' + email;
-                    tooltip.style.display = 'block';
-                    tooltip.style.left = e.clientX + 'px';
-                    tooltip.style.top = (e.clientY - 40) + 'px';
-                    
-                    // Opcjonalnie: Zmień tekst na stronie na ten skopiowany
-                    document.getElementById('emailLabel').textContent = email;
-                    
-                    setTimeout(() => {
-                        tooltip.style.display = 'none';
-                    }, 3000);
+            function renderWeather(lang = document.documentElement.lang || "pl") {
+                if (!weatherWidget || !weatherStatus || !weatherUpdated) return;
+                const selected = translations[lang] ? lang : "pl";
+                const copy = translations[selected].weather;
+
+                if (weatherLoadFailed) {
+                    weatherWidget.dataset.state = "error";
+                    weatherStatus.textContent = copy.error;
+                    weatherUpdated.textContent = copy.error;
+                    return;
+                }
+                if (!weatherData) return;
+
+                weatherWidget.dataset.state = "ready";
+                const numberFormat = new Intl.NumberFormat(selected === "pl" ? "pl-PL" : "en-GB", {
+                    maximumFractionDigits: 1
+                });
+                const formatReading = (sensor) => `${numberFormat.format(sensor.value)} ${sensor.unit}`;
+
+                ["temperature", "humidity", "pressure", "pm25", "pm10"].forEach((name) => {
+                    const element = document.querySelector(`[data-weather="${name}"]`);
+                    if (element && weatherData[name]) element.textContent = formatReading(weatherData[name]);
+                });
+
+                ["pm25", "pm10"].forEach((name) => {
+                    const sensor = weatherData[name];
+                    if (!sensor) return;
+                    const norm = document.querySelector(`[data-weather-norm="${name}"]`);
+                    const bar = document.querySelector(`[data-weather-bar="${name}"]`);
+                    if (norm) {
+                        norm.textContent = interpolate(copy.norm, {
+                            percent: numberFormat.format(sensor.norm_percent),
+                            value: numberFormat.format(sensor.norm_value),
+                            unit: sensor.unit
+                        });
+                    }
+                    if (bar) bar.style.width = `${Math.min(Math.max(sensor.norm_percent, 0), 100)}%`;
+                });
+
+                weatherStatus.textContent = copy.levels[weatherData.air_index_level] || copy.levels.UNKNOWN;
+                const fetchedAt = new Date(weatherData.fetched_at);
+                const formattedDate = new Intl.DateTimeFormat(selected === "pl" ? "pl-PL" : "en-GB", {
+                    dateStyle: "medium",
+                    timeStyle: "short",
+                    timeZone: "Europe/Warsaw"
+                }).format(fetchedAt);
+                weatherUpdated.textContent = interpolate(copy.updated, { date: formattedDate });
+            }
+
+            async function loadWeather() {
+                try {
+                    const response = await fetch("data.json", { cache: "no-store" });
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    weatherData = await response.json();
+                    const required = ["temperature", "humidity", "pressure", "pm25", "pm10", "fetched_at"];
+                    if (!required.every((key) => weatherData[key])) throw new Error("Niepełne dane pogodowe");
+                    renderWeather();
+                } catch (error) {
+                    console.error("Nie udało się wczytać danych pogodowych:", error);
+                    weatherLoadFailed = true;
+                    renderWeather();
+                }
+            }
+
+            function dateKeyInWarsaw(date = new Date()) {
+                const parts = new Intl.DateTimeFormat("en-CA", {
+                    timeZone: "Europe/Warsaw",
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit"
+                }).formatToParts(date);
+                const value = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+                return `${value.year}-${value.month}-${value.day}`;
+            }
+
+            function shiftDateKey(dateKey, days) {
+                const date = new Date(`${dateKey}T12:00:00Z`);
+                date.setUTCDate(date.getUTCDate() + days);
+                return date.toISOString().slice(0, 10);
+            }
+
+            function renderWeatherHistory(lang = document.documentElement.lang || "pl") {
+                if (!weatherHistoryDate || !weatherChartWrap || !weatherChartCanvas) return;
+                const selected = translations[lang] ? lang : "pl";
+                const copy = translations[selected].weather;
+                const todayKey = dateKeyInWarsaw();
+                const oldestKey = shiftDateKey(todayKey, -89);
+                selectedWeatherDate ||= todayKey;
+
+                if (selectedWeatherDate < oldestKey) selectedWeatherDate = oldestKey;
+                if (selectedWeatherDate > todayKey) selectedWeatherDate = todayKey;
+
+                weatherHistoryDate.textContent = new Intl.DateTimeFormat(
+                    selected === "pl" ? "pl-PL" : "en-GB",
+                    { dateStyle: "full", timeZone: "UTC" }
+                ).format(new Date(`${selectedWeatherDate}T12:00:00Z`));
+
+                if (weatherPreviousDay) weatherPreviousDay.disabled = selectedWeatherDate <= oldestKey;
+                if (weatherNextDay) weatherNextDay.disabled = selectedWeatherDate >= todayKey;
+                if (weatherToday) weatherToday.disabled = selectedWeatherDate === todayKey;
+
+                const readings = weatherHistory?.days?.[selectedWeatherDate] || [];
+                const byHour = new Map(readings.map((reading) => [Number(reading.hour.slice(0, 2)), reading]));
+                const labels = Array.from({ length: 24 }, (_, hour) => `${String(hour).padStart(2, "0")}:00`);
+                const values = (name) => labels.map((_, hour) => byHour.get(hour)?.[name] ?? null);
+                weatherChartWrap.dataset.empty = String(readings.length === 0);
+
+                weatherChart?.destroy();
+                weatherChart = null;
+                if (typeof Chart === "undefined") return;
+
+                const styles = getComputedStyle(document.body);
+                const textColor = styles.getPropertyValue("--muted").trim();
+                const gridColor = styles.getPropertyValue("--line").trim();
+                weatherChart = new Chart(weatherChartCanvas, {
+                    type: "line",
+                    data: {
+                        labels,
+                        datasets: [
+                            {
+                                label: copy.temperatureDataset,
+                                data: values("temperature"),
+                                yAxisID: "temperature",
+                                borderColor: "#38bdf8",
+                                backgroundColor: "#38bdf8",
+                                pointRadius: 3,
+                                borderWidth: 2,
+                                tension: 0.25,
+                                spanGaps: false
+                            },
+                            {
+                                label: "PM2.5 (µg/m³)",
+                                data: values("pm25"),
+                                yAxisID: "particles",
+                                borderColor: "#22c55e",
+                                backgroundColor: "#22c55e",
+                                pointRadius: 3,
+                                borderWidth: 2,
+                                tension: 0.25,
+                                spanGaps: false
+                            },
+                            {
+                                label: "PM10 (µg/m³)",
+                                data: values("pm10"),
+                                yAxisID: "particles",
+                                borderColor: "#f59e0b",
+                                backgroundColor: "#f59e0b",
+                                pointRadius: 3,
+                                borderWidth: 2,
+                                tension: 0.25,
+                                spanGaps: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: false,
+                        interaction: { mode: "index", intersect: false },
+                        plugins: {
+                            legend: { labels: { color: textColor, usePointStyle: true, boxWidth: 8 } },
+                            tooltip: { filter: (item) => item.raw !== null }
+                        },
+                        scales: {
+                            x: {
+                                title: { display: true, text: copy.timeAxis, color: textColor },
+                                ticks: { color: textColor, maxRotation: 0, autoSkip: true, maxTicksLimit: 12 },
+                                grid: { color: gridColor }
+                            },
+                            temperature: {
+                                type: "linear",
+                                position: "left",
+                                title: { display: true, text: "°C", color: textColor },
+                                ticks: { color: textColor },
+                                grid: { color: gridColor }
+                            },
+                            particles: {
+                                type: "linear",
+                                position: "right",
+                                beginAtZero: true,
+                                title: { display: true, text: "PM (µg/m³)", color: textColor },
+                                ticks: { color: textColor },
+                                grid: { drawOnChartArea: false }
+                            }
+                        }
+                    }
+                });
+            }
+
+            async function loadWeatherHistory() {
+                try {
+                    const response = await fetch("history.json", { cache: "no-store" });
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    const data = await response.json();
+                    if (!data.days || typeof data.days !== "object") throw new Error("Nieprawidłowy format historii");
+                    weatherHistory = data;
+                } catch (error) {
+                    console.error("Nie udało się wczytać historii pogody:", error);
+                    weatherHistory = { days: {} };
+                }
+                renderWeatherHistory();
+            }
+
+            function setLanguage(lang) {
+                const selected = translations[lang] ? lang : "pl";
+                document.documentElement.lang = selected;
+                localStorage.setItem("banas_lang", selected);
+                document.title = translations[selected].meta.title;
+                document.querySelector("meta[name='description']")?.setAttribute("content", translations[selected].meta.description);
+
+                document.querySelectorAll("[data-i18n]").forEach((element) => {
+                    const value = getValue(element.dataset.i18n, selected);
+                    if (value) element.textContent = value;
+                });
+
+                document.querySelectorAll("[data-i18n-attr]").forEach((element) => {
+                    element.dataset.i18nAttr.split(",").forEach((pair) => {
+                        const [attr, key] = pair.split(":").map((part) => part.trim());
+                        const value = getValue(key, selected);
+                        if (attr && value) element.setAttribute(attr, value);
+                    });
+                });
+
+                langButtons.forEach((button) => {
+                    const isActive = button.dataset.lang === selected;
+                    button.classList.toggle("is-active", isActive);
+                    button.setAttribute("aria-pressed", String(isActive));
+                });
+
+                updateMenuButtonLabel(selected);
+                renderWeather(selected);
+                renderWeatherHistory(selected);
+            }
+
+            function updateMenuButtonLabel(lang = document.documentElement.lang || "pl") {
+                if (!mobileMenuToggle) return;
+                const selected = translations[lang] ? lang : "pl";
+                const isOpen = nav?.classList.contains("is-menu-open");
+                mobileMenuToggle.setAttribute("aria-label", isOpen ? translations[selected].menu.close : translations[selected].menu.open);
+            }
+
+            function setMobileMenu(open) {
+                if (!nav || !mobileMenuToggle || !navLinksContainer) return;
+                const shouldOpen = Boolean(open && mobileMenuQuery.matches);
+                nav.classList.toggle("is-menu-open", shouldOpen);
+                mobileMenuToggle.setAttribute("aria-expanded", String(shouldOpen));
+                navLinksContainer.setAttribute("aria-hidden", String(mobileMenuQuery.matches && !shouldOpen));
+                updateMenuButtonLabel();
+            }
+
+            function syncMobileMenuState() {
+                if (!navLinksContainer) return;
+                if (mobileMenuQuery.matches) {
+                    setMobileMenu(nav?.classList.contains("is-menu-open"));
+                } else {
+                    nav?.classList.remove("is-menu-open");
+                    mobileMenuToggle?.setAttribute("aria-expanded", "false");
+                    navLinksContainer.setAttribute("aria-hidden", "false");
+                    updateMenuButtonLabel();
+                }
+            }
+
+            function applyTheme(theme) {
+                const isLight = theme === "light";
+                document.body.classList.toggle("light", isLight);
+                if (themeToggle) {
+                    themeToggle.textContent = isLight ? "☾" : "☼";
+                    themeToggle.setAttribute("aria-pressed", String(isLight));
+                    const lang = localStorage.getItem("banas_lang") || "pl";
+                    const label = isLight ? translations[lang].theme.lightTitle : translations[lang].theme.darkTitle;
+                    themeToggle.setAttribute("title", label);
+                    themeToggle.setAttribute("aria-label", label);
+                }
+                renderWeatherHistory();
+            }
+
+            setLanguage(localStorage.getItem("banas_lang") || "pl");
+            applyTheme(localStorage.getItem("banas_theme") || "dark");
+            loadWeather();
+            loadWeatherHistory();
+
+            weatherPreviousDay?.addEventListener("click", () => {
+                selectedWeatherDate = shiftDateKey(selectedWeatherDate || dateKeyInWarsaw(), -1);
+                renderWeatherHistory();
+            });
+
+            weatherToday?.addEventListener("click", () => {
+                selectedWeatherDate = dateKeyInWarsaw();
+                renderWeatherHistory();
+            });
+
+            weatherNextDay?.addEventListener("click", () => {
+                selectedWeatherDate = shiftDateKey(selectedWeatherDate || dateKeyInWarsaw(), 1);
+                renderWeatherHistory();
+            });
+
+            langButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    setLanguage(button.dataset.lang);
+                    applyTheme(document.body.classList.contains("light") ? "light" : "dark");
                 });
             });
-        }
-        
-        // --- OBSŁUGA MODALA PRYWATNOŚCI ---
-        const modal = document.getElementById("privacyModal");
-        const btn = document.getElementById("privacyLink");
-        const span = document.getElementsByClassName("close-modal")[0];
 
-        if(btn) {
-            btn.onclick = function(e) {
-                e.preventDefault();
-                modal.style.display = "block";
-                const isPl = currentLang === 'pl';
-                document.querySelector('.modal-text.pl').style.display = 'block';
-                document.querySelector('.modal-text.en').style.display = 'block';
-            }
-        }
-        if(span) {
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-        }
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // --- TERMINAL EASTER EGG ---
-        const termOverlay = document.getElementById('terminal-overlay');
-        const openTermBtn = document.getElementById('openTerminal');
-        const closeTermBtn = document.querySelector('.close-terminal');
-        const termInput = document.getElementById('terminal-input');
-        const termBody = document.getElementById('terminal-body');
-        const termContent = document.getElementById('terminal-content');
-
-        if(openTermBtn) {
-            openTermBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                termOverlay.style.display = 'flex';
-                termInput.focus();
+            themeToggle?.addEventListener("click", () => {
+                const nextTheme = document.body.classList.contains("light") ? "dark" : "light";
+                localStorage.setItem("banas_theme", nextTheme);
+                applyTheme(nextTheme);
             });
-        }
 
-        if(closeTermBtn) {
-            closeTermBtn.addEventListener('click', function() {
-                termOverlay.style.display = 'none';
+            mobileMenuToggle?.addEventListener("click", () => {
+                setMobileMenu(!nav?.classList.contains("is-menu-open"));
             });
-        }
 
-        if(termInput) {
-            termInput.addEventListener('keydown', function(e) {
-                if(e.key === 'Enter') {
-                    const cmd = this.value.trim().toLowerCase();
-                    const originalCmd = this.value;
-                    this.value = '';
-
-                    // Add command to history
-                    const historyLine = document.createElement('div');
-                    historyLine.className = 'cmd-history';
-                    historyLine.textContent = 'root@banas.dev:~# ' + originalCmd;
-                    termContent.appendChild(historyLine);
-
-                    // Process command
-                    const outputLine = document.createElement('div');
-                    outputLine.className = 'cmd-output';
-                    
-                    switch(cmd) {
-                        case 'help':
-                            outputLine.textContent = "Available commands:\n  about    - Who is this guy?\n  skills   - Technical stack\n  contact  - How to reach me\n  n8n      - Open my automation server\n  clear    - Clear terminal\n  exit     - Close terminal";
-                            break;
-                        case 'about':
-                            outputLine.textContent = "Name: Rafał Banaś\nRole: IT Specialist / Automation Engineer\nMission: Automating boring stuff with Python & AI.";
-                            break;
-                        case 'whoami':
-                            outputLine.textContent = "You are a curious visitor exploring my portfolio. Nice to meet you!";
-                            break;
-                        case 'skills':
-                            outputLine.textContent = "Core: Windows/AD, Linux, Python, Bash\nCloud/DevOps: Docker, Proxmox, VMware\nAutomation: n8n, AI Agents (LLM)\nNetworking: Mikrotik, VPN";
-                            break;
-                        case 'contact':
-                            // TELEFON USUNIĘTY Z TEGO WYJŚCIA
-                            outputLine.textContent = "Email: kontakt@banas.dev\nLinkedIn: linkedin.com/in/rafał-banaś-251583152";
-                            break;
-                        case 'n8n':
-                            outputLine.textContent = "Opening n8n.banas.dev...";
-                            window.open('https://n8n.banas.dev', '_blank');
-                            break;
-                        case 'clear':
-                            termContent.innerHTML = '';
-                            return; // Don't append empty output
-                        case 'exit':
-                            termOverlay.style.display = 'none';
-                            return;
-                        case '':
-                            break;
-                        default:
-                            outputLine.textContent = "Command not found: " + cmd + ". Type 'help' for list.";
-                    }
-                    
-                    if(cmd !== 'clear') {
-                        termContent.appendChild(outputLine);
-                    }
-                    
-                    // Auto scroll to bottom
-                    termBody.scrollTop = termBody.scrollHeight;
-                }
+            navLinks.forEach((link) => {
+                link.addEventListener("click", (event) => {
+                    const target = document.querySelector(link.getAttribute("href"));
+                    if (!target) return;
+                    event.preventDefault();
+                    setMobileMenu(false);
+                    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+                    history.replaceState(null, "", link.getAttribute("href"));
+                    navLinks.forEach((item) => {
+                        item.classList.toggle("is-active", item === link);
+                    });
+                });
             });
-        }
-        
-        console.log("%c CV Rafała Banasia wczytane pomyślnie. ", "background: #3498db; color: #fff; padding: 5px; border-radius: 5px;");
-    });
-</script>
 
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape") setMobileMenu(false);
+            });
+
+            document.addEventListener("click", (event) => {
+                if (!mobileMenuQuery.matches || !nav?.classList.contains("is-menu-open")) return;
+                if (nav.contains(event.target)) return;
+                setMobileMenu(false);
+            });
+
+            if (typeof mobileMenuQuery.addEventListener === "function") {
+                mobileMenuQuery.addEventListener("change", syncMobileMenuState);
+            } else {
+                mobileMenuQuery.addListener(syncMobileMenuState);
+            }
+
+            syncMobileMenuState();
+
+            function updateTopbar() {
+                topbar?.classList.toggle("is-scrolled", window.scrollY > 12);
+            }
+
+            updateTopbar();
+            window.addEventListener("scroll", updateTopbar, { passive: true });
+
+            const revealTargets = document.querySelectorAll(".section-heading, .card, .timeline-item, .feature-band, .profile-panel");
+            revealTargets.forEach((element) => element.classList.add("reveal"));
+
+            if ("IntersectionObserver" in window && !reduceMotion) {
+                const revealObserver = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("is-visible");
+                            revealObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: "0px 0px -48px 0px" });
+
+                revealTargets.forEach((element) => revealObserver.observe(element));
+            } else {
+                revealTargets.forEach((element) => element.classList.add("is-visible"));
+            }
+
+            const sectionTargets = navLinks
+                .map((link) => document.querySelector(link.getAttribute("href")))
+                .filter(Boolean);
+
+            if ("IntersectionObserver" in window) {
+                const navObserver = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) return;
+                        navLinks.forEach((link) => {
+                            link.classList.toggle("is-active", link.getAttribute("href") === "#" + entry.target.id);
+                        });
+                    });
+                }, { threshold: 0.32, rootMargin: "-20% 0px -55% 0px" });
+
+                sectionTargets.forEach((section) => navObserver.observe(section));
+            }
+
+            photos.forEach((src) => {
+                const img = new Image();
+                img.src = src;
+            });
+
+            profilePhoto?.addEventListener("click", () => {
+                photoIndex = (photoIndex + 1) % photos.length;
+                profilePhoto.style.opacity = "0";
+                window.setTimeout(() => {
+                    profilePhoto.src = photos[photoIndex];
+                    profilePhoto.style.opacity = "1";
+                }, reduceMotion ? 0 : 160);
+            });
+
+            if (hero && !reduceMotion && canUsePointerGlow) {
+                hero.addEventListener("pointermove", (event) => {
+                    const rect = hero.getBoundingClientRect();
+                    const x = ((event.clientX - rect.left) / rect.width) * 100;
+                    const y = ((event.clientY - rect.top) / rect.height) * 100;
+                    hero.style.setProperty("--hero-glow-x", x.toFixed(1) + "%");
+                    hero.style.setProperty("--hero-glow-y", y.toFixed(1) + "%");
+                }, { passive: true });
+            }
+        })();
+    </script>
 </body>
 </html>

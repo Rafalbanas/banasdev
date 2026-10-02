@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+weather.log
+*.log
+weather_history.db*
+index.html.bak_*
