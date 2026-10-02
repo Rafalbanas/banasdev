@@ -674,6 +674,78 @@
             background: var(--accent-2);
         }
 
+        .precipitation-status {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 14px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--surface-strong) 82%, transparent);
+            padding: 14px 16px;
+        }
+
+        .precipitation-icon {
+            display: grid;
+            width: 44px;
+            height: 44px;
+            place-items: center;
+            border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line));
+            border-radius: 13px;
+            background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .precipitation-copy {
+            min-width: 0;
+        }
+
+        .precipitation-copy strong {
+            display: block;
+            font-size: 0.98rem;
+            line-height: 1.25;
+        }
+
+        .precipitation-details,
+        .precipitation-source {
+            margin: 3px 0 0;
+            color: var(--muted);
+            font-size: 0.78rem;
+            line-height: 1.45;
+        }
+
+        .precipitation-source {
+            font-size: 0.72rem;
+        }
+
+        .precipitation-source a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .precipitation-status[data-state="rain"] .precipitation-icon,
+        .precipitation-status[data-state="showers"] .precipitation-icon,
+        .precipitation-status[data-state="mixed"] .precipitation-icon,
+        .precipitation-status[data-state="freezingRain"] .precipitation-icon,
+        .precipitation-status[data-state="storm"] .precipitation-icon {
+            border-color: color-mix(in srgb, var(--accent) 62%, var(--line));
+            background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+        }
+
+        .precipitation-status[data-state="snow"] .precipitation-icon {
+            border-color: color-mix(in srgb, #bfdbfe 62%, var(--line));
+            background: color-mix(in srgb, #bfdbfe 14%, var(--surface));
+        }
+
+        .precipitation-status[data-state="error"] .precipitation-icon,
+        .precipitation-status[data-state="stale"] .precipitation-icon {
+            border-color: color-mix(in srgb, var(--danger) 48%, var(--line));
+            background: color-mix(in srgb, var(--danger) 10%, var(--surface));
+        }
+
         .weather-readings {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1268,6 +1340,18 @@
                 gap: 10px;
             }
 
+            .precipitation-status {
+                align-items: start;
+                padding: 12px;
+            }
+
+            .precipitation-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 11px;
+                font-size: 1.3rem;
+            }
+
             .weather-history {
                 padding: 16px;
             }
@@ -1549,8 +1633,8 @@
             <div class="section-heading">
                 <div class="section-kicker" data-i18n="weather.kicker">Kato na żywo</div>
                 <div>
-                    <h2 id="weather-title" data-i18n="weather.title">Temperatura i jakość powietrza w Katowicach (Kato)</h2>
-                    <p class="section-lead" data-i18n="weather.lead">Aktualne odczyty z czujników stacji KAT04BAPP, odświeżane automatycznie co godzinę.</p>
+                    <h2 id="weather-title" data-i18n="weather.title">Pogoda i jakość powietrza w Katowicach (Kato)</h2>
+                    <p class="section-lead" data-i18n="weather.lead">Odczyty stacji KAT04BAPP co godzinę oraz modelowy status opadów odświeżany co 5 minut.</p>
                 </div>
             </div>
 
@@ -1561,6 +1645,19 @@
                         <strong class="weather-status" id="weatherStatus" data-i18n="weather.loading">Pobieranie danych…</strong>
                     </div>
                     <span class="tag">InPost Air Sensor · KAT04BAPP</span>
+                </div>
+
+                <div class="precipitation-status" id="precipitationStatus" data-state="loading">
+                    <span class="precipitation-icon" id="precipitationIcon" aria-hidden="true">…</span>
+                    <div class="precipitation-copy">
+                        <strong id="precipitationLabel" data-i18n="weather.precipitationLoading">Sprawdzanie opadów…</strong>
+                        <p class="precipitation-details" id="precipitationDetails" data-i18n="weather.precipitationWaiting">Oczekiwanie na dane modelu.</p>
+                        <p class="precipitation-source">
+                            <span data-i18n="weather.precipitationEstimate">Szacunek z modelu pogodowego.</span>
+                            <span data-i18n="weather.precipitationSource">Źródło:</span>
+                            <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>
+                        </p>
+                    </div>
                 </div>
 
                 <div class="weather-readings">
@@ -1971,6 +2068,10 @@
             const weatherWidget = document.getElementById("weatherWidget");
             const weatherStatus = document.getElementById("weatherStatus");
             const weatherUpdated = document.getElementById("weatherUpdated");
+            const precipitationStatus = document.getElementById("precipitationStatus");
+            const precipitationIcon = document.getElementById("precipitationIcon");
+            const precipitationLabel = document.getElementById("precipitationLabel");
+            const precipitationDetails = document.getElementById("precipitationDetails");
             const weatherHistoryDate = document.getElementById("weatherHistoryDate");
             const weatherChartWrap = document.getElementById("weatherChartWrap");
             const weatherChartCanvas = document.getElementById("weatherHistoryChart");
@@ -1981,9 +2082,18 @@
             let photoIndex = 0;
             let weatherData = null;
             let weatherLoadFailed = false;
+            let precipitationData = null;
+            let precipitationLoadFailed = false;
+            let precipitationIsStale = false;
+            let precipitationRequest = null;
+            let precipitationRefreshTimer = null;
             let weatherHistory = null;
             let weatherChart = null;
             let selectedWeatherDate = null;
+
+            const PRECIPITATION_API_URL = "https://api.open-meteo.com/v1/forecast?latitude=50.26&longitude=19.02&current=rain,showers,snowfall,weather_code&timezone=Europe%2FWarsaw&timeformat=unixtime";
+            const PRECIPITATION_CACHE_KEY = "banas_precipitation_v1";
+            const PRECIPITATION_REFRESH_MS = 5 * 60 * 1000;
 
             document.body.classList.add("js-ready");
 
@@ -2046,14 +2156,32 @@
                     },
                     weather: {
                         kicker: "Kato na żywo",
-                        title: "Temperatura i jakość powietrza w Katowicach (Kato)",
-                        lead: "Aktualne odczyty z czujników stacji KAT04BAPP, odświeżane automatycznie co godzinę.",
+                        title: "Pogoda i jakość powietrza w Katowicach (Kato)",
+                        lead: "Odczyty stacji KAT04BAPP co godzinę oraz modelowy status opadów odświeżany co 5 minut.",
                         station: "Katowice · Brzozowa",
                         loading: "Pobieranie danych…",
                         waiting: "Oczekiwanie na aktualne dane.",
                         temperature: "Temperatura",
                         humidity: "Wilgotność",
                         pressure: "Ciśnienie",
+                        precipitationLoading: "Sprawdzanie opadów…",
+                        precipitationWaiting: "Oczekiwanie na dane modelu.",
+                        precipitationEstimate: "Szacunek z modelu pogodowego.",
+                        precipitationSource: "Źródło:",
+                        precipitationUnavailable: "Pogoda niedostępna",
+                        precipitationError: "Nie udało się pobrać aktualnego statusu opadów.",
+                        precipitationStale: "{status} · dane nieaktualne",
+                        precipitationStaleDetails: "Ostatnie dane: {date} · aktualizacja nie powiodła się.",
+                        precipitationUpdated: "Dane z {date}",
+                        precipitationStates: {
+                            dry: "Bez opadów",
+                            rain: "Pada deszcz",
+                            showers: "Opady przelotne",
+                            snow: "Pada śnieg",
+                            mixed: "Deszcz ze śniegiem",
+                            freezingRain: "Marznący deszcz",
+                            storm: "Burza w okolicy"
+                        },
                         historyTitle: "Historia 24-godzinna",
                         historyNote: "Punkty oznaczają rzeczywiste odczyty godzinowe; wartości pomiędzy nimi nie są interpolowane. Stała skala temperatury obejmuje −20–40°C.",
                         historyNavigation: "Nawigacja historii pogody",
@@ -2233,14 +2361,32 @@
                     },
                     weather: {
                         kicker: "Kato live",
-                        title: "Temperature and air quality in Katowice (Kato)",
-                        lead: "Current readings from the KAT04BAPP station sensors, refreshed automatically every hour.",
+                        title: "Weather and air quality in Katowice (Kato)",
+                        lead: "KAT04BAPP station readings every hour and modelled precipitation status refreshed every 5 minutes.",
                         station: "Katowice · Brzozowa",
                         loading: "Loading data…",
                         waiting: "Waiting for current data.",
                         temperature: "Temperature",
                         humidity: "Humidity",
                         pressure: "Pressure",
+                        precipitationLoading: "Checking precipitation…",
+                        precipitationWaiting: "Waiting for model data.",
+                        precipitationEstimate: "Estimate from a weather model.",
+                        precipitationSource: "Source:",
+                        precipitationUnavailable: "Weather unavailable",
+                        precipitationError: "The current precipitation status could not be retrieved.",
+                        precipitationStale: "{status} · stale data",
+                        precipitationStaleDetails: "Last data: {date} · refresh failed.",
+                        precipitationUpdated: "Data from {date}",
+                        precipitationStates: {
+                            dry: "No precipitation",
+                            rain: "Rain",
+                            showers: "Rain showers",
+                            snow: "Snow",
+                            mixed: "Rain and snow",
+                            freezingRain: "Freezing rain",
+                            storm: "Thunderstorm nearby"
+                        },
                         historyTitle: "24-hour history",
                         historyNote: "Points represent actual hourly readings; values between them are not interpolated. The fixed temperature scale spans −20–40°C.",
                         historyNavigation: "Weather history navigation",
@@ -2452,6 +2598,154 @@
                     weatherLoadFailed = true;
                     renderWeather();
                 }
+            }
+
+            function classifyPrecipitation(current) {
+                const code = Number(current.weather_code);
+                const rain = Math.max(0, Number(current.rain) || 0);
+                const showers = Math.max(0, Number(current.showers) || 0);
+                const snowfall = Math.max(0, Number(current.snowfall) || 0);
+                const hasLiquidPrecipitation = rain + showers > 0;
+
+                const snowCodes = new Set([71, 73, 75, 77, 85, 86]);
+                const showerCodes = new Set([80, 81, 82]);
+                const rainCodes = new Set([51, 53, 55, 61, 63, 65]);
+                const freezingRainCodes = new Set([56, 57, 66, 67]);
+                const stormCodes = new Set([95, 96, 99]);
+
+                if (snowfall > 0 && hasLiquidPrecipitation) return { state: "mixed", icon: "🌨️" };
+                if (snowfall > 0 || snowCodes.has(code)) return { state: "snow", icon: "❄️" };
+                if (stormCodes.has(code)) return { state: "storm", icon: "⛈️" };
+                if (freezingRainCodes.has(code)) return { state: "freezingRain", icon: "🧊" };
+                if (showers > 0 || showerCodes.has(code)) return { state: "showers", icon: "🌦️" };
+                if (rain > 0 || rainCodes.has(code)) return { state: "rain", icon: "🌧️" };
+                return { state: "dry", icon: code <= 1 ? "☀️" : "☁️" };
+            }
+
+            function formatPrecipitationTime(unixTime, lang) {
+                const timestamp = new Date(Number(unixTime) * 1000);
+                if (Number.isNaN(timestamp.getTime())) return "—";
+                return new Intl.DateTimeFormat(lang === "pl" ? "pl-PL" : "en-GB", {
+                    dateStyle: "medium",
+                    timeStyle: "short",
+                    timeZone: "Europe/Warsaw"
+                }).format(timestamp);
+            }
+
+            function renderPrecipitation(lang = document.documentElement.lang || "pl") {
+                if (!precipitationStatus || !precipitationIcon || !precipitationLabel || !precipitationDetails) return;
+                const selected = translations[lang] ? lang : "pl";
+                const copy = translations[selected].weather;
+
+                if (!precipitationData) {
+                    precipitationStatus.dataset.state = precipitationLoadFailed ? "error" : "loading";
+                    precipitationIcon.textContent = precipitationLoadFailed ? "⚠️" : "…";
+                    precipitationLabel.textContent = precipitationLoadFailed
+                        ? copy.precipitationUnavailable
+                        : copy.precipitationLoading;
+                    precipitationDetails.textContent = precipitationLoadFailed
+                        ? copy.precipitationError
+                        : copy.precipitationWaiting;
+                    return;
+                }
+
+                const condition = classifyPrecipitation(precipitationData.current);
+                const conditionLabel = copy.precipitationStates[condition.state];
+                const formattedTime = formatPrecipitationTime(precipitationData.current.time, selected);
+                precipitationStatus.dataset.state = precipitationIsStale ? "stale" : condition.state;
+                precipitationIcon.textContent = precipitationIsStale ? "⚠️" : condition.icon;
+                precipitationLabel.textContent = precipitationIsStale
+                    ? interpolate(copy.precipitationStale, { status: conditionLabel })
+                    : conditionLabel;
+                precipitationDetails.textContent = precipitationIsStale
+                    ? interpolate(copy.precipitationStaleDetails, { date: formattedTime })
+                    : interpolate(copy.precipitationUpdated, { date: formattedTime });
+            }
+
+            function readPrecipitationCache() {
+                try {
+                    const cached = JSON.parse(localStorage.getItem(PRECIPITATION_CACHE_KEY));
+                    if (!cached || !Number.isFinite(cached.savedAt) || !cached.data?.current) return null;
+                    return cached;
+                } catch (error) {
+                    return null;
+                }
+            }
+
+            function writePrecipitationCache(data) {
+                try {
+                    localStorage.setItem(PRECIPITATION_CACHE_KEY, JSON.stringify({
+                        savedAt: Date.now(),
+                        data
+                    }));
+                } catch (error) {
+                    console.warn("Nie udało się zapisać cache Open-Meteo:", error);
+                }
+            }
+
+            function validatePrecipitationData(data) {
+                const current = data?.current;
+                const required = ["time", "rain", "showers", "snowfall", "weather_code"];
+                if (!current || !required.every((key) => Number.isFinite(Number(current[key])))) {
+                    throw new Error("Niepełne dane Open-Meteo");
+                }
+                return data;
+            }
+
+            function schedulePrecipitationRefresh(delay = PRECIPITATION_REFRESH_MS) {
+                window.clearTimeout(precipitationRefreshTimer);
+                precipitationRefreshTimer = window.setTimeout(
+                    () => loadPrecipitation({ force: true }),
+                    Math.max(1000, delay)
+                );
+            }
+
+            async function loadPrecipitation({ force = false } = {}) {
+                if (precipitationRequest) return precipitationRequest;
+
+                const cached = readPrecipitationCache();
+                const cacheAge = cached ? Date.now() - cached.savedAt : Infinity;
+                if (cached && !precipitationData) precipitationData = cached.data;
+
+                if (!force && cached && cacheAge < PRECIPITATION_REFRESH_MS) {
+                    precipitationData = cached.data;
+                    precipitationLoadFailed = false;
+                    precipitationIsStale = false;
+                    renderPrecipitation();
+                    schedulePrecipitationRefresh(PRECIPITATION_REFRESH_MS - cacheAge);
+                    return cached.data;
+                }
+
+                if (precipitationData) renderPrecipitation();
+                const controller = new AbortController();
+                const timeout = window.setTimeout(() => controller.abort(), 10000);
+
+                precipitationRequest = (async () => {
+                    try {
+                        const response = await fetch(PRECIPITATION_API_URL, {
+                            cache: "no-store",
+                            signal: controller.signal
+                        });
+                        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                        const data = validatePrecipitationData(await response.json());
+                        precipitationData = data;
+                        precipitationLoadFailed = false;
+                        precipitationIsStale = false;
+                        writePrecipitationCache(data);
+                    } catch (error) {
+                        console.error("Nie udało się wczytać danych Open-Meteo:", error);
+                        precipitationLoadFailed = true;
+                        precipitationIsStale = Boolean(precipitationData);
+                    } finally {
+                        window.clearTimeout(timeout);
+                        precipitationRequest = null;
+                        renderPrecipitation();
+                        schedulePrecipitationRefresh();
+                    }
+                    return precipitationData;
+                })();
+
+                return precipitationRequest;
             }
 
             function dateKeyInWarsaw(date = new Date()) {
@@ -2669,6 +2963,7 @@
 
                 updateMenuButtonLabel(selected);
                 renderWeather(selected);
+                renderPrecipitation(selected);
                 renderWeatherHistory(selected);
             }
 
@@ -2717,7 +3012,27 @@
             setLanguage(localStorage.getItem("banas_lang") || "pl");
             applyTheme(localStorage.getItem("banas_theme") || "dark");
             loadWeather();
+            loadPrecipitation();
             loadWeatherHistory();
+
+            window.addEventListener("online", () => loadPrecipitation({ force: true }));
+            window.addEventListener("storage", (event) => {
+                if (event.key !== PRECIPITATION_CACHE_KEY || !event.newValue) return;
+                const cached = readPrecipitationCache();
+                if (!cached) return;
+                precipitationData = cached.data;
+                precipitationLoadFailed = false;
+                precipitationIsStale = false;
+                renderPrecipitation();
+                schedulePrecipitationRefresh(PRECIPITATION_REFRESH_MS - (Date.now() - cached.savedAt));
+            });
+            document.addEventListener("visibilitychange", () => {
+                if (document.visibilityState !== "visible") return;
+                const cached = readPrecipitationCache();
+                if (!cached || Date.now() - cached.savedAt >= PRECIPITATION_REFRESH_MS) {
+                    loadPrecipitation({ force: true });
+                }
+            });
 
             weatherPreviousDay?.addEventListener("click", () => {
                 selectedWeatherDate = shiftDateKey(selectedWeatherDate || dateKeyInWarsaw(), -1);

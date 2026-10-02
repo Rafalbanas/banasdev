@@ -30,9 +30,17 @@ Pełne pomiary pozostają w SQLite. Jeżeli skrypt zostanie wywołany kilka razy
 
 Tabela `readings` zawiera kolumny: `timestamp`, `timestamp_local`, `temperature`, `humidity`, `pressure`, `pm25` i `pm10`. Indeks znacznika czasu przyspiesza retencję i generowanie historii.
 
+## Status opadów Open-Meteo
+
+Po otwarciu strony frontend sprawdza aktualne opady dla Katowic (`50.26`, `19.02`) w darmowym API Open-Meteo. Zapytanie obejmuje deszcz, opady przelotne, śnieg i kod pogodowy WMO, dzięki czemu interfejs rozróżnia deszcz, przelotne opady, śnieg, deszcz ze śniegiem, marznący deszcz i burzę.
+
+Dane są odświeżane co 5 minut. Odpowiedź oraz czas jej pobrania trafiają do `localStorage`, co zapobiega ponownemu zapytaniu po szybkim przeładowaniu strony i pozwala współdzielić świeży wynik między kartami. Żądanie ma limit czasu 10 sekund. Przy błędzie ostatni zapisany wynik jest wyświetlany jako nieaktualny; bez danych historycznych interfejs pokazuje „Pogoda niedostępna”, nigdy domyślne „Bez opadów”.
+
+Status jest szacunkiem z modelu pogodowego, a nie pomiarem lokalnego czujnika. Interfejs zawiera wymagane oznaczenie i odnośnik do Open-Meteo. Darmowy endpoint bez klucza może być używany wyłącznie niekomercyjnie, z atrybucją CC BY 4.0 i w granicach limitów Open-Meteo. Jeśli portfolio zostanie skomercjalizowane, integracja wymaga odpowiedniej licencji lub zmiany źródła danych.
+
 ## Wykres historii 24h
 
-Pod bieżącymi odczytami znajduje się responsywny wykres liniowy Chart.js ładowany z CDN. Oś czasu obejmuje godziny `00:00–23:00`, lewa oś przedstawia temperaturę w °C, a prawa stężenia PM2.5 i PM10 w µg/m³. Przyciski „Poprzedni dzień”, „Dzisiaj” i „Następny dzień” pozwalają poruszać się po maksymalnie 90 dniach historii. Teksty, etykiety i nawigacja są dostępne po polsku i angielsku.
+Pod bieżącymi odczytami znajduje się responsywny wykres punktowy Chart.js ładowany z CDN. Oś czasu obejmuje godziny `00:00–23:00`, lewa oś przedstawia temperaturę w °C, a prawa stężenia PM2.5 i PM10 w µg/m³. Przyciski „Poprzedni dzień”, „Dzisiaj” i „Następny dzień” pozwalają poruszać się po maksymalnie 90 dniach historii. Teksty, etykiety i nawigacja są dostępne po polsku i angielsku.
 
 ## Uruchomienie
 
