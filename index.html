@@ -768,6 +768,14 @@
             font-weight: 750;
         }
 
+        .weather-history-note {
+            max-width: 68ch;
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 0.78rem;
+            line-height: 1.45;
+        }
+
         .weather-history-nav {
             justify-content: flex-start;
         }
@@ -1590,6 +1598,7 @@
                     <div>
                         <h3 id="weather-history-title" data-i18n="weather.historyTitle">Historia 24-godzinna</h3>
                         <div class="weather-history-date" id="weatherHistoryDate" aria-live="polite"></div>
+                        <p class="weather-history-note" data-i18n="weather.historyNote">Punkty oznaczają rzeczywiste odczyty godzinowe; wartości pomiędzy nimi nie są interpolowane. Skala jest wspólna dla całej historii.</p>
                     </div>
                     <div class="weather-history-nav" aria-label="Nawigacja historii pogody" data-i18n-attr="aria-label:weather.historyNavigation">
                         <button class="button" id="weatherPreviousDay" type="button" data-i18n="weather.previousDay">← Poprzedni dzień</button>
@@ -2046,6 +2055,7 @@
                         humidity: "Wilgotność",
                         pressure: "Ciśnienie",
                         historyTitle: "Historia 24-godzinna",
+                        historyNote: "Punkty oznaczają rzeczywiste odczyty godzinowe; wartości pomiędzy nimi nie są interpolowane. Skala jest wspólna dla całej historii.",
                         historyNavigation: "Nawigacja historii pogody",
                         previousDay: "← Poprzedni dzień",
                         today: "Dzisiaj",
@@ -2232,6 +2242,7 @@
                         humidity: "Humidity",
                         pressure: "Pressure",
                         historyTitle: "24-hour history",
+                        historyNote: "Points represent actual hourly readings; values between them are not interpolated. The scale is shared across the entire history.",
                         historyNavigation: "Weather history navigation",
                         previousDay: "← Previous day",
                         today: "Today",
@@ -2460,6 +2471,31 @@
                 return date.toISOString().slice(0, 10);
             }
 
+            function stableChartScale(values, { step, minimumSpan, includeZero = false }) {
+                const finiteValues = values.map(Number).filter(Number.isFinite);
+                if (finiteValues.length === 0) return { min: 0, max: minimumSpan };
+
+                const observedMin = Math.min(...finiteValues);
+                const observedMax = Math.max(...finiteValues);
+                let min = Math.floor(observedMin / step) * step;
+                let max = Math.ceil(observedMax / step) * step;
+
+                if (includeZero) min = Math.min(0, min);
+                if (max - min < minimumSpan) {
+                    if (includeZero) {
+                        max = min + minimumSpan;
+                    } else {
+                        const center = (observedMin + observedMax) / 2;
+                        min = Math.floor((center - minimumSpan / 2) / step) * step;
+                        max = min + minimumSpan;
+                    }
+                }
+
+                while (min > observedMin) min -= step;
+                while (max < observedMax) max += step;
+                return { min, max };
+            }
+
             function renderWeatherHistory(lang = document.documentElement.lang || "pl") {
                 if (!weatherHistoryDate || !weatherChartWrap || !weatherChartCanvas) return;
                 const selected = translations[lang] ? lang : "pl";
@@ -2481,6 +2517,15 @@
                 if (weatherToday) weatherToday.disabled = selectedWeatherDate === todayKey;
 
                 const readings = weatherHistory?.days?.[selectedWeatherDate] || [];
+                const allReadings = Object.values(weatherHistory?.days || {}).flat();
+                const temperatureScale = stableChartScale(
+                    allReadings.map((reading) => reading.temperature),
+                    { step: 5, minimumSpan: 10 }
+                );
+                const particleScale = stableChartScale(
+                    allReadings.flatMap((reading) => [reading.pm25, reading.pm10]),
+                    { step: 10, minimumSpan: 50, includeZero: true }
+                );
                 const byHour = new Map(readings.map((reading) => [Number(reading.hour.slice(0, 2)), reading]));
                 const labels = Array.from({ length: 24 }, (_, hour) => `${String(hour).padStart(2, "0")}:00`);
                 const values = (name) => labels.map((_, hour) => byHour.get(hour)?.[name] ?? null);
@@ -2504,10 +2549,10 @@
                                 yAxisID: "temperature",
                                 borderColor: "#38bdf8",
                                 backgroundColor: "#38bdf8",
-                                pointRadius: 3,
-                                borderWidth: 2,
-                                tension: 0.25,
-                                spanGaps: false
+                                showLine: false,
+                                pointStyle: "circle",
+                                pointRadius: 4,
+                                pointHoverRadius: 6
                             },
                             {
                                 label: "PM2.5 (µg/m³)",
@@ -2515,10 +2560,10 @@
                                 yAxisID: "particles",
                                 borderColor: "#22c55e",
                                 backgroundColor: "#22c55e",
-                                pointRadius: 3,
-                                borderWidth: 2,
-                                tension: 0.25,
-                                spanGaps: false
+                                showLine: false,
+                                pointStyle: "triangle",
+                                pointRadius: 5,
+                                pointHoverRadius: 7
                             },
                             {
                                 label: "PM10 (µg/m³)",
@@ -2526,10 +2571,10 @@
                                 yAxisID: "particles",
                                 borderColor: "#f59e0b",
                                 backgroundColor: "#f59e0b",
-                                pointRadius: 3,
-                                borderWidth: 2,
-                                tension: 0.25,
-                                spanGaps: false
+                                showLine: false,
+                                pointStyle: "rectRot",
+                                pointRadius: 5,
+                                pointHoverRadius: 7
                             }
                         ]
                     },
@@ -2551,16 +2596,19 @@
                             temperature: {
                                 type: "linear",
                                 position: "left",
+                                min: temperatureScale.min,
+                                max: temperatureScale.max,
                                 title: { display: true, text: "°C", color: textColor },
-                                ticks: { color: textColor },
+                                ticks: { color: textColor, stepSize: 5 },
                                 grid: { color: gridColor }
                             },
                             particles: {
                                 type: "linear",
                                 position: "right",
-                                beginAtZero: true,
+                                min: particleScale.min,
+                                max: particleScale.max,
                                 title: { display: true, text: "PM (µg/m³)", color: textColor },
-                                ticks: { color: textColor },
+                                ticks: { color: textColor, stepSize: 10 },
                                 grid: { drawOnChartArea: false }
                             }
                         }
