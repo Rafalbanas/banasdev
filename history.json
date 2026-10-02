@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T10:00:02Z",
+  "generated_at": "2026-10-02T11:07:41Z",
   "timezone": "Europe/Warsaw",
   "range_days": 90,
   "days": {
@@ -12,7 +12,9 @@
         "humidity": 56.5,
         "pressure": 1000.0,
         "pm25": 13.4,
-        "pm10": 18.1
+        "pm10": 18.1,
+        "source": "InPost KAT04BAPP",
+        "source_kind": "sensor_measurement"
       },
       {
         "hour": "12:00",
@@ -22,7 +24,21 @@
         "humidity": 56.5,
         "pressure": 1000.0,
         "pm25": 13.4,
-        "pm10": 18.1
+        "pm10": 18.1,
+        "source": "InPost KAT04BAPP",
+        "source_kind": "sensor_measurement"
+      },
+      {
+        "hour": "13:00",
+        "timestamp_utc": "2026-10-02T11:07:41.615823Z",
+        "timestamp_local": "2026-10-02T13:07:41.615823+02:00",
+        "temperature": 21.2,
+        "humidity": 54.1,
+        "pressure": 999.8,
+        "pm25": 10.9,
+        "pm10": 15.8,
+        "source": "InPost KAT04BAPP",
+        "source_kind": "sensor_measurement"
       }
     ]
   }
