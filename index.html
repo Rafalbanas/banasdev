@@ -735,6 +735,76 @@
             background: var(--danger);
         }
 
+        .weather-history {
+            margin-top: 16px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            padding: 22px;
+        }
+
+        .weather-history-header,
+        .weather-history-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .weather-history-header {
+            margin-bottom: 16px;
+        }
+
+        .weather-history-header h3 {
+            margin: 0;
+            font-size: 1.08rem;
+        }
+
+        .weather-history-date {
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 750;
+        }
+
+        .weather-history-nav {
+            justify-content: flex-start;
+        }
+
+        .weather-history-nav .button {
+            min-height: 38px;
+            padding: 7px 10px;
+            font-size: 0.82rem;
+        }
+
+        .weather-history-nav .button:disabled {
+            cursor: not-allowed;
+            opacity: 0.45;
+            transform: none;
+        }
+
+        .weather-chart-wrap {
+            position: relative;
+            width: 100%;
+            height: clamp(280px, 42vw, 410px);
+        }
+
+        .weather-chart-empty {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: none;
+            place-items: center;
+            color: var(--muted);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .weather-chart-wrap[data-empty="true"] .weather-chart-empty {
+            display: grid;
+        }
+
         .timeline {
             display: grid;
             gap: 14px;
@@ -1190,6 +1260,25 @@
                 gap: 10px;
             }
 
+            .weather-history {
+                padding: 16px;
+            }
+
+            .weather-history-nav {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                width: 100%;
+            }
+
+            .weather-history-nav .button {
+                width: 100%;
+            }
+
+            .weather-history-nav .button:nth-child(2) {
+                grid-column: 1 / -1;
+                grid-row: 1;
+            }
+
             .section {
                 padding: 38px 0;
             }
@@ -1494,6 +1583,24 @@
                 </div>
 
                 <p class="weather-meta" id="weatherUpdated" data-i18n="weather.waiting">Oczekiwanie na aktualne dane.</p>
+            </div>
+
+            <div class="weather-history" aria-labelledby="weather-history-title">
+                <div class="weather-history-header">
+                    <div>
+                        <h3 id="weather-history-title" data-i18n="weather.historyTitle">Historia 24-godzinna</h3>
+                        <div class="weather-history-date" id="weatherHistoryDate" aria-live="polite"></div>
+                    </div>
+                    <div class="weather-history-nav" aria-label="Nawigacja historii pogody" data-i18n-attr="aria-label:weather.historyNavigation">
+                        <button class="button" id="weatherPreviousDay" type="button" data-i18n="weather.previousDay">← Poprzedni dzień</button>
+                        <button class="button" id="weatherToday" type="button" data-i18n="weather.today">Dzisiaj</button>
+                        <button class="button" id="weatherNextDay" type="button" data-i18n="weather.nextDay">Następny dzień →</button>
+                    </div>
+                </div>
+                <div class="weather-chart-wrap" id="weatherChartWrap" data-empty="true">
+                    <div class="weather-chart-empty" id="weatherChartEmpty" data-i18n="weather.noHistory">Brak odczytów dla wybranego dnia.</div>
+                    <canvas id="weatherHistoryChart" role="img" aria-label="Wykres temperatury, PM2.5 i PM10 w ciągu 24 godzin" data-i18n-attr="aria-label:weather.chartAria"></canvas>
+                </div>
             </div>
         </section>
 
@@ -1837,6 +1944,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script>
         (() => {
             const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1854,10 +1962,19 @@
             const weatherWidget = document.getElementById("weatherWidget");
             const weatherStatus = document.getElementById("weatherStatus");
             const weatherUpdated = document.getElementById("weatherUpdated");
+            const weatherHistoryDate = document.getElementById("weatherHistoryDate");
+            const weatherChartWrap = document.getElementById("weatherChartWrap");
+            const weatherChartCanvas = document.getElementById("weatherHistoryChart");
+            const weatherPreviousDay = document.getElementById("weatherPreviousDay");
+            const weatherToday = document.getElementById("weatherToday");
+            const weatherNextDay = document.getElementById("weatherNextDay");
             const photos = ["cv_photo.webp", "cv_photo2.webp"];
             let photoIndex = 0;
             let weatherData = null;
             let weatherLoadFailed = false;
+            let weatherHistory = null;
+            let weatherChart = null;
+            let selectedWeatherDate = null;
 
             document.body.classList.add("js-ready");
 
@@ -1928,6 +2045,15 @@
                         temperature: "Temperatura",
                         humidity: "Wilgotność",
                         pressure: "Ciśnienie",
+                        historyTitle: "Historia 24-godzinna",
+                        historyNavigation: "Nawigacja historii pogody",
+                        previousDay: "← Poprzedni dzień",
+                        today: "Dzisiaj",
+                        nextDay: "Następny dzień →",
+                        noHistory: "Brak odczytów dla wybranego dnia.",
+                        chartAria: "Wykres temperatury, PM2.5 i PM10 w ciągu 24 godzin",
+                        temperatureDataset: "Temperatura (°C)",
+                        timeAxis: "Czas",
                         norm: "{percent}% normy ({value} {unit})",
                         updated: "Aktualizacja: {date} · Źródło: InPost",
                         error: "Dane są chwilowo niedostępne",
@@ -2105,6 +2231,15 @@
                         temperature: "Temperature",
                         humidity: "Humidity",
                         pressure: "Pressure",
+                        historyTitle: "24-hour history",
+                        historyNavigation: "Weather history navigation",
+                        previousDay: "← Previous day",
+                        today: "Today",
+                        nextDay: "Next day →",
+                        noHistory: "No readings for the selected day.",
+                        chartAria: "24-hour temperature, PM2.5 and PM10 chart",
+                        temperatureDataset: "Temperature (°C)",
+                        timeAxis: "Time",
                         norm: "{percent}% of the norm ({value} {unit})",
                         updated: "Updated: {date} · Source: InPost",
                         error: "Data is temporarily unavailable",
@@ -2308,6 +2443,145 @@
                 }
             }
 
+            function dateKeyInWarsaw(date = new Date()) {
+                const parts = new Intl.DateTimeFormat("en-CA", {
+                    timeZone: "Europe/Warsaw",
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit"
+                }).formatToParts(date);
+                const value = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+                return `${value.year}-${value.month}-${value.day}`;
+            }
+
+            function shiftDateKey(dateKey, days) {
+                const date = new Date(`${dateKey}T12:00:00Z`);
+                date.setUTCDate(date.getUTCDate() + days);
+                return date.toISOString().slice(0, 10);
+            }
+
+            function renderWeatherHistory(lang = document.documentElement.lang || "pl") {
+                if (!weatherHistoryDate || !weatherChartWrap || !weatherChartCanvas) return;
+                const selected = translations[lang] ? lang : "pl";
+                const copy = translations[selected].weather;
+                const todayKey = dateKeyInWarsaw();
+                const oldestKey = shiftDateKey(todayKey, -89);
+                selectedWeatherDate ||= todayKey;
+
+                if (selectedWeatherDate < oldestKey) selectedWeatherDate = oldestKey;
+                if (selectedWeatherDate > todayKey) selectedWeatherDate = todayKey;
+
+                weatherHistoryDate.textContent = new Intl.DateTimeFormat(
+                    selected === "pl" ? "pl-PL" : "en-GB",
+                    { dateStyle: "full", timeZone: "UTC" }
+                ).format(new Date(`${selectedWeatherDate}T12:00:00Z`));
+
+                if (weatherPreviousDay) weatherPreviousDay.disabled = selectedWeatherDate <= oldestKey;
+                if (weatherNextDay) weatherNextDay.disabled = selectedWeatherDate >= todayKey;
+                if (weatherToday) weatherToday.disabled = selectedWeatherDate === todayKey;
+
+                const readings = weatherHistory?.days?.[selectedWeatherDate] || [];
+                const byHour = new Map(readings.map((reading) => [Number(reading.hour.slice(0, 2)), reading]));
+                const labels = Array.from({ length: 24 }, (_, hour) => `${String(hour).padStart(2, "0")}:00`);
+                const values = (name) => labels.map((_, hour) => byHour.get(hour)?.[name] ?? null);
+                weatherChartWrap.dataset.empty = String(readings.length === 0);
+
+                weatherChart?.destroy();
+                weatherChart = null;
+                if (typeof Chart === "undefined") return;
+
+                const styles = getComputedStyle(document.body);
+                const textColor = styles.getPropertyValue("--muted").trim();
+                const gridColor = styles.getPropertyValue("--line").trim();
+                weatherChart = new Chart(weatherChartCanvas, {
+                    type: "line",
+                    data: {
+                        labels,
+                        datasets: [
+                            {
+                                label: copy.temperatureDataset,
+                                data: values("temperature"),
+                                yAxisID: "temperature",
+                                borderColor: "#38bdf8",
+                                backgroundColor: "#38bdf8",
+                                pointRadius: 3,
+                                borderWidth: 2,
+                                tension: 0.25,
+                                spanGaps: false
+                            },
+                            {
+                                label: "PM2.5 (µg/m³)",
+                                data: values("pm25"),
+                                yAxisID: "particles",
+                                borderColor: "#22c55e",
+                                backgroundColor: "#22c55e",
+                                pointRadius: 3,
+                                borderWidth: 2,
+                                tension: 0.25,
+                                spanGaps: false
+                            },
+                            {
+                                label: "PM10 (µg/m³)",
+                                data: values("pm10"),
+                                yAxisID: "particles",
+                                borderColor: "#f59e0b",
+                                backgroundColor: "#f59e0b",
+                                pointRadius: 3,
+                                borderWidth: 2,
+                                tension: 0.25,
+                                spanGaps: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: false,
+                        interaction: { mode: "index", intersect: false },
+                        plugins: {
+                            legend: { labels: { color: textColor, usePointStyle: true, boxWidth: 8 } },
+                            tooltip: { filter: (item) => item.raw !== null }
+                        },
+                        scales: {
+                            x: {
+                                title: { display: true, text: copy.timeAxis, color: textColor },
+                                ticks: { color: textColor, maxRotation: 0, autoSkip: true, maxTicksLimit: 12 },
+                                grid: { color: gridColor }
+                            },
+                            temperature: {
+                                type: "linear",
+                                position: "left",
+                                title: { display: true, text: "°C", color: textColor },
+                                ticks: { color: textColor },
+                                grid: { color: gridColor }
+                            },
+                            particles: {
+                                type: "linear",
+                                position: "right",
+                                beginAtZero: true,
+                                title: { display: true, text: "PM (µg/m³)", color: textColor },
+                                ticks: { color: textColor },
+                                grid: { drawOnChartArea: false }
+                            }
+                        }
+                    }
+                });
+            }
+
+            async function loadWeatherHistory() {
+                try {
+                    const response = await fetch("history.json", { cache: "no-store" });
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    const data = await response.json();
+                    if (!data.days || typeof data.days !== "object") throw new Error("Nieprawidłowy format historii");
+                    weatherHistory = data;
+                } catch (error) {
+                    console.error("Nie udało się wczytać historii pogody:", error);
+                    weatherHistory = { days: {} };
+                }
+                renderWeatherHistory();
+            }
+
             function setLanguage(lang) {
                 const selected = translations[lang] ? lang : "pl";
                 document.documentElement.lang = selected;
@@ -2336,6 +2610,7 @@
 
                 updateMenuButtonLabel(selected);
                 renderWeather(selected);
+                renderWeatherHistory(selected);
             }
 
             function updateMenuButtonLabel(lang = document.documentElement.lang || "pl") {
@@ -2377,11 +2652,28 @@
                     themeToggle.setAttribute("title", label);
                     themeToggle.setAttribute("aria-label", label);
                 }
+                renderWeatherHistory();
             }
 
             setLanguage(localStorage.getItem("banas_lang") || "pl");
             applyTheme(localStorage.getItem("banas_theme") || "dark");
             loadWeather();
+            loadWeatherHistory();
+
+            weatherPreviousDay?.addEventListener("click", () => {
+                selectedWeatherDate = shiftDateKey(selectedWeatherDate || dateKeyInWarsaw(), -1);
+                renderWeatherHistory();
+            });
+
+            weatherToday?.addEventListener("click", () => {
+                selectedWeatherDate = dateKeyInWarsaw();
+                renderWeatherHistory();
+            });
+
+            weatherNextDay?.addEventListener("click", () => {
+                selectedWeatherDate = shiftDateKey(selectedWeatherDate || dateKeyInWarsaw(), 1);
+                renderWeatherHistory();
+            });
 
             langButtons.forEach((button) => {
                 button.addEventListener("click", () => {

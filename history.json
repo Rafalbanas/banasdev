@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-10-02T09:49:36Z",
+  "timezone": "Europe/Warsaw",
+  "range_days": 90,
+  "days": {
+    "2026-10-02": [
+      {
+        "hour": "11:00",
+        "timestamp_utc": "2026-10-02T09:49:36.059049Z",
+        "timestamp_local": "2026-10-02T11:49:36.059049+02:00",
+        "temperature": 21.6,
+        "humidity": 56.5,
+        "pressure": 1000.0,
+        "pm25": 13.4,
+        "pm10": 18.1
+      }
+    ]
+  }
+}
