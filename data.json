@@ -1,7 +1,7 @@
 {
   "location": "Katowice",
   "measured_at": "2026-10-05T20:00:00Z",
-  "fetched_at": "2026-10-05T20:44:34Z",
+  "fetched_at": "2026-10-05T20:52:56Z",
   "refresh_interval_seconds": 3600,
   "air_index_level": "GOOD",
   "pm25": {

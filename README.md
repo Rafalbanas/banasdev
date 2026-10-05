@@ -1,58 +1,39 @@
 # Portfolio Rafała Banasia
 
-Statyczne, responsywne portfolio dostępne pod adresem \`banas.dev\`. Strona obsługuje język polski i angielski, jasny oraz ciemny motyw, a także zawiera moduł jakości powietrza dla Katowic.
+Statyczne portfolio dostępne pod adresem \`banas.dev\`. Sekcja „Kato na żywo” łączy pogodę z Open-Meteo i jakość powietrza z GIOŚ.
 
-## Struktura projektu
+## Źródła danych
 
-- \`index.html\` — kompletna warstwa prezentacji portfolio.
-- \`fetch_weather.py\` — pobieranie, walidacja i zapis danych GIOŚ. Nazwa została zachowana ze względu na istniejącą automatyzację.
-- \`data.json\` — ostatni wspólny odczyt obu stacji.
-- \`history.json\` — publiczne dane godzinowe używane przez wykres.
-- \`weather_history.db\` — lokalna baza SQLite z historią; plik nie jest wersjonowany.
+- Open-Meteo — temperatura, bieżący status opadów, prognoza na dwie godziny oraz historia temperatury i opadów.
+- GIOŚ — godzinowe PM2,5, PM10 i Polski indeks jakości powietrza ze stacji:
+  - Katowice, ul. Kossutha — \`814\`;
+  - Katowice, ul. Dudy-Gracza — \`17318\`.
 
-## Dane jakości powietrza
+Temperatura ani opady nie są pobierane z GIOŚ lub InPost. Dane pyłowe nie są pobierane z Open-Meteo.
 
-Skrypt korzysta z oficjalnego API Głównego Inspektoratu Ochrony Środowiska:
+## Pliki
 
-- Katowice, ul. Kossutha — stacja \`814\`;
-- Katowice, ul. Dudy-Gracza — stacja \`17318\`.
+- \`index.html\` — strona, widżet oraz wykresy.
+- \`fetch_weather.py\` — kolektor GIOŚ i Open-Meteo.
+- \`data.json\` — aktualne dane jakości powietrza.
+- \`history.json\` — historia średnich PM2,5 i PM10.
+- \`weather.json\` — temperatura, opady i prognoza Open-Meteo.
+- \`weather_history.db\` — lokalna baza historii, niewersjonowana.
 
-Przy każdym uruchomieniu skrypt:
+## Harmonogram
 
-1. pobiera listy stanowisk i automatycznie wybiera działające stanowiska PM2,5 oraz PM10;
-2. pobiera godzinowe pomiary i indeks jakości powietrza obu stacji;
-3. wybiera najnowszą wspólną godzinę pomiaru;
-4. wylicza średnie miejskie PM2,5 i PM10;
-5. zapisuje bieżący wynik do \`data.json\`;
-6. zapisuje do tabeli \`air_readings\` średnie i wartości obu stacji;
-7. generuje atomowo \`history.json\` i usuwa historię starszą niż 90 dni.
+Pogoda jest pobierana co 15 minut, a GIOŚ raz na godzinę, pięć minut po pełnej godzinie:
 
-Wyniki GIOŚ są danymi jednogodzinnymi w czasie lokalnym. Strona i skrypt odświeżają dane raz na godzinę.
+\`\`\`cron
+*/15 * * * * cd /cytrus && /usr/bin/python3 fetch_weather.py --weather-only >> weather.log 2>&1
+5 * * * * cd /cytrus && /usr/bin/python3 fetch_weather.py --air-only >> weather.log 2>&1
+\`\`\`
 
 ## Uruchomienie
-
-Projekt wymaga Pythona 3.10 lub nowszego i nie korzysta z zewnętrznych pakietów:
 
 \`\`\`bash
 python3 fetch_weather.py
 python3 -m http.server 8000
 \`\`\`
 
-Strona będzie dostępna pod adresem \`http://localhost:8000\`.
-
-## Automatyzacja przez cron
-
-\`\`\`cron
-5 * * * * cd /ścieżka/do/portfolio && /usr/bin/python3 fetch_weather.py >> weather.log 2>&1
-\`\`\`
-
-Uruchomienie pięć minut po pełnej godzinie daje GIOŚ czas na opublikowanie nowego pomiaru. Interwał odpowiada godzinowej częstotliwości aktualizacji API.
-
-## Test podstawowy
-
-\`\`\`bash
-python3 fetch_weather.py
-python3 -m json.tool data.json >/dev/null
-python3 -m json.tool history.json >/dev/null
-sqlite3 weather_history.db "SELECT timestamp, pm25, pm10 FROM air_readings ORDER BY timestamp DESC LIMIT 5;"
-\`\`\`
+Wykres temperatury i pyłów pokazuje oddzielne punkty bez linii między pomiarami. Opady są prezentowane na osobnym wykresie słupkowym.
