@@ -674,148 +674,9 @@
             background: var(--accent-2);
         }
 
-        .precipitation-status {
-            display: grid;
-            grid-template-columns: auto minmax(0, 1fr);
-            align-items: center;
-            gap: 13px;
-            margin-bottom: 14px;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: color-mix(in srgb, var(--surface-strong) 82%, transparent);
-            padding: 14px 16px;
-        }
-
-        .precipitation-icon {
-            display: grid;
-            width: 44px;
-            height: 44px;
-            place-items: center;
-            border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line));
-            border-radius: 13px;
-            background: color-mix(in srgb, var(--accent) 10%, var(--surface));
-            font-size: 1.5rem;
-            line-height: 1;
-        }
-
-        .precipitation-copy {
-            min-width: 0;
-        }
-
-        .precipitation-copy strong {
-            display: block;
-            font-size: 0.98rem;
-            line-height: 1.25;
-        }
-
-        .precipitation-details,
-        .precipitation-source {
-            margin: 3px 0 0;
-            color: var(--muted);
-            font-size: 0.78rem;
-            line-height: 1.45;
-        }
-
-        .precipitation-source {
-            font-size: 0.72rem;
-        }
-
-        .precipitation-source a {
-            color: var(--accent);
-            text-decoration: underline;
-            text-underline-offset: 2px;
-        }
-
-        .precipitation-status[data-state="rain"] .precipitation-icon,
-        .precipitation-status[data-state="showers"] .precipitation-icon,
-        .precipitation-status[data-state="mixed"] .precipitation-icon,
-        .precipitation-status[data-state="freezingRain"] .precipitation-icon,
-        .precipitation-status[data-state="storm"] .precipitation-icon {
-            border-color: color-mix(in srgb, var(--accent) 62%, var(--line));
-            background: color-mix(in srgb, var(--accent) 18%, var(--surface));
-        }
-
-        .precipitation-status[data-state="snow"] .precipitation-icon {
-            border-color: color-mix(in srgb, #bfdbfe 62%, var(--line));
-            background: color-mix(in srgb, #bfdbfe 14%, var(--surface));
-        }
-
-        .precipitation-status[data-state="error"] .precipitation-icon,
-        .precipitation-status[data-state="stale"] .precipitation-icon {
-            border-color: color-mix(in srgb, var(--danger) 48%, var(--line));
-            background: color-mix(in srgb, var(--danger) 10%, var(--surface));
-        }
-
-        .weather-forecast {
-            margin-top: 16px;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: var(--surface);
-            box-shadow: var(--shadow);
-            padding: 18px 22px;
-        }
-
-        .weather-forecast-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 18px;
-        }
-
-        .weather-forecast-title {
-            margin: 2px 0 0;
-            font-size: 1.05rem;
-            line-height: 1.3;
-        }
-
-        .weather-forecast-meta,
-        .weather-history-range-note,
-        .weather-chart-note {
-            margin: 5px 0 0;
-            color: var(--muted);
-            font-size: 0.76rem;
-            line-height: 1.45;
-        }
-
-        .weather-forecast-strip {
-            display: grid;
-            grid-template-columns: repeat(8, minmax(88px, 1fr));
-            gap: 8px;
-            margin-top: 14px;
-            overflow-x: auto;
-            padding-bottom: 3px;
-            scrollbar-width: thin;
-        }
-
-        .weather-forecast-point {
-            border: 1px solid var(--line);
-            border-radius: 11px;
-            background: color-mix(in srgb, var(--surface-strong) 84%, transparent);
-            padding: 9px;
-            text-align: center;
-        }
-
-        .weather-forecast-point time,
-        .weather-forecast-point span {
-            display: block;
-            color: var(--muted);
-            font-size: 0.7rem;
-        }
-
-        .weather-forecast-point strong {
-            display: block;
-            margin: 3px 0;
-            font-size: 0.9rem;
-        }
-
-        .weather-forecast[data-state="error"] .weather-forecast-title,
-        .weather-forecast[data-state="stale"] .weather-forecast-title {
-            color: var(--danger);
-        }
-
         .weather-readings {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 12px;
         }
 
@@ -844,20 +705,37 @@
             color: var(--accent);
         }
 
-        .weather-norm {
-            height: 6px;
+        .weather-stations {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
             margin-top: 12px;
-            border-radius: 999px;
-            background: color-mix(in srgb, var(--line) 72%, transparent);
-            overflow: hidden;
         }
 
-        .weather-norm span {
-            width: 0;
-            height: 100%;
-            border-radius: inherit;
-            background: linear-gradient(90deg, var(--accent-2), var(--accent-3));
-            transition: width 300ms ease;
+        .weather-station {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--surface-strong) 82%, transparent);
+            padding: 16px;
+        }
+
+        .weather-station h3 {
+            margin: 0 0 10px;
+            font-size: 0.96rem;
+        }
+
+        .weather-station-values {
+            display: flex;
+            gap: 18px;
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        .weather-station-values strong {
+            display: block;
+            margin-top: 3px;
+            color: var(--text);
+            font-size: 1rem;
         }
 
         .weather-meta {
@@ -907,51 +785,8 @@
             font-weight: 750;
         }
 
-        .weather-history-note {
-            max-width: 68ch;
-            margin: 5px 0 0;
-            color: var(--muted);
-            font-size: 0.78rem;
-            line-height: 1.45;
-        }
-
         .weather-history-nav {
             justify-content: flex-start;
-        }
-
-        .weather-history-controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 14px;
-            flex-wrap: wrap;
-        }
-
-        .weather-range-switch {
-            display: inline-flex;
-            gap: 5px;
-            border: 1px solid var(--line);
-            border-radius: 12px;
-            background: color-mix(in srgb, var(--surface-strong) 76%, transparent);
-            padding: 4px;
-        }
-
-        .weather-range-button {
-            border: 0;
-            border-radius: 8px;
-            background: transparent;
-            padding: 7px 10px;
-            color: var(--muted);
-            cursor: pointer;
-            font: inherit;
-            font-size: 0.78rem;
-            font-weight: 750;
-        }
-
-        .weather-range-button.is-active {
-            background: color-mix(in srgb, var(--accent) 18%, var(--surface));
-            color: var(--text);
         }
 
         .weather-history-nav .button {
@@ -985,23 +820,6 @@
 
         .weather-chart-wrap[data-empty="true"] .weather-chart-empty {
             display: grid;
-        }
-
-        .weather-chart-panel + .weather-chart-panel {
-            margin-top: 18px;
-            border-top: 1px solid var(--line);
-            padding-top: 16px;
-        }
-
-        .weather-chart-panel h4 {
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
-        .weather-precipitation-chart-wrap {
-            position: relative;
-            height: clamp(190px, 26vw, 250px);
-            margin-top: 8px;
         }
 
         .timeline {
@@ -1445,7 +1263,8 @@
             .grid.three,
             .skills-list,
             .timeline-item,
-            .weather-readings {
+            .weather-readings,
+            .weather-stations {
                 grid-template-columns: 1fr;
             }
 
@@ -1457,31 +1276,6 @@
                 align-items: flex-start;
                 flex-direction: column;
                 gap: 10px;
-            }
-
-            .precipitation-status {
-                align-items: start;
-                padding: 12px;
-            }
-
-            .precipitation-icon {
-                width: 40px;
-                height: 40px;
-                border-radius: 11px;
-                font-size: 1.3rem;
-            }
-
-            .weather-forecast {
-                padding: 16px;
-            }
-
-            .weather-forecast-header {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .weather-forecast-strip {
-                grid-template-columns: repeat(8, 84px);
             }
 
             .weather-history {
@@ -1501,21 +1295,6 @@
             .weather-history-nav .button:nth-child(2) {
                 grid-column: 1 / -1;
                 grid-row: 1;
-            }
-
-            .weather-history-controls {
-                align-items: stretch;
-                flex-direction: column;
-            }
-
-            .weather-range-switch {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                width: 100%;
-            }
-
-            .weather-range-button {
-                padding-inline: 5px;
             }
 
             .section {
@@ -1657,7 +1436,7 @@
             </a>
             <div class="nav-links" id="primaryNavigation">
                 <a href="#about" data-i18n="nav.about">O mnie</a>
-                <a href="#weather" data-i18n="nav.weather">Pogoda</a>
+                <a href="#weather" data-i18n="nav.weather">Powietrze</a>
                 <a href="#experience" data-i18n="nav.experience">Doświadczenie</a>
                 <a href="#projects" data-i18n="nav.projects">Projekty</a>
                 <a href="#skills" data-i18n="nav.skills">Umiejętności</a>
@@ -1780,109 +1559,66 @@
             <div class="section-heading">
                 <div class="section-kicker" data-i18n="weather.kicker">Kato na żywo</div>
                 <div>
-                    <h2 id="weather-title" data-i18n="weather.title">Pogoda i jakość powietrza w Katowicach (Kato)</h2>
-                    <p class="section-lead" data-i18n="weather.lead">Odczyty stacji KAT04BAPP co godzinę oraz model pogodowy aktualizowany na serwerze co 15 minut.</p>
+                    <h2 id="weather-title" data-i18n="weather.title">Jakość powietrza w Katowicach</h2>
+                    <p class="section-lead" data-i18n="weather.lead">Godzinowe pomiary PM2,5 i PM10 z dwóch automatycznych stacji GIOŚ.</p>
                 </div>
             </div>
 
             <div class="weather-widget" id="weatherWidget" data-state="loading" aria-live="polite">
                 <div class="weather-summary">
                     <div>
-                        <div class="section-kicker" data-i18n="weather.station">Katowice · Brzozowa</div>
+                        <div class="section-kicker" data-i18n="weather.station">Katowice · średnia z 2 stacji</div>
                         <strong class="weather-status" id="weatherStatus" data-i18n="weather.loading">Pobieranie danych…</strong>
                     </div>
-                    <span class="tag">InPost Air Sensor · KAT04BAPP</span>
-                </div>
-
-                <div class="precipitation-status" id="precipitationStatus" data-state="loading">
-                    <span class="precipitation-icon" id="precipitationIcon" aria-hidden="true">…</span>
-                    <div class="precipitation-copy">
-                        <strong id="precipitationLabel" data-i18n="weather.precipitationLoading">Sprawdzanie opadów…</strong>
-                        <p class="precipitation-details" id="precipitationDetails" data-i18n="weather.precipitationWaiting">Oczekiwanie na dane modelu.</p>
-                        <p class="precipitation-source">
-                            <span data-i18n="weather.precipitationEstimate">Szacunek z modelu pogodowego.</span>
-                            <span data-i18n="weather.precipitationSource">Źródło:</span>
-                            <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>
-                        </p>
-                    </div>
+                    <span class="tag">GIOŚ · co godzinę</span>
                 </div>
 
                 <div class="weather-readings">
-                    <div class="weather-reading">
-                        <span data-i18n="weather.temperature">Temperatura</span>
-                        <strong data-weather="temperature">—</strong>
-                    </div>
-                    <div class="weather-reading">
-                        <span data-i18n="weather.humidity">Wilgotność</span>
-                        <strong data-weather="humidity">—</strong>
-                    </div>
-                    <div class="weather-reading">
-                        <span data-i18n="weather.pressure">Ciśnienie</span>
-                        <strong data-weather="pressure">—</strong>
-                    </div>
                     <div class="weather-reading weather-reading--pm">
-                        <span>PM2.5</span>
+                        <span data-i18n="weather.avgPm25">Średnia PM2,5</span>
                         <strong data-weather="pm25">—</strong>
-                        <span data-weather-norm="pm25">—</span>
-                        <div class="weather-norm" aria-hidden="true"><span data-weather-bar="pm25"></span></div>
                     </div>
                     <div class="weather-reading weather-reading--pm">
-                        <span>PM10</span>
+                        <span data-i18n="weather.avgPm10">Średnia PM10</span>
                         <strong data-weather="pm10">—</strong>
-                        <span data-weather-norm="pm10">—</span>
-                        <div class="weather-norm" aria-hidden="true"><span data-weather-bar="pm10"></span></div>
                     </div>
+                </div>
+
+                <div class="weather-stations">
+                    <article class="weather-station" data-station-id="814">
+                        <h3>Katowice, ul. Kossutha</h3>
+                        <div class="weather-station-values">
+                            <span>PM2,5<strong data-station-reading="pm25">—</strong></span>
+                            <span>PM10<strong data-station-reading="pm10">—</strong></span>
+                        </div>
+                    </article>
+                    <article class="weather-station" data-station-id="17318">
+                        <h3>Katowice, ul. Dudy-Gracza</h3>
+                        <div class="weather-station-values">
+                            <span>PM2,5<strong data-station-reading="pm25">—</strong></span>
+                            <span>PM10<strong data-station-reading="pm10">—</strong></span>
+                        </div>
+                    </article>
                 </div>
 
                 <p class="weather-meta" id="weatherUpdated" data-i18n="weather.waiting">Oczekiwanie na aktualne dane.</p>
             </div>
 
-            <section class="weather-forecast" id="weatherForecast" data-state="loading" aria-labelledby="weather-forecast-title">
-                <div class="weather-forecast-header">
-                    <div>
-                        <div class="section-kicker" id="weatherForecastKicker" data-i18n="weather.forecastKicker">Najbliższe 2 godziny</div>
-                        <h3 class="weather-forecast-title" id="weather-forecast-title" data-i18n="weather.forecastLoading">Pobieranie prognozy…</h3>
-                        <p class="weather-forecast-meta" id="weatherForecastMeta" data-i18n="weather.forecastWaiting">Oczekiwanie na dane serwerowe.</p>
-                    </div>
-                    <span class="tag">Open-Meteo · 15 min</span>
-                </div>
-                <div class="weather-forecast-strip" id="weatherForecastStrip" aria-label="Prognoza w przedziałach 15-minutowych" data-i18n-attr="aria-label:weather.forecastStripAria"></div>
-            </section>
-
             <div class="weather-history" aria-labelledby="weather-history-title">
                 <div class="weather-history-header">
                     <div>
-                        <h3 id="weather-history-title" data-i18n="weather.historyTitle">Historia pogody i jakości powietrza</h3>
+                        <h3 id="weather-history-title" data-i18n="weather.historyTitle">Historia godzinowa średniej z dwóch stacji</h3>
                         <div class="weather-history-date" id="weatherHistoryDate" aria-live="polite"></div>
-                        <p class="weather-history-note" data-i18n="weather.historyNote">Punkty InPost to rzeczywiste odczyty godzinowe bez interpolacji; fioletowe punkty i słupki to wartości modelowe Open-Meteo. Stała skala temperatury obejmuje −20–40°C.</p>
-                        <p class="weather-history-range-note" id="weatherHistoryRange"></p>
                     </div>
-                </div>
-                <div class="weather-history-controls">
-                    <div class="weather-range-switch" role="group" aria-label="Zakres wykresu" data-i18n-attr="aria-label:weather.rangeNavigation">
-                        <button class="weather-range-button is-active" type="button" data-weather-range="day" data-i18n="weather.rangeDay">Dzień</button>
-                        <button class="weather-range-button" type="button" data-weather-range="24h" data-i18n="weather.range24hShort">24 h</button>
-                        <button class="weather-range-button" type="button" data-weather-range="7d" data-i18n="weather.range7dShort">7 dni</button>
-                        <button class="weather-range-button" type="button" data-weather-range="30d" data-i18n="weather.range30dShort">30 dni</button>
-                    </div>
-                    <div class="weather-history-nav" id="weatherDayNavigation" aria-label="Nawigacja historii pogody" data-i18n-attr="aria-label:weather.historyNavigation">
+                    <div class="weather-history-nav" aria-label="Nawigacja historii jakości powietrza" data-i18n-attr="aria-label:weather.historyNavigation">
                         <button class="button" id="weatherPreviousDay" type="button" data-i18n="weather.previousDay">← Poprzedni dzień</button>
                         <button class="button" id="weatherToday" type="button" data-i18n="weather.today">Dzisiaj</button>
                         <button class="button" id="weatherNextDay" type="button" data-i18n="weather.nextDay">Następny dzień →</button>
                     </div>
                 </div>
-                <div class="weather-chart-panel">
-                    <div class="weather-chart-wrap" id="weatherChartWrap" data-empty="true">
-                        <div class="weather-chart-empty" id="weatherChartEmpty" data-i18n="weather.noHistory">Brak odczytów dla wybranego zakresu.</div>
-                        <canvas id="weatherHistoryChart" role="img" aria-label="Wykres temperatury, PM2.5 i PM10" data-i18n-attr="aria-label:weather.chartAria"></canvas>
-                    </div>
-                </div>
-                <div class="weather-chart-panel">
-                    <h4 data-i18n="weather.precipitationChartTitle">Opady</h4>
-                    <p class="weather-chart-note" id="weatherPrecipitationNote"></p>
-                    <div class="weather-precipitation-chart-wrap">
-                        <canvas id="weatherPrecipitationChart" role="img" aria-label="Wykres opadów historycznych i prognozowanych" data-i18n-attr="aria-label:weather.precipitationChartAria"></canvas>
-                    </div>
+                <div class="weather-chart-wrap" id="weatherChartWrap" data-empty="true">
+                    <div class="weather-chart-empty" id="weatherChartEmpty" data-i18n="weather.noHistory">Brak odczytów dla wybranego dnia.</div>
+                    <canvas id="weatherHistoryChart" role="img" aria-label="Wykres PM2,5 i PM10 w ciągu 24 godzin" data-i18n-attr="aria-label:weather.chartAria"></canvas>
                 </div>
             </div>
         </section>
@@ -2245,44 +1981,19 @@
             const weatherWidget = document.getElementById("weatherWidget");
             const weatherStatus = document.getElementById("weatherStatus");
             const weatherUpdated = document.getElementById("weatherUpdated");
-            const precipitationStatus = document.getElementById("precipitationStatus");
-            const precipitationIcon = document.getElementById("precipitationIcon");
-            const precipitationLabel = document.getElementById("precipitationLabel");
-            const precipitationDetails = document.getElementById("precipitationDetails");
-            const weatherForecast = document.getElementById("weatherForecast");
-            const weatherForecastKicker = document.getElementById("weatherForecastKicker");
-            const weatherForecastTitle = document.getElementById("weather-forecast-title");
-            const weatherForecastMeta = document.getElementById("weatherForecastMeta");
-            const weatherForecastStrip = document.getElementById("weatherForecastStrip");
             const weatherHistoryDate = document.getElementById("weatherHistoryDate");
-            const weatherHistoryRange = document.getElementById("weatherHistoryRange");
             const weatherChartWrap = document.getElementById("weatherChartWrap");
             const weatherChartCanvas = document.getElementById("weatherHistoryChart");
-            const weatherPrecipitationCanvas = document.getElementById("weatherPrecipitationChart");
-            const weatherPrecipitationNote = document.getElementById("weatherPrecipitationNote");
-            const weatherDayNavigation = document.getElementById("weatherDayNavigation");
             const weatherPreviousDay = document.getElementById("weatherPreviousDay");
             const weatherToday = document.getElementById("weatherToday");
             const weatherNextDay = document.getElementById("weatherNextDay");
-            const weatherRangeButtons = [...document.querySelectorAll("[data-weather-range]")];
             const photos = ["cv_photo.webp", "cv_photo2.webp"];
             let photoIndex = 0;
             let weatherData = null;
             let weatherLoadFailed = false;
-            let precipitationData = null;
-            let precipitationLoadFailed = false;
-            let precipitationIsStale = false;
-            let precipitationRequest = null;
-            let precipitationRefreshTimer = null;
             let weatherHistory = null;
-            let weatherModelData = null;
             let weatherChart = null;
-            let weatherPrecipitationChart = null;
             let selectedWeatherDate = null;
-            let selectedWeatherRange = "day";
-
-            const WEATHER_DATA_URL = "weather.json";
-            const PRECIPITATION_REFRESH_MS = 5 * 60 * 1000;
 
             document.body.classList.add("js-ready");
 
@@ -2295,7 +2006,7 @@
                     langSwitch: { label: "Wybór języka" },
                     nav: {
                         about: "O mnie",
-                        weather: "Pogoda",
+                        weather: "Powietrze",
                         experience: "Doświadczenie",
                         projects: "Projekty",
                         skills: "Umiejętności",
@@ -2345,91 +2056,22 @@
                     },
                     weather: {
                         kicker: "Kato na żywo",
-                        title: "Pogoda i jakość powietrza w Katowicach (Kato)",
-                        lead: "Odczyty stacji KAT04BAPP co godzinę oraz model pogodowy aktualizowany na serwerze co 15 minut.",
-                        station: "Katowice · Brzozowa",
+                        title: "Jakość powietrza w Katowicach",
+                        lead: "Godzinowe pomiary PM2,5 i PM10 z dwóch automatycznych stacji GIOŚ.",
+                        station: "Katowice · średnia z 2 stacji",
                         loading: "Pobieranie danych…",
                         waiting: "Oczekiwanie na aktualne dane.",
-                        temperature: "Temperatura",
-                        humidity: "Wilgotność",
-                        pressure: "Ciśnienie",
-                        precipitationLoading: "Sprawdzanie opadów…",
-                        precipitationWaiting: "Oczekiwanie na dane modelu.",
-                        precipitationEstimate: "Szacunek z modelu pogodowego.",
-                        precipitationSource: "Źródło:",
-                        precipitationUnavailable: "Pogoda niedostępna",
-                        precipitationError: "Nie udało się pobrać aktualnego statusu opadów.",
-                        precipitationStale: "{status} · dane nieaktualne",
-                        precipitationStaleDetails: "Ostatnie dane: {date} · aktualizacja nie powiodła się.",
-                        precipitationUpdated: "Dane z {date}",
-                        precipitationStates: {
-                            dry: "Bez opadów",
-                            rain: "Pada deszcz",
-                            showers: "Opady przelotne",
-                            snow: "Pada śnieg",
-                            mixed: "Deszcz ze śniegiem",
-                            freezingRain: "Marznący deszcz",
-                            storm: "Burza w okolicy"
-                        },
-                        forecastKicker: "Najbliższe 2 godziny",
-                        forecastFromNow: "Prognoza od teraz · najbliższe 2 godziny",
-                        forecastLoading: "Pobieranie prognozy…",
-                        forecastWaiting: "Oczekiwanie na dane serwerowe.",
-                        forecastUnavailable: "Prognoza niedostępna",
-                        forecastDry: "Prognoza bez opadów przez najbliższe 2 godziny",
-                        forecastPossible: "{type} możliwe około {time}",
-                        forecastContinues: "{type} mogą utrzymać się przez około {minutes} min",
-                        forecastUpdated: "Dane modelu: {dataTime} · pobrano: {fetchedTime}",
-                        forecastStale: "Prognoza może być nieaktualna · dane z {date}",
-                        forecastStripAria: "Prognoza w przedziałach 15-minutowych",
-                        forecastTemperature: "{value}°C",
-                        forecastPrecipitation: "{value} mm / 15 min",
-                        forecastProbability: "{value}% / godz.",
-                        forecastProbabilityUnavailable: "Prawd.: jak wyżej",
-                        forecastTypes: {
-                            rain: "Deszcz",
-                            showers: "Opady przelotne",
-                            snow: "Śnieg",
-                            mixed: "Deszcz ze śniegiem",
-                            freezingRain: "Marznący deszcz",
-                            storm: "Opady burzowe"
-                        },
-                        historyTitle: "Historia pogody i jakości powietrza",
-                        historyNote: "Punkty InPost to rzeczywiste odczyty godzinowe bez interpolacji; fioletowe punkty i słupki to wartości modelowe Open-Meteo. Stała skala temperatury obejmuje −20–40°C.",
-                        historyAvailable: "Dostępne dane: {from}–{to}. Zbieranie na serwerze od {collected}; wcześniejsze dane to backfill modelowy Open-Meteo.",
-                        historyNavigation: "Nawigacja historii pogody",
-                        rangeNavigation: "Zakres wykresu",
-                        rangeDay: "Dzień",
-                        range24hShort: "24 h",
-                        range7dShort: "7 dni",
-                        range30dShort: "30 dni",
-                        range24h: "Ostatnie 24 godziny",
-                        range7d: "Ostatnie 7 dni",
-                        range30d: "Ostatnie 30 dni",
+                        avgPm25: "Średnia PM2,5",
+                        avgPm10: "Średnia PM10",
+                        historyTitle: "Historia godzinowa średniej z dwóch stacji",
+                        historyNavigation: "Nawigacja historii jakości powietrza",
                         previousDay: "← Poprzedni dzień",
                         today: "Dzisiaj",
                         nextDay: "Następny dzień →",
-                        noHistory: "Brak odczytów dla wybranego zakresu.",
-                        chartAria: "Wykres temperatury, PM2.5 i PM10",
-                        precipitationChartTitle: "Opady",
-                        precipitationChartAria: "Wykres opadów historycznych i prognozowanych",
-                        precipitationInterval15m: "Suma dla niepokrywających się przedziałów 15-minutowych.",
-                        precipitationInterval6h: "Suma niepokrywających się przedziałów w blokach 6-godzinnych.",
-                        precipitationIntervalDay: "Suma niepokrywających się przedziałów dla lokalnych dni.",
-                        sensorTemperatureDataset: "Temperatura · InPost",
-                        modelTemperatureDataset: "Temperatura modelowa · Open-Meteo",
-                        collectedTemperatureDataset: "Temperatura modelowa · zebrana",
-                        backfillTemperatureDataset: "Temperatura modelowa · backfill",
-                        forecastTemperatureDataset: "Prognoza temperatury · Open-Meteo",
-                        sensorPm25Dataset: "PM2.5 · InPost",
-                        sensorPm10Dataset: "PM10 · InPost",
-                        precipitationDataset: "Opady modelowe · Open-Meteo",
-                        collectedPrecipitationDataset: "Opady modelowe · zebrane",
-                        backfillPrecipitationDataset: "Opady modelowe · backfill",
-                        forecastPrecipitationDataset: "Prognoza opadów · Open-Meteo",
+                        noHistory: "Brak odczytów dla wybranego dnia.",
+                        chartAria: "Wykres PM2,5 i PM10 w ciągu 24 godzin",
                         timeAxis: "Czas",
-                        norm: "{percent}% normy ({value} {unit})",
-                        updated: "Aktualizacja: {date} · Źródło: InPost",
+                        updated: "Pomiar: {date} · Źródło: GIOŚ · odświeżanie co godzinę",
                         error: "Dane są chwilowo niedostępne",
                         levels: {
                             VERY_GOOD: "Bardzo dobra jakość powietrza",
@@ -2547,7 +2189,7 @@
                     langSwitch: { label: "Language selection" },
                     nav: {
                         about: "About",
-                        weather: "Weather",
+                        weather: "Air quality",
                         experience: "Experience",
                         projects: "Projects",
                         skills: "Skills",
@@ -2597,91 +2239,22 @@
                     },
                     weather: {
                         kicker: "Kato live",
-                        title: "Weather and air quality in Katowice (Kato)",
-                        lead: "KAT04BAPP station readings every hour and weather-model data refreshed on the server every 15 minutes.",
-                        station: "Katowice · Brzozowa",
+                        title: "Air quality in Katowice",
+                        lead: "Hourly PM2.5 and PM10 readings from two automated GIOŚ monitoring stations.",
+                        station: "Katowice · average of 2 stations",
                         loading: "Loading data…",
                         waiting: "Waiting for current data.",
-                        temperature: "Temperature",
-                        humidity: "Humidity",
-                        pressure: "Pressure",
-                        precipitationLoading: "Checking precipitation…",
-                        precipitationWaiting: "Waiting for model data.",
-                        precipitationEstimate: "Estimate from a weather model.",
-                        precipitationSource: "Source:",
-                        precipitationUnavailable: "Weather unavailable",
-                        precipitationError: "The current precipitation status could not be retrieved.",
-                        precipitationStale: "{status} · stale data",
-                        precipitationStaleDetails: "Last data: {date} · refresh failed.",
-                        precipitationUpdated: "Data from {date}",
-                        precipitationStates: {
-                            dry: "No precipitation",
-                            rain: "Rain",
-                            showers: "Rain showers",
-                            snow: "Snow",
-                            mixed: "Rain and snow",
-                            freezingRain: "Freezing rain",
-                            storm: "Thunderstorm nearby"
-                        },
-                        forecastKicker: "Next 2 hours",
-                        forecastFromNow: "Forecast from now · next 2 hours",
-                        forecastLoading: "Loading forecast…",
-                        forecastWaiting: "Waiting for server data.",
-                        forecastUnavailable: "Forecast unavailable",
-                        forecastDry: "No precipitation forecast for the next 2 hours",
-                        forecastPossible: "{type} possible around {time}",
-                        forecastContinues: "{type} may continue for about {minutes} min",
-                        forecastUpdated: "Model data: {dataTime} · fetched: {fetchedTime}",
-                        forecastStale: "Forecast may be stale · data from {date}",
-                        forecastStripAria: "Forecast in 15-minute intervals",
-                        forecastTemperature: "{value}°C",
-                        forecastPrecipitation: "{value} mm / 15 min",
-                        forecastProbability: "{value}% / hour",
-                        forecastProbabilityUnavailable: "Probability: as above",
-                        forecastTypes: {
-                            rain: "Rain",
-                            showers: "Showers",
-                            snow: "Snow",
-                            mixed: "Rain and snow",
-                            freezingRain: "Freezing rain",
-                            storm: "Thunderstorm precipitation"
-                        },
-                        historyTitle: "Weather and air-quality history",
-                        historyNote: "InPost points are actual hourly readings without interpolation; purple points and bars are Open-Meteo model values. The fixed temperature scale spans −20–40°C.",
-                        historyAvailable: "Available data: {from}–{to}. Server collection since {collected}; earlier values are an Open-Meteo model backfill.",
-                        historyNavigation: "Weather history navigation",
-                        rangeNavigation: "Chart range",
-                        rangeDay: "Day",
-                        range24hShort: "24 h",
-                        range7dShort: "7 days",
-                        range30dShort: "30 days",
-                        range24h: "Last 24 hours",
-                        range7d: "Last 7 days",
-                        range30d: "Last 30 days",
+                        avgPm25: "Average PM2.5",
+                        avgPm10: "Average PM10",
+                        historyTitle: "Hourly history averaged from two stations",
+                        historyNavigation: "Air quality history navigation",
                         previousDay: "← Previous day",
                         today: "Today",
                         nextDay: "Next day →",
-                        noHistory: "No readings for the selected range.",
-                        chartAria: "Temperature, PM2.5 and PM10 chart",
-                        precipitationChartTitle: "Precipitation",
-                        precipitationChartAria: "Historical and forecast precipitation chart",
-                        precipitationInterval15m: "Sum for non-overlapping 15-minute intervals.",
-                        precipitationInterval6h: "Sum of non-overlapping intervals in 6-hour blocks.",
-                        precipitationIntervalDay: "Sum of non-overlapping intervals for local calendar days.",
-                        sensorTemperatureDataset: "Temperature · InPost",
-                        modelTemperatureDataset: "Model temperature · Open-Meteo",
-                        collectedTemperatureDataset: "Model temperature · collected",
-                        backfillTemperatureDataset: "Model temperature · backfill",
-                        forecastTemperatureDataset: "Temperature forecast · Open-Meteo",
-                        sensorPm25Dataset: "PM2.5 · InPost",
-                        sensorPm10Dataset: "PM10 · InPost",
-                        precipitationDataset: "Model precipitation · Open-Meteo",
-                        collectedPrecipitationDataset: "Model precipitation · collected",
-                        backfillPrecipitationDataset: "Model precipitation · backfill",
-                        forecastPrecipitationDataset: "Precipitation forecast · Open-Meteo",
+                        noHistory: "No readings for the selected day.",
+                        chartAria: "24-hour PM2.5 and PM10 chart",
                         timeAxis: "Time",
-                        norm: "{percent}% of the norm ({value} {unit})",
-                        updated: "Updated: {date} · Source: InPost",
+                        updated: "Measurement: {date} · Source: GIOŚ · refreshed hourly",
                         error: "Data is temporarily unavailable",
                         levels: {
                             VERY_GOOD: "Very good air quality",
@@ -2838,33 +2411,27 @@
                 });
                 const formatReading = (sensor) => `${numberFormat.format(sensor.value)} ${sensor.unit}`;
 
-                ["temperature", "humidity", "pressure", "pm25", "pm10"].forEach((name) => {
+                ["pm25", "pm10"].forEach((name) => {
                     const element = document.querySelector(`[data-weather="${name}"]`);
                     if (element && weatherData[name]) element.textContent = formatReading(weatherData[name]);
                 });
 
-                ["pm25", "pm10"].forEach((name) => {
-                    const sensor = weatherData[name];
-                    if (!sensor) return;
-                    const norm = document.querySelector(`[data-weather-norm="${name}"]`);
-                    const bar = document.querySelector(`[data-weather-bar="${name}"]`);
-                    if (norm) {
-                        norm.textContent = interpolate(copy.norm, {
-                            percent: numberFormat.format(sensor.norm_percent),
-                            value: numberFormat.format(sensor.norm_value),
-                            unit: sensor.unit
-                        });
-                    }
-                    if (bar) bar.style.width = `${Math.min(Math.max(sensor.norm_percent, 0), 100)}%`;
+                weatherData.stations.forEach((station) => {
+                    const card = document.querySelector(`[data-station-id="${station.id}"]`);
+                    if (!card) return;
+                    ["pm25", "pm10"].forEach((name) => {
+                        const element = card.querySelector(`[data-station-reading="${name}"]`);
+                        if (element && station[name]) element.textContent = formatReading(station[name]);
+                    });
                 });
 
                 weatherStatus.textContent = copy.levels[weatherData.air_index_level] || copy.levels.UNKNOWN;
-                const fetchedAt = new Date(weatherData.fetched_at);
+                const measuredAt = new Date(weatherData.measured_at);
                 const formattedDate = new Intl.DateTimeFormat(selected === "pl" ? "pl-PL" : "en-GB", {
                     dateStyle: "medium",
                     timeStyle: "short",
                     timeZone: "Europe/Warsaw"
-                }).format(fetchedAt);
+                }).format(measuredAt);
                 weatherUpdated.textContent = interpolate(copy.updated, { date: formattedDate });
             }
 
@@ -2873,202 +2440,15 @@
                     const response = await fetch("data.json", { cache: "no-store" });
                     if (!response.ok) throw new Error(`HTTP ${response.status}`);
                     weatherData = await response.json();
-                    const required = ["temperature", "humidity", "pressure", "pm25", "pm10", "fetched_at"];
-                    if (!required.every((key) => weatherData[key])) throw new Error("Niepełne dane pogodowe");
+                    const required = ["pm25", "pm10", "measured_at", "stations"];
+                    if (!required.every((key) => weatherData[key])) throw new Error("Niepełne dane jakości powietrza");
+                    weatherLoadFailed = false;
                     renderWeather();
                 } catch (error) {
-                    console.error("Nie udało się wczytać danych pogodowych:", error);
+                    console.error("Nie udało się wczytać danych jakości powietrza:", error);
                     weatherLoadFailed = true;
                     renderWeather();
                 }
-            }
-
-            function classifyPrecipitation(current) {
-                const code = Number(current.weather_code);
-                const rain = Math.max(0, Number(current.rain) || 0);
-                const showers = Math.max(0, Number(current.showers) || 0);
-                const snowfall = Math.max(0, Number(current.snowfall) || 0);
-                const hasLiquidPrecipitation = rain + showers > 0;
-
-                const snowCodes = new Set([71, 73, 75, 77, 85, 86]);
-                const showerCodes = new Set([80, 81, 82]);
-                const rainCodes = new Set([51, 53, 55, 61, 63, 65]);
-                const freezingRainCodes = new Set([56, 57, 66, 67]);
-                const stormCodes = new Set([95, 96, 99]);
-
-                if (snowfall > 0 && hasLiquidPrecipitation) return { state: "mixed", icon: "🌨️" };
-                if (snowfall > 0 || snowCodes.has(code)) return { state: "snow", icon: "❄️" };
-                if (stormCodes.has(code)) return { state: "storm", icon: "⛈️" };
-                if (freezingRainCodes.has(code)) return { state: "freezingRain", icon: "🧊" };
-                if (showers > 0 || showerCodes.has(code)) return { state: "showers", icon: "🌦️" };
-                if (rain > 0 || rainCodes.has(code)) return { state: "rain", icon: "🌧️" };
-                return { state: "dry", icon: code <= 1 ? "☀️" : "☁️" };
-            }
-
-            function formatPrecipitationTime(rawTime, lang) {
-                const timestamp = new Date(rawTime);
-                if (Number.isNaN(timestamp.getTime())) return "—";
-                return new Intl.DateTimeFormat(lang === "pl" ? "pl-PL" : "en-GB", {
-                    dateStyle: "medium",
-                    timeStyle: "short",
-                    timeZone: "Europe/Warsaw"
-                }).format(timestamp);
-            }
-
-            function renderPrecipitation(lang = document.documentElement.lang || "pl") {
-                if (!precipitationStatus || !precipitationIcon || !precipitationLabel || !precipitationDetails) return;
-                const selected = translations[lang] ? lang : "pl";
-                const copy = translations[selected].weather;
-
-                if (!precipitationData) {
-                    precipitationStatus.dataset.state = precipitationLoadFailed ? "error" : "loading";
-                    precipitationIcon.textContent = precipitationLoadFailed ? "⚠️" : "…";
-                    precipitationLabel.textContent = precipitationLoadFailed
-                        ? copy.precipitationUnavailable
-                        : copy.precipitationLoading;
-                    precipitationDetails.textContent = precipitationLoadFailed
-                        ? copy.precipitationError
-                        : copy.precipitationWaiting;
-                    return;
-                }
-
-                const condition = classifyPrecipitation(precipitationData.current);
-                const conditionLabel = copy.precipitationStates[condition.state];
-                const formattedTime = formatPrecipitationTime(precipitationData.current.data_time_utc, selected);
-                precipitationStatus.dataset.state = precipitationIsStale ? "stale" : condition.state;
-                precipitationIcon.textContent = precipitationIsStale ? "⚠️" : condition.icon;
-                precipitationLabel.textContent = precipitationIsStale
-                    ? interpolate(copy.precipitationStale, { status: conditionLabel })
-                    : conditionLabel;
-                precipitationDetails.textContent = precipitationIsStale
-                    ? interpolate(copy.precipitationStaleDetails, { date: formattedTime })
-                    : interpolate(copy.precipitationUpdated, { date: formattedTime });
-            }
-
-            function schedulePrecipitationRefresh(delay = PRECIPITATION_REFRESH_MS) {
-                window.clearTimeout(precipitationRefreshTimer);
-                precipitationRefreshTimer = window.setTimeout(
-                    () => loadPrecipitation(),
-                    Math.max(1000, delay)
-                );
-            }
-
-            async function loadPrecipitation() {
-                if (precipitationRequest) return precipitationRequest;
-                if (precipitationData) renderPrecipitation();
-                const controller = new AbortController();
-                const timeout = window.setTimeout(() => controller.abort(), 10000);
-
-                precipitationRequest = (async () => {
-                    try {
-                        const response = await fetch(WEATHER_DATA_URL, {
-                            cache: "no-cache",
-                            signal: controller.signal
-                        });
-                        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                        const data = await response.json();
-                        const location = data?.locations?.kat04bapp;
-                        if (!location?.current || !Array.isArray(location.observations)) {
-                            throw new Error("Niepełny eksport weather.json");
-                        }
-                        weatherModelData = data;
-                        precipitationData = location;
-                        precipitationLoadFailed = false;
-                        precipitationIsStale = Date.now() - new Date(location.current.fetched_at_utc).getTime() > 30 * 60 * 1000;
-                    } catch (error) {
-                        console.error("Nie udało się wczytać serwerowych danych pogodowych:", error);
-                        precipitationLoadFailed = true;
-                        precipitationIsStale = Boolean(precipitationData);
-                    } finally {
-                        window.clearTimeout(timeout);
-                        precipitationRequest = null;
-                        renderPrecipitation();
-                        renderTwoHourForecast();
-                        renderWeatherHistory();
-                        schedulePrecipitationRefresh();
-                    }
-                    return precipitationData;
-                })();
-
-                return precipitationRequest;
-            }
-
-            function forecastCondition(interval) {
-                const condition = classifyPrecipitation({
-                    ...interval,
-                    showers: 0
-                });
-                return condition.state === "dry" ? null : condition.state;
-            }
-
-            function renderTwoHourForecast(lang = document.documentElement.lang || "pl") {
-                if (!weatherForecast || !weatherForecastTitle || !weatherForecastMeta || !weatherForecastStrip) return;
-                const selected = translations[lang] ? lang : "pl";
-                const copy = translations[selected].weather;
-                const location = weatherModelData?.locations?.kat04bapp;
-                const intervals = location?.forecast?.intervals || [];
-                const todayKey = dateKeyInWarsaw();
-                const viewingHistory = selectedWeatherRange === "day" && selectedWeatherDate && selectedWeatherDate !== todayKey;
-                weatherForecastKicker.textContent = viewingHistory ? copy.forecastFromNow : copy.forecastKicker;
-                weatherForecastStrip.replaceChildren();
-
-                if (!intervals.length) {
-                    weatherForecast.dataset.state = "error";
-                    weatherForecastTitle.textContent = copy.forecastUnavailable;
-                    weatherForecastMeta.textContent = copy.precipitationError;
-                    return;
-                }
-
-                const issuedAt = new Date(location.forecast.issued_at_utc);
-                const stale = precipitationLoadFailed || Date.now() - issuedAt.getTime() > 30 * 60 * 1000;
-                const wetIntervals = intervals.filter((interval) => forecastCondition(interval));
-                const currentWet = forecastCondition(location.current);
-                if (currentWet && wetIntervals.length) {
-                    let continuous = 0;
-                    for (const interval of intervals) {
-                        if (!forecastCondition(interval)) break;
-                        continuous += 15;
-                    }
-                    weatherForecastTitle.textContent = interpolate(copy.forecastContinues, {
-                        type: copy.forecastTypes[currentWet],
-                        minutes: continuous
-                    });
-                } else if (wetIntervals.length) {
-                    const first = wetIntervals[0];
-                    weatherForecastTitle.textContent = interpolate(copy.forecastPossible, {
-                        type: copy.forecastTypes[forecastCondition(first)],
-                        time: formatShortTime(first.forecast_time_utc, selected)
-                    });
-                } else {
-                    weatherForecastTitle.textContent = copy.forecastDry;
-                }
-
-                weatherForecast.dataset.state = stale ? "stale" : "ready";
-                weatherForecastMeta.textContent = stale
-                    ? interpolate(copy.forecastStale, { date: formatDateTime(location.forecast.issued_at_utc, selected) })
-                    : interpolate(copy.forecastUpdated, {
-                        dataTime: formatDateTime(intervals[0].forecast_time_utc, selected),
-                        fetchedTime: formatDateTime(location.forecast.issued_at_utc, selected)
-                    });
-
-                const shownProbabilityIntervals = new Set();
-                intervals.forEach((interval) => {
-                    const point = document.createElement("div");
-                    point.className = "weather-forecast-point";
-                    const probabilityKey = interval.probability_interval_start_utc;
-                    const showProbability = probabilityKey && !shownProbabilityIntervals.has(probabilityKey);
-                    if (showProbability) shownProbabilityIntervals.add(probabilityKey);
-                    const probability = showProbability && interval.precipitation_probability !== null
-                        ? interpolate(copy.forecastProbability, { value: Math.round(interval.precipitation_probability) })
-                        : copy.forecastProbabilityUnavailable;
-                    point.innerHTML = `
-                        <time datetime="${interval.forecast_time_utc}">${formatShortTime(interval.forecast_time_utc, selected)}</time>
-                        <strong>${interpolate(copy.forecastTemperature, { value: formatNumber(interval.temperature, selected, 1) })}</strong>
-                        <span>${interpolate(copy.forecastPrecipitation, { value: formatNumber(interval.precipitation, selected, 1) })}</span>
-                        <span title="${probabilityKey || ""}">${probability}</span>
-                    `;
-                    weatherForecastStrip.append(point);
-                });
             }
 
             function dateKeyInWarsaw(date = new Date()) {
@@ -3088,43 +2468,7 @@
                 return date.toISOString().slice(0, 10);
             }
 
-            function stableChartScale(values, {
-                step,
-                minimumSpan,
-                includeZero = false,
-                baselineMin = null,
-                baselineMax = null
-            }) {
-                const finiteValues = values.map(Number).filter(Number.isFinite);
-                if (finiteValues.length === 0) {
-                    return {
-                        min: baselineMin ?? 0,
-                        max: baselineMax ?? minimumSpan
-                    };
-                }
-
-                const observedMin = Math.min(...finiteValues);
-                const observedMax = Math.max(...finiteValues);
-                let min = baselineMin ?? Math.floor(observedMin / step) * step;
-                let max = baselineMax ?? Math.ceil(observedMax / step) * step;
-
-                if (includeZero) min = Math.min(0, min);
-                if (max - min < minimumSpan) {
-                    if (includeZero) {
-                        max = min + minimumSpan;
-                    } else {
-                        const center = (observedMin + observedMax) / 2;
-                        min = Math.floor((center - minimumSpan / 2) / step) * step;
-                        max = min + minimumSpan;
-                    }
-                }
-
-                while (min > observedMin) min -= step;
-                while (max < observedMax) max += step;
-                return { min, max };
-            }
-
-            function renderWeatherHistoryLegacy(lang = document.documentElement.lang || "pl") {
+            function renderWeatherHistory(lang = document.documentElement.lang || "pl") {
                 if (!weatherHistoryDate || !weatherChartWrap || !weatherChartCanvas) return;
                 const selected = translations[lang] ? lang : "pl";
                 const copy = translations[selected].weather;
@@ -3145,15 +2489,6 @@
                 if (weatherToday) weatherToday.disabled = selectedWeatherDate === todayKey;
 
                 const readings = weatherHistory?.days?.[selectedWeatherDate] || [];
-                const allReadings = Object.values(weatherHistory?.days || {}).flat();
-                const temperatureScale = stableChartScale(
-                    allReadings.map((reading) => reading.temperature),
-                    { step: 5, minimumSpan: 10, baselineMin: -20, baselineMax: 40 }
-                );
-                const particleScale = stableChartScale(
-                    allReadings.flatMap((reading) => [reading.pm25, reading.pm10]),
-                    { step: 10, minimumSpan: 50, includeZero: true }
-                );
                 const byHour = new Map(readings.map((reading) => [Number(reading.hour.slice(0, 2)), reading]));
                 const labels = Array.from({ length: 24 }, (_, hour) => `${String(hour).padStart(2, "0")}:00`);
                 const values = (name) => labels.map((_, hour) => byHour.get(hour)?.[name] ?? null);
@@ -3172,26 +2507,15 @@
                         labels,
                         datasets: [
                             {
-                                label: copy.temperatureDataset,
-                                data: values("temperature"),
-                                yAxisID: "temperature",
-                                borderColor: "#38bdf8",
-                                backgroundColor: "#38bdf8",
-                                showLine: false,
-                                pointStyle: "circle",
-                                pointRadius: 4,
-                                pointHoverRadius: 6
-                            },
-                            {
                                 label: "PM2.5 (µg/m³)",
                                 data: values("pm25"),
                                 yAxisID: "particles",
                                 borderColor: "#22c55e",
                                 backgroundColor: "#22c55e",
-                                showLine: false,
-                                pointStyle: "triangle",
-                                pointRadius: 5,
-                                pointHoverRadius: 7
+                                pointRadius: 3,
+                                borderWidth: 2,
+                                tension: 0.25,
+                                spanGaps: false
                             },
                             {
                                 label: "PM10 (µg/m³)",
@@ -3199,10 +2523,10 @@
                                 yAxisID: "particles",
                                 borderColor: "#f59e0b",
                                 backgroundColor: "#f59e0b",
-                                showLine: false,
-                                pointStyle: "rectRot",
-                                pointRadius: 5,
-                                pointHoverRadius: 7
+                                pointRadius: 3,
+                                borderWidth: 2,
+                                tension: 0.25,
+                                spanGaps: false
                             }
                         ]
                     },
@@ -3221,497 +2545,11 @@
                                 ticks: { color: textColor, maxRotation: 0, autoSkip: true, maxTicksLimit: 12 },
                                 grid: { color: gridColor }
                             },
-                            temperature: {
-                                type: "linear",
-                                position: "left",
-                                min: temperatureScale.min,
-                                max: temperatureScale.max,
-                                title: { display: true, text: "°C", color: textColor },
-                                ticks: { color: textColor, stepSize: 5 },
-                                grid: { color: gridColor }
-                            },
                             particles: {
                                 type: "linear",
-                                position: "right",
-                                min: particleScale.min,
-                                max: particleScale.max,
-                                title: { display: true, text: "PM (µg/m³)", color: textColor },
-                                ticks: { color: textColor, stepSize: 10 },
-                                grid: { drawOnChartArea: false }
-                            }
-                        }
-                    }
-                });
-            }
-
-            function formatNumber(value, lang, digits = 1) {
-                if (value === null || value === undefined || !Number.isFinite(Number(value))) return "—";
-                return new Intl.NumberFormat(lang === "pl" ? "pl-PL" : "en-GB", {
-                    maximumFractionDigits: digits,
-                    minimumFractionDigits: 0
-                }).format(Number(value));
-            }
-
-            function formatDateTime(rawTime, lang) {
-                if (!rawTime) return "—";
-                const date = new Date(rawTime);
-                if (Number.isNaN(date.getTime())) return "—";
-                return new Intl.DateTimeFormat(lang === "pl" ? "pl-PL" : "en-GB", {
-                    dateStyle: "medium",
-                    timeStyle: "short",
-                    timeZone: "Europe/Warsaw"
-                }).format(date);
-            }
-
-            function formatShortTime(rawTime, lang) {
-                const date = new Date(rawTime);
-                if (Number.isNaN(date.getTime())) return "—";
-                return new Intl.DateTimeFormat(lang === "pl" ? "pl-PL" : "en-GB", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    timeZone: "Europe/Warsaw"
-                }).format(date);
-            }
-
-            function localTimeParts(rawTime) {
-                const parts = new Intl.DateTimeFormat("en-CA", {
-                    timeZone: "Europe/Warsaw",
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hourCycle: "h23"
-                }).formatToParts(new Date(rawTime));
-                return Object.fromEntries(parts.map((part) => [part.type, part.value]));
-            }
-
-            function mean(values) {
-                const finite = values.map(Number).filter(Number.isFinite);
-                return finite.length ? finite.reduce((sum, value) => sum + value, 0) / finite.length : null;
-            }
-
-            function createWeatherBuckets(range, selectedDate, lang) {
-                const buckets = [];
-                if (range === "day") {
-                    for (let index = 0; index < 96; index += 1) {
-                        const hour = Math.floor(index / 4);
-                        const minute = (index % 4) * 15;
-                        const time = `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
-                        buckets.push({ key: `${selectedDate} ${time}`, label: time });
-                    }
-                    return buckets;
-                }
-
-                if (range === "24h") {
-                    const end = Math.floor(Date.now() / 900000) * 900000;
-                    for (let index = 95; index >= 0; index -= 1) {
-                        const start = end - index * 900000;
-                        buckets.push({
-                            key: String(start),
-                            start,
-                            end: start + 900000,
-                            label: new Intl.DateTimeFormat(lang === "pl" ? "pl-PL" : "en-GB", {
-                                weekday: "short",
-                                hour: "2-digit",
-                                minute: "2-digit",
-                                timeZone: "Europe/Warsaw"
-                            }).format(new Date(start))
-                        });
-                    }
-                    return buckets;
-                }
-
-                if (range === "7d") {
-                    const block = 6 * 60 * 60 * 1000;
-                    const end = Math.floor(Date.now() / block) * block;
-                    for (let index = 27; index >= 0; index -= 1) {
-                        const start = end - index * block;
-                        buckets.push({
-                            key: String(start),
-                            start,
-                            end: start + block,
-                            label: new Intl.DateTimeFormat(lang === "pl" ? "pl-PL" : "en-GB", {
-                                day: "2-digit",
-                                month: "2-digit",
-                                hour: "2-digit",
-                                timeZone: "Europe/Warsaw"
-                            }).format(new Date(start))
-                        });
-                    }
-                    return buckets;
-                }
-
-                const today = dateKeyInWarsaw();
-                for (let index = 29; index >= 0; index -= 1) {
-                    const key = shiftDateKey(today, -index);
-                    buckets.push({
-                        key,
-                        label: new Intl.DateTimeFormat(lang === "pl" ? "pl-PL" : "en-GB", {
-                            day: "2-digit",
-                            month: "short",
-                            timeZone: "UTC"
-                        }).format(new Date(`${key}T12:00:00Z`))
-                    });
-                }
-                return buckets;
-            }
-
-            function bucketKeyFor(rawTime, range) {
-                const date = new Date(rawTime);
-                if (Number.isNaN(date.getTime())) return null;
-                if (range === "day") {
-                    const parts = localTimeParts(date);
-                    const minute = Math.floor(Number(parts.minute) / 15) * 15;
-                    return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${String(minute).padStart(2, "0")}`;
-                }
-                if (range === "24h") return String(Math.floor(date.getTime() / 900000) * 900000);
-                if (range === "7d") {
-                    const block = 6 * 60 * 60 * 1000;
-                    return String(Math.floor(date.getTime() / block) * block);
-                }
-                return dateKeyInWarsaw(date);
-            }
-
-            function aggregateWeatherBuckets(buckets, range) {
-                const data = new Map(buckets.map((bucket) => [bucket.key, {
-                    sensorTemperature: [],
-                    pm25: [],
-                    pm10: [],
-                    collectedTemperature: [],
-                    backfillTemperature: [],
-                    collectedPrecipitation: 0,
-                    collectedPrecipitationCount: 0,
-                    backfillPrecipitation: 0,
-                    backfillPrecipitationCount: 0,
-                    forecastTemperature: [],
-                    forecastPrecipitation: 0,
-                    forecastPrecipitationCount: 0
-                }]));
-
-                Object.values(weatherHistory?.days || {}).flat().forEach((reading) => {
-                    const bucket = data.get(bucketKeyFor(reading.timestamp_utc, range));
-                    if (!bucket) return;
-                    bucket.sensorTemperature.push(reading.temperature);
-                    bucket.pm25.push(reading.pm25);
-                    bucket.pm10.push(reading.pm10);
-                });
-
-                const location = weatherModelData?.locations?.kat04bapp;
-                (location?.observations || []).forEach((reading) => {
-                    const bucket = data.get(bucketKeyFor(reading.interval_end_utc, range));
-                    if (!bucket) return;
-                    const isBackfill = reading.source_kind === "backfill_model";
-                    bucket[isBackfill ? "backfillTemperature" : "collectedTemperature"].push(reading.temperature);
-                    if (Number.isFinite(Number(reading.precipitation))) {
-                        const valueKey = isBackfill ? "backfillPrecipitation" : "collectedPrecipitation";
-                        const countKey = isBackfill ? "backfillPrecipitationCount" : "collectedPrecipitationCount";
-                        bucket[valueKey] += Number(reading.precipitation);
-                        bucket[countKey] += 1;
-                    }
-                });
-
-                if (range === "day" && selectedWeatherDate === dateKeyInWarsaw()) {
-                    (location?.forecast?.intervals || []).forEach((reading) => {
-                        const bucket = data.get(bucketKeyFor(reading.forecast_time_utc, range));
-                        if (!bucket) return;
-                        bucket.forecastTemperature.push(reading.temperature);
-                        if (Number.isFinite(Number(reading.precipitation))) {
-                            bucket.forecastPrecipitation += Number(reading.precipitation);
-                            bucket.forecastPrecipitationCount += 1;
-                        }
-                    });
-                }
-
-                return buckets.map((bucket) => {
-                    const values = data.get(bucket.key);
-                    return {
-                        ...bucket,
-                        sensorTemperature: mean(values.sensorTemperature),
-                        pm25: mean(values.pm25),
-                        pm10: mean(values.pm10),
-                        collectedTemperature: mean(values.collectedTemperature),
-                        backfillTemperature: mean(values.backfillTemperature),
-                        collectedPrecipitation: values.collectedPrecipitationCount
-                            ? values.collectedPrecipitation
-                            : null,
-                        backfillPrecipitation: values.backfillPrecipitationCount
-                            ? values.backfillPrecipitation
-                            : null,
-                        forecastTemperature: mean(values.forecastTemperature),
-                        forecastPrecipitation: values.forecastPrecipitationCount
-                            ? values.forecastPrecipitation
-                            : null
-                    };
-                });
-            }
-
-            function chartTooltipLabel(context, lang) {
-                if (context.raw === null || context.raw === undefined) return "";
-                const unit = context.dataset.unit || "";
-                const source = context.dataset.source ? ` · ${context.dataset.source}` : "";
-                return `${context.dataset.label}: ${formatNumber(context.raw, lang, 2)} ${unit}${source}`;
-            }
-
-            function renderWeatherHistory(lang = document.documentElement.lang || "pl") {
-                if (!weatherHistoryDate || !weatherChartWrap || !weatherChartCanvas || !weatherPrecipitationCanvas) return;
-                const selected = translations[lang] ? lang : "pl";
-                const copy = translations[selected].weather;
-                const todayKey = dateKeyInWarsaw();
-                const oldestKey = shiftDateKey(todayKey, -89);
-                selectedWeatherDate ||= todayKey;
-                if (selectedWeatherDate < oldestKey) selectedWeatherDate = oldestKey;
-                if (selectedWeatherDate > todayKey) selectedWeatherDate = todayKey;
-
-                weatherRangeButtons.forEach((button) => {
-                    button.classList.toggle("is-active", button.dataset.weatherRange === selectedWeatherRange);
-                    button.setAttribute("aria-pressed", String(button.dataset.weatherRange === selectedWeatherRange));
-                });
-                weatherDayNavigation.hidden = selectedWeatherRange !== "day";
-                if (weatherPreviousDay) weatherPreviousDay.disabled = selectedWeatherDate <= oldestKey;
-                if (weatherNextDay) weatherNextDay.disabled = selectedWeatherDate >= todayKey;
-                if (weatherToday) weatherToday.disabled = selectedWeatherDate === todayKey;
-
-                if (selectedWeatherRange === "day") {
-                    weatherHistoryDate.textContent = new Intl.DateTimeFormat(
-                        selected === "pl" ? "pl-PL" : "en-GB",
-                        { dateStyle: "full", timeZone: "UTC" }
-                    ).format(new Date(`${selectedWeatherDate}T12:00:00Z`));
-                } else {
-                    const rangeKey = selectedWeatherRange === "24h"
-                        ? "range24h"
-                        : selectedWeatherRange === "7d" ? "range7d" : "range30d";
-                    weatherHistoryDate.textContent = copy[rangeKey];
-                }
-
-                const location = weatherModelData?.locations?.kat04bapp;
-                if (weatherHistoryRange && location?.available_from) {
-                    weatherHistoryRange.textContent = interpolate(copy.historyAvailable, {
-                        from: formatDateTime(location.available_from, selected),
-                        to: formatDateTime(location.current?.data_time_utc, selected),
-                        collected: formatDateTime(location.collection_started_at, selected)
-                    });
-                }
-                weatherPrecipitationNote.textContent = selectedWeatherRange === "7d"
-                    ? copy.precipitationInterval6h
-                    : selectedWeatherRange === "30d"
-                        ? copy.precipitationIntervalDay
-                        : copy.precipitationInterval15m;
-
-                const buckets = aggregateWeatherBuckets(
-                    createWeatherBuckets(selectedWeatherRange, selectedWeatherDate, selected),
-                    selectedWeatherRange
-                );
-                const labels = buckets.map((bucket) => bucket.label);
-                const values = (key) => buckets.map((bucket) => bucket[key]);
-                const hasData = buckets.some((bucket) => [
-                    bucket.sensorTemperature,
-                    bucket.pm25,
-                    bucket.pm10,
-                    bucket.collectedTemperature,
-                    bucket.backfillTemperature,
-                    bucket.collectedPrecipitation,
-                    bucket.backfillPrecipitation,
-                    bucket.forecastTemperature,
-                    bucket.forecastPrecipitation
-                ].some((value) => value !== null));
-                weatherChartWrap.dataset.empty = String(!hasData);
-
-                weatherChart?.destroy();
-                weatherPrecipitationChart?.destroy();
-                weatherChart = null;
-                weatherPrecipitationChart = null;
-                renderTwoHourForecast(selected);
-                if (typeof Chart === "undefined") return;
-
-                const allSensors = Object.values(weatherHistory?.days || {}).flat();
-                const allModel = location?.observations || [];
-                const temperatureScale = stableChartScale(
-                    [
-                        ...allSensors.map((reading) => reading.temperature),
-                        ...allModel.map((reading) => reading.temperature)
-                    ],
-                    { step: 5, minimumSpan: 10, baselineMin: -20, baselineMax: 40 }
-                );
-                const particleScale = stableChartScale(
-                    allSensors.flatMap((reading) => [reading.pm25, reading.pm10]),
-                    { step: 10, minimumSpan: 50, includeZero: true }
-                );
-                const styles = getComputedStyle(document.body);
-                const textColor = styles.getPropertyValue("--muted").trim();
-                const gridColor = styles.getPropertyValue("--line").trim();
-                const commonOptions = {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: false,
-                    interaction: { mode: "index", intersect: false },
-                    plugins: {
-                        legend: { labels: { color: textColor, usePointStyle: true, boxWidth: 8 } },
-                        tooltip: {
-                            filter: (item) => item.raw !== null,
-                            callbacks: { label: (context) => chartTooltipLabel(context, selected) }
-                        }
-                    }
-                };
-
-                weatherChart = new Chart(weatherChartCanvas, {
-                    type: "line",
-                    data: {
-                        labels,
-                        datasets: [
-                            {
-                                label: copy.sensorTemperatureDataset,
-                                data: values("sensorTemperature"),
-                                yAxisID: "temperature",
-                                borderColor: "#38bdf8",
-                                backgroundColor: "#38bdf8",
-                                pointStyle: "circle",
-                                pointRadius: 4,
-                                showLine: false,
-                                unit: "°C",
-                                source: "InPost KAT04BAPP"
-                            },
-                            {
-                                label: copy.collectedTemperatureDataset,
-                                data: values("collectedTemperature"),
-                                yAxisID: "temperature",
-                                borderColor: "#c084fc",
-                                backgroundColor: "#c084fc",
-                                pointStyle: "circle",
-                                pointRadius: selectedWeatherRange === "day" ? 3 : 4,
-                                showLine: false,
-                                unit: "°C",
-                                source: "Open-Meteo · collected_model"
-                            },
-                            {
-                                label: copy.backfillTemperatureDataset,
-                                data: values("backfillTemperature"),
-                                yAxisID: "temperature",
-                                borderColor: "#a78bfa",
-                                backgroundColor: "#a78bfa",
-                                pointStyle: "crossRot",
-                                pointRadius: selectedWeatherRange === "day" ? 2 : 3,
-                                showLine: false,
-                                unit: "°C",
-                                source: "Open-Meteo · backfill_model"
-                            },
-                            {
-                                label: copy.forecastTemperatureDataset,
-                                data: values("forecastTemperature"),
-                                yAxisID: "temperature",
-                                borderColor: "#e879f9",
-                                backgroundColor: "#e879f9",
-                                borderDash: [7, 5],
-                                borderWidth: 2,
-                                pointRadius: 3,
-                                spanGaps: false,
-                                unit: "°C",
-                                source: "Open-Meteo · forecast"
-                            },
-                            {
-                                label: copy.sensorPm25Dataset,
-                                data: values("pm25"),
-                                yAxisID: "particles",
-                                borderColor: "#22c55e",
-                                backgroundColor: "#22c55e",
-                                pointStyle: "triangle",
-                                pointRadius: 5,
-                                showLine: false,
-                                unit: "µg/m³",
-                                source: "InPost KAT04BAPP"
-                            },
-                            {
-                                label: copy.sensorPm10Dataset,
-                                data: values("pm10"),
-                                yAxisID: "particles",
-                                borderColor: "#f59e0b",
-                                backgroundColor: "#f59e0b",
-                                pointStyle: "rectRot",
-                                pointRadius: 5,
-                                showLine: false,
-                                unit: "µg/m³",
-                                source: "InPost KAT04BAPP"
-                            }
-                        ]
-                    },
-                    options: {
-                        ...commonOptions,
-                        scales: {
-                            x: {
-                                title: { display: true, text: copy.timeAxis, color: textColor },
-                                ticks: { color: textColor, maxRotation: 0, autoSkip: true, maxTicksLimit: 12 },
-                                grid: { color: gridColor }
-                            },
-                            temperature: {
-                                type: "linear",
                                 position: "left",
-                                min: temperatureScale.min,
-                                max: temperatureScale.max,
-                                title: { display: true, text: "°C", color: textColor },
-                                ticks: { color: textColor, stepSize: 5 },
-                                grid: { color: gridColor }
-                            },
-                            particles: {
-                                type: "linear",
-                                position: "right",
-                                min: particleScale.min,
-                                max: particleScale.max,
-                                title: { display: true, text: "PM (µg/m³)", color: textColor },
-                                ticks: { color: textColor, stepSize: 10 },
-                                grid: { drawOnChartArea: false }
-                            }
-                        }
-                    }
-                });
-
-                const precipitationUnit = selectedWeatherRange === "7d"
-                    ? "mm / 6 h"
-                    : selectedWeatherRange === "30d" ? "mm / dzień" : "mm / 15 min";
-                weatherPrecipitationChart = new Chart(weatherPrecipitationCanvas, {
-                    type: "bar",
-                    data: {
-                        labels,
-                        datasets: [
-                            {
-                                label: copy.collectedPrecipitationDataset,
-                                data: values("collectedPrecipitation"),
-                                borderColor: "#38bdf8",
-                                backgroundColor: "rgba(56, 189, 248, 0.62)",
-                                borderWidth: 1,
-                                unit: precipitationUnit,
-                                source: "Open-Meteo · collected_model"
-                            },
-                            {
-                                label: copy.backfillPrecipitationDataset,
-                                data: values("backfillPrecipitation"),
-                                borderColor: "#818cf8",
-                                backgroundColor: "rgba(129, 140, 248, 0.36)",
-                                borderWidth: 1,
-                                unit: precipitationUnit,
-                                source: "Open-Meteo · backfill_model"
-                            },
-                            {
-                                label: copy.forecastPrecipitationDataset,
-                                data: values("forecastPrecipitation"),
-                                borderColor: "#f59e0b",
-                                backgroundColor: "rgba(245, 158, 11, 0.48)",
-                                borderWidth: 1,
-                                unit: "mm / 15 min",
-                                source: "Open-Meteo · forecast"
-                            }
-                        ]
-                    },
-                    options: {
-                        ...commonOptions,
-                        scales: {
-                            x: {
-                                ticks: { color: textColor, maxRotation: 0, autoSkip: true, maxTicksLimit: 12 },
-                                grid: { color: gridColor }
-                            },
-                            y: {
                                 beginAtZero: true,
-                                suggestedMax: 1,
-                                title: { display: true, text: precipitationUnit, color: textColor },
+                                title: { display: true, text: "PM (µg/m³)", color: textColor },
                                 ticks: { color: textColor },
                                 grid: { color: gridColor }
                             }
@@ -3728,7 +2566,7 @@
                     if (!data.days || typeof data.days !== "object") throw new Error("Nieprawidłowy format historii");
                     weatherHistory = data;
                 } catch (error) {
-                    console.error("Nie udało się wczytać historii pogody:", error);
+                    console.error("Nie udało się wczytać historii jakości powietrza:", error);
                     weatherHistory = { days: {} };
                 }
                 renderWeatherHistory();
@@ -3762,8 +2600,6 @@
 
                 updateMenuButtonLabel(selected);
                 renderWeather(selected);
-                renderPrecipitation(selected);
-                renderTwoHourForecast(selected);
                 renderWeatherHistory(selected);
             }
 
@@ -3812,21 +2648,11 @@
             setLanguage(localStorage.getItem("banas_lang") || "pl");
             applyTheme(localStorage.getItem("banas_theme") || "dark");
             loadWeather();
-            loadPrecipitation();
             loadWeatherHistory();
-
-            window.addEventListener("online", () => loadPrecipitation());
-            document.addEventListener("visibilitychange", () => {
-                if (document.visibilityState !== "visible") return;
-                loadPrecipitation();
-            });
-
-            weatherRangeButtons.forEach((button) => {
-                button.addEventListener("click", () => {
-                    selectedWeatherRange = button.dataset.weatherRange;
-                    renderWeatherHistory();
-                });
-            });
+            window.setInterval(() => {
+                loadWeather();
+                loadWeatherHistory();
+            }, 60 * 60 * 1000);
 
             weatherPreviousDay?.addEventListener("click", () => {
                 selectedWeatherDate = shiftDateKey(selectedWeatherDate || dateKeyInWarsaw(), -1);
