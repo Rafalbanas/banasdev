@@ -19,10 +19,11 @@ from zoneinfo import ZoneInfo
 
 GIOS_API_BASE = "https://api.gios.gov.pl/pjp-api/v1/rest"
 OPEN_METEO_API_URL = "https://api.open-meteo.com/v1/forecast"
-OUTPUT_PATH = Path(__file__).resolve().with_name("data.json")
-DATABASE_PATH = Path(__file__).resolve().with_name("weather_history.db")
-HISTORY_PATH = Path(__file__).resolve().with_name("history.json")
-WEATHER_PATH = Path(__file__).resolve().with_name("weather.json")
+DATA_DIR = Path(os.environ.get("BANASDEV_DATA_DIR", Path(__file__).resolve().parent))
+OUTPUT_PATH = DATA_DIR / "data.json"
+DATABASE_PATH = DATA_DIR / "weather_history.db"
+HISTORY_PATH = DATA_DIR / "history.json"
+WEATHER_PATH = DATA_DIR / "weather.json"
 LOCAL_TIMEZONE = ZoneInfo("Europe/Warsaw")
 WEATHER_RETENTION_DAYS = 30
 AIR_RETENTION_DAYS = 90

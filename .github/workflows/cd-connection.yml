@@ -1,0 +1,37 @@
+name: Check banas.dev deployment connection
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/banasdev-ci-cd]
+permissions: {}
+jobs:
+  connection:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Verify server identity and restricted SSH access
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$VPS_HOST" && test -n "$VPS_PORT" && test -n "$VPS_USER"
+          test -n "$SSH_KEY" && test -n "$KNOWN_HOSTS"
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
+          ssh_args=(-o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=20 -p "$VPS_PORT")
+          live=$(ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" status)
+          [[ "$live" =~ ^[a-f0-9]{40}$ ]]
+          echo "Restricted SSH works; running revision: $live"
+          if ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" whoami; then
+            echo 'Unexpected unrestricted shell access' >&2
+            exit 1
+          fi
+      - name: Remove SSH key
+        if: always()
+        run: rm -f ~/.ssh/id_ed25519

@@ -1,0 +1,3 @@
+# Preserve the existing /cytrus JSON, SQLite database and weather.log.
+*/15 * * * * BANASDEV_DATA_DIR=/cytrus /usr/bin/python3 /var/lib/banasdev/current/fetch_weather.py --weather-only >> /cytrus/weather.log 2>&1
+5 * * * * BANASDEV_DATA_DIR=/cytrus /usr/bin/python3 /var/lib/banasdev/current/fetch_weather.py --air-only >> /cytrus/weather.log 2>&1
