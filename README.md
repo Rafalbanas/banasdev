@@ -2,6 +2,16 @@
 
 Statyczne portfolio dostępne pod adresem `banas.dev`. Sekcja „Kato na żywo” łączy pogodę z Open-Meteo i jakość powietrza z GIOŚ.
 
+## CI/CD
+
+GitHub Actions sprawdza każdy push i PR. Po udanych testach push do `main`
+automatycznie wdraża sprawdzoną paczkę na VPS przez ograniczone SSH.
+Można też uruchomić workflow ręcznie na `main`. Wdrożenie przełącza wersję
+atomowo, sprawdza stronę i przy błędzie przywraca poprzednią wersję.
+Dane pogodowe i baza SQLite pozostają na serwerze.
+
+Szczegóły konfiguracji, sekretów i odzyskiwania: [deploy/README.md](deploy/README.md).
+
 ## Źródła danych
 
 - Open-Meteo — temperatura, bieżący status opadów, prognoza na dwie godziny oraz historia temperatury i opadów.
@@ -25,8 +35,8 @@ Temperatura ani opady nie są pobierane z GIOŚ lub InPost. Dane pyłowe nie są
 Pogoda jest pobierana co 15 minut, a GIOŚ raz na godzinę, pięć minut po pełnej godzinie:
 
 ```cron
-*/15 * * * * cd /cytrus && /usr/bin/python3 fetch_weather.py --weather-only >> weather.log 2>&1
-5 * * * * cd /cytrus && /usr/bin/python3 fetch_weather.py --air-only >> weather.log 2>&1
+*/15 * * * * BANASDEV_DATA_DIR=/cytrus /usr/bin/python3 /var/lib/banasdev/current/fetch_weather.py --weather-only >> /cytrus/weather.log 2>&1
+5 * * * * BANASDEV_DATA_DIR=/cytrus /usr/bin/python3 /var/lib/banasdev/current/fetch_weather.py --air-only >> /cytrus/weather.log 2>&1
 ```
 
 ## Uruchomienie

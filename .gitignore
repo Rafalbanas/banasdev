@@ -4,3 +4,5 @@ weather.log
 *.log
 weather_history.db*
 index.html.bak_*
+
+release.zip
