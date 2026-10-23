@@ -1250,6 +1250,12 @@
             white-space: nowrap;
         }
 
+        .footer-email {
+            overflow-wrap: anywhere;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
         footer {
             border-top: 1px solid var(--line);
             color: var(--muted);
@@ -2250,10 +2256,14 @@
                     <div class="section-kicker" data-i18n="contact.kicker">Kontakt</div>
                     <h2 id="contact-title" data-i18n="contact.title">Porozmawiajmy o IT, automatyzacji albo danych.</h2>
                     <p class="section-lead" data-i18n="contact.lead">
-                        Najłatwiej znaleźć mnie przez LinkedIn, GitHuba lub moje publiczne profile projektowe.
+                        Napisz do mnie e-mail lub znajdź mnie przez LinkedIn, GitHuba i moje publiczne profile projektowe.
                     </p>
                 </div>
                 <div class="contact-links">
+                    <span class="contact-link" data-public-email>
+                        <strong>E-mail</strong>
+                        <span data-email-text>contact [at] banas [dot] dev</span>
+                    </span>
                     <a class="contact-link" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener">
                         <strong>LinkedIn</strong>
                         <span>linkedin.com/in/rafał-banaś-251583152</span>
@@ -2278,10 +2288,28 @@
     <footer>
         <div class="page">
             <span>&copy; 2026 Rafał Banaś. banas.dev</span>
+            <span class="footer-email" data-public-email>
+                <span data-email-text>contact [at] banas [dot] dev</span>
+            </span>
             <span data-i18n="footer.note">Statyczna strona bez analityki i trackerów. Motyw i język zapisują się lokalnie w przeglądarce.</span>
         </div>
     </footer>
 
+    <script>
+        (() => {
+            const mailbox = "contact";
+            const domain = ["banas", "dev"].join(".");
+            const address = [mailbox, domain].join("@");
+            document.querySelectorAll("[data-public-email]").forEach((placeholder) => {
+                const link = document.createElement("a");
+                link.className = placeholder.className;
+                link.href = ["mail", "to", ":", address].join("");
+                placeholder.querySelector("[data-email-text]").textContent = address;
+                link.append(...placeholder.childNodes);
+                placeholder.replaceWith(link);
+            });
+        })();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script>
         (() => {
@@ -2586,7 +2614,7 @@
                     contact: {
                         kicker: "Kontakt",
                         title: "Porozmawiajmy o IT, automatyzacji albo danych.",
-                        lead: "Najłatwiej znaleźć mnie przez LinkedIn, GitHuba lub moje publiczne profile projektowe."
+                        lead: "Napisz do mnie e-mail lub znajdź mnie przez LinkedIn, GitHuba i moje publiczne profile projektowe."
                     },
                     footer: {
                         note: "Statyczna strona bez analityki i trackerów. Motyw i język zapisują się lokalnie w przeglądarce."
@@ -2840,7 +2868,7 @@
                     contact: {
                         kicker: "Contact",
                         title: "Let’s talk about IT, automation or data.",
-                        lead: "The easiest way to reach me is through LinkedIn, GitHub or my public project profiles."
+                        lead: "Send me an email or find me on LinkedIn, GitHub and my public project profiles."
                     },
                     footer: {
                         note: "Static website with no analytics or trackers. Theme and language are stored locally in the browser."
