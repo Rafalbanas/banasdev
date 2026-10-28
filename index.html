@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafał Banaś | Technical Support Engineer, IT & Data Science</title>
-    <meta name="description" content="Portfolio Rafała Banasia: Technical Support Engineer, IT/Application Support, student informatyki rozwijający się w kierunku AI, Data Science, automatyzacji i systemów.">
+    <title>Rafał Banaś | Technical Support Engineer · Python & AI</title>
+    <meta name="description" content="Rafał Banaś — Technical Support Engineer Tier 2 w Motorola Solutions, magister informatyki. Wsparcie aplikacji, Python, automatyzacja i własne projekty AI.">
+    <link rel="canonical" href="https://banas.dev/">
     <meta name="author" content="Rafał Banaś">
     <meta name="theme-color" content="#0f172a">
 
@@ -14,13 +15,13 @@
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://banas.dev/">
-    <meta property="og:title" content="Rafał Banaś | Technical Support Engineer, IT & Data Science">
-    <meta property="og:description" content="Portfolio techniczne: IT/Application Support, troubleshooting, automatyzacja, AI, Data Science i projekty webowe.">
+    <meta property="og:title" content="Rafał Banaś | Technical Support Engineer · Python & AI">
+    <meta property="og:description" content="Wsparcie Tier 2 WAVE PTX w EMEA, magister informatyki i projekty Python: CVTailor, Cycling, Plates oraz self-hosting.">
     <meta property="og:image" content="https://banas.dev/cv_photo.webp">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Rafał Banaś | Technical Support Engineer">
-    <meta name="twitter:description" content="Technical Support Engineer, student informatyki, projekty AI, automatyzacja i dane treningowe.">
+    <meta name="twitter:description" content="Technical Support Engineer Tier 2, magister informatyki, projekty Python, AI i automatyzacja.">
     <meta name="twitter:image" content="https://banas.dev/cv_photo.webp">
 
     <style>
@@ -39,7 +40,7 @@
             --code: #a7f3d0;
             --danger: #fb7185;
             --shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
-            --radius: 8px;
+            --radius: 18px;
             --max: 1160px;
         }
 
@@ -50,7 +51,9 @@
             --surface: rgba(255, 255, 255, 0.9);
             --surface-strong: #ffffff;
             --text: #172033;
-            --muted: #5d6677;
+            --muted: #4b5669;
+            --accent: #0369a1;
+            --accent-2: #15803d;
             --line: rgba(15, 23, 42, 0.14);
             --shadow: 0 18px 60px rgba(15, 23, 42, 0.11);
             --code: #047857;
@@ -330,12 +333,12 @@
             --hero-glow-x: 50%;
             --hero-glow-y: 42%;
             position: relative;
-            min-height: calc(100svh - 68px);
+            min-height: min(880px, calc(100svh - 68px));
             display: grid;
             grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
             align-items: center;
-            gap: 44px;
-            padding: 64px 0 42px;
+            gap: clamp(28px, 5vw, 72px);
+            padding: 72px 0 64px;
         }
 
         .hero::before {
@@ -384,7 +387,7 @@
             margin: 22px 0 18px;
             font-size: clamp(2.35rem, 7vw, 5.8rem);
             line-height: 0.98;
-            letter-spacing: 0;
+            letter-spacing: -0.045em;
         }
 
         .hero-subtitle {
@@ -399,6 +402,25 @@
             gap: 10px;
             margin: 28px 0;
         }
+
+        .hero-facts {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            padding: 22px 0;
+            margin-bottom: 24px;
+            border-block: 1px solid var(--line);
+        }
+
+        .hero-facts > div { min-width: 0; }
+        .hero-facts strong { display: block; font-size: clamp(1.05rem, 2vw, 1.4rem); letter-spacing: -0.03em; }
+        .hero-facts span { display: block; color: var(--muted); font-size: 0.8rem; line-height: 1.5; }
+        a:focus-visible, button:focus-visible, input:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+        }
+        body.light .button.primary { background: #bae6fd; color: #082f49; }
+        .project-card:focus-within { border-color: var(--accent); }
 
         .hero-tags,
         .tags {
@@ -467,8 +489,9 @@
 
         .profile-photo {
             width: 100%;
-            aspect-ratio: 4 / 5;
+            aspect-ratio: 5 / 4;
             object-fit: cover;
+            object-position: center 28%;
             border-radius: var(--radius);
             border: 1px solid var(--line);
             cursor: pointer;
@@ -553,7 +576,7 @@
         }
 
         .section {
-            padding: 58px 0;
+            padding: clamp(44px, 6vw, 80px) 0;
             border-top: 1px solid var(--line);
         }
 
@@ -587,7 +610,7 @@
 
         .grid {
             display: grid;
-            gap: 14px;
+            gap: 20px;
         }
 
         .grid.two {
@@ -604,7 +627,7 @@
             border: 1px solid var(--line);
             border-radius: var(--radius);
             background: var(--surface);
-            padding: 20px;
+            padding: clamp(20px, 2.5vw, 30px);
             min-width: 0;
             overflow-wrap: anywhere;
             transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
@@ -1720,17 +1743,21 @@
     <main id="main">
         <section class="page hero" id="top" aria-labelledby="hero-title">
             <div>
-                <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> <span data-i18n="hero.eyebrow">Technical Support Engineer / IT / Application Support</span></div>
+                <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> <span data-i18n="hero.eyebrow">Technical Support Engineer · Python · AI</span></div>
                 <h1 id="hero-title">Rafał Banaś</h1>
                 <p class="hero-subtitle" data-i18n="hero.subtitle">
-                    Technical Support Engineer w Motorola Solutions i student informatyki. Łączę praktyczne IT,
-                    wsparcie aplikacji, troubleshooting systemów, automatyzację i analizę danych z rosnącym
-                    zainteresowaniem AI oraz uczeniem maszynowym.
+                    Wspieram partnerów WAVE PTX w regionie EMEA jako Technical Support Engineer Tier 2 w Motorola Solutions.
+                    Jestem magistrem informatyki. Po pracy buduję narzędzia w Pythonie, automatyzuję zadania i rozwijam własne projekty AI.
                 </p>
                 <div class="hero-actions">
                     <a class="button primary" href="#projects" data-i18n="hero.projectsCta">Zobacz projekty</a>
                     <a class="button secondary" href="https://github.com/Rafalbanas" target="_blank" rel="noopener">GitHub</a>
                     <a class="button secondary" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener">LinkedIn</a>
+                </div>
+                <div class="hero-facts" aria-label="W skrócie" data-i18n-attr="aria-label:hero.factsAria">
+                    <div><strong>3+</strong><span data-i18n="hero.factExperience">lata wsparcia i operacji IT</span></div>
+                    <div><strong>Tier 2</strong><span>WAVE PTX · EMEA</span></div>
+                    <div><strong>MSc · 2026</strong><span data-i18n="hero.factDegree">informatyka · UE Katowice</span></div>
                 </div>
                 <ul class="hero-tags" aria-label="Główne obszary" data-i18n-attr="aria-label:hero.tagsAria">
                     <li class="tag">Windows Server</li>
@@ -1759,7 +1786,7 @@
                     </div>
                     <div class="meta-row">
                         <span data-i18n="profile.currentLabel">Aktualnie</span>
-                        <span>Technical Support Engineer</span>
+                        <span>Technical Support Engineer · Tier 2</span>
                     </div>
                     <div class="meta-row">
                         <span data-i18n="profile.companyLabel">Firma</span>
@@ -1792,12 +1819,11 @@
             <div class="section-heading">
                 <div class="section-kicker" data-i18n="about.kicker">O mnie</div>
                 <div>
-                    <h2 id="about-title" data-i18n="about.title">Techniczne IT z ciekawością do danych i automatyzacji.</h2>
+                    <h2 id="about-title" data-i18n="about.title">Personal engineering lab: praktyczne IT, dane i automatyzacja.</h2>
                     <p class="section-lead" data-i18n="about.lead">
-                        Jestem studentem informatyki i pracuję w IT, rozwijając się w kierunku AI, Data Science
-                        i automatyzacji. Najbliżej mi do praktycznego styku aplikacji, systemów, użytkowników
-                        i procesów wsparcia: diagnozowania problemów, porządkowania informacji, dokumentowania
-                        rozwiązań i szukania miejsc, w których skrypt albo automatyzacja oszczędza czas.
+                        Mam ponad trzy lata doświadczenia we wsparciu i operacjach IT oraz tytuł magistra informatyki.
+                        Diagnozuję problemy aplikacji, systemów i sieci, analizuję logi i dokumentuję rozwiązania.
+                        Własne projekty pozwalają mi łączyć Python, automatyzację i analizę danych z praktyką utrzymania usług.
                     </p>
                 </div>
             </div>
@@ -1807,12 +1833,12 @@
                     <p data-i18n="about.card1Text">Aplikacje, systemy, użytkownicy, infrastruktura, sieci i troubleshooting w codziennej pracy operacyjnej.</p>
                 </article>
                 <article class="card">
-                    <h3 data-i18n="about.card2Title">Automatyzacja i skrypty</h3>
-                    <p data-i18n="about.card2Text">PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania warto zamieniać w procedury lub narzędzia.</p>
+                    <h3 data-i18n="about.card2Title">Automatyzacja i prototypy</h3>
+                    <p data-i18n="about.card2Text">PowerShell, Python, podstawy Bash i n8n. Korzystam z asystentów AI przy tworzeniu kodu; zmiany weryfikuję przez przegląd, Git i testy.</p>
                 </article>
                 <article class="card">
                     <h3 data-i18n="about.card3Title">Dane, AI i sport</h3>
-                    <p data-i18n="about.card3Text">Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako konkretny obszar pracy magisterskiej.</p>
+                    <p data-i18n="about.card3Text">Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako praktyczne pole do eksperymentów z danymi.</p>
                 </article>
             </div>
         </section>
@@ -1939,8 +1965,7 @@
                 <div>
                     <h2 id="experience-title" data-i18n="experience.title">Doświadczenie zawodowe</h2>
                     <p class="section-lead" data-i18n="experience.lead">
-                        Pracowałem między innymi jako IT Specialist, Application Support i w obszarze IT Operations.
-                        Od kwietnia 2026 pracuję jako Technical Support Engineer w Motorola Solutions.
+                        Ponad trzy lata praktyki we wsparciu i operacjach IT. Od kwietnia 2026 wspieram partnerów WAVE PTX w EMEA jako Technical Support Engineer Tier 2 w Motorola Solutions.
                     </p>
                 </div>
             </div>
@@ -1953,10 +1978,10 @@
                         <p class="company">IT / Application Support</p>
                         <p class="company">Motorola Solutions</p>
                         <ul>
-                            <li data-i18n="experience.motorola1">Praca w środowisku IT z naciskiem na wsparcie aplikacji, systemów i użytkowników.</li>
-                            <li data-i18n="experience.motorola2">Analiza i rozwiązywanie problemów technicznych w oparciu o procesy wsparcia i dokumentację.</li>
-                            <li data-i18n="experience.motorola3">Współpraca z systemami, zgłoszeniami, dokumentacją i informacjami potrzebnymi do diagnozy.</li>
-                            <li data-i18n="experience.motorola4">Rozwijanie kompetencji w obszarach automatyzacji, analizy problemów i pracy z systemami.</li>
+                            <li data-i18n="experience.motorola1">Wsparcie Tier 2 partnerów WAVE PTX w regionie EMEA: problemy telekomunikacyjne, łączność i sieci.</li>
+                            <li data-i18n="experience.motorola2">Diagnostyka WAVE Dispatch, Windows i aplikacji; prowadzenie zgłoszeń partnerów w Salesforce.</li>
+                            <li data-i18n="experience.motorola3">Współpraca z Tier 1 i eskalowanie złożonych przypadków do Tier 3 engineering przez Jira.</li>
+                            <li data-i18n="experience.motorola4">Komunikacja z partnerami po angielsku (B2), obsługa incydentów i analiza pakietów w Wireshark podczas diagnostyki.</li>
                         </ul>
                     </div>
                 </article>
@@ -2029,8 +2054,8 @@
             <div class="grid three">
                 <article class="card project-card project-card--actionable">
                     <div class="project-number">01</div>
-                    <h3>Cycling</h3>
-                    <p data-i18n="projects.cyclingText">Interaktywna prezentacja projektu analizy formy kolarskiej, porównanie wyników modeli, wykresy i kalkulator FTP.</p>
+                    <h3>Cycling · Telemetry & ML</h3>
+                    <p data-i18n="projects.cyclingText">Wyniki pracy magisterskiej: estymacja badawczej etykiety FTP z telemetrii GoldenCheetah, porównanie modeli i SHAP. Kalkulator 0,95 × MMP20 jest heurystyką, nie inferencją modelu ani pomiarem progu fizjologicznego.</p>
                     <ul class="tags" aria-label="Obszary projektu Cycling" data-i18n-attr="aria-label:projects.cyclingTagsAria">
                         <li class="tag" data-i18n="tag.cyclingData">Dane kolarskie</li>
                         <li class="tag" data-i18n="tag.charts">Wykresy</li>
@@ -2038,53 +2063,49 @@
                     </ul>
                     <div class="project-actions">
                         <a class="button primary" href="https://cycling.banas.dev" target="_blank" rel="noopener" data-i18n="projects.cyclingCta">Zobacz projekt</a>
+                        <a class="button" href="https://github.com/Rafalbanas/Cycling" target="_blank" rel="noopener" data-i18n="projects.resumeCodeCta">Kod</a>
                     </div>
                 </article>
 
                 <article class="card project-card project-card--actionable">
                     <div class="project-number">02</div>
-                    <h3 data-i18n="projects.n8nTitle">Automatyzacje / n8n</h3>
-                    <p data-i18n="projects.n8nText">Środowisko automatyzacji procesów i integracji usług, wykorzystywane do testowania przepływów wspierających codzienną pracę techniczną.</p>
-                    <ul class="tags" aria-label="n8n">
-                        <li class="tag">n8n</li>
-                        <li class="tag" data-i18n="tag.integrations">Integracje</li>
-                        <li class="tag" data-i18n="tag.automation">Automatyzacja</li>
-                    </ul>
-                    <div class="project-actions">
-                        <a class="button primary" href="https://n8n.banas.dev" target="_blank" rel="noopener" data-i18n="projects.n8nCta">Otwórz n8n</a>
-                    </div>
-                </article>
-
-                <article class="card project-card project-card--actionable">
-                    <div class="project-number">03</div>
-                    <h3>AI Resume Tailoring</h3>
-                    <p data-i18n="projects.resumeText">Dopasowuje opisy stanowisk do zweryfikowanych faktów z profilu i generuje CV w formatach PDF oraz DOCX przy użyciu FastAPI i n8n.</p>
-                    <ul class="tags" aria-label="Technologie AI Resume Tailoring">
-                        <li class="tag">FastAPI</li>
-                        <li class="tag">n8n</li>
-                        <li class="tag">PDF / DOCX</li>
-                    </ul>
-                    <div class="project-actions">
-                        <a class="button" href="https://github.com/Rafalbanas/ai-resume-tailoring-platform" target="_blank" rel="noopener" data-i18n="projects.resumeCodeCta">Kod</a>
-                        <a class="button primary" href="https://cv.banas.dev/" target="_blank" rel="noopener" data-i18n="projects.resumeDemoCta">Demo</a>
-                    </div>
-                </article>
-
-                <article class="card project-card project-card--actionable">
-                    <div class="project-card-header">
-                        <div class="project-number">04</div>
-                        <span class="project-status" data-i18n="projects.preparing">W przygotowaniu</span>
-                    </div>
                     <h3 data-i18n="projects.platesTitle">Rozpoznawanie tablic rejestracyjnych / Plates</h3>
-                    <p data-i18n="projects.platesText">Projekt wykrywania tablic i odczytywania numerów ze zdjęć, wykorzystujący YOLO i OCR do detekcji obiektu, odczytu tekstu i obróbki wyniku.</p>
+                    <p data-i18n="projects.platesText">Publiczne demo ALPR: FastALPR i gotowe modele ONNX wykrywają tablice oraz odczytują tekst lokalnie na VPS. Repozytorium zawiera także osobny pipeline treningu i oceny detektora. OCR może mylić podobne znaki.</p>
                     <ul class="tags" aria-label="Technologie Plates">
                         <li class="tag">YOLO</li>
                         <li class="tag">OCR</li>
                         <li class="tag">Computer Vision</li>
                     </ul>
                     <div class="project-actions">
-                        <a class="button" data-project-link="plates" aria-disabled="true" tabindex="-1" data-i18n="projects.platesCta" data-i18n-attr="aria-label:projects.platesLinkAria">Zobacz projekt</a>
+                        <a class="button primary" href="https://plates.banas.dev" target="_blank" rel="noopener" data-i18n="projects.platesCta">Zobacz projekt</a>
+                        <a class="button" href="https://github.com/Rafalbanas/automatic_plate_number_recognition" target="_blank" rel="noopener" data-i18n="projects.platesCodeCta">Kod</a>
                     </div>
+                </article>
+
+                <article class="card project-card project-card--actionable">
+                    <div class="project-number">03</div>
+                    <h3>CVTailor · AI Resume Tailoring</h3>
+                    <p data-i18n="projects.resumeText">CVTailor analizuje oferty pracy i generuje PDF/DOCX z potwierdzonych faktów. FastAPI, Ollama/Gemini i niezależny Truth Lock. Kod obejmuje lokalny RAG z rankingiem BM25; aplikacja do użytku osobistego wymaga logowania, a wynik — weryfikacji człowieka.</p>
+                    <ul class="tags" aria-label="Technologie AI Resume Tailoring">
+                        <li class="tag">FastAPI</li>
+                        <li class="tag">Ollama / Gemini</li>
+                        <li class="tag">PDF / DOCX</li>
+                    </ul>
+                    <div class="project-actions">
+                        <a class="button" href="https://github.com/Rafalbanas/ai-resume-tailoring-platform" target="_blank" rel="noopener" data-i18n="projects.resumeCodeCta">Kod</a>
+                        <a class="button primary" href="https://cv.banas.dev/" target="_blank" rel="noopener" data-i18n="projects.resumeDemoCta">Aplikacja · logowanie</a>
+                    </div>
+                </article>
+
+                <article class="card project-card project-card--actionable">
+                    <div class="project-card-header">
+                        <div class="project-number">04</div>
+                        <span class="project-status" data-i18n="projects.privateDeployment">Prywatne wdrożenie</span>
+                    </div>
+                    <h3>Banas Chat</h3>
+                    <p data-i18n="projects.chatText">Prywatne wdrożenie Open WebUI z Ollama: MFA, limity generowania, koordynacja GPU i szyfrowane kopie zapasowe. Utrzymuję konfigurację i integracje; interfejs oraz silnik aplikacji pochodzą z Open WebUI.</p>
+                    <ul class="tags" aria-label="Banas Chat"><li class="tag">Open WebUI</li><li class="tag">Ollama</li><li class="tag">Docker</li></ul>
+                    <div class="project-actions"><a class="button" href="https://github.com/Rafalbanas/chat" target="_blank" rel="noopener" data-i18n="projects.resumeCodeCta">Kod</a></div>
                 </article>
             </div>
 
@@ -2104,7 +2125,7 @@
                 <article class="card project-card">
                     <div class="project-number">06</div>
                     <h3 data-i18n="projects.thesisTitle">Praca magisterska</h3>
-                    <p data-i18n="projects.thesisText">Projekt badawczo-inżynierski: predykcja formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem ML.</p>
+                    <p data-i18n="projects.thesisText">Ukończona praca magisterska: pipeline Python i porównanie modeli estymujących badawczą etykietę FTP. pandas, scikit-learn, XGBoost i interpretacja SHAP; wyniki prezentuje aplikacja Cycling.</p>
                     <ul class="tags" aria-label="Obszary pracy magisterskiej" data-i18n-attr="aria-label:projects.thesisTagsAria">
                         <li class="tag">ML</li>
                         <li class="tag" data-i18n="tag.telemetry">Telemetryka</li>
@@ -2126,7 +2147,7 @@
                 <article class="card project-card">
                     <div class="project-number">08</div>
                     <h3>Banas.dev</h3>
-                    <p data-i18n="projects.banasText">Własna przestrzeń na projekty, testy, automatyzacje i usługi. Statyczna strona, własne subdomeny i miejsce do praktycznego eksperymentowania.</p>
+                    <p data-i18n="projects.banasText">Własna przestrzeń typu personal engineering lab: projekty, testy, automatyzacje, usługi, subdomeny i praktyczne eksperymenty bez ciężkiej infrastruktury.</p>
                     <ul class="tags" aria-label="Banas.dev">
                         <li class="tag">Portfolio</li>
                         <li class="tag" data-i18n="tag.services">Usługi</li>
@@ -2141,12 +2162,9 @@
             <div class="feature-band">
                 <div>
                     <div class="section-kicker" data-i18n="thesis.kicker">Praca magisterska / dane kolarskie</div>
-                    <h2 id="thesis-title" data-i18n="thesis.title">Machine learning, telemetryka i forma kolarska.</h2>
+                    <h2 id="thesis-title" data-i18n="thesis.title">Od telemetrii do sprawdzalnych wyników.</h2>
                     <p class="section-lead" data-i18n="thesis.lead">
-                        Moja praca magisterska to projekt badawczo-inżynierski dotyczący predykcji formy kolarskiej
-                        na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem uczenia maszynowego.
-                        To połączenie sportu, danych, ML i praktycznej analizy wydolności, bez obietnicy gotowego
-                        produktu komercyjnego.
+                        W ukończonej pracy magisterskiej porównałem modele estymacji etykiety FTP na danych GoldenCheetah OpenData. Zbiór obejmował 151 399 sesji 726 zawodników; podział testowy wykonano po zawodnikach. Etykieta 0,95 × MMP20 jest heurystyką badawczą, nie laboratoryjnym pomiarem progu. Cycling pokazuje metryki, SHAP i czytnik pracy.
                     </p>
                     <p data-i18n="thesis.gravel">
                         Gravel jest dla mnie naturalnym miejscem styku technologii i wytrzymałości: długie trasy,
@@ -2161,7 +2179,7 @@
                     </div>
                     <div class="metric">
                         <strong>FTP</strong>
-                        <span data-i18n="thesis.metricFtp">forma, obciążenie, wydolność</span>
+                        <span data-i18n="thesis.metricFtp">etykieta badawcza, nie pomiar progu</span>
                     </div>
                     <div class="metric">
                         <strong>GPS</strong>
@@ -2177,7 +2195,7 @@
                 <div>
                     <h2 id="skills-title" data-i18n="skills.title">Technologie i narzędzia</h2>
                     <p class="section-lead" data-i18n="skills.lead">
-                        Kompetencje zebrane z pracy w IT, studiów, automatyki oraz własnych projektów.
+                        Praktyka zawodowa: wsparcie aplikacji, systemów i sieci. Python, FastAPI i ML rozwijam także w projektach własnych i akademickich. Angielski B2 w codziennej pracy; Docker, Bash i GitHub Actions — poziom podstawowy.
                     </p>
                 </div>
             </div>
@@ -2276,10 +2294,6 @@
                         <strong>Strava</strong>
                         <span>strava.com/athletes/9698049</span>
                     </a>
-                    <a class="contact-link" href="https://n8n.banas.dev" target="_blank" rel="noopener">
-                        <strong>n8n</strong>
-                        <span>n8n.banas.dev</span>
-                    </a>
                 </div>
             </div>
         </section>
@@ -2372,8 +2386,8 @@
             const translations = {
                 pl: {
                     meta: {
-                        title: "Rafał Banaś | Technical Support Engineer, IT & Data Science",
-                        description: "Portfolio Rafała Banasia: Technical Support Engineer, IT/Application Support, student informatyki rozwijający się w kierunku AI, Data Science, automatyzacji i systemów."
+                        title: "Rafał Banaś | Technical Support Engineer · Python & AI",
+                        description: "Rafał Banaś — Technical Support Engineer Tier 2 w Motorola Solutions, magister informatyki. Wsparcie aplikacji, Python, automatyzacja i własne projekty AI."
                     },
                     langSwitch: { label: "Wybór języka" },
                     nav: {
@@ -2389,8 +2403,11 @@
                         close: "Zamknij menu"
                     },
                     hero: {
-                        eyebrow: "Technical Support Engineer / IT / Application Support",
-                        subtitle: "Technical Support Engineer w Motorola Solutions i student informatyki. Traktuję banas.dev jak osobiste engineering lab: miejsce do budowania, testowania i automatyzowania rozwiązań na styku IT, systemów, danych i sportu.",
+                        eyebrow: "Technical Support Engineer · Python · AI",
+                        subtitle: "Wspieram partnerów WAVE PTX w regionie EMEA jako Technical Support Engineer Tier 2 w Motorola Solutions. Jestem magistrem informatyki. Po pracy buduję narzędzia w Pythonie, automatyzuję zadania i rozwijam własne projekty AI.",
+                        factsAria: "W skrócie",
+                        factExperience: "lata wsparcia i operacji IT",
+                        factDegree: "informatyka · UE Katowice",
                         projectsCta: "Zobacz projekty",
                         tagsAria: "Główne obszary",
                         labAria: "Tryb pracy",
@@ -2418,11 +2435,11 @@
                     about: {
                         kicker: "O mnie",
                         title: "Personal engineering lab: praktyczne IT, dane i automatyzacja.",
-                        lead: "Jestem studentem informatyki i pracuję w IT, rozwijając się w kierunku AI, Data Science i automatyzacji. Najbliżej mi do praktycznego styku aplikacji, systemów, użytkowników i procesów wsparcia: diagnozowania problemów, porządkowania informacji, dokumentowania rozwiązań oraz budowania małych narzędzi, które coś realnie usprawniają.",
+                        lead: "Mam ponad trzy lata doświadczenia we wsparciu i operacjach IT oraz tytuł magistra informatyki. Diagnozuję problemy aplikacji, systemów i sieci, analizuję logi i dokumentuję rozwiązania. Własne projekty pozwalają mi łączyć Python, automatyzację i analizę danych z praktyką utrzymania usług.",
                         card1Title: "Praktyczne wsparcie IT",
                         card1Text: "Aplikacje, systemy, użytkownicy, infrastruktura, sieci i troubleshooting w codziennej pracy operacyjnej.",
                         card2Title: "Automatyzacja i prototypy",
-                        card2Text: "PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania trafiają do skryptów, workflowów albo checklist.",
+                        card2Text: "PowerShell, Python, podstawy Bash i n8n. Korzystam z asystentów AI przy tworzeniu kodu; zmiany weryfikuję przez przegląd, Git i testy.",
                         card3Title: "Dane, AI i sport",
                         card3Text: "Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako praktyczne pole do eksperymentów z danymi."
                     },
@@ -2526,12 +2543,12 @@
                     experience: {
                         kicker: "Doświadczenie",
                         title: "Doświadczenie zawodowe",
-                        lead: "Pracowałem między innymi jako IT Specialist, Application Support i w obszarze IT Operations. Od kwietnia 2026 pracuję jako Technical Support Engineer w Motorola Solutions.",
+                        lead: "Ponad trzy lata praktyki we wsparciu i operacjach IT. Od kwietnia 2026 wspieram partnerów WAVE PTX w EMEA jako Technical Support Engineer Tier 2 w Motorola Solutions.",
                         motorolaPeriod: "od kwietnia 2026",
-                        motorola1: "Praca w środowisku IT z naciskiem na wsparcie aplikacji, systemów i użytkowników.",
-                        motorola2: "Analiza i rozwiązywanie problemów technicznych w oparciu o procesy wsparcia i dokumentację.",
-                        motorola3: "Współpraca z systemami, zgłoszeniami, dokumentacją i informacjami potrzebnymi do diagnozy.",
-                        motorola4: "Rozwijanie kompetencji w obszarach automatyzacji, analizy problemów i pracy z systemami.",
+                        motorola1: "Wsparcie Tier 2 partnerów WAVE PTX w regionie EMEA: problemy telekomunikacyjne, łączność i sieci.",
+                        motorola2: "Diagnostyka WAVE Dispatch, Windows i aplikacji; prowadzenie zgłoszeń partnerów w Salesforce.",
+                        motorola3: "Współpraca z Tier 1 i eskalowanie złożonych przypadków do Tier 3 engineering przez Jira.",
+                        motorola4: "Komunikacja z partnerami po angielsku (B2), obsługa incydentów i analiza pakietów w Wireshark podczas diagnostyki.",
                         madejPeriod: "październik 2025 - styczeń 2026",
                         itSpecialist: "Specjalista IT",
                         madej1: "Wsparcie użytkowników końcowych oraz rozwiązywanie problemów sprzętowych i programowych.",
@@ -2551,24 +2568,27 @@
                         kicker: "Projekty",
                         title: "Projekty i obszary pracy",
                         lead: "Zestaw obszarów, które pokazują praktyczne podejście do IT: od prostych aplikacji webowych i backendu, przez computer vision, po automatyzacje, systemy i własną przestrzeń do testów.",
-                        cyclingText: "Interaktywna prezentacja projektu analizy formy kolarskiej, porównanie wyników modeli, wykresy i kalkulator FTP.",
+                        cyclingText: "Wyniki pracy magisterskiej: estymacja badawczej etykiety FTP z telemetrii GoldenCheetah, porównanie modeli i SHAP. Kalkulator 0,95 × MMP20 jest heurystyką, nie inferencją modelu ani pomiarem progu fizjologicznego.",
                         cyclingCta: "Zobacz projekt",
                         cyclingTagsAria: "Obszary projektu Cycling",
                         n8nTitle: "Automatyzacje / n8n",
                         n8nText: "Środowisko automatyzacji procesów i integracji usług, wykorzystywane do testowania przepływów wspierających codzienną pracę techniczną.",
                         n8nCta: "Otwórz n8n",
                         platesTitle: "Rozpoznawanie tablic rejestracyjnych / Plates",
-                        platesText: "Projekt wykrywania tablic i odczytywania numerów ze zdjęć, wykorzystujący YOLO i OCR do detekcji obiektu, odczytu tekstu i obróbki wyniku.",
+                        platesText: "Publiczne demo ALPR: FastALPR i gotowe modele ONNX wykrywają tablice oraz odczytują tekst lokalnie na VPS. Repozytorium zawiera także osobny pipeline treningu i oceny detektora. OCR może mylić podobne znaki.",
                         platesCta: "Zobacz projekt",
-                        platesLinkAria: "Zobacz projekt Plates — status: w przygotowaniu",
-                        resumeText: "Dopasowuje opisy stanowisk do zweryfikowanych faktów z profilu i generuje CV w formatach PDF oraz DOCX przy użyciu FastAPI i n8n.",
+                        platesCodeCta: "Kod",
+                        platesLinkAria: "Zobacz działające demo Plates",
+                        resumeText: "CVTailor analizuje oferty pracy i generuje PDF/DOCX z potwierdzonych faktów. FastAPI, Ollama/Gemini i niezależny Truth Lock. Kod obejmuje lokalny RAG z rankingiem BM25; aplikacja do użytku osobistego wymaga logowania, a wynik — weryfikacji człowieka.",
                         resumeCodeCta: "Kod",
-                        resumeDemoCta: "Demo",
+                        resumeDemoCta: "Aplikacja · logowanie",
+                        privateDeployment: "Prywatne wdrożenie",
+                        chatText: "Prywatne wdrożenie Open WebUI z Ollama: MFA, limity generowania, koordynacja GPU i szyfrowane kopie zapasowe. Utrzymuję konfigurację i integracje; interfejs oraz silnik aplikacji pochodzą z Open WebUI.",
                         preparing: "W przygotowaniu",
                         moreTitle: "Pozostałe projekty i obszary",
                         lanariText: "Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.",
                         thesisTitle: "Praca magisterska",
-                        thesisText: "Projekt badawczo-inżynierski: predykcja formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem ML.",
+                        thesisText: "Ukończona praca magisterska: pipeline Python i porównanie modeli estymujących badawczą etykietę FTP. pandas, scikit-learn, XGBoost i interpretacja SHAP; wyniki prezentuje aplikacja Cycling.",
                         itAutomationTitle: "Administracja i automatyzacja IT",
                         itAutomationText: "PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.",
                         banasText: "Własna przestrzeń typu personal engineering lab: projekty, testy, automatyzacje, usługi, subdomeny i praktyczne eksperymenty bez ciężkiej infrastruktury.",
@@ -2584,17 +2604,17 @@
                     },
                     thesis: {
                         kicker: "Praca magisterska / dane kolarskie",
-                        title: "Machine learning, telemetryka i forma kolarska.",
-                        lead: "Moja praca magisterska to projekt badawczo-inżynierski dotyczący predykcji formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem uczenia maszynowego. To połączenie sportu, danych, ML i praktycznej analizy wydolności, bez obietnicy gotowego produktu komercyjnego.",
+                        title: "Od telemetrii do sprawdzalnych wyników.",
+                        lead: "W ukończonej pracy magisterskiej porównałem modele estymacji etykiety FTP na danych GoldenCheetah OpenData. Zbiór obejmował 151 399 sesji 726 zawodników; podział testowy wykonano po zawodnikach. Etykieta 0,95 × MMP20 jest heurystyką badawczą, nie laboratoryjnym pomiarem progu. Cycling pokazuje metryki, SHAP i czytnik pracy.",
                         gravel: "Gravel jest dla mnie naturalnym miejscem styku technologii i wytrzymałości: długie trasy, eksploracja, moc, tętno, FTP, obciążenie treningowe i pytanie, jak z surowych danych wyciągać wnioski, które mają sens nie tylko na wykresie, ale też w praktyce treningowej.",
                         metricMl: "modelowanie i predykcja",
-                        metricFtp: "forma, obciążenie, wydolność",
+                        metricFtp: "etykieta badawcza, nie pomiar progu",
                         metricGps: "trasy, czas, dystans, kontekst"
                     },
                     skills: {
                         kicker: "Umiejętności",
                         title: "Technologie i narzędzia",
-                        lead: "Kompetencje zebrane z pracy w IT, studiów, automatyki oraz własnych projektów.",
+                        lead: "Praktyka zawodowa: wsparcie aplikacji, systemów i sieci. Python, FastAPI i ML rozwijam także w projektach własnych i akademickich. Angielski B2 w codziennej pracy; Docker, Bash i GitHub Actions — poziom podstawowy.",
                         systems: "Systemy",
                         automation: "Automatyzacja",
                         dataBackend: "Dane i backend",
@@ -2626,8 +2646,8 @@
                 },
                 en: {
                     meta: {
-                        title: "Rafał Banaś | Technical Support Engineer, IT & Data Science",
-                        description: "Rafał Banaś portfolio: Technical Support Engineer, IT/Application Support and computer science student growing toward AI, Data Science, automation and systems."
+                        title: "Rafał Banaś | Technical Support Engineer · Python & AI",
+                        description: "Rafał Banaś — Technical Support Engineer Tier 2 at Motorola Solutions, MSc in Computer Science. Application support, Python, automation and personal AI projects."
                     },
                     langSwitch: { label: "Language selection" },
                     nav: {
@@ -2643,8 +2663,11 @@
                         close: "Close menu"
                     },
                     hero: {
-                        eyebrow: "Technical Support Engineer / IT / Application Support",
-                        subtitle: "Technical Support Engineer at Motorola Solutions and computer science student. I treat banas.dev as a personal engineering lab: a place to build, test and automate solutions at the intersection of IT, systems, data and sport.",
+                        eyebrow: "Technical Support Engineer · Python · AI",
+                        subtitle: "I support WAVE PTX partners across EMEA as a Technical Support Engineer Tier 2 at Motorola Solutions. I hold an MSc in Computer Science. Outside work, I build Python tools, automate tasks and develop personal AI projects.",
+                        factsAria: "At a glance",
+                        factExperience: "years in IT support and operations",
+                        factDegree: "Computer Science · UE Katowice",
                         projectsCta: "View projects",
                         tagsAria: "Main areas",
                         labAria: "Work mode",
@@ -2672,11 +2695,11 @@
                     about: {
                         kicker: "About",
                         title: "Personal engineering lab: practical IT, data and automation.",
-                        lead: "I am a computer science student working in IT and growing toward AI, Data Science and automation. My strongest focus is the practical intersection of applications, systems, users and support processes: diagnosing issues, organizing information, documenting solutions and building small tools that improve real workflows.",
+                        lead: "I have more than three years of experience in IT support and operations and an MSc in Computer Science. I troubleshoot applications, systems and networks, analyze logs and document solutions. Personal projects connect Python, automation and data analysis with hands-on service maintenance.",
                         card1Title: "Hands-on IT support",
                         card1Text: "Applications, systems, users, infrastructure, networks and troubleshooting in day-to-day IT operations.",
                         card2Title: "Automation and prototypes",
-                        card2Text: "PowerShell, Bash, Python basics and an approach where repetitive work becomes a script, workflow or checklist.",
+                        card2Text: "PowerShell, Python, basic Bash and n8n. I use AI coding assistants while keeping human review, Git and tests as validation checkpoints.",
                         card3Title: "Data, AI and sport",
                         card3Text: "Machine learning, training telemetry and cycling form analysis as a practical field for data experiments."
                     },
@@ -2780,12 +2803,12 @@
                     experience: {
                         kicker: "Experience",
                         title: "Professional experience",
-                        lead: "I have worked across IT Specialist, Application Support and IT Operations areas. Since April 2026, I have been working as a Technical Support Engineer at Motorola Solutions.",
+                        lead: "More than three years in IT support and operations. Since April 2026, I have supported WAVE PTX partners across EMEA as a Technical Support Engineer Tier 2 at Motorola Solutions.",
                         motorolaPeriod: "since April 2026",
-                        motorola1: "Working in an IT environment with a focus on supporting applications, systems and users.",
-                        motorola2: "Analyzing and resolving technical issues using support processes and documentation.",
-                        motorola3: "Working with systems, tickets, documentation and diagnostic information.",
-                        motorola4: "Developing skills in automation, problem analysis and practical systems work.",
+                        motorola1: "Tier 2 support for WAVE PTX partners across EMEA, resolving telecom, connectivity and network-related issues.",
+                        motorola2: "Troubleshooting WAVE Dispatch, Windows and application issues; managing partner cases in Salesforce.",
+                        motorola3: "Collaborating with Tier 1 and escalating complex technical cases to Tier 3 engineering through Jira.",
+                        motorola4: "Communicating with partners in English (B2), handling incidents and inspecting packets with Wireshark during diagnostics.",
                         madejPeriod: "October 2025 - January 2026",
                         itSpecialist: "IT Specialist",
                         madej1: "End-user support and troubleshooting hardware and software issues.",
@@ -2805,24 +2828,27 @@
                         kicker: "Projects",
                         title: "Projects and focus areas",
                         lead: "A set of areas showing my practical approach to IT: from simple web applications and backend work, through computer vision, to automation, systems and my own testing space.",
-                        cyclingText: "An interactive presentation of the cycling performance analysis project, including model result comparisons, charts and an FTP calculator.",
+                        cyclingText: "MSc thesis results: estimating a research FTP label from GoldenCheetah telemetry, model comparisons and SHAP. The 0.95 × MMP20 calculator is a heuristic, not model inference or a physiological threshold measurement.",
                         cyclingCta: "View project",
                         cyclingTagsAria: "Cycling project areas",
                         n8nTitle: "Automation / n8n",
                         n8nText: "An environment for process automation and service integrations, used to test workflows supporting everyday technical work.",
                         n8nCta: "Open n8n",
                         platesTitle: "License plate recognition / Plates",
-                        platesText: "A project for detecting license plates and reading their numbers from images, using YOLO and OCR for object detection, text extraction and result processing.",
+                        platesText: "Public ALPR demo: FastALPR and pretrained ONNX models detect plates and read their text locally on a VPS. The repository also includes a separate detector training and evaluation pipeline. OCR can confuse similar characters.",
                         platesCta: "View project",
-                        platesLinkAria: "View the Plates project — status: in progress",
-                        resumeText: "Matches job descriptions against verified profile facts and generates PDF and DOCX resumes using FastAPI and n8n.",
+                        platesCodeCta: "Code",
+                        platesLinkAria: "Open the working Plates demo",
+                        resumeText: "CVTailor analyzes job postings and generates PDF/DOCX resumes from attested facts. FastAPI, Ollama/Gemini and independent Truth Lock validation. The code includes local RAG with BM25 ranking; this personal application requires login, and its output requires human review.",
                         resumeCodeCta: "Code",
-                        resumeDemoCta: "Demo",
+                        resumeDemoCta: "Application · login required",
+                        privateDeployment: "Private deployment",
+                        chatText: "Private Open WebUI deployment with Ollama: MFA, generation limits, GPU coordination and encrypted backups. I maintain configuration and integrations; the interface and application engine are provided by Open WebUI.",
                         preparing: "Coming soon",
                         moreTitle: "Other projects and focus areas",
                         lanariText: "An e-commerce project with a Python/FastAPI backend and a simple frontend. Practice in API design, application logic, data validation and web integration.",
                         thesisTitle: "Master’s thesis",
-                        thesisText: "A research and engineering project: predicting cycling performance/form using telemetry data from sports devices with ML.",
+                        thesisText: "Completed MSc thesis: a Python pipeline and model comparison for research FTP label estimation. pandas, scikit-learn, XGBoost and SHAP interpretation; the Cycling application presents the results.",
                         itAutomationTitle: "IT administration and automation",
                         itAutomationText: "PowerShell, Linux, servers, monitoring, networks and scripts supporting diagnostics, configuration and repetitive administrative work.",
                         banasText: "My personal engineering lab space: projects, tests, automation, services, subdomains and practical experiments without heavy infrastructure.",
@@ -2838,17 +2864,17 @@
                     },
                     thesis: {
                         kicker: "Thesis / Cycling data",
-                        title: "Machine learning, telemetry and cycling performance.",
-                        lead: "My master’s thesis is a research and engineering project focused on predicting cycling performance/form using telemetry data from sports devices with machine learning. It combines sport, data, ML and practical performance analysis without promising a finished commercial product.",
+                        title: "From telemetry to verifiable results.",
+                        lead: "My completed MSc thesis compared models estimating a research FTP label from GoldenCheetah OpenData. The dataset covered 151,399 sessions from 726 athletes, with an athlete-level test split. The 0.95 × MMP20 label is a research heuristic, not a laboratory threshold measurement. Cycling presents metrics, SHAP and a thesis reader.",
                         gravel: "Gravel cycling is a natural intersection of technology and endurance sport for me: long routes, exploration, power, heart rate, FTP, training load and the question of how to turn raw data into insights that make sense not only on a chart, but also in practical training analysis.",
                         metricMl: "modeling and prediction",
-                        metricFtp: "form, load, performance",
+                        metricFtp: "research label, not a threshold measurement",
                         metricGps: "routes, time, distance, context"
                     },
                     skills: {
                         kicker: "Skills",
                         title: "Technologies and tools",
-                        lead: "Skills built through IT work, studies, automation engineering and personal projects.",
+                        lead: "Professional practice: application, systems and network support. I also develop Python, FastAPI and ML through personal and academic projects. English B2 in daily work; Docker, Bash and GitHub Actions at a basic level.",
                         systems: "Systems",
                         automation: "Automation",
                         dataBackend: "Data and backend",
