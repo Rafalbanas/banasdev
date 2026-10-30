@@ -27,7 +27,11 @@ produkcyjnego serwera, zewnętrznych profili ani pełnej zgodności WCAG.
   historią pogody; przeliczanie historii również czeka do tego momentu. Błąd lub
   timeout nie blokuje portfolio: użytkownik widzi komunikat PL/EN i przycisk
   ponowienia. Brak IntersectionObserver uruchamia bezpieczny wariant bez opóźniania.
-  Zwykłe odwiedzenie strony nie wymaga żadnych zewnętrznych żądań.
+  Kod repozytorium nie wymaga zewnętrznych żądań podczas odwiedzin.
+  Test produkcji wykazał jednak skrypt Cloudflare Web Analytics dołączany
+  przez infrastrukturę, niezależnie od HTML w repozytorium. Usunięto więc
+  nieprawdziwą deklarację „bez analityki i trackerów” ze stopki PL/EN.
+  Ustawień analityki Cloudflare nie zmieniano.
 - **Trzeci etap — przeglądanie projektów:** wyszukiwarka po nazwach, opisach
   i technologiach oraz łączone z nią filtry „Dane i AI”, „Automatyzacja i IT”,
   „Web i backend”. Wyszukiwanie ignoruje wielkość liter, nadmiarowe spacje
@@ -72,7 +76,7 @@ Końcowy wynik trzeciego etapu: 20 testów jednostkowych/integracyjnych OK;
 rozszerzony test przeglądarkowy filtrów i wyszukiwarki OK; walidacja HTML,
 kotwic, składni JavaScript i `git diff --check` OK.
 
-## Uwaga przed przyszłym wdrożeniem
+## Wymagania odbiornika wdrożeń
 
 Paczka ma dwa nowe pliki. Jawne listy dozwolonych plików w `scripts/package.py`
 i `deploy/deploy.py` zostały rozszerzone bez luzowania walidacji archiwum.
@@ -95,6 +99,21 @@ Walidacja po integracji: 25 testów OK oraz testy przeglądarkowe PL/EN, motywó
 pięciu szerokości, filtrów, klawiatury i ładowania wykresów OK. Poprawiono
 niestabilny timestamp wpisu `revision.txt` w ZIP, który mógł zmieniać digest
 identycznego źródła i zakłócać wskazanie poprzedniej wersji; dodano test regresji.
+
+### Walidacja na produkcji
+
+Wdrożenie wykonano lokalnym odbiornikiem na VPS, po aktualizacji jego jawnej
+listy plików i zapisaniu kopii poprzedniej wersji w `/var/backups/banasdev/`.
+Przełączenie `current` jest atomowe; dane pogodowe i SQLite pozostały w `/cytrus`.
+Publiczny HTTPS zwrócił poprawne revision.txt, bibliotekę i licencję zgodne bajtowo
+ze źródłem oraz trzy poprawne pliki JSON. Chromium przez publiczne Cloudflare
+potwierdziło PL/EN, oba motywy, pięć szerokości ekranu, filtry, klawiaturę,
+publiczny e-mail, opóźnione ładowanie Chart.js i wszystkie zakresy wykresów,
+bez błędów JavaScript ani nieudanych żądań.
+Konfiguracji Nginx i Cloudflare nie zmieniano. Kod zapisano na lokalnej gałęzi
+`feat/portfolio-modernization-2026` z zachowaniem historii bieżącej produkcji;
+nie wykonywano push na GitHub. Przed następnym wdrożeniem z GitHub Actions
+należy włączyć tę historię do `main` (ochrona ancestry odrzuci starszą gałąź).
 
 ## Dalsze rekomendacje
 
