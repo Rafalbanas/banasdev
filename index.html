@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafał Banaś | Technical Support Engineer, IT & Data Science</title>
-    <meta name="description" content="Portfolio Rafała Banasia: Technical Support Engineer, IT/Application Support, student informatyki rozwijający się w kierunku AI, Data Science, automatyzacji i systemów.">
+    <title>Rafał Banaś | Technical Support Engineer · Python & AI</title>
+    <meta name="description" content="Rafał Banaś — Technical Support Engineer Tier 2 w Motorola Solutions, magister informatyki. Wsparcie aplikacji, Python, automatyzacja i własne projekty AI.">
+    <link rel="canonical" href="https://banas.dev/">
     <meta name="author" content="Rafał Banaś">
-    <meta name="theme-color" content="#0f172a">
+    <link rel="canonical" href="https://banas.dev/">
+    <meta name="theme-color" content="#101416">
 
     <link rel="icon" type="image/png" href="favicon.png?v=4">
     <link rel="shortcut icon" type="image/png" href="favicon.png?v=4">
@@ -14,32 +16,32 @@
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://banas.dev/">
-    <meta property="og:title" content="Rafał Banaś | Technical Support Engineer, IT & Data Science">
-    <meta property="og:description" content="Portfolio techniczne: IT/Application Support, troubleshooting, automatyzacja, AI, Data Science i projekty webowe.">
+    <meta property="og:title" content="Rafał Banaś | Technical Support Engineer · Python & AI">
+    <meta property="og:description" content="Wsparcie Tier 2 WAVE PTX w EMEA, magister informatyki i projekty Python: CVTailor, Cycling, Plates oraz self-hosting.">
     <meta property="og:image" content="https://banas.dev/cv_photo.webp">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Rafał Banaś | Technical Support Engineer">
-    <meta name="twitter:description" content="Technical Support Engineer, student informatyki, projekty AI, automatyzacja i dane treningowe.">
+    <meta name="twitter:description" content="Technical Support Engineer Tier 2, magister informatyki, projekty Python, AI i automatyzacja.">
     <meta name="twitter:image" content="https://banas.dev/cv_photo.webp">
 
     <style>
         :root {
             color-scheme: dark;
-            --bg: #0b1020;
-            --bg-soft: #111827;
-            --surface: rgba(17, 24, 39, 0.82);
-            --surface-strong: #172033;
-            --text: #e5e7eb;
-            --muted: #a7b0c0;
+            --bg: #101416;
+            --bg-soft: #161c1f;
+            --surface: rgba(26, 33, 36, 0.88);
+            --surface-strong: #20292d;
+            --text: #f0f3ee;
+            --muted: #adb9b8;
             --line: rgba(148, 163, 184, 0.22);
-            --accent: #38bdf8;
+            --accent: #bcf280;
             --accent-2: #22c55e;
             --accent-3: #f59e0b;
             --code: #a7f3d0;
             --danger: #fb7185;
             --shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
-            --radius: 8px;
+            --radius: 16px;
             --max: 1160px;
         }
 
@@ -50,14 +52,21 @@
             --surface: rgba(255, 255, 255, 0.9);
             --surface-strong: #ffffff;
             --text: #172033;
-            --muted: #5d6677;
+            --muted: #4b5669;
+            --accent-2: #15803d;
             --line: rgba(15, 23, 42, 0.14);
             --shadow: 0 18px 60px rgba(15, 23, 42, 0.11);
             --code: #047857;
+            --accent: #356415;
+            --accent-2: #15803d;
         }
 
         * {
             box-sizing: border-box;
+        }
+
+        [hidden] {
+            display: none !important;
         }
 
         html {
@@ -70,8 +79,7 @@
             margin: 0;
             min-height: 100vh;
             background:
-                radial-gradient(circle at 18% 8%, rgba(56, 189, 248, 0.18), transparent 34%),
-                radial-gradient(circle at 82% 0%, rgba(34, 197, 94, 0.10), transparent 32%),
+                radial-gradient(ellipse at 80% 0%, rgba(151, 193, 112, 0.09), transparent 32%),
                 linear-gradient(135deg, var(--bg), var(--bg-soft));
             color: var(--text);
             font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -112,7 +120,8 @@
         }
 
         a:focus-visible,
-        button:focus-visible {
+        button:focus-visible,
+        input:focus-visible {
             outline: 3px solid color-mix(in srgb, var(--accent) 70%, white);
             outline-offset: 3px;
         }
@@ -132,8 +141,8 @@
             position: absolute;
             left: 16px;
             top: -48px;
-            z-index: 10;
-            background: var(--accent);
+            z-index: 200;
+            background: #bcf280;
             color: #04111f;
             padding: 10px 14px;
             border-radius: var(--radius);
@@ -286,6 +295,13 @@
             color: var(--text);
         }
 
+        .nav-links a {
+            background: transparent;
+            border-color: transparent;
+            font-size: 0.84rem;
+            padding-inline: 9px;
+        }
+
         .language-switch {
             display: inline-flex;
             align-items: center;
@@ -316,7 +332,7 @@
         }
 
         .button.primary {
-            background: linear-gradient(135deg, var(--accent), #60a5fa);
+            background: #bcf280;
             border-color: transparent;
             color: #06111f;
             font-weight: 850;
@@ -330,18 +346,18 @@
             --hero-glow-x: 50%;
             --hero-glow-y: 42%;
             position: relative;
-            min-height: calc(100svh - 68px);
+            min-height: min(800px, calc(100svh - 68px));
             display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+            grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
             align-items: center;
-            gap: 44px;
-            padding: 64px 0 42px;
+            gap: 64px;
+            padding: 80px 0 64px;
         }
 
         .hero::before {
             content: "";
             position: absolute;
-            inset: 34px -4vw auto auto;
+            inset: 34px 0 auto auto;
             width: min(440px, 58vw);
             aspect-ratio: 1;
             border-radius: 50%;
@@ -357,12 +373,13 @@
             align-items: center;
             gap: 8px;
             width: fit-content;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: var(--surface);
+            border: 0;
+            border-radius: 0;
+            background: transparent;
             color: var(--muted);
-            padding: 7px 10px;
-            font-size: 0.9rem;
+            padding: 0;
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
         }
 
         .status-dot {
@@ -382,15 +399,25 @@
 
         h1 {
             margin: 22px 0 18px;
-            font-size: clamp(2.35rem, 7vw, 5.8rem);
+            font-size: clamp(2.8rem, 7vw, 6.2rem);
             line-height: 0.98;
-            letter-spacing: 0;
+            letter-spacing: -0.055em;
+        }
+
+        .hero-role {
+            margin-bottom: 24px;
+            max-width: 20ch;
+            color: var(--accent);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            line-height: 1.18;
+            letter-spacing: -0.035em;
+            font-weight: 650;
         }
 
         .hero-subtitle {
             max-width: 720px;
             color: var(--muted);
-            font-size: clamp(1.04rem, 2vw, 1.28rem);
+            font-size: clamp(1rem, 1.5vw, 1.12rem);
         }
 
         .hero-actions {
@@ -399,6 +426,24 @@
             gap: 10px;
             margin: 28px 0;
         }
+
+        .hero-facts {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            padding: 22px 0;
+            margin-bottom: 24px;
+            border-block: 1px solid var(--line);
+        }
+
+        .hero-facts > div { min-width: 0; }
+        .hero-facts strong { display: block; font-size: clamp(1.05rem, 2vw, 1.4rem); letter-spacing: -0.03em; }
+        .hero-facts span { display: block; color: var(--muted); font-size: 0.8rem; line-height: 1.5; }
+        a:focus-visible, button:focus-visible, input:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+        }
+        .project-card:focus-within { border-color: var(--accent); }
 
         .hero-tags,
         .tags {
@@ -448,7 +493,7 @@
             border-radius: var(--radius);
             background: var(--surface);
             box-shadow: var(--shadow);
-            padding: 18px;
+            padding: 14px;
             overflow: hidden;
             min-width: 0;
         }
@@ -467,8 +512,9 @@
 
         .profile-photo {
             width: 100%;
-            aspect-ratio: 4 / 5;
+            aspect-ratio: 5 / 4;
             object-fit: cover;
+            object-position: center 28%;
             border-radius: var(--radius);
             border: 1px solid var(--line);
             cursor: pointer;
@@ -477,6 +523,25 @@
 
         .profile-photo:hover {
             transform: translateY(-2px);
+        }
+
+        .photo-switch {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            border-radius: var(--radius);
+            background: transparent;
+            color: var(--muted);
+            font: inherit;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .photo-hint {
+            display: block;
+            padding: 8px 2px 0;
+            font-size: 0.75rem;
         }
 
         .profile-meta {
@@ -492,6 +557,10 @@
             margin-top: 16px;
             overflow: hidden;
             font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        }
+
+        body.light .lab-terminal {
+            background: var(--bg-soft);
         }
 
         .lab-terminal-header {
@@ -553,7 +622,7 @@
         }
 
         .section {
-            padding: 58px 0;
+            padding: 76px 0;
             border-top: 1px solid var(--line);
         }
 
@@ -577,7 +646,7 @@
             margin-bottom: 10px;
             font-size: clamp(1.8rem, 4vw, 3rem);
             line-height: 1.08;
-            letter-spacing: 0;
+            letter-spacing: -0.035em;
         }
 
         .section-lead {
@@ -587,7 +656,7 @@
 
         .grid {
             display: grid;
-            gap: 14px;
+            gap: 20px;
         }
 
         .grid.two {
@@ -604,7 +673,7 @@
             border: 1px solid var(--line);
             border-radius: var(--radius);
             background: var(--surface);
-            padding: 20px;
+            padding: 26px;
             min-width: 0;
             overflow-wrap: anywhere;
             transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
@@ -1026,6 +1095,30 @@
             padding-top: 16px;
         }
 
+        .weather-history:not([data-chart-state="ready"]) .weather-chart-panel {
+            display: none;
+        }
+
+        .chart-library-notice {
+            padding: 18px;
+            margin-top: 20px;
+            border: 1px dashed var(--line);
+            border-radius: var(--radius);
+            color: var(--muted);
+        }
+
+        .chart-library-notice p {
+            margin-bottom: 0;
+        }
+
+        .chart-library-notice .button {
+            margin-top: 12px;
+        }
+
+        body:not(.js-ready) .chart-library-notice {
+            display: none;
+        }
+
         .weather-chart-panel h4 {
             margin: 0;
             font-size: 0.9rem;
@@ -1154,6 +1247,77 @@
             text-transform: uppercase;
         }
 
+        .project-tools {
+            padding: 22px;
+            margin-bottom: 28px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+        }
+
+        .project-search label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .project-search input {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            min-height: 48px;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--bg-soft);
+            color: var(--text);
+            font: inherit;
+        }
+
+        .project-search input::placeholder {
+            color: var(--muted);
+            opacity: 1;
+        }
+
+        .project-filter-row,
+        .project-filters {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-filter-row {
+            margin-top: 16px;
+            justify-content: space-between;
+        }
+
+        .project-filters .button[aria-pressed="true"] {
+            background: #bcf280;
+            border-color: transparent;
+            color: #06111f;
+            font-weight: 750;
+        }
+
+        .project-results {
+            margin: 14px 0 0;
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        .project-empty {
+            padding: 32px 24px;
+            border: 1px dashed var(--line);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .project-empty p {
+            margin-bottom: 0;
+            color: var(--muted);
+        }
+
         .feature-band {
             position: relative;
             overflow: hidden;
@@ -1250,6 +1414,12 @@
             white-space: nowrap;
         }
 
+        .footer-email {
+            overflow-wrap: anywhere;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
         footer {
             border-top: 1px solid var(--line);
             color: var(--muted);
@@ -1313,6 +1483,24 @@
                 pointer-events: auto;
                 transform: translateY(0);
                 visibility: visible;
+            }
+
+            body:not(.js-ready) .nav {
+                flex-wrap: wrap;
+            }
+
+            body:not(.js-ready) .nav-links {
+                position: static;
+                order: 3;
+                width: 100%;
+                opacity: 1;
+                pointer-events: auto;
+                transform: none;
+                visibility: visible;
+            }
+
+            body:not(.js-ready) .nav-actions {
+                display: none;
             }
 
             .nav-links a {
@@ -1682,7 +1870,7 @@
     </style>
 </head>
 <body>
-    <a class="skip-link" href="#main">Przejdź do treści</a>
+    <a class="skip-link" href="#main" data-i18n="skipLink">Przejdź do treści</a>
 
     <header class="topbar">
         <nav class="nav" aria-label="Główna nawigacja">
@@ -1692,10 +1880,10 @@
             </a>
             <div class="nav-links" id="primaryNavigation">
                 <a href="#about" data-i18n="nav.about">O mnie</a>
-                <a href="#weather" data-i18n="nav.weather">Pogoda</a>
                 <a href="#experience" data-i18n="nav.experience">Doświadczenie</a>
                 <a href="#projects" data-i18n="nav.projects">Projekty</a>
                 <a href="#skills" data-i18n="nav.skills">Umiejętności</a>
+                <a href="#weather" data-i18n="nav.weather">Pogoda</a>
                 <a href="#contact" data-i18n="nav.contact">Kontakt</a>
             </div>
             <div class="nav-actions">
@@ -1711,20 +1899,25 @@
         </nav>
     </header>
 
-    <main id="main">
+    <main id="main" tabindex="-1">
         <section class="page hero" id="top" aria-labelledby="hero-title">
             <div>
-                <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> <span data-i18n="hero.eyebrow">Technical Support Engineer / IT / Application Support</span></div>
+                <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> <span data-i18n="hero.eyebrow">Technical Support Engineer · Python · AI</span></div>
                 <h1 id="hero-title">Rafał Banaś</h1>
+                <p class="hero-role" data-i18n="hero.role">Systemy. Dane. Mniej ręcznej pracy.</p>
                 <p class="hero-subtitle" data-i18n="hero.subtitle">
-                    Technical Support Engineer w Motorola Solutions i student informatyki. Łączę praktyczne IT,
-                    wsparcie aplikacji, troubleshooting systemów, automatyzację i analizę danych z rosnącym
-                    zainteresowaniem AI oraz uczeniem maszynowym.
+                    Wspieram partnerów WAVE PTX w regionie EMEA jako Technical Support Engineer Tier 2 w Motorola Solutions.
+                    Jestem magistrem informatyki. Po pracy buduję narzędzia w Pythonie, automatyzuję zadania i rozwijam własne projekty AI.
                 </p>
                 <div class="hero-actions">
                     <a class="button primary" href="#projects" data-i18n="hero.projectsCta">Zobacz projekty</a>
                     <a class="button secondary" href="https://github.com/Rafalbanas" target="_blank" rel="noopener">GitHub</a>
                     <a class="button secondary" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener">LinkedIn</a>
+                </div>
+                <div class="hero-facts" aria-label="W skrócie" data-i18n-attr="aria-label:hero.factsAria">
+                    <div><strong>3+</strong><span data-i18n="hero.factExperience">lata wsparcia i operacji IT</span></div>
+                    <div><strong>Tier 2</strong><span>WAVE PTX · EMEA</span></div>
+                    <div><strong>MSc · 2026</strong><span data-i18n="hero.factDegree">informatyka · UE Katowice</span></div>
                 </div>
                 <ul class="hero-tags" aria-label="Główne obszary" data-i18n-attr="aria-label:hero.tagsAria">
                     <li class="tag">Windows Server</li>
@@ -1745,7 +1938,10 @@
             </div>
 
             <aside class="profile-panel" aria-label="Profil" data-i18n-attr="aria-label:profile.aria">
-                <img src="cv_photo.webp" alt="Rafał Banaś" class="profile-photo" id="profilePhoto" fetchpriority="high">
+                <button class="photo-switch" id="photoSwitch" type="button" aria-label="Zmień zdjęcie profilowe" data-i18n-attr="aria-label:profile.changePhoto">
+                    <img src="cv_photo.webp" alt="Rafał Banaś" class="profile-photo" id="profilePhoto" fetchpriority="high" width="400" height="300">
+                    <span class="photo-hint" data-i18n="profile.photoHint">Dwie strony tej samej osoby ↗ Zmień zdjęcie</span>
+                </button>
                 <div class="profile-meta">
                     <div class="meta-row">
                         <span data-i18n="profile.locationLabel">Lokalizacja</span>
@@ -1753,7 +1949,7 @@
                     </div>
                     <div class="meta-row">
                         <span data-i18n="profile.currentLabel">Aktualnie</span>
-                        <span>Technical Support Engineer</span>
+                        <span>Technical Support Engineer · Tier 2</span>
                     </div>
                     <div class="meta-row">
                         <span data-i18n="profile.companyLabel">Firma</span>
@@ -1786,12 +1982,11 @@
             <div class="section-heading">
                 <div class="section-kicker" data-i18n="about.kicker">O mnie</div>
                 <div>
-                    <h2 id="about-title" data-i18n="about.title">Techniczne IT z ciekawością do danych i automatyzacji.</h2>
+                    <h2 id="about-title" data-i18n="about.title">Personal engineering lab: praktyczne IT, dane i automatyzacja.</h2>
                     <p class="section-lead" data-i18n="about.lead">
-                        Jestem studentem informatyki i pracuję w IT, rozwijając się w kierunku AI, Data Science
-                        i automatyzacji. Najbliżej mi do praktycznego styku aplikacji, systemów, użytkowników
-                        i procesów wsparcia: diagnozowania problemów, porządkowania informacji, dokumentowania
-                        rozwiązań i szukania miejsc, w których skrypt albo automatyzacja oszczędza czas.
+                        Mam ponad trzy lata doświadczenia we wsparciu i operacjach IT oraz tytuł magistra informatyki.
+                        Diagnozuję problemy aplikacji, systemów i sieci, analizuję logi i dokumentuję rozwiązania.
+                        Własne projekty pozwalają mi łączyć Python, automatyzację i analizę danych z praktyką utrzymania usług.
                     </p>
                 </div>
             </div>
@@ -1801,12 +1996,342 @@
                     <p data-i18n="about.card1Text">Aplikacje, systemy, użytkownicy, infrastruktura, sieci i troubleshooting w codziennej pracy operacyjnej.</p>
                 </article>
                 <article class="card">
-                    <h3 data-i18n="about.card2Title">Automatyzacja i skrypty</h3>
-                    <p data-i18n="about.card2Text">PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania warto zamieniać w procedury lub narzędzia.</p>
+                    <h3 data-i18n="about.card2Title">Automatyzacja i prototypy</h3>
+                    <p data-i18n="about.card2Text">PowerShell, Python, podstawy Bash i n8n. Korzystam z asystentów AI przy tworzeniu kodu; zmiany weryfikuję przez przegląd, Git i testy.</p>
                 </article>
                 <article class="card">
                     <h3 data-i18n="about.card3Title">Dane, AI i sport</h3>
-                    <p data-i18n="about.card3Text">Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako konkretny obszar pracy magisterskiej.</p>
+                    <p data-i18n="about.card3Text">Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako praktyczne pole do eksperymentów z danymi.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="page section" id="experience" aria-labelledby="experience-title">
+            <div class="section-heading">
+                <div class="section-kicker" data-i18n="experience.kicker">Doświadczenie</div>
+                <div>
+                    <h2 id="experience-title" data-i18n="experience.title">Doświadczenie zawodowe</h2>
+                    <p class="section-lead" data-i18n="experience.lead">
+                        Ponad trzy lata praktyki we wsparciu i operacjach IT. Od kwietnia 2026 wspieram partnerów WAVE PTX w EMEA jako Technical Support Engineer Tier 2 w Motorola Solutions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <article class="timeline-item">
+                    <div class="period" data-i18n="experience.motorolaPeriod">od kwietnia 2026</div>
+                    <div>
+                        <h3>Technical Support Engineer</h3>
+                        <p class="company">IT / Application Support</p>
+                        <p class="company">Motorola Solutions</p>
+                        <ul>
+                            <li data-i18n="experience.motorola1">Wsparcie Tier 2 partnerów WAVE PTX w regionie EMEA: problemy telekomunikacyjne, łączność i sieci.</li>
+                            <li data-i18n="experience.motorola2">Diagnostyka WAVE Dispatch, Windows i aplikacji; prowadzenie zgłoszeń partnerów w Salesforce.</li>
+                            <li data-i18n="experience.motorola3">Współpraca z Tier 1 i eskalowanie złożonych przypadków do Tier 3 engineering przez Jira.</li>
+                            <li data-i18n="experience.motorola4">Komunikacja z partnerami po angielsku (B2), obsługa incydentów i analiza pakietów w Wireshark podczas diagnostyki.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="period" data-i18n="experience.madejPeriod">październik 2025 - styczeń 2026</div>
+                    <div>
+                        <h3>Madej Wróbel Sp. z o.o.</h3>
+                        <p class="company" data-i18n="experience.itSpecialist">Specjalista IT</p>
+                        <ul>
+                            <li data-i18n="experience.madej1">Wsparcie użytkowników końcowych oraz rozwiązywanie problemów sprzętowych i programowych.</li>
+                            <li data-i18n="experience.madej2">Administracja systemami operacyjnymi i aplikacjami biurowymi.</li>
+                            <li data-i18n="experience.madej3">Utrzymanie ciągłości działania infrastruktury IT.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="period">2024 - 2025</div>
+                    <div>
+                        <h3>Elmiko Sp. z o.o.</h3>
+                        <p class="company" data-i18n="experience.itSpecialist">Specjalista IT</p>
+                        <ul>
+                            <li data-i18n="experience.elmiko1">Utrzymanie i konfiguracja sprzętu IT oraz sieci komputerowych.</li>
+                            <li data-i18n="experience.elmiko2">Administracja kontami użytkowników i zarządzanie dostępem w Active Directory.</li>
+                            <li data-i18n="experience.elmiko3">Monitoring, troubleshooting, wsparcie użytkowników wewnętrznych i współpraca z dostawcami.</li>
+                            <li data-i18n="experience.elmiko4">Utrzymanie sieci, routery MikroTik, VPN i tunele.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="period">2023 - 2024</div>
+                    <div>
+                        <h3>Farby Kabe Sp. z o.o.</h3>
+                        <p class="company" data-i18n="experience.itSpecialist">Specjalista IT</p>
+                        <ul>
+                            <li data-i18n="experience.kabe1">Konfiguracja sprzętu IT, kont użytkowników i dostępów w Active Directory.</li>
+                            <li data-i18n="experience.kabe2">Praca z VMware ESXi, Windows Server, MS SQL, MikroTik, VPN i FortiGate.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="period">2021 - 2022</div>
+                    <div>
+                        <h3 data-i18n="experience.automationTitle">Automatyka i robotyka</h3>
+                        <p class="company">Junior PLC Programmer / Junior Automation Engineer</p>
+                        <ul>
+                            <li data-i18n="experience.automation1">Wizualizacje HMI, wsparcie projektów automatyki i robotyki oraz praca przy uruchomieniach.</li>
+                            <li data-i18n="experience.automation2">Doświadczenie inżynierskie, które pomaga mi patrzeć na IT systemowo i procesowo.</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="page section" id="projects" aria-labelledby="projects-title">
+            <div class="section-heading">
+                <div class="section-kicker" data-i18n="projects.kicker">Projekty</div>
+                <div>
+                    <h2 id="projects-title" data-i18n="projects.title">Projekty i obszary pracy</h2>
+                    <p class="section-lead" data-i18n="projects.lead">
+                        Zestaw obszarów, które pokazują praktyczne podejście do IT: od prostych aplikacji webowych
+                        i backendu, przez computer vision, po automatyzacje, systemy i własną przestrzeń do testów.
+                    </p>
+                </div>
+            </div>
+
+            <div class="project-tools" id="projectTools" hidden>
+                <div class="project-search" role="search" aria-labelledby="projectSearchLabel">
+                    <label id="projectSearchLabel" for="projectSearch" data-i18n="projects.searchLabel">Znajdź projekt lub technologię</label>
+                    <input id="projectSearch" type="search" maxlength="100" autocomplete="off" spellcheck="false" aria-controls="projectFeatured projectMore" aria-describedby="projectResults" placeholder="np. Python, n8n, dane kolarskie" data-i18n-attr="placeholder:projects.searchPlaceholder">
+                </div>
+                <div class="project-filter-row">
+                    <div class="project-filters" role="group" aria-label="Filtruj projekty według obszaru" data-i18n-attr="aria-label:projects.filterLabel">
+                        <button class="button" type="button" data-project-filter="all" aria-pressed="true" aria-controls="projectFeatured projectMore" data-i18n="projects.filterAll">Wszystkie</button>
+                        <button class="button" type="button" data-project-filter="data" aria-pressed="false" aria-controls="projectFeatured projectMore" data-i18n="projects.filterData">Dane i AI</button>
+                        <button class="button" type="button" data-project-filter="automation" aria-pressed="false" aria-controls="projectFeatured projectMore" data-i18n="projects.filterAutomation">Automatyzacja i IT</button>
+                        <button class="button" type="button" data-project-filter="web" aria-pressed="false" aria-controls="projectFeatured projectMore" data-i18n="projects.filterWeb">Web i backend</button>
+                    </div>
+                    <button class="button secondary" type="button" id="projectReset" data-i18n="projects.resetFilters">Wyczyść filtry</button>
+                </div>
+                <p class="project-results" id="projectResults" role="status" aria-live="polite" aria-atomic="true"></p>
+            </div>
+
+            <div class="grid two" id="projectFeatured" data-project-grid>
+                <article class="card project-card project-card--actionable" data-project-categories="data">
+                    <div class="project-number">01</div>
+                    <h3>Cycling · Telemetry & ML</h3>
+                    <p data-i18n="projects.cyclingText">Wyniki pracy magisterskiej: estymacja badawczej etykiety FTP z telemetrii GoldenCheetah, porównanie modeli i SHAP. Kalkulator 0,95 × MMP20 jest heurystyką, nie inferencją modelu ani pomiarem progu fizjologicznego.</p>
+                    <ul class="tags" aria-label="Obszary projektu Cycling" data-i18n-attr="aria-label:projects.cyclingTagsAria">
+                        <li class="tag" data-i18n="tag.cyclingData">Dane kolarskie</li>
+                        <li class="tag" data-i18n="tag.charts">Wykresy</li>
+                        <li class="tag">FTP</li>
+                    </ul>
+                    <div class="project-actions">
+                        <a class="button primary" href="https://cycling.banas.dev" target="_blank" rel="noopener" data-i18n="projects.cyclingCta">Zobacz projekt</a>
+                        <a class="button" href="https://github.com/Rafalbanas/Cycling" target="_blank" rel="noopener" data-i18n="projects.resumeCodeCta">Kod</a>
+                    </div>
+                </article>
+
+                <article class="card project-card project-card--actionable" data-project-categories="data">
+                    <div class="project-number">02</div>
+                    <h3 data-i18n="projects.platesTitle">Rozpoznawanie tablic rejestracyjnych / Plates</h3>
+                    <p data-i18n="projects.platesText">Publiczne demo ALPR: FastALPR i gotowe modele ONNX wykrywają tablice oraz odczytują tekst lokalnie na VPS. Repozytorium zawiera także osobny pipeline treningu i oceny detektora. OCR może mylić podobne znaki.</p>
+                    <ul class="tags" aria-label="Technologie Plates">
+                        <li class="tag">YOLO</li>
+                        <li class="tag">OCR</li>
+                        <li class="tag">Computer Vision</li>
+                    </ul>
+                    <div class="project-actions">
+                        <a class="button primary" href="https://plates.banas.dev" target="_blank" rel="noopener" data-i18n="projects.platesCta">Zobacz projekt</a>
+                        <a class="button" href="https://github.com/Rafalbanas/automatic_plate_number_recognition" target="_blank" rel="noopener" data-i18n="projects.platesCodeCta">Kod</a>
+                    </div>
+                </article>
+
+                <article class="card project-card project-card--actionable" data-project-categories="data automation web">
+                    <div class="project-number">03</div>
+                    <h3>CVTailor · AI Resume Tailoring</h3>
+                    <p data-i18n="projects.resumeText">CVTailor analizuje oferty pracy i generuje PDF/DOCX z potwierdzonych faktów. FastAPI, Ollama/Gemini i niezależny Truth Lock. Kod obejmuje lokalny RAG z rankingiem BM25; aplikacja do użytku osobistego wymaga logowania, a wynik — weryfikacji człowieka.</p>
+                    <ul class="tags" aria-label="Technologie AI Resume Tailoring">
+                        <li class="tag">FastAPI</li>
+                        <li class="tag">Ollama / Gemini</li>
+                        <li class="tag">PDF / DOCX</li>
+                    </ul>
+                    <div class="project-actions">
+                        <a class="button" href="https://github.com/Rafalbanas/ai-resume-tailoring-platform" target="_blank" rel="noopener" data-i18n="projects.resumeCodeCta">Kod</a>
+                        <a class="button primary" href="https://cv.banas.dev/" target="_blank" rel="noopener" data-i18n="projects.resumeDemoCta">Aplikacja · logowanie</a>
+                    </div>
+                </article>
+
+                <article class="card project-card project-card--actionable" data-project-categories="data automation">
+                    <div class="project-card-header">
+                        <div class="project-number">04</div>
+                        <span class="project-status" data-i18n="projects.privateDeployment">Prywatne wdrożenie</span>
+                    </div>
+                    <h3>Banas Chat</h3>
+                    <p data-i18n="projects.chatText">Prywatne wdrożenie Open WebUI z Ollama: MFA, limity generowania, koordynacja GPU i szyfrowane kopie zapasowe. Utrzymuję konfigurację i integracje; interfejs oraz silnik aplikacji pochodzą z Open WebUI.</p>
+                    <ul class="tags" aria-label="Banas Chat"><li class="tag">Open WebUI</li><li class="tag">Ollama</li><li class="tag">Docker</li></ul>
+                    <div class="project-actions"><a class="button" href="https://github.com/Rafalbanas/chat" target="_blank" rel="noopener" data-i18n="projects.resumeCodeCta">Kod</a></div>
+                </article>
+            </div>
+
+            <h3 class="project-group-title" id="projectMoreTitle" data-i18n="projects.moreTitle">Pozostałe projekty i obszary</h3>
+            <div class="grid two" id="projectMore" data-project-grid>
+                <article class="card project-card" data-project-categories="web">
+                    <div class="project-number">05</div>
+                    <h3>Lanari Candle</h3>
+                    <p data-i18n="projects.lanariText">Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.</p>
+                    <ul class="tags" aria-label="Technologie Lanari Candle">
+                        <li class="tag">Python</li>
+                        <li class="tag">FastAPI</li>
+                        <li class="tag">Frontend</li>
+                    </ul>
+                </article>
+
+                <article class="card project-card" data-project-categories="data">
+                    <div class="project-number">06</div>
+                    <h3 data-i18n="projects.thesisTitle">Praca magisterska</h3>
+                    <p data-i18n="projects.thesisText">Ukończona praca magisterska: pipeline Python i porównanie modeli estymujących badawczą etykietę FTP. pandas, scikit-learn, XGBoost i interpretacja SHAP; wyniki prezentuje aplikacja Cycling.</p>
+                    <ul class="tags" aria-label="Obszary pracy magisterskiej" data-i18n-attr="aria-label:projects.thesisTagsAria">
+                        <li class="tag">ML</li>
+                        <li class="tag" data-i18n="tag.telemetry">Telemetryka</li>
+                        <li class="tag" data-i18n="tag.cyclingData">Dane kolarskie</li>
+                    </ul>
+                </article>
+
+                <article class="card project-card" data-project-categories="automation">
+                    <div class="project-number">07</div>
+                    <h3 data-i18n="projects.itAutomationTitle">Administracja i automatyzacja IT</h3>
+                    <p data-i18n="projects.itAutomationText">PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.</p>
+                    <ul class="tags" aria-label="Obszary administracji IT">
+                        <li class="tag">PowerShell</li>
+                        <li class="tag">Linux</li>
+                        <li class="tag">Monitoring</li>
+                    </ul>
+                </article>
+
+                <article class="card project-card" data-project-categories="automation web">
+                    <div class="project-number">08</div>
+                    <h3>Banas.dev</h3>
+                    <p data-i18n="projects.banasText">Własna przestrzeń typu personal engineering lab: projekty, testy, automatyzacje, usługi, subdomeny i praktyczne eksperymenty bez ciężkiej infrastruktury.</p>
+                    <ul class="tags" aria-label="Banas.dev">
+                        <li class="tag">Portfolio</li>
+                        <li class="tag" data-i18n="tag.services">Usługi</li>
+                        <li class="tag" data-i18n="tag.automation">Automatyzacja</li>
+                    </ul>
+                </article>
+
+            </div>
+            <div class="project-empty" id="projectEmpty" hidden>
+                <h3 data-i18n="projects.emptyTitle">Brak pasujących projektów</h3>
+                <p data-i18n="projects.emptyHint">Spróbuj innej frazy lub wyczyść filtry powyżej.</p>
+            </div>
+        </section>
+
+        <section class="page section" id="thesis" aria-labelledby="thesis-title">
+            <div class="feature-band">
+                <div>
+                    <div class="section-kicker" data-i18n="thesis.kicker">Praca magisterska / dane kolarskie</div>
+                    <h2 id="thesis-title" data-i18n="thesis.title">Od telemetrii do sprawdzalnych wyników.</h2>
+                    <p class="section-lead" data-i18n="thesis.lead">
+                        W ukończonej pracy magisterskiej porównałem modele estymacji etykiety FTP na danych GoldenCheetah OpenData. Zbiór obejmował 151 399 sesji 726 zawodników; podział testowy wykonano po zawodnikach. Etykieta 0,95 × MMP20 jest heurystyką badawczą, nie laboratoryjnym pomiarem progu. Cycling pokazuje metryki, SHAP i czytnik pracy.
+                    </p>
+                    <p data-i18n="thesis.gravel">
+                        Gravel jest dla mnie naturalnym miejscem styku technologii i wytrzymałości: długie trasy,
+                        eksploracja, moc, tętno, FTP, obciążenie treningowe i pytanie, jak z surowych danych
+                        wyciągać wnioski, które mają sens nie tylko na wykresie, ale też w praktyce treningowej.
+                    </p>
+                </div>
+                <div class="metrics" aria-label="Akcenty projektu">
+                    <div class="metric">
+                        <strong>ML</strong>
+                        <span data-i18n="thesis.metricMl">modelowanie i predykcja</span>
+                    </div>
+                    <div class="metric">
+                        <strong>FTP</strong>
+                        <span data-i18n="thesis.metricFtp">etykieta badawcza, nie pomiar progu</span>
+                    </div>
+                    <div class="metric">
+                        <strong>GPS</strong>
+                        <span data-i18n="thesis.metricGps">trasy, czas, dystans, kontekst</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page section" id="skills" aria-labelledby="skills-title">
+            <div class="section-heading">
+                <div class="section-kicker" data-i18n="skills.kicker">Umiejętności</div>
+                <div>
+                    <h2 id="skills-title" data-i18n="skills.title">Technologie i narzędzia</h2>
+                    <p class="section-lead" data-i18n="skills.lead">
+                        Praktyka zawodowa: wsparcie aplikacji, systemów i sieci. Python, FastAPI i ML rozwijam także w projektach własnych i akademickich. Angielski B2 w codziennej pracy; Docker, Bash i GitHub Actions — poziom podstawowy.
+                    </p>
+                </div>
+            </div>
+
+            <div class="skills-list">
+                <article class="card skill-group">
+                    <h3 data-i18n="skills.systems">Systemy</h3>
+                    <ul>
+                        <li>Windows Server</li>
+                        <li>Microsoft 365</li>
+                        <li>Active Directory</li>
+                        <li>Linux</li>
+                    </ul>
+                </article>
+                <article class="card skill-group">
+                    <h3 data-i18n="skills.automation">Automatyzacja</h3>
+                    <ul>
+                        <li>PowerShell</li>
+                        <li data-i18n="skills.pythonBasics">Podstawy Pythona</li>
+                        <li data-i18n="skills.bashBasics">Podstawy Bash</li>
+                        <li>n8n</li>
+                    </ul>
+                </article>
+                <article class="card skill-group">
+                    <h3 data-i18n="skills.dataBackend">Dane i backend</h3>
+                    <ul>
+                        <li>SQL Server</li>
+                        <li>T-SQL</li>
+                        <li>FastAPI</li>
+                        <li data-i18n="skills.aiMlBasics">Podstawy AI / ML</li>
+                    </ul>
+                </article>
+                <article class="card skill-group">
+                    <h3 data-i18n="skills.infrastructure">Infrastruktura</h3>
+                    <ul>
+                        <li>VMware ESXi</li>
+                        <li>Hyper-V</li>
+                        <li>Proxmox</li>
+                        <li>TCP/IP, DNS, DHCP, VPN</li>
+                        <li>MikroTik, FortiGate</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="page section" id="education" aria-labelledby="education-title">
+            <div class="section-heading">
+                <div class="section-kicker" data-i18n="education.kicker">Edukacja</div>
+                <div>
+                    <h2 id="education-title" data-i18n="education.title">Edukacja</h2>
+                    <p class="section-lead" data-i18n="education.lead">
+                        Informatyka, systemy inteligentne oraz wcześniejsze zaplecze inżynierskie z automatyki i robotyki.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid two">
+                <article class="card">
+                    <h3>Uniwersytet Ekonomiczny w Katowicach</h3>
+                    <p data-i18n="education.uek">Magister, Informatyka, Programowanie Systemów Inteligentnych. Ukończone w 2026 roku.</p>
+                </article>
+                <article class="card">
+                    <h3>Politechnika Śląska</h3>
+                    <p data-i18n="education.polsl">Inżynier, Automatyka i Robotyka. Ukończone w 2022 roku.</p>
+                </article>
+                <article class="card">
+                    <h3>Śląskie Techniczne Zakłady Naukowe</h3>
+                    <p data-i18n="education.tzn">Technik mechatronik. Ukończone w 2018 roku.</p>
                 </article>
             </div>
         </section>
@@ -1889,7 +2414,7 @@
                 <div class="weather-forecast-strip" id="weatherForecastStrip" aria-label="Prognoza w przedziałach 15-minutowych" data-i18n-attr="aria-label:weather.forecastStripAria"></div>
             </section>
 
-            <div class="weather-history" aria-labelledby="weather-history-title">
+            <div class="weather-history" id="weatherHistoryPanel" data-chart-state="idle" aria-labelledby="weather-history-title">
                 <div class="weather-history-header">
                     <div>
                         <h3 id="weather-history-title" data-i18n="weather.historyTitle">Historia pogody i jakości powietrza</h3>
@@ -1911,6 +2436,11 @@
                         <button class="button" id="weatherNextDay" type="button" data-i18n="weather.nextDay">Następny dzień →</button>
                     </div>
                 </div>
+                <div class="chart-library-notice" id="chartLibraryNotice">
+                    <p id="chartLibraryStatus" role="status" data-i18n="weather.chartIdle">Wykresy wczytają się, gdy przejdziesz do tej sekcji.</p>
+                    <button class="button" id="chartLibraryRetry" type="button" data-i18n="weather.chartRetry" hidden>Spróbuj ponownie</button>
+                </div>
+                <noscript><p>Interaktywne wykresy wymagają włączonego JavaScript.</p></noscript>
                 <div class="weather-chart-panel">
                     <div class="weather-chart-wrap" id="weatherChartWrap" data-empty="true">
                         <div class="weather-chart-empty" id="weatherChartEmpty" data-i18n="weather.noHistory">Brak odczytów dla wybranego zakresu.</div>
@@ -1927,333 +2457,20 @@
             </div>
         </section>
 
-        <section class="page section" id="experience" aria-labelledby="experience-title">
-            <div class="section-heading">
-                <div class="section-kicker" data-i18n="experience.kicker">Doświadczenie</div>
-                <div>
-                    <h2 id="experience-title" data-i18n="experience.title">Doświadczenie zawodowe</h2>
-                    <p class="section-lead" data-i18n="experience.lead">
-                        Pracowałem między innymi jako IT Specialist, Application Support i w obszarze IT Operations.
-                        Od kwietnia 2026 pracuję jako Technical Support Engineer w Motorola Solutions.
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline">
-                <article class="timeline-item">
-                    <div class="period" data-i18n="experience.motorolaPeriod">od kwietnia 2026</div>
-                    <div>
-                        <h3>Technical Support Engineer</h3>
-                        <p class="company">IT / Application Support</p>
-                        <p class="company">Motorola Solutions</p>
-                        <ul>
-                            <li data-i18n="experience.motorola1">Praca w środowisku IT z naciskiem na wsparcie aplikacji, systemów i użytkowników.</li>
-                            <li data-i18n="experience.motorola2">Analiza i rozwiązywanie problemów technicznych w oparciu o procesy wsparcia i dokumentację.</li>
-                            <li data-i18n="experience.motorola3">Współpraca z systemami, zgłoszeniami, dokumentacją i informacjami potrzebnymi do diagnozy.</li>
-                            <li data-i18n="experience.motorola4">Rozwijanie kompetencji w obszarach automatyzacji, analizy problemów i pracy z systemami.</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="timeline-item">
-                    <div class="period" data-i18n="experience.madejPeriod">październik 2025 - styczeń 2026</div>
-                    <div>
-                        <h3>Madej Wróbel Sp. z o.o.</h3>
-                        <p class="company" data-i18n="experience.itSpecialist">Specjalista IT</p>
-                        <ul>
-                            <li data-i18n="experience.madej1">Wsparcie użytkowników końcowych oraz rozwiązywanie problemów sprzętowych i programowych.</li>
-                            <li data-i18n="experience.madej2">Administracja systemami operacyjnymi i aplikacjami biurowymi.</li>
-                            <li data-i18n="experience.madej3">Utrzymanie ciągłości działania infrastruktury IT.</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="timeline-item">
-                    <div class="period">2024 - 2025</div>
-                    <div>
-                        <h3>Elmiko Sp. z o.o.</h3>
-                        <p class="company" data-i18n="experience.itSpecialist">Specjalista IT</p>
-                        <ul>
-                            <li data-i18n="experience.elmiko1">Utrzymanie i konfiguracja sprzętu IT oraz sieci komputerowych.</li>
-                            <li data-i18n="experience.elmiko2">Administracja kontami użytkowników i zarządzanie dostępem w Active Directory.</li>
-                            <li data-i18n="experience.elmiko3">Monitoring, troubleshooting, wsparcie użytkowników wewnętrznych i współpraca z dostawcami.</li>
-                            <li data-i18n="experience.elmiko4">Utrzymanie sieci, routery MikroTik, VPN i tunele.</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="timeline-item">
-                    <div class="period">2023 - 2024</div>
-                    <div>
-                        <h3>Farby Kabe Sp. z o.o.</h3>
-                        <p class="company" data-i18n="experience.itSpecialist">Specjalista IT</p>
-                        <ul>
-                            <li data-i18n="experience.kabe1">Konfiguracja sprzętu IT, kont użytkowników i dostępów w Active Directory.</li>
-                            <li data-i18n="experience.kabe2">Praca z VMware ESXi, Windows Server, MS SQL, MikroTik, VPN i FortiGate.</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="timeline-item">
-                    <div class="period">2021 - 2022</div>
-                    <div>
-                        <h3 data-i18n="experience.automationTitle">Automatyka i robotyka</h3>
-                        <p class="company">Junior PLC Programmer / Junior Automation Engineer</p>
-                        <ul>
-                            <li data-i18n="experience.automation1">Wizualizacje HMI, wsparcie projektów automatyki i robotyki oraz praca przy uruchomieniach.</li>
-                            <li data-i18n="experience.automation2">Doświadczenie inżynierskie, które pomaga mi patrzeć na IT systemowo i procesowo.</li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section class="page section" id="projects" aria-labelledby="projects-title">
-            <div class="section-heading">
-                <div class="section-kicker" data-i18n="projects.kicker">Projekty</div>
-                <div>
-                    <h2 id="projects-title" data-i18n="projects.title">Projekty i obszary pracy</h2>
-                    <p class="section-lead" data-i18n="projects.lead">
-                        Zestaw obszarów, które pokazują praktyczne podejście do IT: od prostych aplikacji webowych
-                        i backendu, przez computer vision, po automatyzacje, systemy i własną przestrzeń do testów.
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid three">
-                <article class="card project-card project-card--actionable">
-                    <div class="project-number">01</div>
-                    <h3>Cycling</h3>
-                    <p data-i18n="projects.cyclingText">Interaktywna prezentacja projektu analizy formy kolarskiej, porównanie wyników modeli, wykresy i kalkulator FTP.</p>
-                    <ul class="tags" aria-label="Obszary projektu Cycling" data-i18n-attr="aria-label:projects.cyclingTagsAria">
-                        <li class="tag" data-i18n="tag.cyclingData">Dane kolarskie</li>
-                        <li class="tag" data-i18n="tag.charts">Wykresy</li>
-                        <li class="tag">FTP</li>
-                    </ul>
-                    <div class="project-actions">
-                        <a class="button primary" href="https://cycling.banas.dev" target="_blank" rel="noopener" data-i18n="projects.cyclingCta">Zobacz projekt</a>
-                    </div>
-                </article>
-
-                <article class="card project-card project-card--actionable">
-                    <div class="project-number">02</div>
-                    <h3 data-i18n="projects.n8nTitle">Automatyzacje / n8n</h3>
-                    <p data-i18n="projects.n8nText">Środowisko automatyzacji procesów i integracji usług, wykorzystywane do testowania przepływów wspierających codzienną pracę techniczną.</p>
-                    <ul class="tags" aria-label="n8n">
-                        <li class="tag">n8n</li>
-                        <li class="tag" data-i18n="tag.integrations">Integracje</li>
-                        <li class="tag" data-i18n="tag.automation">Automatyzacja</li>
-                    </ul>
-                    <div class="project-actions">
-                        <a class="button primary" href="https://n8n.banas.dev" target="_blank" rel="noopener" data-i18n="projects.n8nCta">Otwórz n8n</a>
-                    </div>
-                </article>
-
-                <article class="card project-card project-card--actionable">
-                    <div class="project-number">03</div>
-                    <h3>AI Resume Tailoring</h3>
-                    <p data-i18n="projects.resumeText">Dopasowuje opisy stanowisk do zweryfikowanych faktów z profilu i generuje CV w formatach PDF oraz DOCX przy użyciu FastAPI i n8n.</p>
-                    <ul class="tags" aria-label="Technologie AI Resume Tailoring">
-                        <li class="tag">FastAPI</li>
-                        <li class="tag">n8n</li>
-                        <li class="tag">PDF / DOCX</li>
-                    </ul>
-                    <div class="project-actions">
-                        <a class="button" href="https://github.com/Rafalbanas/ai-resume-tailoring-platform" target="_blank" rel="noopener" data-i18n="projects.resumeCodeCta">Kod</a>
-                        <a class="button primary" href="https://cv.banas.dev/" target="_blank" rel="noopener" data-i18n="projects.resumeDemoCta">Demo</a>
-                    </div>
-                </article>
-
-                <article class="card project-card project-card--actionable">
-                    <div class="project-card-header">
-                        <div class="project-number">04</div>
-                        <span class="project-status" data-i18n="projects.preparing">W przygotowaniu</span>
-                    </div>
-                    <h3 data-i18n="projects.platesTitle">Rozpoznawanie tablic rejestracyjnych / Plates</h3>
-                    <p data-i18n="projects.platesText">Projekt wykrywania tablic i odczytywania numerów ze zdjęć, wykorzystujący YOLO i OCR do detekcji obiektu, odczytu tekstu i obróbki wyniku.</p>
-                    <ul class="tags" aria-label="Technologie Plates">
-                        <li class="tag">YOLO</li>
-                        <li class="tag">OCR</li>
-                        <li class="tag">Computer Vision</li>
-                    </ul>
-                    <div class="project-actions">
-                        <a class="button" data-project-link="plates" aria-disabled="true" tabindex="-1" data-i18n="projects.platesCta" data-i18n-attr="aria-label:projects.platesLinkAria">Zobacz projekt</a>
-                    </div>
-                </article>
-            </div>
-
-            <h3 class="project-group-title" data-i18n="projects.moreTitle">Pozostałe projekty i obszary</h3>
-            <div class="grid two">
-                <article class="card project-card">
-                    <div class="project-number">05</div>
-                    <h3>Lanari Candle</h3>
-                    <p data-i18n="projects.lanariText">Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.</p>
-                    <ul class="tags" aria-label="Technologie Lanari Candle">
-                        <li class="tag">Python</li>
-                        <li class="tag">FastAPI</li>
-                        <li class="tag">Frontend</li>
-                    </ul>
-                </article>
-
-                <article class="card project-card">
-                    <div class="project-number">06</div>
-                    <h3 data-i18n="projects.thesisTitle">Praca magisterska</h3>
-                    <p data-i18n="projects.thesisText">Projekt badawczo-inżynierski: predykcja formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem ML.</p>
-                    <ul class="tags" aria-label="Obszary pracy magisterskiej" data-i18n-attr="aria-label:projects.thesisTagsAria">
-                        <li class="tag">ML</li>
-                        <li class="tag" data-i18n="tag.telemetry">Telemetryka</li>
-                        <li class="tag" data-i18n="tag.cyclingData">Dane kolarskie</li>
-                    </ul>
-                </article>
-
-                <article class="card project-card">
-                    <div class="project-number">07</div>
-                    <h3 data-i18n="projects.itAutomationTitle">Administracja i automatyzacja IT</h3>
-                    <p data-i18n="projects.itAutomationText">PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.</p>
-                    <ul class="tags" aria-label="Obszary administracji IT">
-                        <li class="tag">PowerShell</li>
-                        <li class="tag">Linux</li>
-                        <li class="tag">Monitoring</li>
-                    </ul>
-                </article>
-
-                <article class="card project-card">
-                    <div class="project-number">08</div>
-                    <h3>Banas.dev</h3>
-                    <p data-i18n="projects.banasText">Własna przestrzeń na projekty, testy, automatyzacje i usługi. Statyczna strona, własne subdomeny i miejsce do praktycznego eksperymentowania.</p>
-                    <ul class="tags" aria-label="Banas.dev">
-                        <li class="tag">Portfolio</li>
-                        <li class="tag" data-i18n="tag.services">Usługi</li>
-                        <li class="tag" data-i18n="tag.automation">Automatyzacja</li>
-                    </ul>
-                </article>
-
-            </div>
-        </section>
-
-        <section class="page section" id="thesis" aria-labelledby="thesis-title">
-            <div class="feature-band">
-                <div>
-                    <div class="section-kicker" data-i18n="thesis.kicker">Praca magisterska / dane kolarskie</div>
-                    <h2 id="thesis-title" data-i18n="thesis.title">Machine learning, telemetryka i forma kolarska.</h2>
-                    <p class="section-lead" data-i18n="thesis.lead">
-                        Moja praca magisterska to projekt badawczo-inżynierski dotyczący predykcji formy kolarskiej
-                        na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem uczenia maszynowego.
-                        To połączenie sportu, danych, ML i praktycznej analizy wydolności, bez obietnicy gotowego
-                        produktu komercyjnego.
-                    </p>
-                    <p data-i18n="thesis.gravel">
-                        Gravel jest dla mnie naturalnym miejscem styku technologii i wytrzymałości: długie trasy,
-                        eksploracja, moc, tętno, FTP, obciążenie treningowe i pytanie, jak z surowych danych
-                        wyciągać wnioski, które mają sens nie tylko na wykresie, ale też w praktyce treningowej.
-                    </p>
-                </div>
-                <div class="metrics" aria-label="Akcenty projektu">
-                    <div class="metric">
-                        <strong>ML</strong>
-                        <span data-i18n="thesis.metricMl">modelowanie i predykcja</span>
-                    </div>
-                    <div class="metric">
-                        <strong>FTP</strong>
-                        <span data-i18n="thesis.metricFtp">forma, obciążenie, wydolność</span>
-                    </div>
-                    <div class="metric">
-                        <strong>GPS</strong>
-                        <span data-i18n="thesis.metricGps">trasy, czas, dystans, kontekst</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="page section" id="skills" aria-labelledby="skills-title">
-            <div class="section-heading">
-                <div class="section-kicker" data-i18n="skills.kicker">Umiejętności</div>
-                <div>
-                    <h2 id="skills-title" data-i18n="skills.title">Technologie i narzędzia</h2>
-                    <p class="section-lead" data-i18n="skills.lead">
-                        Kompetencje zebrane z pracy w IT, studiów, automatyki oraz własnych projektów.
-                    </p>
-                </div>
-            </div>
-
-            <div class="skills-list">
-                <article class="card skill-group">
-                    <h3 data-i18n="skills.systems">Systemy</h3>
-                    <ul>
-                        <li>Windows Server</li>
-                        <li>Microsoft 365</li>
-                        <li>Active Directory</li>
-                        <li>Linux</li>
-                    </ul>
-                </article>
-                <article class="card skill-group">
-                    <h3 data-i18n="skills.automation">Automatyzacja</h3>
-                    <ul>
-                        <li>PowerShell</li>
-                        <li data-i18n="skills.pythonBasics">Podstawy Pythona</li>
-                        <li data-i18n="skills.bashBasics">Podstawy Bash</li>
-                        <li>n8n</li>
-                    </ul>
-                </article>
-                <article class="card skill-group">
-                    <h3 data-i18n="skills.dataBackend">Dane i backend</h3>
-                    <ul>
-                        <li>SQL Server</li>
-                        <li>T-SQL</li>
-                        <li>FastAPI</li>
-                        <li data-i18n="skills.aiMlBasics">Podstawy AI / ML</li>
-                    </ul>
-                </article>
-                <article class="card skill-group">
-                    <h3 data-i18n="skills.infrastructure">Infrastruktura</h3>
-                    <ul>
-                        <li>VMware ESXi</li>
-                        <li>Hyper-V</li>
-                        <li>Proxmox</li>
-                        <li>TCP/IP, DNS, DHCP, VPN</li>
-                        <li>MikroTik, FortiGate</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-
-        <section class="page section" id="education" aria-labelledby="education-title">
-            <div class="section-heading">
-                <div class="section-kicker" data-i18n="education.kicker">Edukacja</div>
-                <div>
-                    <h2 id="education-title" data-i18n="education.title">Edukacja</h2>
-                    <p class="section-lead" data-i18n="education.lead">
-                        Informatyka, systemy inteligentne oraz wcześniejsze zaplecze inżynierskie z automatyki i robotyki.
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid two">
-                <article class="card">
-                    <h3>Uniwersytet Ekonomiczny w Katowicach</h3>
-                    <p data-i18n="education.uek">Magister, Informatyka, Programowanie Systemów Inteligentnych. Ukończone w 2026 roku.</p>
-                </article>
-                <article class="card">
-                    <h3>Politechnika Śląska</h3>
-                    <p data-i18n="education.polsl">Inżynier, Automatyka i Robotyka. Ukończone w 2022 roku.</p>
-                </article>
-                <article class="card">
-                    <h3>Śląskie Techniczne Zakłady Naukowe</h3>
-                    <p data-i18n="education.tzn">Technik mechatronik. Ukończone w 2018 roku.</p>
-                </article>
-            </div>
-        </section>
-
         <section class="page section" id="contact" aria-labelledby="contact-title">
             <div class="contact-layout">
                 <div>
                     <div class="section-kicker" data-i18n="contact.kicker">Kontakt</div>
                     <h2 id="contact-title" data-i18n="contact.title">Porozmawiajmy o IT, automatyzacji albo danych.</h2>
                     <p class="section-lead" data-i18n="contact.lead">
-                        Najłatwiej znaleźć mnie przez LinkedIn, GitHuba lub moje publiczne profile projektowe.
+                        Napisz do mnie e-mail lub znajdź mnie przez LinkedIn, GitHuba i moje publiczne profile projektowe.
                     </p>
                 </div>
                 <div class="contact-links">
+                    <span class="contact-link" data-public-email>
+                        <strong>E-mail</strong>
+                        <span data-email-text>contact [at] banas [dot] dev</span>
+                    </span>
                     <a class="contact-link" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener">
                         <strong>LinkedIn</strong>
                         <span>linkedin.com/in/rafał-banaś-251583152</span>
@@ -2266,10 +2483,6 @@
                         <strong>Strava</strong>
                         <span>strava.com/athletes/9698049</span>
                     </a>
-                    <a class="contact-link" href="https://n8n.banas.dev" target="_blank" rel="noopener">
-                        <strong>n8n</strong>
-                        <span>n8n.banas.dev</span>
-                    </a>
                 </div>
             </div>
         </section>
@@ -2278,13 +2491,39 @@
     <footer>
         <div class="page">
             <span>&copy; 2026 Rafał Banaś. banas.dev</span>
+            <span class="footer-email" data-public-email>
+                <span data-email-text>contact [at] banas [dot] dev</span>
+            </span>
             <span data-i18n="footer.note">Statyczna strona bez analityki i trackerów. Motyw i język zapisują się lokalnie w przeglądarce.</span>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script>
         (() => {
+            const mailbox = "contact";
+            const domain = ["banas", "dev"].join(".");
+            const address = [mailbox, domain].join("@");
+            document.querySelectorAll("[data-public-email]").forEach((placeholder) => {
+                const link = document.createElement("a");
+                link.className = placeholder.className;
+                link.href = ["mail", "to", ":", address].join("");
+                placeholder.querySelector("[data-email-text]").textContent = address;
+                link.append(...placeholder.childNodes);
+                placeholder.replaceWith(link);
+            });
+        })();
+    </script>
+    <script>
+        (() => {
+            // Storage can be unavailable in private or restricted browser contexts.
+            const preferences = {
+                get(key) {
+                    try { return localStorage.getItem(key); } catch { return null; }
+                },
+                set(key, value) {
+                    try { localStorage.setItem(key, value); } catch { /* In-memory UI still works. */ }
+                }
+            };
             const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
             const canUsePointerGlow = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
             const themeToggle = document.getElementById("themeToggle");
@@ -2293,6 +2532,12 @@
             const nav = document.querySelector(".nav");
             const navLinksContainer = document.getElementById("primaryNavigation");
             const hero = document.querySelector(".hero");
+            const projectTools = document.getElementById("projectTools");
+            const projectSearch = document.getElementById("projectSearch");
+            const projectCards = [...document.querySelectorAll("#projects .project-card")];
+            const projectFilterButtons = [...document.querySelectorAll("[data-project-filter]")];
+            const projectSearchIndex = new Map();
+            let selectedProjectFilter = "all";
             const profilePhoto = document.getElementById("profilePhoto");
             const navLinks = [...document.querySelectorAll(".nav-links a[href^='#']")];
             const langButtons = [...document.querySelectorAll(".lang-button[data-lang]")];
@@ -2320,6 +2565,11 @@
             const weatherToday = document.getElementById("weatherToday");
             const weatherNextDay = document.getElementById("weatherNextDay");
             const weatherRangeButtons = [...document.querySelectorAll("[data-weather-range]")];
+            const weatherHistoryPanel = document.getElementById("weatherHistoryPanel");
+            const chartLibraryNotice = document.getElementById("chartLibraryNotice");
+            const chartLibraryStatus = document.getElementById("chartLibraryStatus");
+            const chartLibraryRetry = document.getElementById("chartLibraryRetry");
+            let chartLibraryState = "idle";
             const photos = ["cv_photo.webp", "cv_photo2.webp"];
             let photoIndex = 0;
             let weatherData = null;
@@ -2343,9 +2593,10 @@
 
             const translations = {
                 pl: {
+                    skipLink: "Przejdź do treści",
                     meta: {
-                        title: "Rafał Banaś | Technical Support Engineer, IT & Data Science",
-                        description: "Portfolio Rafała Banasia: Technical Support Engineer, IT/Application Support, student informatyki rozwijający się w kierunku AI, Data Science, automatyzacji i systemów."
+                        title: "Rafał Banaś | Technical Support Engineer · Python & AI",
+                        description: "Rafał Banaś — Technical Support Engineer Tier 2 w Motorola Solutions, magister informatyki. Wsparcie aplikacji, Python, automatyzacja i własne projekty AI."
                     },
                     langSwitch: { label: "Wybór języka" },
                     nav: {
@@ -2361,8 +2612,12 @@
                         close: "Zamknij menu"
                     },
                     hero: {
-                        eyebrow: "Technical Support Engineer / IT / Application Support",
-                        subtitle: "Technical Support Engineer w Motorola Solutions i student informatyki. Traktuję banas.dev jak osobiste engineering lab: miejsce do budowania, testowania i automatyzowania rozwiązań na styku IT, systemów, danych i sportu.",
+                        eyebrow: "Technical Support Engineer · Python · AI",
+                        subtitle: "Wspieram partnerów WAVE PTX w regionie EMEA jako Technical Support Engineer Tier 2 w Motorola Solutions. Jestem magistrem informatyki. Po pracy buduję narzędzia w Pythonie, automatyzuję zadania i rozwijam własne projekty AI.",
+                        factsAria: "W skrócie",
+                        factExperience: "lata wsparcia i operacji IT",
+                        factDegree: "informatyka · UE Katowice",
+                        role: "Systemy. Dane. Mniej ręcznej pracy.",
                         projectsCta: "Zobacz projekty",
                         tagsAria: "Główne obszary",
                         labAria: "Tryb pracy",
@@ -2378,6 +2633,8 @@
                         line3: "automation: skrypty, workflowy, usługi"
                     },
                     profile: {
+                        changePhoto: "Zmień zdjęcie profilowe",
+                        photoHint: "Dwie strony tej samej osoby ↗ Zmień zdjęcie",
                         aria: "Profil",
                         locationLabel: "Lokalizacja",
                         location: "Katowice, Polska",
@@ -2390,11 +2647,11 @@
                     about: {
                         kicker: "O mnie",
                         title: "Personal engineering lab: praktyczne IT, dane i automatyzacja.",
-                        lead: "Jestem studentem informatyki i pracuję w IT, rozwijając się w kierunku AI, Data Science i automatyzacji. Najbliżej mi do praktycznego styku aplikacji, systemów, użytkowników i procesów wsparcia: diagnozowania problemów, porządkowania informacji, dokumentowania rozwiązań oraz budowania małych narzędzi, które coś realnie usprawniają.",
+                        lead: "Mam ponad trzy lata doświadczenia we wsparciu i operacjach IT oraz tytuł magistra informatyki. Diagnozuję problemy aplikacji, systemów i sieci, analizuję logi i dokumentuję rozwiązania. Własne projekty pozwalają mi łączyć Python, automatyzację i analizę danych z praktyką utrzymania usług.",
                         card1Title: "Praktyczne wsparcie IT",
                         card1Text: "Aplikacje, systemy, użytkownicy, infrastruktura, sieci i troubleshooting w codziennej pracy operacyjnej.",
                         card2Title: "Automatyzacja i prototypy",
-                        card2Text: "PowerShell, Bash, podstawy Pythona i podejście, w którym powtarzalne zadania trafiają do skryptów, workflowów albo checklist.",
+                        card2Text: "PowerShell, Python, podstawy Bash i n8n. Korzystam z asystentów AI przy tworzeniu kodu; zmiany weryfikuję przez przegląd, Git i testy.",
                         card3Title: "Dane, AI i sport",
                         card3Text: "Uczenie maszynowe, telemetryka treningowa i analiza formy kolarskiej jako praktyczne pole do eksperymentów z danymi."
                     },
@@ -2404,6 +2661,10 @@
                         lead: "Temperatura i opady z Open-Meteo co 15 minut oraz godzinowe pomiary PM2,5 i PM10 z GIOŚ.",
                         station: "Katowice · pogoda i średnia z 2 stacji",
                         loading: "Pobieranie danych…",
+                        chartIdle: "Wykresy wczytają się, gdy przejdziesz do tej sekcji.",
+                        chartLoading: "Wczytywanie wykresów… Pozostałe dane są już dostępne.",
+                        chartError: "Nie udało się wczytać wykresów. Pomiary i prognoza nadal są dostępne.",
+                        chartRetry: "Spróbuj ponownie",
                         waiting: "Oczekiwanie na aktualne dane.",
                         temperature: "Temperatura",
                         avgPm25: "Średnia PM2,5",
@@ -2498,12 +2759,12 @@
                     experience: {
                         kicker: "Doświadczenie",
                         title: "Doświadczenie zawodowe",
-                        lead: "Pracowałem między innymi jako IT Specialist, Application Support i w obszarze IT Operations. Od kwietnia 2026 pracuję jako Technical Support Engineer w Motorola Solutions.",
+                        lead: "Ponad trzy lata praktyki we wsparciu i operacjach IT. Od kwietnia 2026 wspieram partnerów WAVE PTX w EMEA jako Technical Support Engineer Tier 2 w Motorola Solutions.",
                         motorolaPeriod: "od kwietnia 2026",
-                        motorola1: "Praca w środowisku IT z naciskiem na wsparcie aplikacji, systemów i użytkowników.",
-                        motorola2: "Analiza i rozwiązywanie problemów technicznych w oparciu o procesy wsparcia i dokumentację.",
-                        motorola3: "Współpraca z systemami, zgłoszeniami, dokumentacją i informacjami potrzebnymi do diagnozy.",
-                        motorola4: "Rozwijanie kompetencji w obszarach automatyzacji, analizy problemów i pracy z systemami.",
+                        motorola1: "Wsparcie Tier 2 partnerów WAVE PTX w regionie EMEA: problemy telekomunikacyjne, łączność i sieci.",
+                        motorola2: "Diagnostyka WAVE Dispatch, Windows i aplikacji; prowadzenie zgłoszeń partnerów w Salesforce.",
+                        motorola3: "Współpraca z Tier 1 i eskalowanie złożonych przypadków do Tier 3 engineering przez Jira.",
+                        motorola4: "Komunikacja z partnerami po angielsku (B2), obsługa incydentów i analiza pakietów w Wireshark podczas diagnostyki.",
                         madejPeriod: "październik 2025 - styczeń 2026",
                         itSpecialist: "Specjalista IT",
                         madej1: "Wsparcie użytkowników końcowych oraz rozwiązywanie problemów sprzętowych i programowych.",
@@ -2521,26 +2782,40 @@
                     },
                     projects: {
                         kicker: "Projekty",
+                        searchLabel: "Znajdź projekt lub technologię",
+                        searchPlaceholder: "np. Python, n8n, dane kolarskie",
+                        filterLabel: "Filtruj projekty według obszaru",
+                        filterAll: "Wszystkie",
+                        filterData: "Dane i AI",
+                        filterAutomation: "Automatyzacja i IT",
+                        filterWeb: "Web i backend",
+                        resetFilters: "Wyczyść filtry",
+                        resultCount: "Projekty: {count} z {total}",
+                        emptyTitle: "Brak pasujących projektów",
+                        emptyHint: "Spróbuj innej frazy lub wyczyść filtry powyżej.",
                         title: "Projekty i obszary pracy",
                         lead: "Zestaw obszarów, które pokazują praktyczne podejście do IT: od prostych aplikacji webowych i backendu, przez computer vision, po automatyzacje, systemy i własną przestrzeń do testów.",
-                        cyclingText: "Interaktywna prezentacja projektu analizy formy kolarskiej, porównanie wyników modeli, wykresy i kalkulator FTP.",
+                        cyclingText: "Wyniki pracy magisterskiej: estymacja badawczej etykiety FTP z telemetrii GoldenCheetah, porównanie modeli i SHAP. Kalkulator 0,95 × MMP20 jest heurystyką, nie inferencją modelu ani pomiarem progu fizjologicznego.",
                         cyclingCta: "Zobacz projekt",
                         cyclingTagsAria: "Obszary projektu Cycling",
                         n8nTitle: "Automatyzacje / n8n",
                         n8nText: "Środowisko automatyzacji procesów i integracji usług, wykorzystywane do testowania przepływów wspierających codzienną pracę techniczną.",
                         n8nCta: "Otwórz n8n",
                         platesTitle: "Rozpoznawanie tablic rejestracyjnych / Plates",
-                        platesText: "Projekt wykrywania tablic i odczytywania numerów ze zdjęć, wykorzystujący YOLO i OCR do detekcji obiektu, odczytu tekstu i obróbki wyniku.",
+                        platesText: "Publiczne demo ALPR: FastALPR i gotowe modele ONNX wykrywają tablice oraz odczytują tekst lokalnie na VPS. Repozytorium zawiera także osobny pipeline treningu i oceny detektora. OCR może mylić podobne znaki.",
                         platesCta: "Zobacz projekt",
-                        platesLinkAria: "Zobacz projekt Plates — status: w przygotowaniu",
-                        resumeText: "Dopasowuje opisy stanowisk do zweryfikowanych faktów z profilu i generuje CV w formatach PDF oraz DOCX przy użyciu FastAPI i n8n.",
+                        platesCodeCta: "Kod",
+                        platesLinkAria: "Zobacz działające demo Plates",
+                        resumeText: "CVTailor analizuje oferty pracy i generuje PDF/DOCX z potwierdzonych faktów. FastAPI, Ollama/Gemini i niezależny Truth Lock. Kod obejmuje lokalny RAG z rankingiem BM25; aplikacja do użytku osobistego wymaga logowania, a wynik — weryfikacji człowieka.",
                         resumeCodeCta: "Kod",
-                        resumeDemoCta: "Demo",
+                        resumeDemoCta: "Aplikacja · logowanie",
+                        privateDeployment: "Prywatne wdrożenie",
+                        chatText: "Prywatne wdrożenie Open WebUI z Ollama: MFA, limity generowania, koordynacja GPU i szyfrowane kopie zapasowe. Utrzymuję konfigurację i integracje; interfejs oraz silnik aplikacji pochodzą z Open WebUI.",
                         preparing: "W przygotowaniu",
                         moreTitle: "Pozostałe projekty i obszary",
                         lanariText: "Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.",
                         thesisTitle: "Praca magisterska",
-                        thesisText: "Projekt badawczo-inżynierski: predykcja formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem ML.",
+                        thesisText: "Ukończona praca magisterska: pipeline Python i porównanie modeli estymujących badawczą etykietę FTP. pandas, scikit-learn, XGBoost i interpretacja SHAP; wyniki prezentuje aplikacja Cycling.",
                         itAutomationTitle: "Administracja i automatyzacja IT",
                         itAutomationText: "PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.",
                         banasText: "Własna przestrzeń typu personal engineering lab: projekty, testy, automatyzacje, usługi, subdomeny i praktyczne eksperymenty bez ciężkiej infrastruktury.",
@@ -2556,17 +2831,17 @@
                     },
                     thesis: {
                         kicker: "Praca magisterska / dane kolarskie",
-                        title: "Machine learning, telemetryka i forma kolarska.",
-                        lead: "Moja praca magisterska to projekt badawczo-inżynierski dotyczący predykcji formy kolarskiej na podstawie danych telemetrycznych z urządzeń sportowych z wykorzystaniem uczenia maszynowego. To połączenie sportu, danych, ML i praktycznej analizy wydolności, bez obietnicy gotowego produktu komercyjnego.",
+                        title: "Od telemetrii do sprawdzalnych wyników.",
+                        lead: "W ukończonej pracy magisterskiej porównałem modele estymacji etykiety FTP na danych GoldenCheetah OpenData. Zbiór obejmował 151 399 sesji 726 zawodników; podział testowy wykonano po zawodnikach. Etykieta 0,95 × MMP20 jest heurystyką badawczą, nie laboratoryjnym pomiarem progu. Cycling pokazuje metryki, SHAP i czytnik pracy.",
                         gravel: "Gravel jest dla mnie naturalnym miejscem styku technologii i wytrzymałości: długie trasy, eksploracja, moc, tętno, FTP, obciążenie treningowe i pytanie, jak z surowych danych wyciągać wnioski, które mają sens nie tylko na wykresie, ale też w praktyce treningowej.",
                         metricMl: "modelowanie i predykcja",
-                        metricFtp: "forma, obciążenie, wydolność",
+                        metricFtp: "etykieta badawcza, nie pomiar progu",
                         metricGps: "trasy, czas, dystans, kontekst"
                     },
                     skills: {
                         kicker: "Umiejętności",
                         title: "Technologie i narzędzia",
-                        lead: "Kompetencje zebrane z pracy w IT, studiów, automatyki oraz własnych projektów.",
+                        lead: "Praktyka zawodowa: wsparcie aplikacji, systemów i sieci. Python, FastAPI i ML rozwijam także w projektach własnych i akademickich. Angielski B2 w codziennej pracy; Docker, Bash i GitHub Actions — poziom podstawowy.",
                         systems: "Systemy",
                         automation: "Automatyzacja",
                         dataBackend: "Dane i backend",
@@ -2586,7 +2861,7 @@
                     contact: {
                         kicker: "Kontakt",
                         title: "Porozmawiajmy o IT, automatyzacji albo danych.",
-                        lead: "Najłatwiej znaleźć mnie przez LinkedIn, GitHuba lub moje publiczne profile projektowe."
+                        lead: "Napisz do mnie e-mail lub znajdź mnie przez LinkedIn, GitHuba i moje publiczne profile projektowe."
                     },
                     footer: {
                         note: "Statyczna strona bez analityki i trackerów. Motyw i język zapisują się lokalnie w przeglądarce."
@@ -2597,9 +2872,10 @@
                     }
                 },
                 en: {
+                    skipLink: "Skip to content",
                     meta: {
-                        title: "Rafał Banaś | Technical Support Engineer, IT & Data Science",
-                        description: "Rafał Banaś portfolio: Technical Support Engineer, IT/Application Support and computer science student growing toward AI, Data Science, automation and systems."
+                        title: "Rafał Banaś | Technical Support Engineer · Python & AI",
+                        description: "Rafał Banaś — Technical Support Engineer Tier 2 at Motorola Solutions, MSc in Computer Science. Application support, Python, automation and personal AI projects."
                     },
                     langSwitch: { label: "Language selection" },
                     nav: {
@@ -2615,8 +2891,12 @@
                         close: "Close menu"
                     },
                     hero: {
-                        eyebrow: "Technical Support Engineer / IT / Application Support",
-                        subtitle: "Technical Support Engineer at Motorola Solutions and computer science student. I treat banas.dev as a personal engineering lab: a place to build, test and automate solutions at the intersection of IT, systems, data and sport.",
+                        eyebrow: "Technical Support Engineer · Python · AI",
+                        subtitle: "I support WAVE PTX partners across EMEA as a Technical Support Engineer Tier 2 at Motorola Solutions. I hold an MSc in Computer Science. Outside work, I build Python tools, automate tasks and develop personal AI projects.",
+                        factsAria: "At a glance",
+                        factExperience: "years in IT support and operations",
+                        factDegree: "Computer Science · UE Katowice",
+                        role: "Systems. Data. Less manual work.",
                         projectsCta: "View projects",
                         tagsAria: "Main areas",
                         labAria: "Work mode",
@@ -2632,6 +2912,8 @@
                         line3: "automation: scripts, workflows, services"
                     },
                     profile: {
+                        changePhoto: "Change profile photo",
+                        photoHint: "Two sides of the same person ↗ Change photo",
                         aria: "Profile",
                         locationLabel: "Location",
                         location: "Katowice, Poland",
@@ -2644,11 +2926,11 @@
                     about: {
                         kicker: "About",
                         title: "Personal engineering lab: practical IT, data and automation.",
-                        lead: "I am a computer science student working in IT and growing toward AI, Data Science and automation. My strongest focus is the practical intersection of applications, systems, users and support processes: diagnosing issues, organizing information, documenting solutions and building small tools that improve real workflows.",
+                        lead: "I have more than three years of experience in IT support and operations and an MSc in Computer Science. I troubleshoot applications, systems and networks, analyze logs and document solutions. Personal projects connect Python, automation and data analysis with hands-on service maintenance.",
                         card1Title: "Hands-on IT support",
                         card1Text: "Applications, systems, users, infrastructure, networks and troubleshooting in day-to-day IT operations.",
                         card2Title: "Automation and prototypes",
-                        card2Text: "PowerShell, Bash, Python basics and an approach where repetitive work becomes a script, workflow or checklist.",
+                        card2Text: "PowerShell, Python, basic Bash and n8n. I use AI coding assistants while keeping human review, Git and tests as validation checkpoints.",
                         card3Title: "Data, AI and sport",
                         card3Text: "Machine learning, training telemetry and cycling form analysis as a practical field for data experiments."
                     },
@@ -2658,6 +2940,10 @@
                         lead: "Temperature and precipitation from Open-Meteo every 15 minutes, plus hourly PM2.5 and PM10 readings from GIOŚ.",
                         station: "Katowice · weather and 2-station average",
                         loading: "Loading data…",
+                        chartIdle: "Charts will load when you reach this section.",
+                        chartLoading: "Loading charts… The other readings are already available.",
+                        chartError: "Charts could not be loaded. Readings and forecasts are still available.",
+                        chartRetry: "Try again",
                         waiting: "Waiting for current data.",
                         temperature: "Temperature",
                         avgPm25: "Average PM2.5",
@@ -2752,12 +3038,12 @@
                     experience: {
                         kicker: "Experience",
                         title: "Professional experience",
-                        lead: "I have worked across IT Specialist, Application Support and IT Operations areas. Since April 2026, I have been working as a Technical Support Engineer at Motorola Solutions.",
+                        lead: "More than three years in IT support and operations. Since April 2026, I have supported WAVE PTX partners across EMEA as a Technical Support Engineer Tier 2 at Motorola Solutions.",
                         motorolaPeriod: "since April 2026",
-                        motorola1: "Working in an IT environment with a focus on supporting applications, systems and users.",
-                        motorola2: "Analyzing and resolving technical issues using support processes and documentation.",
-                        motorola3: "Working with systems, tickets, documentation and diagnostic information.",
-                        motorola4: "Developing skills in automation, problem analysis and practical systems work.",
+                        motorola1: "Tier 2 support for WAVE PTX partners across EMEA, resolving telecom, connectivity and network-related issues.",
+                        motorola2: "Troubleshooting WAVE Dispatch, Windows and application issues; managing partner cases in Salesforce.",
+                        motorola3: "Collaborating with Tier 1 and escalating complex technical cases to Tier 3 engineering through Jira.",
+                        motorola4: "Communicating with partners in English (B2), handling incidents and inspecting packets with Wireshark during diagnostics.",
                         madejPeriod: "October 2025 - January 2026",
                         itSpecialist: "IT Specialist",
                         madej1: "End-user support and troubleshooting hardware and software issues.",
@@ -2775,26 +3061,40 @@
                     },
                     projects: {
                         kicker: "Projects",
+                        searchLabel: "Find a project or technology",
+                        searchPlaceholder: "e.g. Python, n8n, cycling data",
+                        filterLabel: "Filter projects by area",
+                        filterAll: "All projects",
+                        filterData: "Data & AI",
+                        filterAutomation: "Automation & IT",
+                        filterWeb: "Web & backend",
+                        resetFilters: "Clear filters",
+                        resultCount: "Projects: {count} of {total}",
+                        emptyTitle: "No matching projects",
+                        emptyHint: "Try another search or clear the filters above.",
                         title: "Projects and focus areas",
                         lead: "A set of areas showing my practical approach to IT: from simple web applications and backend work, through computer vision, to automation, systems and my own testing space.",
-                        cyclingText: "An interactive presentation of the cycling performance analysis project, including model result comparisons, charts and an FTP calculator.",
+                        cyclingText: "MSc thesis results: estimating a research FTP label from GoldenCheetah telemetry, model comparisons and SHAP. The 0.95 × MMP20 calculator is a heuristic, not model inference or a physiological threshold measurement.",
                         cyclingCta: "View project",
                         cyclingTagsAria: "Cycling project areas",
                         n8nTitle: "Automation / n8n",
                         n8nText: "An environment for process automation and service integrations, used to test workflows supporting everyday technical work.",
                         n8nCta: "Open n8n",
                         platesTitle: "License plate recognition / Plates",
-                        platesText: "A project for detecting license plates and reading their numbers from images, using YOLO and OCR for object detection, text extraction and result processing.",
+                        platesText: "Public ALPR demo: FastALPR and pretrained ONNX models detect plates and read their text locally on a VPS. The repository also includes a separate detector training and evaluation pipeline. OCR can confuse similar characters.",
                         platesCta: "View project",
-                        platesLinkAria: "View the Plates project — status: in progress",
-                        resumeText: "Matches job descriptions against verified profile facts and generates PDF and DOCX resumes using FastAPI and n8n.",
+                        platesCodeCta: "Code",
+                        platesLinkAria: "Open the working Plates demo",
+                        resumeText: "CVTailor analyzes job postings and generates PDF/DOCX resumes from attested facts. FastAPI, Ollama/Gemini and independent Truth Lock validation. The code includes local RAG with BM25 ranking; this personal application requires login, and its output requires human review.",
                         resumeCodeCta: "Code",
-                        resumeDemoCta: "Demo",
+                        resumeDemoCta: "Application · login required",
+                        privateDeployment: "Private deployment",
+                        chatText: "Private Open WebUI deployment with Ollama: MFA, generation limits, GPU coordination and encrypted backups. I maintain configuration and integrations; the interface and application engine are provided by Open WebUI.",
                         preparing: "Coming soon",
                         moreTitle: "Other projects and focus areas",
                         lanariText: "An e-commerce project with a Python/FastAPI backend and a simple frontend. Practice in API design, application logic, data validation and web integration.",
                         thesisTitle: "Master’s thesis",
-                        thesisText: "A research and engineering project: predicting cycling performance/form using telemetry data from sports devices with ML.",
+                        thesisText: "Completed MSc thesis: a Python pipeline and model comparison for research FTP label estimation. pandas, scikit-learn, XGBoost and SHAP interpretation; the Cycling application presents the results.",
                         itAutomationTitle: "IT administration and automation",
                         itAutomationText: "PowerShell, Linux, servers, monitoring, networks and scripts supporting diagnostics, configuration and repetitive administrative work.",
                         banasText: "My personal engineering lab space: projects, tests, automation, services, subdomains and practical experiments without heavy infrastructure.",
@@ -2810,17 +3110,17 @@
                     },
                     thesis: {
                         kicker: "Thesis / Cycling data",
-                        title: "Machine learning, telemetry and cycling performance.",
-                        lead: "My master’s thesis is a research and engineering project focused on predicting cycling performance/form using telemetry data from sports devices with machine learning. It combines sport, data, ML and practical performance analysis without promising a finished commercial product.",
+                        title: "From telemetry to verifiable results.",
+                        lead: "My completed MSc thesis compared models estimating a research FTP label from GoldenCheetah OpenData. The dataset covered 151,399 sessions from 726 athletes, with an athlete-level test split. The 0.95 × MMP20 label is a research heuristic, not a laboratory threshold measurement. Cycling presents metrics, SHAP and a thesis reader.",
                         gravel: "Gravel cycling is a natural intersection of technology and endurance sport for me: long routes, exploration, power, heart rate, FTP, training load and the question of how to turn raw data into insights that make sense not only on a chart, but also in practical training analysis.",
                         metricMl: "modeling and prediction",
-                        metricFtp: "form, load, performance",
+                        metricFtp: "research label, not a threshold measurement",
                         metricGps: "routes, time, distance, context"
                     },
                     skills: {
                         kicker: "Skills",
                         title: "Technologies and tools",
-                        lead: "Skills built through IT work, studies, automation engineering and personal projects.",
+                        lead: "Professional practice: application, systems and network support. I also develop Python, FastAPI and ML through personal and academic projects. English B2 in daily work; Docker, Bash and GitHub Actions at a basic level.",
                         systems: "Systems",
                         automation: "Automation",
                         dataBackend: "Data and backend",
@@ -2840,7 +3140,7 @@
                     contact: {
                         kicker: "Contact",
                         title: "Let’s talk about IT, automation or data.",
-                        lead: "The easiest way to reach me is through LinkedIn, GitHub or my public project profiles."
+                        lead: "Send me an email or find me on LinkedIn, GitHub and my public project profiles."
                     },
                     footer: {
                         note: "Static website with no analytics or trackers. Theme and language are stored locally in the browser."
@@ -3130,13 +3430,17 @@
                 });
             }
 
+            // Reuse ICU formatters: creating thousands during each chart render
+            // blocks the main thread when the full history is loaded.
+            const warsawDateFormatter = new Intl.DateTimeFormat("en-CA", {
+                timeZone: "Europe/Warsaw",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit"
+            });
+
             function dateKeyInWarsaw(date = new Date()) {
-                const parts = new Intl.DateTimeFormat("en-CA", {
-                    timeZone: "Europe/Warsaw",
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit"
-                }).formatToParts(date);
+                const parts = warsawDateFormatter.formatToParts(date);
                 const value = Object.fromEntries(parts.map((part) => [part.type, part.value]));
                 return `${value.year}-${value.month}-${value.day}`;
             }
@@ -3332,16 +3636,18 @@
                 }).format(date);
             }
 
+            const warsawTimeFormatter = new Intl.DateTimeFormat("en-CA", {
+                timeZone: "Europe/Warsaw",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                hourCycle: "h23"
+            });
+
             function localTimeParts(rawTime) {
-                const parts = new Intl.DateTimeFormat("en-CA", {
-                    timeZone: "Europe/Warsaw",
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hourCycle: "h23"
-                }).formatToParts(new Date(rawTime));
+                const parts = warsawTimeFormatter.formatToParts(new Date(rawTime));
                 return Object.fromEntries(parts.map((part) => [part.type, part.value]));
             }
 
@@ -3512,10 +3818,50 @@
                 return `${context.dataset.label}: ${formatNumber(context.raw, lang, 2)} ${unit}${source}`;
             }
 
+            function renderChartLibraryStatus(lang = document.documentElement.lang || "pl") {
+                if (!weatherHistoryPanel || !chartLibraryNotice || !chartLibraryStatus) return;
+                weatherHistoryPanel.dataset.chartState = chartLibraryState;
+                chartLibraryNotice.hidden = chartLibraryState === "ready";
+                const key = chartLibraryState === "error" ? "chartError"
+                    : chartLibraryState === "loading" ? "chartLoading" : "chartIdle";
+                chartLibraryStatus.textContent = translations[lang].weather[key];
+                if (chartLibraryRetry) chartLibraryRetry.hidden = chartLibraryState !== "error";
+            }
+
+            function loadChartLibrary() {
+                if (chartLibraryState === "loading" || chartLibraryState === "ready") return;
+                if (typeof Chart === "function") {
+                    chartLibraryState = "ready";
+                    renderWeatherHistory();
+                    return;
+                }
+                chartLibraryState = "loading";
+                renderChartLibraryStatus();
+                const script = document.createElement("script");
+                script.src = "assets/vendor/chart.umd.min.js";
+                script.async = true;
+                let settled = false;
+                const finish = (success) => {
+                    if (settled) return;
+                    settled = true;
+                    window.clearTimeout(timer);
+                    script.onload = null;
+                    script.onerror = null;
+                    if (!success) script.remove();
+                    chartLibraryState = success ? "ready" : "error";
+                    renderWeatherHistory();
+                };
+                const timer = window.setTimeout(() => finish(false), 15000);
+                script.onload = () => finish(typeof Chart === "function");
+                script.onerror = () => finish(false);
+                document.head.append(script);
+            }
+
             function renderWeatherHistory(lang = document.documentElement.lang || "pl") {
                 if (!weatherHistoryDate || !weatherChartWrap || !weatherChartCanvas || !weatherPrecipitationCanvas) return;
                 const selected = translations[lang] ? lang : "pl";
                 const copy = translations[selected].weather;
+                renderChartLibraryStatus(selected);
                 const todayKey = dateKeyInWarsaw();
                 const oldestKey = shiftDateKey(todayKey, -89);
                 selectedWeatherDate ||= todayKey;
@@ -3557,6 +3903,10 @@
                         ? copy.precipitationIntervalDay
                         : copy.precipitationInterval15m;
 
+                // Keep chart code and history aggregation off the initial render path.
+                renderTwoHourForecast(selected);
+                if (chartLibraryState !== "ready" || typeof Chart !== "function") return;
+
                 const buckets = aggregateWeatherBuckets(
                     createWeatherBuckets(selectedWeatherRange, selectedWeatherDate, selected),
                     selectedWeatherRange
@@ -3580,8 +3930,6 @@
                 weatherPrecipitationChart?.destroy();
                 weatherChart = null;
                 weatherPrecipitationChart = null;
-                renderTwoHourForecast(selected);
-                if (typeof Chart === "undefined") return;
 
                 const allSensors = Object.values(weatherHistory?.days || {}).flat();
                 const allModel = location?.observations || [];
@@ -3780,10 +4128,47 @@
                 renderWeatherHistory();
             }
 
+            function normalizeProjectText(text) {
+                return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ł/g, "l");
+            }
+
+            function applyProjectFilters(lang = document.documentElement.lang || "pl") {
+                if (!projectSearch) return;
+                const terms = normalizeProjectText(projectSearch.value).trim().split(/\s+/).filter(Boolean);
+                let count = 0;
+                projectCards.forEach((card) => {
+                    if (!projectSearchIndex.has(card)) {
+                        // Search both languages so switching PL/EN keeps the same results.
+                        const text = [...card.querySelectorAll("h3, p, .tag")].flatMap((element) => {
+                            const key = element.dataset.i18n;
+                            return key ? [element.textContent, getValue(key, "pl"), getValue(key, "en")]
+                                : [element.textContent];
+                        }).filter(Boolean).join(" ");
+                        projectSearchIndex.set(card, normalizeProjectText(text));
+                    }
+                    const categories = (card.dataset.projectCategories || "").split(/\s+/);
+                    const matchesCategory = selectedProjectFilter === "all" || categories.includes(selectedProjectFilter);
+                    const matchesQuery = terms.every((term) => projectSearchIndex.get(card).includes(term));
+                    card.hidden = !(matchesCategory && matchesQuery);
+                    if (!card.hidden) count += 1;
+                });
+                projectFilterButtons.forEach((button) => {
+                    button.setAttribute("aria-pressed", String(button.dataset.projectFilter === selectedProjectFilter));
+                });
+                document.querySelectorAll("[data-project-grid]").forEach((grid) => {
+                    grid.hidden = ![...grid.querySelectorAll(".project-card")].some((card) => !card.hidden);
+                });
+                document.getElementById("projectMoreTitle").hidden = document.getElementById("projectMore").hidden;
+                document.getElementById("projectEmpty").hidden = count !== 0;
+                document.getElementById("projectResults").textContent = interpolate(translations[lang].projects.resultCount, {
+                    count, total: projectCards.length
+                });
+            }
+
             function setLanguage(lang) {
                 const selected = translations[lang] ? lang : "pl";
                 document.documentElement.lang = selected;
-                localStorage.setItem("banas_lang", selected);
+                preferences.set("banas_lang", selected);
                 document.title = translations[selected].meta.title;
                 document.querySelector("meta[name='description']")?.setAttribute("content", translations[selected].meta.description);
 
@@ -3807,6 +4192,7 @@
                 });
 
                 updateMenuButtonLabel(selected);
+                applyProjectFilters(selected);
                 renderWeather(selected);
                 renderPrecipitation(selected);
                 renderTwoHourForecast(selected);
@@ -3844,10 +4230,11 @@
             function applyTheme(theme) {
                 const isLight = theme === "light";
                 document.body.classList.toggle("light", isLight);
+                document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isLight ? "#f6f7f9" : "#101416");
                 if (themeToggle) {
                     themeToggle.textContent = isLight ? "☾" : "☼";
                     themeToggle.setAttribute("aria-pressed", String(isLight));
-                    const lang = localStorage.getItem("banas_lang") || "pl";
+                    const lang = document.documentElement.lang;
                     const label = isLight ? translations[lang].theme.lightTitle : translations[lang].theme.darkTitle;
                     themeToggle.setAttribute("title", label);
                     themeToggle.setAttribute("aria-label", label);
@@ -3855,11 +4242,36 @@
                 renderWeatherHistory();
             }
 
-            setLanguage(localStorage.getItem("banas_lang") || "pl");
-            applyTheme(localStorage.getItem("banas_theme") || "dark");
+            projectSearch?.addEventListener("input", () => applyProjectFilters());
+            projectFilterButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    selectedProjectFilter = button.dataset.projectFilter;
+                    applyProjectFilters();
+                });
+            });
+            document.getElementById("projectReset")?.addEventListener("click", () => {
+                selectedProjectFilter = "all";
+                projectSearch.value = "";
+                applyProjectFilters();
+                projectSearch.focus();
+            });
+            setLanguage(preferences.get("banas_lang") || "pl");
+            if (projectTools) projectTools.hidden = false;
+            applyTheme(preferences.get("banas_theme") || "dark");
             loadWeather();
             loadPrecipitation();
             loadWeatherHistory();
+            chartLibraryRetry?.addEventListener("click", loadChartLibrary);
+            if (weatherHistoryPanel && "IntersectionObserver" in window) {
+                const chartObserver = new IntersectionObserver((entries) => {
+                    if (!entries.some((entry) => entry.isIntersecting)) return;
+                    chartObserver.disconnect();
+                    loadChartLibrary();
+                }, { rootMargin: "300px 0px" });
+                chartObserver.observe(weatherHistoryPanel);
+            } else {
+                loadChartLibrary();
+            }
             window.setInterval(() => {
                 loadWeather();
                 loadWeatherHistory();
@@ -3902,7 +4314,7 @@
 
             themeToggle?.addEventListener("click", () => {
                 const nextTheme = document.body.classList.contains("light") ? "dark" : "light";
-                localStorage.setItem("banas_theme", nextTheme);
+                preferences.set("banas_theme", nextTheme);
                 applyTheme(nextTheme);
             });
 
@@ -3925,7 +4337,10 @@
             });
 
             document.addEventListener("keydown", (event) => {
-                if (event.key === "Escape") setMobileMenu(false);
+                if (event.key === "Escape" && nav?.classList.contains("is-menu-open")) {
+                    setMobileMenu(false);
+                    mobileMenuToggle?.focus();
+                }
             });
 
             document.addEventListener("click", (event) => {
@@ -3989,7 +4404,7 @@
                 img.src = src;
             });
 
-            profilePhoto?.addEventListener("click", () => {
+            document.getElementById("photoSwitch")?.addEventListener("click", () => {
                 photoIndex = (photoIndex + 1) % photos.length;
                 profilePhoto.style.opacity = "0";
                 window.setTimeout(() => {

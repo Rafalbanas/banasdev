@@ -2,6 +2,35 @@
 
 Statyczne portfolio dostępne pod adresem `banas.dev`. Sekcja „Kato na żywo” łączy pogodę z Open-Meteo i jakość powietrza z GIOŚ.
 
+## Aktualizacja portfolio — 28 października 2026
+
+Treści PL/EN obejmują aktualne wsparcie Tier 2 WAVE PTX, ukończone studia
+magisterskie oraz projekty CVTailor, Cycling, Plates i Banas Chat.
+Informacje zawodowe zweryfikowano z profilem CV właściciela; prywatny profil,
+telefon i szczegóły umowy nie są publikowane w tym repozytorium.
+
+Publiczne źródła opisów i ograniczeń projektów:
+
+- [CVTailor — opis kanoniczny](https://github.com/Rafalbanas/ai-resume-tailoring-platform/blob/main/docs/project-description.md)
+  i [README](https://github.com/Rafalbanas/ai-resume-tailoring-platform): kod lokalnego RAG/BM25
+  nie jest sam w sobie potwierdzeniem wdrożenia tej funkcji. Aplikacja wymaga logowania.
+- [Cycling](https://github.com/Rafalbanas/Cycling): wyniki pracy magisterskiej;
+  kalkulator heurystyczny nie wykonuje inferencji ML ani pomiaru progu fizjologicznego.
+- [Plates](https://github.com/Rafalbanas/automatic_plate_number_recognition):
+  publiczne demo ALPR z gotowymi modelami i osobnym pipeline treningowym.
+- [Banas Chat](https://github.com/Rafalbanas/chat): prywatne wdrożenie Open WebUI,
+  z zachowaniem autorstwa komponentów upstream.
+
+Walidacja lokalna (Python 3 i Node.js w `PATH`):
+
+```bash
+python3 scripts/check_site.py
+python3 -m unittest discover -s tests -v
+```
+
+Testy portfolio kontrolują zgodność polskiej treści bez JavaScript ze słownikiem,
+kompletność tłumaczeń PL/EN, aktualny profil i linki projektowe.
+
 ## CI/CD
 
 GitHub Actions sprawdza każdy push i PR. Po udanych testach push do `main`
@@ -30,6 +59,15 @@ Temperatura ani opady nie są pobierane z GIOŚ lub InPost. Dane pyłowe nie są
 - `weather.json` — temperatura, opady i prognoza Open-Meteo.
 - `weather_history.db` — lokalna baza historii, niewersjonowana.
 
+## Przeglądanie projektów
+
+Sekcja projektów ma lokalną wyszukiwarkę i filtry obszarów. Karty oznacza się
+atrybutem `data-project-categories` (`data`, `automation`, `web`; możliwe jest
+kilka wartości rozdzielonych spacją). Wyszukiwanie obejmuje tytuł, opis i tagi
+w obu językach, nie rozróżnia wielkości liter ani polskich znaków. Zapytanie
+nie trafia na serwer ani do localStorage. Bez JavaScript wszystkie karty
+pozostają widoczne. Teksty interfejsu są w słownikach `translations.pl/en.projects`.
+
 ## Harmonogram
 
 Pogoda jest pobierana co 15 minut, a GIOŚ raz na godzinę, pięć minut po pełnej godzinie:
@@ -40,6 +78,8 @@ Pogoda jest pobierana co 15 minut, a GIOŚ raz na godzinę, pięć minut po peł
 ```
 
 ## Uruchomienie
+
+Wyniki przeglądu UX i technicznego oraz polecenia testów: [AUDIT.md](AUDIT.md).
 
 ```bash
 python3 fetch_weather.py
