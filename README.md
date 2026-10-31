@@ -70,16 +70,24 @@ pozostają widoczne. Teksty interfejsu są w słownikach `translations.pl/en.pro
 
 ## Harmonogram
 
-Pogoda jest pobierana co 15 minut, a GIOŚ raz na godzinę, pięć minut po pełnej godzinie:
+Pogoda jest pobierana co 15 minut, a GIOŚ raz na godzinę, pięć minut po pełnej
+godzinie. Docelowo przez `/etc/cron.d/banasdev-weather` na dedykowanym koncie
+bez uprawnień roota, z danymi w `/var/lib/banasdev-weather`:
 
 ```cron
-*/15 * * * * BANASDEV_DATA_DIR=/cytrus /usr/bin/python3 /var/lib/banasdev/current/fetch_weather.py --weather-only >> /cytrus/weather.log 2>&1
-5 * * * * BANASDEV_DATA_DIR=/cytrus /usr/bin/python3 /var/lib/banasdev/current/fetch_weather.py --air-only >> /cytrus/weather.log 2>&1
+*/15 * * * * banasdev-weather BANASDEV_DATA_DIR=/var/lib/banasdev-weather /usr/bin/python3 /var/lib/banasdev/current/fetch_weather.py --weather-only >> /var/lib/banasdev-weather/weather.log 2>&1
+5 * * * * banasdev-weather BANASDEV_DATA_DIR=/var/lib/banasdev-weather /usr/bin/python3 /var/lib/banasdev/current/fetch_weather.py --air-only >> /var/lib/banasdev-weather/weather.log 2>&1
 ```
+
+Nie wklejać tego formatu do crontaba użytkownika. Migracja istniejącej bazy,
+uprawnień i symlinków wymaga operatora; procedura w [deploy/README.md](deploy/README.md).
 
 ## Uruchomienie
 
 Wyniki przeglądu UX i technicznego oraz polecenia testów: [AUDIT.md](AUDIT.md).
+Aktualny audyt i status poprawek: [UX_SECURITY_AUDIT.md](UX_SECURITY_AUDIT.md).
+Po zmianach skryptów lub stylów inline zaktualizuj hashe CSP przez
+`python3 scripts/security_policy.py --write`; walidacja odrzuca nieaktualną politykę.
 
 ```bash
 python3 fetch_weather.py

@@ -4,6 +4,10 @@ from pathlib import Path
 import subprocess
 import tempfile
 from urllib.parse import unquote, urlsplit
+if __package__:
+    from . import security_policy
+else:
+    import security_policy
 
 
 class Site(HTMLParser):
@@ -37,6 +41,7 @@ class Site(HTMLParser):
 
 
 def check(root):
+    security_policy.check(root)
     site = Site()
     site.feed((root / "index.html").read_text())
     for url in site.urls:

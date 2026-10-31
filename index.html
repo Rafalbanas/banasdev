@@ -2,10 +2,11 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-8/fVjucyYklKj2ZwmQuod3Uf/UBWO1302Set3TgDBU0='; script-src-attr 'none'; style-src 'self' 'sha256-MtAeTZ66WQlBh4MeqoPpbNaWhRIyepuIGHnguIGD0H0='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rafał Banaś | Technical Support Engineer · Python & AI</title>
     <meta name="description" content="Rafał Banaś — Technical Support Engineer Tier 2 w Motorola Solutions, magister informatyki. Wsparcie aplikacji, Python, automatyzacja i własne projekty AI.">
-    <link rel="canonical" href="https://banas.dev/">
     <meta name="author" content="Rafał Banaś">
     <link rel="canonical" href="https://banas.dev/">
     <meta name="theme-color" content="#101416">
@@ -968,11 +969,13 @@
             font-size: 0.82rem;
         }
 
-        .weather-widget[data-state="error"] .weather-status {
+        .weather-widget[data-state="error"] .weather-status,
+        .weather-widget[data-state="stale"] .weather-status {
             border-color: color-mix(in srgb, var(--danger) 42%, var(--line));
         }
 
-        .weather-widget[data-state="error"] .weather-status::before {
+        .weather-widget[data-state="error"] .weather-status::before,
+        .weather-widget[data-state="stale"] .weather-status::before {
             background: var(--danger);
         }
 
@@ -1867,13 +1870,24 @@
                 transition: none !important;
             }
         }
+        .weather-data { margin-top: 24px; }
+        .weather-data summary { cursor: pointer; font-weight: 700; padding: 12px 0; }
+        .weather-data p { color: var(--muted); }
+        .weather-table-scroll { max-width: 100%; overflow-x: auto; }
+        .weather-data table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .weather-data caption { text-align: left; padding: 12px 0; }
+        .weather-data th, .weather-data td { padding: 10px; border-bottom: 1px solid var(--line); text-align: left; }
+        .weather-data th { min-width: 100px; }
+        summary:focus-visible, .weather-table-scroll:focus-visible, [tabindex="-1"]:focus {
+            outline: 3px solid var(--accent); outline-offset: 4px;
+        }
     </style>
 </head>
 <body>
     <a class="skip-link" href="#main" data-i18n="skipLink">Przejdź do treści</a>
 
     <header class="topbar">
-        <nav class="nav" aria-label="Główna nawigacja">
+        <nav class="nav" aria-label="Główna nawigacja" data-i18n-attr="aria-label:nav.label">
             <a class="brand" href="#top" aria-label="banas.dev">
                 <span class="brand-mark">RB</span>
                 <span>banas.dev</span>
@@ -1911,6 +1925,7 @@
                 </p>
                 <div class="hero-actions">
                     <a class="button primary" href="#projects" data-i18n="hero.projectsCta">Zobacz projekty</a>
+                    <a class="button secondary" href="#contact" data-i18n="hero.contactCta">Napisz do mnie</a>
                     <a class="button secondary" href="https://github.com/Rafalbanas" target="_blank" rel="noopener">GitHub</a>
                     <a class="button secondary" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener">LinkedIn</a>
                 </div>
@@ -2119,7 +2134,10 @@
                 <article class="card project-card project-card--actionable" data-project-categories="data">
                     <div class="project-number">01</div>
                     <h3>Cycling · Telemetry & ML</h3>
-                    <p data-i18n="projects.cyclingText">Wyniki pracy magisterskiej: estymacja badawczej etykiety FTP z telemetrii GoldenCheetah, porównanie modeli i SHAP. Kalkulator 0,95 × MMP20 jest heurystyką, nie inferencją modelu ani pomiarem progu fizjologicznego.</p>
+                    <p data-i18n="projects.cyclingSummary">Jak analizować dane z treningów kolarskich? W mojej aplikacji pokazuję wyniki pracy magisterskiej, porównanie modeli i czytnik pracy.</p>
+                    <details class="project-details"><summary data-i18n="projects.details">Szczegóły techniczne i ograniczenia</summary>
+                        <p data-i18n="projects.cyclingText">Wyniki pracy magisterskiej: estymacja badawczej etykiety FTP z telemetrii GoldenCheetah, porównanie modeli i SHAP. Kalkulator 0,95 × MMP20 jest heurystyką, nie inferencją modelu ani pomiarem progu fizjologicznego.</p>
+                    </details>
                     <ul class="tags" aria-label="Obszary projektu Cycling" data-i18n-attr="aria-label:projects.cyclingTagsAria">
                         <li class="tag" data-i18n="tag.cyclingData">Dane kolarskie</li>
                         <li class="tag" data-i18n="tag.charts">Wykresy</li>
@@ -2134,8 +2152,11 @@
                 <article class="card project-card project-card--actionable" data-project-categories="data">
                     <div class="project-number">02</div>
                     <h3 data-i18n="projects.platesTitle">Rozpoznawanie tablic rejestracyjnych / Plates</h3>
-                    <p data-i18n="projects.platesText">Publiczne demo ALPR: FastALPR i gotowe modele ONNX wykrywają tablice oraz odczytują tekst lokalnie na VPS. Repozytorium zawiera także osobny pipeline treningu i oceny detektora. OCR może mylić podobne znaki.</p>
-                    <ul class="tags" aria-label="Technologie Plates">
+                    <p data-i18n="projects.platesSummary">Odczyt tablic ze zdjęć: przygotowałem publiczne demo z gotowymi modelami oraz osobny pipeline treningu i oceny detektora. Odczyt może zawierać błędy.</p>
+                    <details class="project-details"><summary data-i18n="projects.details">Szczegóły techniczne i ograniczenia</summary>
+                        <p data-i18n="projects.platesText">Publiczne demo ALPR: FastALPR i gotowe modele ONNX wykrywają tablice oraz odczytują tekst lokalnie na VPS. Repozytorium zawiera także osobny pipeline treningu i oceny detektora. OCR może mylić podobne znaki.</p>
+                    </details>
+                    <ul class="tags" aria-label="Technologie Plates" data-i18n-attr="aria-label:projects.platesTagsAria">
                         <li class="tag">YOLO</li>
                         <li class="tag">OCR</li>
                         <li class="tag">Computer Vision</li>
@@ -2149,8 +2170,11 @@
                 <article class="card project-card project-card--actionable" data-project-categories="data automation web">
                     <div class="project-number">03</div>
                     <h3>CVTailor · AI Resume Tailoring</h3>
-                    <p data-i18n="projects.resumeText">CVTailor analizuje oferty pracy i generuje PDF/DOCX z potwierdzonych faktów. FastAPI, Ollama/Gemini i niezależny Truth Lock. Kod obejmuje lokalny RAG z rankingiem BM25; aplikacja do użytku osobistego wymaga logowania, a wynik — weryfikacji człowieka.</p>
-                    <ul class="tags" aria-label="Technologie AI Resume Tailoring">
+                    <p data-i18n="projects.resumeSummary">Dopasowanie CV do oferty bez dopisywania doświadczenia: rozwijam narzędzie generujące PDF/DOCX z potwierdzonych faktów. Aplikacja prywatna, wymaga logowania i weryfikacji wyniku.</p>
+                    <details class="project-details"><summary data-i18n="projects.details">Szczegóły techniczne i ograniczenia</summary>
+                        <p data-i18n="projects.resumeText">CVTailor analizuje oferty pracy i generuje PDF/DOCX z potwierdzonych faktów. FastAPI, Ollama/Gemini i niezależny Truth Lock. Kod obejmuje lokalny RAG z rankingiem BM25; aplikacja do użytku osobistego wymaga logowania, a wynik — weryfikacji człowieka.</p>
+                    </details>
+                    <ul class="tags" aria-label="Technologie AI Resume Tailoring" data-i18n-attr="aria-label:projects.resumeTagsAria">
                         <li class="tag">FastAPI</li>
                         <li class="tag">Ollama / Gemini</li>
                         <li class="tag">PDF / DOCX</li>
@@ -2179,7 +2203,7 @@
                     <div class="project-number">05</div>
                     <h3>Lanari Candle</h3>
                     <p data-i18n="projects.lanariText">Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.</p>
-                    <ul class="tags" aria-label="Technologie Lanari Candle">
+                    <ul class="tags" aria-label="Technologie Lanari Candle" data-i18n-attr="aria-label:projects.lanariTagsAria">
                         <li class="tag">Python</li>
                         <li class="tag">FastAPI</li>
                         <li class="tag">Frontend</li>
@@ -2201,7 +2225,7 @@
                     <div class="project-number">07</div>
                     <h3 data-i18n="projects.itAutomationTitle">Administracja i automatyzacja IT</h3>
                     <p data-i18n="projects.itAutomationText">PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.</p>
-                    <ul class="tags" aria-label="Obszary administracji IT">
+                    <ul class="tags" aria-label="Obszary administracji IT" data-i18n-attr="aria-label:projects.itTagsAria">
                         <li class="tag">PowerShell</li>
                         <li class="tag">Linux</li>
                         <li class="tag">Monitoring</li>
@@ -2240,7 +2264,7 @@
                         wyciągać wnioski, które mają sens nie tylko na wykresie, ale też w praktyce treningowej.
                     </p>
                 </div>
-                <div class="metrics" aria-label="Akcenty projektu">
+                <div class="metrics" aria-label="Akcenty projektu" data-i18n-attr="aria-label:thesis.metricsAria">
                     <div class="metric">
                         <strong>ML</strong>
                         <span data-i18n="thesis.metricMl">modelowanie i predykcja</span>
@@ -2454,6 +2478,27 @@
                         <canvas id="weatherPrecipitationChart" role="img" aria-label="Wykres opadów historycznych i prognozowanych" data-i18n-attr="aria-label:weather.precipitationChartAria"></canvas>
                     </div>
                 </div>
+                <details class="weather-data" id="weatherDataDetails">
+                    <summary data-i18n="weather.tableToggle">Pokaż dane wykresów w tabeli</summary>
+                    <p id="weatherTableSummary" role="status" data-i18n="weather.tableHint">Tabela obejmuje wybrany zakres i działa również bez biblioteki wykresów. Symbol — oznacza brak danych.</p>
+                    <div class="weather-table-scroll" role="region" tabindex="0" aria-label="Dane historii pogody" data-i18n-attr="aria-label:weather.tableRegion">
+                        <table id="weatherDataTable">
+                            <caption id="weatherTableCaption" data-i18n="weather.tableCaption">Historia pogody i jakości powietrza — czas w Warszawie</caption>
+                            <thead><tr>
+                                <th scope="col" data-i18n="weather.timeAxis">Czas</th>
+                                <th scope="col"><span data-i18n="weather.collectedTemperatureDataset">Temperatura modelowa · zebrana</span> (°C)</th>
+                                <th scope="col"><span data-i18n="weather.backfillTemperatureDataset">Temperatura modelowa · backfill</span> (°C)</th>
+                                <th scope="col"><span data-i18n="weather.forecastTemperatureDataset">Prognoza temperatury · Open-Meteo</span> (°C)</th>
+                                <th scope="col">PM2.5 · GIOŚ (µg/m³)</th>
+                                <th scope="col">PM10 · GIOŚ (µg/m³)</th>
+                                <th scope="col"><span data-i18n="weather.collectedPrecipitationDataset">Opady modelowe · zebrane</span> (mm)</th>
+                                <th scope="col"><span data-i18n="weather.backfillPrecipitationDataset">Opady modelowe · backfill</span> (mm)</th>
+                                <th scope="col"><span data-i18n="weather.forecastPrecipitationDataset">Prognoza opadów · Open-Meteo</span> (mm)</th>
+                            </tr></thead>
+                            <tbody id="weatherTableBody"></tbody>
+                        </table>
+                    </div>
+                </details>
             </div>
         </section>
 
@@ -2498,7 +2543,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false">
         (() => {
             const mailbox = "contact";
             const domain = ["banas", "dev"].join(".");
@@ -2513,7 +2558,7 @@
             });
         })();
     </script>
-    <script>
+    <script data-cfasync="false">
         (() => {
             // Storage can be unavailable in private or restricted browser contexts.
             const preferences = {
@@ -2569,6 +2614,7 @@
             const chartLibraryNotice = document.getElementById("chartLibraryNotice");
             const chartLibraryStatus = document.getElementById("chartLibraryStatus");
             const chartLibraryRetry = document.getElementById("chartLibraryRetry");
+            const weatherDataDetails = document.getElementById("weatherDataDetails");
             let chartLibraryState = "idle";
             const photos = ["cv_photo.webp", "cv_photo2.webp"];
             let photoIndex = 0;
@@ -2588,6 +2634,8 @@
 
             const WEATHER_DATA_URL = "weather.json";
             const PRECIPITATION_REFRESH_MS = 15 * 60 * 1000;
+            // Hourly GIOŚ readings may arrive late; warn after three hours.
+            const AIR_MAX_AGE_MS = 3 * 60 * 60 * 1000;
 
             document.body.classList.add("js-ready");
 
@@ -2600,6 +2648,7 @@
                     },
                     langSwitch: { label: "Wybór języka" },
                     nav: {
+                        label: "Główna nawigacja",
                         about: "O mnie",
                         weather: "Pogoda",
                         experience: "Doświadczenie",
@@ -2619,6 +2668,7 @@
                         factDegree: "informatyka · UE Katowice",
                         role: "Systemy. Dane. Mniej ręcznej pracy.",
                         projectsCta: "Zobacz projekty",
+                        contactCta: "Napisz do mnie",
                         tagsAria: "Główne obszary",
                         labAria: "Tryb pracy",
                         lab1: "buduj",
@@ -2666,6 +2716,13 @@
                         chartError: "Nie udało się wczytać wykresów. Pomiary i prognoza nadal są dostępne.",
                         chartRetry: "Spróbuj ponownie",
                         waiting: "Oczekiwanie na aktualne dane.",
+                        airStale: "Dane jakości powietrza nieaktualne",
+                        airStaleDetails: "Ostatni pomiar jakości powietrza: {date}. Nie traktuj go jako aktualnej oceny.",
+                        tableToggle: "Pokaż dane wykresów w tabeli",
+                        tableHint: "Tabela obejmuje wybrany zakres i działa również bez biblioteki wykresów. Symbol — oznacza brak danych.",
+                        tableRegion: "Dane historii pogody",
+                        tableCaption: "Historia pogody i jakości powietrza — czas w Warszawie",
+                        tableSummary: "Przedziały z danymi: {count} z {total}. Temperatura i PM: średnie; opady: sumy. Symbol — oznacza brak danych. Zebrane dane, backfill i prognoza są oddzielone.",
                         temperature: "Temperatura",
                         avgPm25: "Średnia PM2,5",
                         avgPm10: "Średnia PM10",
@@ -2781,6 +2838,14 @@
                         automation2: "Doświadczenie inżynierskie, które pomaga mi patrzeć na IT systemowo i procesowo."
                     },
                     projects: {
+                        details: "Szczegóły techniczne i ograniczenia",
+                        cyclingSummary: "Jak analizować dane z treningów kolarskich? W mojej aplikacji pokazuję wyniki pracy magisterskiej, porównanie modeli i czytnik pracy.",
+                        platesSummary: "Odczyt tablic ze zdjęć: przygotowałem publiczne demo z gotowymi modelami oraz osobny pipeline treningu i oceny detektora. Odczyt może zawierać błędy.",
+                        resumeSummary: "Dopasowanie CV do oferty bez dopisywania doświadczenia: rozwijam narzędzie generujące PDF/DOCX z potwierdzonych faktów. Aplikacja prywatna, wymaga logowania i weryfikacji wyniku.",
+                        platesTagsAria: "Technologie Plates",
+                        resumeTagsAria: "Technologie AI Resume Tailoring",
+                        lanariTagsAria: "Technologie Lanari Candle",
+                        itTagsAria: "Obszary administracji IT",
                         kicker: "Projekty",
                         searchLabel: "Znajdź projekt lub technologię",
                         searchPlaceholder: "np. Python, n8n, dane kolarskie",
@@ -2830,6 +2895,7 @@
                         charts: "Wykresy"
                     },
                     thesis: {
+                        metricsAria: "Akcenty projektu",
                         kicker: "Praca magisterska / dane kolarskie",
                         title: "Od telemetrii do sprawdzalnych wyników.",
                         lead: "W ukończonej pracy magisterskiej porównałem modele estymacji etykiety FTP na danych GoldenCheetah OpenData. Zbiór obejmował 151 399 sesji 726 zawodników; podział testowy wykonano po zawodnikach. Etykieta 0,95 × MMP20 jest heurystyką badawczą, nie laboratoryjnym pomiarem progu. Cycling pokazuje metryki, SHAP i czytnik pracy.",
@@ -2879,6 +2945,7 @@
                     },
                     langSwitch: { label: "Language selection" },
                     nav: {
+                        label: "Main navigation",
                         about: "About",
                         weather: "Weather",
                         experience: "Experience",
@@ -2898,6 +2965,7 @@
                         factDegree: "Computer Science · UE Katowice",
                         role: "Systems. Data. Less manual work.",
                         projectsCta: "View projects",
+                        contactCta: "Contact me",
                         tagsAria: "Main areas",
                         labAria: "Work mode",
                         lab1: "build",
@@ -2945,6 +3013,13 @@
                         chartError: "Charts could not be loaded. Readings and forecasts are still available.",
                         chartRetry: "Try again",
                         waiting: "Waiting for current data.",
+                        airStale: "Air-quality data is out of date",
+                        airStaleDetails: "Last air-quality reading: {date}. Do not treat it as a current assessment.",
+                        tableToggle: "Show chart data as a table",
+                        tableHint: "The table covers the selected range and works without the chart library. — means missing data.",
+                        tableRegion: "Weather history data",
+                        tableCaption: "Weather and air-quality history — Warsaw time",
+                        tableSummary: "Intervals with data: {count} of {total}. Temperature and PM: averages; precipitation: sums. — means missing data. Collected data, backfill and forecasts are separate.",
                         temperature: "Temperature",
                         avgPm25: "Average PM2.5",
                         avgPm10: "Average PM10",
@@ -3060,6 +3135,14 @@
                         automation2: "Engineering experience that helps me look at IT from a systems and process perspective."
                     },
                     projects: {
+                        details: "Technical details and limitations",
+                        cyclingSummary: "How can cycling training data be analyzed? My application presents MSc thesis results, model comparisons and a thesis reader.",
+                        platesSummary: "Reading plates from photos: I built a public demo using pretrained models and a separate detector training and evaluation pipeline. Recognition may contain errors.",
+                        resumeSummary: "Tailoring a resume without inventing experience: I develop a tool that generates PDF/DOCX from attested facts. This private application requires login and human review of the output.",
+                        platesTagsAria: "Plates technologies",
+                        resumeTagsAria: "AI Resume Tailoring technologies",
+                        lanariTagsAria: "Lanari Candle technologies",
+                        itTagsAria: "IT administration areas",
                         kicker: "Projects",
                         searchLabel: "Find a project or technology",
                         searchPlaceholder: "e.g. Python, n8n, cycling data",
@@ -3109,6 +3192,7 @@
                         charts: "Charts"
                     },
                     thesis: {
+                        metricsAria: "Project highlights",
                         kicker: "Thesis / Cycling data",
                         title: "From telemetry to verifiable results.",
                         lead: "My completed MSc thesis compared models estimating a research FTP label from GoldenCheetah OpenData. The dataset covered 151,399 sessions from 726 athletes, with an athlete-level test split. The 0.95 × MMP20 label is a research heuristic, not a laboratory threshold measurement. Cycling presents metrics, SHAP and a thesis reader.",
@@ -3191,7 +3275,9 @@
                 }
                 if (!weatherData) return;
 
-                weatherWidget.dataset.state = "ready";
+                const age = Date.now() - new Date(weatherData.measured_at).getTime();
+                const stale = !Number.isFinite(age) || age > AIR_MAX_AGE_MS || age < -5 * 60 * 1000;
+                weatherWidget.dataset.state = stale ? "stale" : "ready";
                 const numberFormat = new Intl.NumberFormat(selected === "pl" ? "pl-PL" : "en-GB", {
                     maximumFractionDigits: 1
                 });
@@ -3211,29 +3297,31 @@
                     });
                 });
 
-                weatherStatus.textContent = copy.levels[weatherData.air_index_level] || copy.levels.UNKNOWN;
-                const measuredAt = new Date(weatherData.measured_at);
-                const formattedDate = new Intl.DateTimeFormat(selected === "pl" ? "pl-PL" : "en-GB", {
-                    dateStyle: "medium",
-                    timeStyle: "short",
-                    timeZone: "Europe/Warsaw"
-                }).format(measuredAt);
-                weatherUpdated.textContent = interpolate(copy.updated, { date: formattedDate });
+                weatherStatus.textContent = stale ? copy.airStale : copy.levels[weatherData.air_index_level] || copy.levels.UNKNOWN;
+                const formattedDate = formatDateTime(weatherData.measured_at, selected);
+                weatherUpdated.textContent = interpolate(stale ? copy.airStaleDetails : copy.updated, { date: formattedDate });
             }
 
             async function loadWeather() {
+                const controller = new AbortController();
+                const timeout = window.setTimeout(() => controller.abort(), 10000);
                 try {
-                    const response = await fetch("data.json", { cache: "no-store" });
+                    const response = await fetch("data.json", { cache: "no-store", signal: controller.signal });
                     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                    weatherData = await response.json();
-                    const required = ["pm25", "pm10", "measured_at", "stations"];
-                    if (!required.every((key) => weatherData[key])) throw new Error("Niepełne dane jakości powietrza");
+                    const data = await response.json();
+                    if (!data || !Array.isArray(data.stations) || !data.measured_at ||
+                        ![data.pm25, data.pm10].every((sensor) => sensor && typeof sensor.value === "number" && Number.isFinite(sensor.value) && typeof sensor.unit === "string")) {
+                        throw new Error("Niepełne dane jakości powietrza");
+                    }
+                    weatherData = data;
                     weatherLoadFailed = false;
                     renderWeather();
                 } catch (error) {
                     console.error("Nie udało się wczytać danych jakości powietrza:", error);
                     weatherLoadFailed = true;
                     renderWeather();
+                } finally {
+                    window.clearTimeout(timeout);
                 }
             }
 
@@ -3420,12 +3508,17 @@
                     const probability = showProbability && interval.precipitation_probability !== null
                         ? interpolate(copy.forecastProbability, { value: Math.round(interval.precipitation_probability) })
                         : copy.forecastProbabilityUnavailable;
-                    point.innerHTML = `
-                        <time datetime="${interval.forecast_time_utc}">${formatShortTime(interval.forecast_time_utc, selected)}</time>
-                        <strong>${interpolate(copy.forecastTemperature, { value: formatNumber(interval.temperature, selected, 1) })}</strong>
-                        <span>${interpolate(copy.forecastPrecipitation, { value: formatNumber(interval.precipitation, selected, 1) })}</span>
-                        <span title="${probabilityKey || ""}">${probability}</span>
-                    `;
+                    const time = document.createElement("time");
+                    time.dateTime = String(interval.forecast_time_utc || "");
+                    time.textContent = formatShortTime(interval.forecast_time_utc, selected);
+                    const temperature = document.createElement("strong");
+                    temperature.textContent = interpolate(copy.forecastTemperature, { value: formatNumber(interval.temperature, selected, 1) });
+                    const precipitation = document.createElement("span");
+                    precipitation.textContent = interpolate(copy.forecastPrecipitation, { value: formatNumber(interval.precipitation, selected, 1) });
+                    const chance = document.createElement("span");
+                    chance.title = String(probabilityKey || "");
+                    chance.textContent = probability;
+                    point.append(time, temperature, precipitation, chance);
                     weatherForecastStrip.append(point);
                 });
             }
@@ -3652,7 +3745,8 @@
             }
 
             function mean(values) {
-                const finite = values.map(Number).filter(Number.isFinite);
+                const finite = values.filter((value) => value !== null && value !== undefined && value !== "")
+                    .map(Number).filter(Number.isFinite);
                 return finite.length ? finite.reduce((sum, value) => sum + value, 0) / finite.length : null;
             }
 
@@ -3768,7 +3862,7 @@
                     if (!bucket) return;
                     const isBackfill = reading.source_kind === "backfill_model";
                     bucket[isBackfill ? "backfillTemperature" : "collectedTemperature"].push(reading.temperature);
-                    if (Number.isFinite(Number(reading.precipitation))) {
+                    if (reading.precipitation !== null && reading.precipitation !== undefined && Number.isFinite(Number(reading.precipitation))) {
                         const valueKey = isBackfill ? "backfillPrecipitation" : "collectedPrecipitation";
                         const countKey = isBackfill ? "backfillPrecipitationCount" : "collectedPrecipitationCount";
                         bucket[valueKey] += Number(reading.precipitation);
@@ -3781,7 +3875,7 @@
                         const bucket = data.get(bucketKeyFor(reading.forecast_time_utc, range));
                         if (!bucket) return;
                         bucket.forecastTemperature.push(reading.temperature);
-                        if (Number.isFinite(Number(reading.precipitation))) {
+                        if (reading.precipitation !== null && reading.precipitation !== undefined && Number.isFinite(Number(reading.precipitation))) {
                             bucket.forecastPrecipitation += Number(reading.precipitation);
                             bucket.forecastPrecipitationCount += 1;
                         }
@@ -3818,6 +3912,37 @@
                 return `${context.dataset.label}: ${formatNumber(context.raw, lang, 2)} ${unit}${source}`;
             }
 
+            function renderAccessibleHistory(lang = document.documentElement.lang || "pl", buckets = null) {
+                if (!weatherDataDetails?.open) return;
+                const selected = translations[lang] ? lang : "pl";
+                const copy = translations[selected].weather;
+                buckets ||= aggregateWeatherBuckets(
+                    createWeatherBuckets(selectedWeatherRange, selectedWeatherDate || dateKeyInWarsaw(), selected),
+                    selectedWeatherRange
+                );
+                const keys = ["collectedTemperature", "backfillTemperature", "forecastTemperature", "pm25", "pm10",
+                    "collectedPrecipitation", "backfillPrecipitation", "forecastPrecipitation"];
+                const count = buckets.filter((bucket) => keys.some((key) => bucket[key] !== null)).length;
+                document.getElementById("weatherTableSummary").textContent = count
+                    ? interpolate(copy.tableSummary, { count, total: buckets.length }) : copy.noHistory;
+                document.getElementById("weatherTableCaption").textContent = `${copy.tableCaption} · ${weatherHistoryDate.textContent}. ${weatherPrecipitationNote.textContent}`;
+                const fragment = document.createDocumentFragment();
+                buckets.forEach((bucket) => {
+                    const row = document.createElement("tr");
+                    const heading = document.createElement("th");
+                    heading.scope = "row";
+                    heading.textContent = bucket.label;
+                    row.append(heading);
+                    keys.forEach((key) => {
+                        const cell = document.createElement("td");
+                        cell.textContent = formatNumber(bucket[key], selected, 2);
+                        row.append(cell);
+                    });
+                    fragment.append(row);
+                });
+                document.getElementById("weatherTableBody").replaceChildren(fragment);
+            }
+
             function renderChartLibraryStatus(lang = document.documentElement.lang || "pl") {
                 if (!weatherHistoryPanel || !chartLibraryNotice || !chartLibraryStatus) return;
                 weatherHistoryPanel.dataset.chartState = chartLibraryState;
@@ -3838,6 +3963,7 @@
                 chartLibraryState = "loading";
                 renderChartLibraryStatus();
                 const script = document.createElement("script");
+                script.setAttribute("data-cfasync", "false");
                 script.src = "assets/vendor/chart.umd.min.js";
                 script.async = true;
                 let settled = false;
@@ -3905,6 +4031,7 @@
 
                 // Keep chart code and history aggregation off the initial render path.
                 renderTwoHourForecast(selected);
+                renderAccessibleHistory(selected);
                 if (chartLibraryState !== "ready" || typeof Chart !== "function") return;
 
                 const buckets = aggregateWeatherBuckets(
@@ -4262,6 +4389,7 @@
             loadPrecipitation();
             loadWeatherHistory();
             chartLibraryRetry?.addEventListener("click", loadChartLibrary);
+            weatherDataDetails?.addEventListener("toggle", () => renderAccessibleHistory());
             if (weatherHistoryPanel && "IntersectionObserver" in window) {
                 const chartObserver = new IntersectionObserver((entries) => {
                     if (!entries.some((entry) => entry.isIntersecting)) return;
@@ -4276,6 +4404,7 @@
                 loadWeather();
                 loadWeatherHistory();
             }, 60 * 60 * 1000);
+            window.setInterval(() => { if (weatherData) renderWeather(); }, 60 * 1000);
 
             window.addEventListener("online", () => loadPrecipitation());
             document.addEventListener("visibilitychange", () => {
@@ -4322,13 +4451,16 @@
                 setMobileMenu(!nav?.classList.contains("is-menu-open"));
             });
 
-            navLinks.forEach((link) => {
+            document.querySelectorAll('a[href^="#"]:not(.skip-link)').forEach((link) => {
                 link.addEventListener("click", (event) => {
                     const target = document.querySelector(link.getAttribute("href"));
                     if (!target) return;
                     event.preventDefault();
                     setMobileMenu(false);
                     target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+                    const focusTarget = target.querySelector("h1, h2") || target;
+                    focusTarget.setAttribute("tabindex", "-1");
+                    focusTarget.focus({ preventScroll: true });
                     history.replaceState(null, "", link.getAttribute("href"));
                     navLinks.forEach((item) => {
                         item.classList.toggle("is-active", item === link);

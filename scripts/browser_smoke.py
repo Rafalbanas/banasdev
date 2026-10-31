@@ -4,7 +4,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
 
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import expect, sync_playwright
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -85,7 +85,7 @@ def check():
     url = f"http://127.0.0.1:{server.server_port}"
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch()
+            browser = p.chromium.launch(timeout=20000)
             page = browser.new_page(reduced_motion="reduce")
             page.set_default_timeout(10000)
             errors = []
@@ -96,8 +96,15 @@ def check():
             page.on("request", lambda request: external_requests.append(request.url)
                     if not request.url.startswith(url + "/") else None)
             page.on("pageerror", lambda error: errors.append(str(error)))
+            page.add_init_script("window.cspViolations = []; document.addEventListener('securitypolicyviolation', e => window.cspViolations.push(e.violatedDirective))")
             page.goto(url, wait_until="networkidle")
-            page.locator('#weatherWidget[data-state="ready"]').wait_for(state="attached")
+            # Repository fixtures may intentionally be old; old data must not look current.
+            try:
+                page.locator('#weatherWidget[data-state="ready"], #weatherWidget[data-state="stale"]').wait_for(state="attached")
+            except Exception:
+                print("Initial page diagnostics:", {"errors": errors, "csp": page.evaluate("window.cspViolations"),
+                                                     "weather": page.locator("#weatherWidget").get_attribute("data-state")}, flush=True)
+                raise
             assert not chart_requests, "Charts must not load on the first screen"
             assert page.evaluate("typeof Chart") == "undefined"
             for lang in ("en", "pl"):
@@ -113,7 +120,7 @@ def check():
                     for width in (320, 375, 768, 1024, 1440):
                         page.set_viewport_size({"width": width, "height": 900})
                         # Chart.js resizes its canvases asynchronously.
-                        page.wait_for_function("document.documentElement.scrollWidth <= innerWidth", timeout=3000)
+                        page.wait_for_function("() => document.documentElement.scrollWidth <= innerWidth", timeout=3000)
             page.set_viewport_size({"width": 375, "height": 900})
             page.locator("#mobileMenuToggle").click()
             assert page.locator("#mobileMenuToggle").get_attribute("aria-expanded") == "true"
@@ -123,6 +130,9 @@ def check():
             page.locator("#mobileMenuToggle").click()
             page.locator('.nav-links a[href="#projects"]').click()
             assert page.locator("#mobileMenuToggle").get_attribute("aria-expanded") == "false"
+            assert page.locator("#projects-title").evaluate("e => e === document.activeElement")
+            page.keyboard.press("Tab")
+            assert page.locator("#projectSearch").evaluate("e => e === document.activeElement")
             check_project_filters(page)
             photo = page.locator("#profilePhoto").get_attribute("src")
             page.locator("#photoSwitch").focus()
@@ -136,9 +146,20 @@ def check():
             for period in ("24h", "7d", "30d", "day"):
                 page.locator(f'[data-weather-range="{period}"]').click()
                 assert "is-active" in page.locator(f'[data-weather-range="{period}"]').get_attribute("class")
+            page.locator("#weatherDataDetails summary").click()
+            expect(page.locator("#weatherTableBody tr")).to_have_count(96)
+            assert page.locator("#weatherDataTable thead th").count() == 9
+            assert page.locator("#weatherTableBody tr").first.locator("th[scope=row]").count() == 1
+            page.locator('[data-weather-range="30d"]').click()
+            expect(page.locator("#weatherTableBody tr")).to_have_count(30)
+            page.locator('[data-lang="en"]').click()
+            assert page.locator("nav").get_attribute("aria-label") == "Main navigation"
+            assert "Warsaw time" in page.locator("#weatherTableCaption").inner_text()
+            page.locator('[data-lang="pl"]').click()
+            assert not page.evaluate("window.cspViolations"), page.evaluate("window.cspViolations")
             for width in (320, 375, 768, 1024, 1440):
                 page.set_viewport_size({"width": width, "height": 900})
-                page.wait_for_function("document.documentElement.scrollWidth <= innerWidth", timeout=3000)
+                page.wait_for_function("() => document.documentElement.scrollWidth <= innerWidth", timeout=3000)
             assert len(chart_requests) == 1, chart_requests
             assert not external_requests, external_requests
             page.evaluate("localStorage.setItem('banas_lang', 'invalid')")
@@ -158,6 +179,8 @@ def check():
             page.locator("#weatherHistoryPanel").scroll_into_view_if_needed()
             page.locator('#weatherHistoryPanel[data-chart-state="error"]').wait_for(state="attached")
             assert page.locator("#chartLibraryRetry").is_visible()
+            page.locator("#weatherDataDetails summary").click()
+            expect(page.locator("#weatherTableBody tr")).to_have_count(96)
             assert "Nie udało" in page.locator("#chartLibraryStatus").inner_text()
             page.locator('[data-lang="en"]').click()
             page.locator("#themeToggle").click()
@@ -188,10 +211,10 @@ def check():
             page.on("pageerror", lambda error: errors.append(str(error)))
             page.goto(url, wait_until="networkidle")
             page.locator("#projects .card").first.scroll_into_view_if_needed()
-            page.wait_for_function("document.querySelector('#projects .card').classList.contains('is-visible')")
+            page.wait_for_function("() => document.querySelector('#projects .card').classList.contains('is-visible')")
             page.locator('[data-project-filter="web"]').click()
             page.locator("#projects .project-card:not([hidden])").first.scroll_into_view_if_needed()
-            page.wait_for_function("document.querySelector('#projects .project-card:not([hidden])').classList.contains('is-visible')")
+            page.wait_for_function("() => document.querySelector('#projects .project-card:not([hidden])').classList.contains('is-visible')")
             assert not errors, errors
             context.close()
 
