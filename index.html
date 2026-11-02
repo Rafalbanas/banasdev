@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-8/fVjucyYklKj2ZwmQuod3Uf/UBWO1302Set3TgDBU0='; script-src-attr 'none'; style-src 'self' 'sha256-MtAeTZ66WQlBh4MeqoPpbNaWhRIyepuIGHnguIGD0H0='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-EV7pgSehuE/cSiRdWGUqyn6+tJQ7iNLeHZ9pcFO/3t8='; script-src-attr 'none'; style-src 'self' 'sha256-MtAeTZ66WQlBh4MeqoPpbNaWhRIyepuIGHnguIGD0H0='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rafał Banaś | Technical Support Engineer · Python & AI</title>
@@ -4462,9 +4462,7 @@
                     focusTarget.setAttribute("tabindex", "-1");
                     focusTarget.focus({ preventScroll: true });
                     history.replaceState(null, "", link.getAttribute("href"));
-                    navLinks.forEach((item) => {
-                        item.classList.toggle("is-active", item === link);
-                    });
+                    scheduleNavigationUpdate();
                 });
             });
 
@@ -4518,17 +4516,44 @@
                 .map((link) => document.querySelector(link.getAttribute("href")))
                 .filter(Boolean);
 
-            if ("IntersectionObserver" in window) {
-                const navObserver = new IntersectionObserver((entries) => {
-                    entries.forEach((entry) => {
-                        if (!entry.isIntersecting) return;
-                        navLinks.forEach((link) => {
-                            link.classList.toggle("is-active", link.getAttribute("href") === "#" + entry.target.id);
-                        });
-                    });
-                }, { threshold: 0.32, rootMargin: "-20% 0px -55% 0px" });
+            function setActiveNavigation(sectionId) {
+                navLinks.forEach((link) => {
+                    const active = link.getAttribute("href") === "#" + sectionId;
+                    link.classList.toggle("is-active", active);
+                    if (active) link.setAttribute("aria-current", "location");
+                    else link.removeAttribute("aria-current");
+                });
+            }
 
-                sectionTargets.forEach((section) => navObserver.observe(section));
+            function updateActiveNavigation() {
+                // Section starts work for long sections too, unlike visibility ratios.
+                const activationLine = Math.max((topbar?.getBoundingClientRect().bottom || 0) + 16, window.innerHeight * 0.2);
+                let activeId = null;
+                sectionTargets.forEach((section) => {
+                    if (section.getBoundingClientRect().top <= activationLine) activeId = section.id;
+                });
+                // The final section may be too short to reach the activation line.
+                if (window.scrollY > 0 && Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight) {
+                    activeId = sectionTargets[sectionTargets.length - 1]?.id || activeId;
+                }
+                setActiveNavigation(activeId);
+            }
+
+            let navigationFrame = null;
+            function scheduleNavigationUpdate() {
+                if (navigationFrame !== null) return;
+                navigationFrame = window.requestAnimationFrame(() => {
+                    navigationFrame = null;
+                    updateActiveNavigation();
+                });
+            }
+
+            updateActiveNavigation();
+            window.addEventListener("scroll", scheduleNavigationUpdate, { passive: true });
+            window.addEventListener("resize", scheduleNavigationUpdate);
+            window.addEventListener("pageshow", scheduleNavigationUpdate);
+            if ("ResizeObserver" in window) {
+                new ResizeObserver(scheduleNavigationUpdate).observe(document.body);
             }
 
             photos.forEach((src) => {
