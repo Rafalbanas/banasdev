@@ -8,6 +8,7 @@ import tempfile
 import threading
 import unittest
 from unittest.mock import patch
+from urllib.request import urlopen
 import zipfile
 
 from deploy.deploy import deploy
@@ -63,6 +64,35 @@ class DeploymentTests(unittest.TestCase):
         self.assertEqual((public / "weather.json").read_text(), '{"updated":true}')
         self.assertEqual((data / "weather_history.db").read_bytes(), b"existing database")
         self.assertFalse((public / "fetch_weather.py").exists())
+
+    def test_vendor_assets_integrity(self):
+        revision = "c" * 40
+        payload = self.payload(revision)
+        self.send(revision, payload)
+        public = Path(self.config["state_dir"]) / "current/public"
+
+        files = [
+            "assets/vendor/chart.umd.min.js",
+            "assets/vendor/chart.LICENSE.md",
+        ]
+
+        for file_rel_path in files:
+            source_path = ROOT / file_rel_path
+            self.assertTrue(source_path.exists(), f"Source {file_rel_path} missing")
+            source_bytes = source_path.read_bytes()
+
+            local_path = public / file_rel_path
+            self.assertEqual(local_path.read_bytes(), source_bytes)
+
+            url = f"{self.config['health_url']}/{file_rel_path}"
+            with urlopen(url, timeout=3) as response:
+                remote_bytes = response.read()
+            self.assertEqual(remote_bytes, source_bytes)
+
+    def test_revision_entry_has_stable_timestamp(self):
+        with zipfile.ZipFile(io.BytesIO(self.payload("a" * 40))) as archive:
+            self.assertEqual(archive.getinfo("public/revision.txt").date_time,
+                             (1980, 1, 1, 0, 0, 0))
 
     def test_redeploy_preserves_original_rollback_target(self):
         self.send("a" * 40, self.payload("a" * 40))

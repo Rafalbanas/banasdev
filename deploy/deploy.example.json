@@ -1,5 +1,5 @@
 {
   "state_dir": "/var/lib/banasdev",
-  "data_dir": "/cytrus",
+  "data_dir": "/var/lib/banasdev-weather",
   "health_url": "http://127.0.0.1:18081"
 }

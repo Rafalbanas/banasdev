@@ -1,3 +1,6 @@
-# Preserve the existing /cytrus JSON, SQLite database and weather.log.
-*/15 * * * * BANASDEV_DATA_DIR=/cytrus /usr/bin/python3 /var/lib/banasdev/current/fetch_weather.py --weather-only >> /cytrus/weather.log 2>&1
-5 * * * * BANASDEV_DATA_DIR=/cytrus /usr/bin/python3 /var/lib/banasdev/current/fetch_weather.py --air-only >> /cytrus/weather.log 2>&1
+# /etc/cron.d format. Migrate data first; preserve the originals in /cytrus.
+SHELL=/bin/sh
+PATH=/usr/bin:/bin
+
+*/15 * * * * banasdev-weather BANASDEV_DATA_DIR=/var/lib/banasdev-weather /usr/bin/python3 /var/lib/banasdev/current/fetch_weather.py --weather-only >> /var/lib/banasdev-weather/weather.log 2>&1
+5 * * * * banasdev-weather BANASDEV_DATA_DIR=/var/lib/banasdev-weather /usr/bin/python3 /var/lib/banasdev/current/fetch_weather.py --air-only >> /var/lib/banasdev-weather/weather.log 2>&1
