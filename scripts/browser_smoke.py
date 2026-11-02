@@ -79,6 +79,37 @@ def check_project_filters(page):
     assert page.locator("#projectEmpty").is_hidden()
 
 
+def check_scroll_navigation(page):
+    active = page.locator('.nav-links a.is-active')
+    for width in (375, 1440):
+        page.set_viewport_size({"width": width, "height": 900})
+        for lang in ("pl", "en"):
+            page.locator(f'[data-lang="{lang}"]').click()
+            links = page.locator('.nav-links a[href^="#"]').evaluate_all(
+                "links => links.map(link => link.getAttribute('href'))")
+            # Use scrolling, not link clicks: clicks used to hide the broken observer.
+            for href in links + list(reversed(links)):
+                page.evaluate("""href => {
+                    const section = document.querySelector(href);
+                    window.scrollTo({top: scrollY + section.getBoundingClientRect().top - 100,
+                                     behavior: 'instant'});
+                }""", href)
+                expect(active).to_have_count(1)
+                expect(active).to_have_attribute("href", href)
+                expect(active).to_have_attribute("aria-current", "location")
+                expect(page.locator('.nav-links a[aria-current="location"]')).to_have_count(1)
+                if href == "#projects":
+                    page.evaluate("""() => {
+                        const section = document.querySelector('#projects');
+                        window.scrollTo({top: scrollY + section.getBoundingClientRect().top
+                                             + section.offsetHeight / 2, behavior: 'instant'});
+                    }""")
+                    expect(active).to_have_attribute("href", "#projects")
+            page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
+            expect(active).to_have_count(0)
+            expect(page.locator('.nav-links a[aria-current]')).to_have_count(0)
+
+
 def check():
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(ROOT)))
     Thread(target=server.serve_forever, daemon=True).start()
@@ -134,6 +165,7 @@ def check():
             page.keyboard.press("Tab")
             assert page.locator("#projectSearch").evaluate("e => e === document.activeElement")
             check_project_filters(page)
+            check_scroll_navigation(page)
             photo = page.locator("#profilePhoto").get_attribute("src")
             page.locator("#photoSwitch").focus()
             page.keyboard.press("Enter")
@@ -203,6 +235,7 @@ def check():
             page.goto(url, wait_until="networkidle")
             page.locator('#weatherHistoryPanel[data-chart-state="ready"]').wait_for(state="attached")
             assert page.evaluate("!!Chart.getChart('weatherHistoryChart')")
+            check_scroll_navigation(page)
             assert not errors, errors
             context.close()
 
@@ -227,7 +260,7 @@ def check():
             assert page.locator("#projects .project-card:visible").count() == page.locator("#projects .project-card").count()
             context.close()
             browser.close()
-        print("Browser OK: PL/EN, themes, 5 widths, project search/filters, keyboard, lazy local charts, retry, no external requests, storage failure, no JS")
+        print("Browser OK: PL/EN, scroll navigation desktop/mobile, themes, 5 widths, project search/filters, keyboard, lazy local charts, retry, no external requests, storage failure, no JS")
     finally:
         server.shutdown()
         server.server_close()
