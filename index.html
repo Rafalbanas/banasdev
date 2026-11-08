@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-zo8CbPhhNl1YyM5uh9PhTjsG7DkNnuE1C7FEnmcpxcY='; script-src-attr 'none'; style-src 'self' 'sha256-Um85xxJJhbo2dCxpJRu3J6Ix4CymGJL1P7aHV31RbrU='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-pF9NPXTy9Ozvkgn8v9+6Zzxs9nmvwThBsSSAOZ5TtZ8='; script-src-attr 'none'; style-src 'self' 'sha256-e6ly7uj7uFfFH8HDqhSUmmDdFA1GQsHuuQzEaf8+jxw='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rafał Banaś | Technical Support Engineer · Python & AI</title>
@@ -1258,6 +1258,143 @@
             background: var(--surface);
         }
 
+        .project-intro {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin: 20px 0 0;
+        }
+
+        .project-intro p { margin: 0; color: var(--muted); max-width: 65ch; }
+        .project-view { display: flex; gap: 6px; flex-shrink: 0; }
+        .project-view .button { min-height: 44px; }
+        .project-view [aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+        #projects[data-view="list"] [data-project-grid] { grid-template-columns: minmax(0, 1fr); }
+        #projects[data-view="list"] .project-card { min-height: 0; }
+        #projects[data-view="list"] .project-card > p { max-width: 85ch; }
+        .project-kind {
+            display: inline-block;
+            margin: 0 0 12px;
+            color: var(--muted);
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+        }
+
+        .project-details {
+            margin: 16px 0 0;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: var(--bg-soft);
+        }
+
+        .project-details > summary {
+            padding: 14px 16px;
+            cursor: pointer;
+            color: var(--accent);
+            font-weight: 750;
+            min-height: 48px;
+        }
+
+        .project-details[open] > summary { border-bottom: 1px solid var(--line); }
+        .case-tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 12px 0; }
+        .case-tabs button {
+            min-height: 44px;
+            padding: 9px 12px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--muted);
+            font: inherit;
+            font-size: 0.82rem;
+            cursor: pointer;
+        }
+
+        .case-tabs button[aria-selected="true"] {
+            color: var(--text);
+            border-color: var(--accent);
+            background: color-mix(in srgb, var(--accent) 9%, var(--bg-soft));
+        }
+
+        .case-panel { padding: 18px 16px; }
+        .case-panel h4 { margin: 0 0 10px; font-size: 1rem; color: var(--text); }
+        .case-panel p { margin: 0 0 12px; font-size: 0.9rem; color: var(--muted); }
+        .case-panel p:last-child { margin-bottom: 0; }
+        .case-panel:focus-visible, .case-tabs button:focus-visible, .tag button:focus-visible {
+            outline: 3px solid var(--accent); outline-offset: 3px;
+        }
+
+        .case-flow { list-style: none; padding: 0; margin: 0; counter-reset: flow; }
+        .case-flow li {
+            position: relative;
+            padding: 0 0 18px 38px;
+            min-height: 44px;
+            counter-increment: flow;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .case-flow li::before {
+            content: counter(flow, decimal-leading-zero);
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent);
+            font: 750 0.8rem/1.7 ui-monospace, monospace;
+        }
+
+        .case-flow li:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            left: 11px;
+            top: 27px;
+            bottom: 6px;
+            width: 1px;
+            background: var(--line);
+        }
+
+        .case-flow li:last-child { padding-bottom: 0; }
+        .case-evidence { padding: 14px 16px; border-top: 1px solid var(--line); }
+        .case-evidence a { font-size: 0.84rem; text-underline-offset: 4px; }
+        .case-evidence p { font-size: 0.76rem; color: var(--muted); margin: 8px 0 0; }
+        .tag:has(button) { padding: 0; }
+        .tag button {
+            border: 0;
+            border-radius: inherit;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            padding: 8px 10px;
+            min-height: 44px;
+            cursor: pointer;
+        }
+
+        .tag button:hover { color: var(--accent); }
+        .project-empty .button { margin-top: 18px; }
+        .project-card[data-project-id="homelab"] {
+            grid-column: 1 / -1;
+            border-color: color-mix(in srgb, var(--accent) 32%, var(--line));
+            background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 5%, transparent), transparent 65%), var(--surface);
+        }
+
+        .project-card[data-project-id="homelab"] > p { max-width: 85ch; }
+        .lab-specs {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .lab-specs div { padding: 12px; border: 1px solid var(--line); border-radius: 10px; }
+        .lab-specs dt { color: var(--muted); font-size: 0.75rem; }
+        .lab-specs dd { margin: 4px 0 0; font-weight: 750; font-size: 0.88rem; overflow-wrap: anywhere; }
+        @media (max-width: 480px) {
+            .lab-specs { grid-template-columns: minmax(0, 1fr); }
+            .project-view { width: 100%; }
+            .project-view .button { flex: 1; }
+        }
+
         .project-search label {
             display: block;
             margin-bottom: 8px;
@@ -2140,8 +2277,7 @@
                 <div>
                     <h2 id="projects-title" data-i18n="projects.title">Projekty i obszary pracy</h2>
                     <p class="section-lead" data-i18n="projects.lead">
-                        Zestaw obszarów, które pokazują praktyczne podejście do IT: od prostych aplikacji webowych
-                        i backendu, przez computer vision, po automatyzacje, systemy i własną przestrzeń do testów.
+                        Nie tylko lista technologii. Poznaj cel, mój wkład i ograniczenia: od aplikacji i analizy danych po prywatny homelab, lokalne AI i utrzymanie systemów.
                     </p>
                 </div>
             </div>
@@ -2149,7 +2285,14 @@
             <div class="project-tools" id="projectTools" hidden>
                 <div class="project-search" role="search" aria-labelledby="projectSearchLabel">
                     <label id="projectSearchLabel" for="projectSearch" data-i18n="projects.searchLabel">Znajdź projekt lub technologię</label>
-                    <input id="projectSearch" type="search" maxlength="100" autocomplete="off" spellcheck="false" aria-controls="projectFeatured projectMore" aria-describedby="projectResults" placeholder="np. Python, n8n, dane kolarskie" data-i18n-attr="placeholder:projects.searchPlaceholder">
+                    <input id="projectSearch" type="search" maxlength="100" autocomplete="off" spellcheck="false" aria-controls="projectFeatured projectMore" aria-describedby="projectResults" placeholder="np. Ollama, FastAPI, Home Assistant" data-i18n-attr="placeholder:projects.searchPlaceholder">
+                </div>
+                <div class="project-intro">
+                    <p data-i18n="explorer.hint">Zajrzyj pod maskę projektu albo wybierz technologię na karcie, aby znaleźć powiązane projekty.</p>
+                    <div class="project-view" role="group" aria-label="Widok projektów" data-i18n-attr="aria-label:explorer.viewLabel">
+                        <button class="button" type="button" data-project-view="grid" aria-pressed="true" aria-controls="projectFeatured projectMore" data-i18n="explorer.grid">Karty</button>
+                        <button class="button" type="button" data-project-view="list" aria-pressed="false" aria-controls="projectFeatured projectMore" data-i18n="explorer.list">Lista</button>
+                    </div>
                 </div>
                 <div class="project-filter-row">
                     <div class="project-filters" role="group" aria-label="Filtruj projekty według obszaru" data-i18n-attr="aria-label:projects.filterLabel">
@@ -2164,12 +2307,29 @@
             </div>
 
             <div class="grid two" id="projectFeatured" data-project-grid>
-                <article class="card project-card project-card--actionable" data-project-categories="data">
+                <article class="card project-card project-card--actionable" data-project-categories="data" data-project-id="cycling">
                     <div class="project-number">01</div>
+                    <span class="project-kind" data-i18n="explorer.researchApp">Aplikacja badawcza · publiczne demo</span>
                     <h3>Cycling · Telemetry & ML</h3>
                     <p data-i18n="projects.cyclingSummary">Jak analizować dane z treningów kolarskich? W mojej aplikacji pokazuję wyniki pracy magisterskiej, porównanie modeli i czytnik pracy.</p>
-                    <details class="project-details"><summary data-i18n="projects.details">Szczegóły techniczne i ograniczenia</summary>
-                        <p data-i18n="projects.cyclingText">Wyniki pracy magisterskiej: estymacja badawczej etykiety FTP z telemetrii GoldenCheetah, porównanie modeli i SHAP. Kalkulator 0,95 × MMP20 jest heurystyką, nie inferencją modelu ani pomiarem progu fizjologicznego.</p>
+                    <details class="project-details" data-case-study="cycling"><summary data-i18n="explorer.open">Poznaj projekt od środka</summary>
+                        <div class="case-panel" data-case-panel="overview">
+                            <h4 data-i18n="explorer.overview">Cel i mój wkład</h4>
+                            <p data-i18n="cases.cycling.role">Łączę badania nad danymi kolarskimi z aplikacją do przeglądania wyników. Mój zakres to pipeline analityczny, porównanie modeli i prezentacja metryk oraz pracy magisterskiej w przeglądarce.</p>
+                        </div>
+                        <div class="case-panel" data-case-panel="flow">
+                            <h4 data-i18n="explorer.flow">Jak to działa</h4>
+                            <ol class="case-flow">
+                                <li data-i18n="cases.cycling.step1">Telemetria GoldenCheetah OpenData → przygotowanie cech i badawczej etykiety FTP.</li>
+                                <li data-i18n="cases.cycling.step2">Porównanie modeli → ocena z podziałem danych po zawodnikach, nie losowo po sesjach.</li>
+                                <li data-i18n="cases.cycling.step3">Aplikacja webowa → metryki, wizualizacje SHAP i czytnik pracy.</li>
+                            </ol>
+                        </div>
+                        <div class="case-panel" data-case-panel="quality">
+                            <h4 data-i18n="explorer.quality">Weryfikacja i ograniczenia</h4>
+                            <p data-i18n="projects.cyclingText">Wyniki pracy magisterskiej: estymacja badawczej etykiety FTP z telemetrii GoldenCheetah, porównanie modeli i SHAP. Kalkulator 0,95 × MMP20 jest heurystyką, nie inferencją modelu ani pomiarem progu fizjologicznego.</p>
+                        </div>
+                        <div class="case-evidence"><a href="https://github.com/Rafalbanas/Cycling/blob/71f094fca99aec60a8bc62f3ea2c19b4bedd9636/README.md" target="_blank" rel="noopener" data-i18n="explorer.source">Kod i dokumentacja źródłowa ↗</a><p data-i18n="explorer.snapshot">Przegląd źródeł: 08.11.2026 · zapis stanu kodu, nie monitoring wdrożenia.</p></div>
                     </details>
                     <ul class="tags" aria-label="Obszary projektu Cycling" data-i18n-attr="aria-label:projects.cyclingTagsAria">
                         <li class="tag" data-i18n="tag.cyclingData">Dane kolarskie</li>
@@ -2182,12 +2342,29 @@
                     </div>
                 </article>
 
-                <article class="card project-card project-card--actionable" data-project-categories="data">
+                <article class="card project-card project-card--actionable" data-project-categories="data" data-project-id="plates">
                     <div class="project-number">02</div>
+                    <span class="project-kind" data-i18n="explorer.visionApp">Computer vision · publiczne demo</span>
                     <h3 data-i18n="projects.platesTitle">Rozpoznawanie tablic rejestracyjnych / Plates</h3>
                     <p data-i18n="projects.platesSummary">Odczyt tablic ze zdjęć: przygotowałem publiczne demo z gotowymi modelami oraz osobny pipeline treningu i oceny detektora. Odczyt może zawierać błędy.</p>
-                    <details class="project-details"><summary data-i18n="projects.details">Szczegóły techniczne i ograniczenia</summary>
-                        <p data-i18n="projects.platesText">Publiczne demo ALPR: FastALPR i gotowe modele ONNX wykrywają tablice oraz odczytują tekst lokalnie na VPS. Repozytorium zawiera także osobny pipeline treningu i oceny detektora. OCR może mylić podobne znaki.</p>
+                    <details class="project-details" data-case-study="plates"><summary data-i18n="explorer.open">Poznaj projekt od środka</summary>
+                        <div class="case-panel" data-case-panel="overview">
+                            <h4 data-i18n="explorer.overview">Cel i mój wkład</h4>
+                            <p data-i18n="cases.plates.role">Przygotowałem aplikację do odczytywania tablic ze zdjęć i osobną ścieżkę eksperymentów z detektorem. Integracja gotowych modeli w demo nie oznacza, że korzysta ono z mojego wytrenowanego detektora.</p>
+                        </div>
+                        <div class="case-panel" data-case-panel="flow">
+                            <h4 data-i18n="explorer.flow">Jak to działa</h4>
+                            <ol class="case-flow">
+                                <li data-i18n="cases.plates.step1">Zdjęcie → wykrycie obszaru tablicy przez gotowy model ONNX.</li>
+                                <li data-i18n="cases.plates.step2">Wycinek tablicy → rozpoznawanie znaków przez OCR.</li>
+                                <li data-i18n="cases.plates.step3">Wynik w przeglądarce → osobno w repozytorium: trening i ocena detektora.</li>
+                            </ol>
+                        </div>
+                        <div class="case-panel" data-case-panel="quality">
+                            <h4 data-i18n="explorer.quality">Weryfikacja i ograniczenia</h4>
+                            <p data-i18n="projects.platesText">Publiczne demo ALPR: FastALPR i gotowe modele ONNX wykrywają tablice oraz odczytują tekst lokalnie na VPS. Repozytorium zawiera także osobny pipeline treningu i oceny detektora. OCR może mylić podobne znaki.</p>
+                        </div>
+                        <div class="case-evidence"><a href="https://github.com/Rafalbanas/automatic_plate_number_recognition/blob/4868be5ec3bb62cdb774fe83987dd1cf6257e18a/README.md" target="_blank" rel="noopener" data-i18n="explorer.source">Kod i dokumentacja źródłowa ↗</a><p data-i18n="explorer.snapshot">Przegląd źródeł: 08.11.2026 · zapis stanu kodu, nie monitoring wdrożenia.</p></div>
                     </details>
                     <ul class="tags" aria-label="Technologie Plates" data-i18n-attr="aria-label:projects.platesTagsAria">
                         <li class="tag">YOLO</li>
@@ -2200,12 +2377,30 @@
                     </div>
                 </article>
 
-                <article class="card project-card project-card--actionable" data-project-categories="data automation web">
+                <article class="card project-card project-card--actionable" data-project-categories="data automation web" data-project-id="resume">
                     <div class="project-number">03</div>
+                    <span class="project-kind" data-i18n="explorer.personalApp">Aplikacja osobista · logowanie</span>
                     <h3>CVTailor · AI Resume Tailoring</h3>
                     <p data-i18n="projects.resumeSummary">Dopasowanie CV do oferty bez dopisywania doświadczenia: rozwijam narzędzie generujące PDF/DOCX z potwierdzonych faktów. Aplikacja prywatna, wymaga logowania i weryfikacji wyniku.</p>
-                    <details class="project-details"><summary data-i18n="projects.details">Szczegóły techniczne i ograniczenia</summary>
-                        <p data-i18n="projects.resumeText">CVTailor analizuje oferty pracy i generuje PDF/DOCX z potwierdzonych faktów. FastAPI, Ollama/Gemini i niezależny Truth Lock. Kod obejmuje lokalny RAG z rankingiem BM25; aplikacja do użytku osobistego wymaga logowania, a wynik — weryfikacji człowieka.</p>
+                    <details class="project-details" data-case-study="resume"><summary data-i18n="explorer.open">Poznaj projekt od środka</summary>
+                        <div class="case-panel" data-case-panel="overview">
+                            <h4 data-i18n="explorer.overview">Cel i mój wkład</h4>
+                            <p data-i18n="cases.resume.role">Rozwijam analizę ofert, dobór faktów z profilu, walidację treści i eksport dokumentów. Integruję API modeli, nie trenuję własnego LLM. Nowe szkice bazują na źródłach, a użytkownik nadal odpowiada za przegląd wyniku.</p>
+                        </div>
+                        <div class="case-panel" data-case-panel="flow">
+                            <h4 data-i18n="explorer.flow">Jak to działa</h4>
+                            <ol class="case-flow">
+                                <li data-i18n="cases.resume.step1">Oferta pracy → wymagania z cytatami i rozróżnieniem warunków obowiązkowych oraz preferowanych.</li>
+                                <li data-i18n="cases.resume.step2">Lokalny ranking BM25 → fakty z identyfikatorami źródeł → generowanie przez Ollama lub Gemini.</li>
+                                <li data-i18n="cases.resume.step3">Niezależny Truth Lock i przegląd człowieka → PDF/DOCX oraz historia wersji.</li>
+                            </ol>
+                        </div>
+                        <div class="case-panel" data-case-panel="quality">
+                            <h4 data-i18n="explorer.quality">Weryfikacja i ograniczenia</h4>
+                            <p data-i18n="projects.resumeText">CVTailor analizuje oferty pracy i generuje PDF/DOCX z potwierdzonych faktów. FastAPI, Ollama/Gemini i niezależny Truth Lock. Kod obejmuje lokalny RAG z rankingiem BM25; aplikacja do użytku osobistego wymaga logowania, a wynik — weryfikacji człowieka.</p>
+                            <p data-i18n="cases.resume.limit">Dokumentacja opisuje też opcjonalne wyszukiwanie semantyczne, domyślnie wyłączone. Obecność funkcji w kodzie nie potwierdza aktywacji w prywatnym wdrożeniu. Brak deklaracji procentowej poprawy jakości czy szybkości.</p>
+                        </div>
+                        <div class="case-evidence"><a href="https://github.com/Rafalbanas/ai-resume-tailoring-platform/blob/e8db1aef4502d5d123f2abe61988e2089740e263/docs/project-description.md" target="_blank" rel="noopener" data-i18n="explorer.source">Kod i dokumentacja źródłowa ↗</a><p data-i18n="explorer.snapshot">Przegląd źródeł: 08.11.2026 · zapis stanu kodu, nie monitoring wdrożenia.</p></div>
                     </details>
                     <ul class="tags" aria-label="Technologie AI Resume Tailoring" data-i18n-attr="aria-label:projects.resumeTagsAria">
                         <li class="tag">FastAPI</li>
@@ -2218,13 +2413,32 @@
                     </div>
                 </article>
 
-                <article class="card project-card project-card--actionable" data-project-categories="data automation">
+                <article class="card project-card project-card--actionable" data-project-categories="data automation" data-project-id="chat">
                     <div class="project-card-header">
                         <div class="project-number">04</div>
                         <span class="project-status" data-i18n="projects.privateDeployment">Prywatne wdrożenie</span>
                     </div>
                     <h3>Banas Chat</h3>
                     <p data-i18n="projects.chatText">Prywatne wdrożenie Open WebUI z Ollama: MFA, limity generowania, koordynacja GPU i szyfrowane kopie zapasowe. Utrzymuję konfigurację i integracje; interfejs oraz silnik aplikacji pochodzą z Open WebUI.</p>
+                    <details class="project-details" data-case-study="chat"><summary data-i18n="explorer.open">Poznaj projekt od środka</summary>
+                        <div class="case-panel" data-case-panel="overview">
+                            <h4 data-i18n="explorer.overview">Cel i mój wkład</h4>
+                            <p data-i18n="cases.chat.role">Definiuję wymagania i utrzymuję konfigurację prywatnego wdrożenia. Open WebUI dostarcza interfejs, konta, MFA i historię rozmów. Dodatkowe skrypty i dokumentacja powstały z pomocą Codex.</p>
+                        </div>
+                        <div class="case-panel" data-case-panel="flow">
+                            <h4 data-i18n="explorer.flow">Jak to działa</h4>
+                            <ol class="case-flow">
+                                <li data-i18n="cases.chat.step1">Uwierzytelnienie i MFA → Open WebUI, bez publicznej rejestracji.</li>
+                                <li data-i18n="cases.chat.step2">Bramka polityki → dozwolone modele Ollama, limity kontekstu i generowania.</li>
+                                <li data-i18n="cases.chat.step3">Koordynacja obciążenia GPU z CVTailor → odpowiedź i zwolnienie modelu z pamięci.</li>
+                            </ol>
+                        </div>
+                        <div class="case-panel" data-case-panel="quality">
+                            <h4 data-i18n="explorer.quality">Weryfikacja i ograniczenia</h4>
+                            <p data-i18n="cases.chat.limit">Dokumentacja opisuje weryfikację odtworzenia szyfrowanych kopii. Koordynacja GPU opiera się na odpytywaniu, więc krótkie nakładanie zadań jest możliwe. To konkretne prywatne wdrożenie, nie uniwersalny instalator ani autorski silnik czatu.</p>
+                        </div>
+                        <div class="case-evidence"><a href="https://github.com/Rafalbanas/chat/blob/48ae3f44cdaa1772e258a7a0f0aac98af4973c7f/README.md" target="_blank" rel="noopener" data-i18n="explorer.source">Kod i dokumentacja źródłowa ↗</a><p data-i18n="explorer.snapshot">Przegląd źródeł: 08.11.2026 · zapis stanu kodu, nie monitoring wdrożenia.</p></div>
+                    </details>
                     <ul class="tags" aria-label="Banas Chat"><li class="tag">Open WebUI</li><li class="tag">Ollama</li><li class="tag">Docker</li></ul>
                     <div class="project-actions"><a class="button" href="https://github.com/Rafalbanas/chat" target="_blank" rel="noopener" data-i18n="projects.resumeCodeCta">Kod</a></div>
                 </article>
@@ -2232,32 +2446,93 @@
 
             <h3 class="project-group-title" id="projectMoreTitle" data-i18n="projects.moreTitle">Pozostałe projekty i obszary</h3>
             <div class="grid two" id="projectMore" data-project-grid>
-                <article class="card project-card" data-project-categories="web">
+                <article class="card project-card" data-project-categories="web" data-project-id="lanari">
                     <div class="project-number">05</div>
+                    <span class="project-kind" data-i18n="explorer.prototype">MVP · publiczny kod</span>
                     <h3>Lanari Candle</h3>
                     <p data-i18n="projects.lanariText">Projekt e-commerce z backendem w Pythonie i FastAPI oraz prostym frontendem. Praktyka projektowania API, logiki aplikacji, walidacji danych i integracji webowej.</p>
+                    <details class="project-details" data-case-study="lanari"><summary data-i18n="explorer.open">Poznaj projekt od środka</summary>
+                        <div class="case-panel" data-case-panel="overview">
+                            <h4 data-i18n="explorer.overview">Cel i mój wkład</h4>
+                            <p data-i18n="cases.lanari.role">Projekt MVP sklepu: łączę frontend z API produktów, koszyka i zamówień. Repozytorium pokazuje praktykę backendu i modelowania danych, a nie potwierdzenie gotowości komercyjnego sklepu.</p>
+                        </div>
+                        <div class="case-panel" data-case-panel="flow">
+                            <h4 data-i18n="explorer.flow">Jak to działa</h4>
+                            <ol class="case-flow">
+                                <li data-i18n="cases.lanari.step1">Interfejs HTML/JS → katalog produktów i operacje koszyka przez API.</li>
+                                <li data-i18n="cases.lanari.step2">FastAPI i schematy danych → logika zamówień, użytkowników oraz dostawy.</li>
+                                <li data-i18n="cases.lanari.step3">Warstwa bazy i migracje Alembic → zapis stanu aplikacji.</li>
+                            </ol>
+                        </div>
+                        <div class="case-panel" data-case-panel="quality">
+                            <h4 data-i18n="explorer.quality">Weryfikacja i ograniczenia</h4>
+                            <p data-i18n="cases.lanari.limit">Kod obejmuje test przepływu API, ale nie jest to potwierdzenie gotowości produkcyjnej. Projekt pozostaje MVP bez zweryfikowanego publicznego demo; sama obecność modułów płatności nie oznacza obsługi realnych transakcji.</p>
+                        </div>
+                        <div class="case-evidence"><a href="https://github.com/Rafalbanas/lanari_candle/tree/59367c33e211115013f0627d20e0d15265517a82" target="_blank" rel="noopener" data-i18n="explorer.source">Kod i dokumentacja źródłowa ↗</a><p data-i18n="explorer.snapshot">Przegląd źródeł: 08.11.2026 · zapis stanu kodu, nie monitoring wdrożenia.</p></div>
+                    </details>
                     <ul class="tags" aria-label="Technologie Lanari Candle" data-i18n-attr="aria-label:projects.lanariTagsAria">
                         <li class="tag">Python</li>
                         <li class="tag">FastAPI</li>
                         <li class="tag">Frontend</li>
                     </ul>
+                    <div class="project-actions"><a class="button" href="https://github.com/Rafalbanas/lanari_candle" target="_blank" rel="noopener" data-i18n="projects.resumeCodeCta">Kod</a></div>
                 </article>
 
-                <article class="card project-card" data-project-categories="data">
+                <article class="card project-card" data-project-categories="data" data-project-id="thesis">
                     <div class="project-number">06</div>
+                    <span class="project-kind" data-i18n="explorer.research">Badania · wyniki w Cycling</span>
                     <h3 data-i18n="projects.thesisTitle">Praca magisterska</h3>
                     <p data-i18n="projects.thesisText">Ukończona praca magisterska: pipeline Python i porównanie modeli estymujących badawczą etykietę FTP. pandas, scikit-learn, XGBoost i interpretacja SHAP; wyniki prezentuje aplikacja Cycling.</p>
+                    <details class="project-details" data-case-study="thesis"><summary data-i18n="explorer.open">Poznaj projekt od środka</summary>
+                        <div class="case-panel" data-case-panel="overview">
+                            <h4 data-i18n="explorer.overview">Cel i mój wkład</h4>
+                            <p data-i18n="cases.thesis.role">Część badawcza stojąca za Cycling, a nie drugi niezależny produkt. Przygotowałem analizę telemetrii, porównanie modeli i interpretację wyników dla pracy magisterskiej.</p>
+                        </div>
+                        <div class="case-panel" data-case-panel="flow">
+                            <h4 data-i18n="explorer.flow">Jak to działa</h4>
+                            <ol class="case-flow">
+                                <li data-i18n="cases.thesis.step1">Przygotowanie danych → etykieta badawcza 0,95 × MMP20 i warianty cech.</li>
+                                <li data-i18n="cases.thesis.step2">Rozdzielenie zawodników między trening i test → kontrola wycieku danych.</li>
+                                <li data-i18n="cases.thesis.step3">Porównanie błędów i SHAP → zagregowane wyniki opublikowane w Cycling.</li>
+                            </ol>
+                        </div>
+                        <div class="case-panel" data-case-panel="quality">
+                            <h4 data-i18n="explorer.quality">Weryfikacja i ograniczenia</h4>
+                            <p data-i18n="cases.thesis.limit">Wariant zawierający MMP20 jest kontrolą wycieku, bo ta cecha tworzy etykietę. Publiczne repozytorium Cycling udostępnia wyniki, nie surową telemetrię ani model do nowych predykcji. Wyniki nie są poradą treningową.</p>
+                        </div>
+                        <div class="case-evidence"><a href="https://github.com/Rafalbanas/Cycling/blob/71f094fca99aec60a8bc62f3ea2c19b4bedd9636/README.md" target="_blank" rel="noopener" data-i18n="explorer.source">Kod i dokumentacja źródłowa ↗</a><p data-i18n="explorer.snapshot">Przegląd źródeł: 08.11.2026 · zapis stanu kodu, nie monitoring wdrożenia.</p></div>
+                    </details>
                     <ul class="tags" aria-label="Obszary pracy magisterskiej" data-i18n-attr="aria-label:projects.thesisTagsAria">
                         <li class="tag">ML</li>
                         <li class="tag" data-i18n="tag.telemetry">Telemetryka</li>
                         <li class="tag" data-i18n="tag.cyclingData">Dane kolarskie</li>
                     </ul>
+                    <div class="project-actions"><a class="button" href="https://cycling.banas.dev" target="_blank" rel="noopener" data-i18n="explorer.results">Przeglądaj wyniki</a></div>
                 </article>
 
-                <article class="card project-card" data-project-categories="automation">
+                <article class="card project-card" data-project-categories="automation" data-project-id="automation">
                     <div class="project-number">07</div>
+                    <span class="project-kind" data-i18n="explorer.practice">Obszar praktyki · nie osobna aplikacja</span>
                     <h3 data-i18n="projects.itAutomationTitle">Administracja i automatyzacja IT</h3>
                     <p data-i18n="projects.itAutomationText">PowerShell, Linux, serwery, monitoring, sieci i skrypty wspierające diagnostykę, konfigurację oraz powtarzalne zadania administracyjne.</p>
+                    <details class="project-details" data-case-study="automation"><summary data-i18n="explorer.open">Poznaj projekt od środka</summary>
+                        <div class="case-panel" data-case-panel="overview">
+                            <h4 data-i18n="explorer.overview">Cel i mój wkład</h4>
+                            <p data-i18n="cases.automation.role">Obszar pracy z systemami i wsparciem IT: diagnostyka, konfiguracja i ograniczanie powtarzalnych czynności. To opis praktyki, nie deklaracja osobnej platformy czy publicznego zestawu skryptów.</p>
+                        </div>
+                        <div class="case-panel" data-case-panel="flow">
+                            <h4 data-i18n="explorer.flow">Jak to działa</h4>
+                            <ol class="case-flow">
+                                <li data-i18n="cases.automation.step1">Rozpoznanie problemu → kontekst, logi, uprawnienia i łączność.</li>
+                                <li data-i18n="cases.automation.step2">Dobór narzędzia → polecenia systemowe lub skrypt dla powtarzalnego zadania.</li>
+                                <li data-i18n="cases.automation.step3">Sprawdzenie efektu → dokumentacja zmiany i możliwość jej cofnięcia.</li>
+                            </ol>
+                        </div>
+                        <div class="case-panel" data-case-panel="quality">
+                            <h4 data-i18n="explorer.quality">Weryfikacja i ograniczenia</h4>
+                            <p data-i18n="cases.automation.limit">Schemat pokazuje podejście do pracy, nie audyt konkretnej infrastruktury. Nie publikuję konfiguracji klientów, danych zgłoszeń ani prywatnych runbooków. Brak osobnego publicznego repozytorium dla tej karty.</p>
+                        </div>
+                    </details>
                     <ul class="tags" aria-label="Obszary administracji IT" data-i18n-attr="aria-label:projects.itTagsAria">
                         <li class="tag">PowerShell</li>
                         <li class="tag">Linux</li>
@@ -2265,21 +2540,76 @@
                     </ul>
                 </article>
 
-                <article class="card project-card" data-project-categories="automation web">
+                <article class="card project-card" data-project-categories="automation web" data-project-id="banas">
                     <div class="project-number">08</div>
+                    <span class="project-kind" data-i18n="explorer.website">Ta strona · statyczny frontend i dane</span>
                     <h3>Banas.dev</h3>
                     <p data-i18n="projects.banasText">Własna przestrzeń typu personal engineering lab: projekty, testy, automatyzacje, usługi, subdomeny i praktyczne eksperymenty bez ciężkiej infrastruktury.</p>
+                    <details class="project-details" data-case-study="banas"><summary data-i18n="explorer.open">Poznaj projekt od środka</summary>
+                        <div class="case-panel" data-case-panel="overview">
+                            <h4 data-i18n="explorer.overview">Cel i mój wkład</h4>
+                            <p data-i18n="cases.banas.role">Rozwijam to portfolio jako lekką statyczną stronę: dwujęzyczny interfejs, przeglądanie projektów i lokalne wykresy danych. Integruję kolektor z publicznymi źródłami i utrzymuję testy oraz proces publikacji.</p>
+                        </div>
+                        <div class="case-panel" data-case-panel="flow">
+                            <h4 data-i18n="explorer.flow">Jak to działa</h4>
+                            <ol class="case-flow">
+                                <li data-i18n="cases.banas.step1">GIOŚ i Open-Meteo → oddzielne źródła jakości powietrza oraz pogody.</li>
+                                <li data-i18n="cases.banas.step2">Kolektor → lokalne pliki JSON i historia; strona odczytuje je bez połączeń z zewnętrznymi API.</li>
+                                <li data-i18n="cases.banas.step3">Interfejs PL/EN → wykresy ładowane na żądanie, tabela danych i ostrzeżenia o nieaktualnych odczytach.</li>
+                            </ol>
+                        </div>
+                        <div class="case-panel" data-case-panel="quality">
+                            <h4 data-i18n="explorer.quality">Weryfikacja i ograniczenia</h4>
+                            <p data-i18n="cases.banas.limit">Testy kontrolują treści, linki, CSP i wdrażanie z wycofaniem zmian. Dane z repozytorium mogą być historyczne; brak aktualnego pomiaru nie oznacza dobrej jakości powietrza. Przegląd repozytoriów jest zapisany lokalnie, bez śledzenia odwiedzających przez GitHub.</p>
+                        </div>
+                        <div class="case-evidence"><a href="https://github.com/Rafalbanas/banasdev/blob/d70fc81f4c8a68f29b68a4fb0a62258ade91e018/README.md" target="_blank" rel="noopener" data-i18n="explorer.source">Kod i dokumentacja źródłowa ↗</a><p data-i18n="explorer.snapshot">Przegląd źródeł: 08.11.2026 · zapis stanu kodu, nie monitoring wdrożenia.</p></div>
+                    </details>
                     <ul class="tags" aria-label="Banas.dev">
                         <li class="tag">Portfolio</li>
                         <li class="tag" data-i18n="tag.services">Usługi</li>
                         <li class="tag" data-i18n="tag.automation">Automatyzacja</li>
                     </ul>
+                    <div class="project-actions"><a class="button" href="https://github.com/Rafalbanas/banasdev" target="_blank" rel="noopener" data-i18n="projects.resumeCodeCta">Kod</a></div>
                 </article>
 
+                <article class="card project-card" data-project-categories="data automation" data-project-id="homelab">
+                    <div class="project-number">09</div>
+                    <span class="project-kind" data-i18n="explorer.privateLab">Własne laboratorium · dokumentacja prywatna</span>
+                    <h3 data-i18n="projects.homelabTitle">Homelab · Linux, lokalne AI i automatyzacja</h3>
+                    <p data-i18n="projects.homelabSummary">Moje laboratorium na Ubuntu: lokalne modele przez Ollama, Home Assistant OS w KVM/libvirt oraz pulpit i Steam uruchamiane na żądanie. Łączę zastosowania domowe z praktyką utrzymania usług i zarządzania zasobami GPU.</p>
+                    <dl class="lab-specs">
+                        <div><dt data-i18n="cases.homelab.system">System</dt><dd>Ubuntu</dd></div>
+                        <div><dt>GPU</dt><dd>RTX 3060 · 12 GB</dd></div>
+                        <div><dt data-i18n="cases.homelab.virtualization">Wirtualizacja</dt><dd>KVM / libvirt</dd></div>
+                    </dl>
+                    <details class="project-details" data-case-study="homelab"><summary data-i18n="explorer.open">Poznaj projekt od środka</summary>
+                        <div class="case-panel" data-case-panel="overview">
+                            <h4 data-i18n="explorer.overview">Cel i mój wkład</h4>
+                            <p data-i18n="cases.homelab.role">Konfiguruję i dokumentuję środowisko, w którym jedna stacja obsługuje lokalną inferencję, maszynę wirtualną Home Assistant i zadania graficzne. Rozwijam narzędzia do zarządzania usługami i sesją, zamiast utrzymywać pulpit aktywny przez cały czas.</p>
+                        </div>
+                        <div class="case-panel" data-case-panel="flow">
+                            <h4 data-i18n="explorer.flow">Jak to działa</h4>
+                            <ol class="case-flow">
+                                <li data-i18n="cases.homelab.step1">Ubuntu i systemd → usługi oraz lokalna inferencja Ollama korzystająca z GPU NVIDIA.</li>
+                                <li data-i18n="cases.homelab.step2">KVM/libvirt → osobna maszyna Home Assistant OS, z udokumentowanym uruchomieniem i autostartem.</li>
+                                <li data-i18n="cases.homelab.step3">Pulpit i Steam na żądanie → licznik braku Steama, gier i UxPlay zwalnia sesję graficzną, nie zatrzymując Ollama.</li>
+                            </ol>
+                        </div>
+                        <div class="case-panel" data-case-panel="quality">
+                            <h4 data-i18n="explorer.quality">Weryfikacja i ograniczenia</h4>
+                            <p data-i18n="cases.homelab.limit">Opis opiera się na dokumentacji, nie na bieżącym audycie maszyny. Zainstalowany model nie musi być załadowany. Licznik sesji obserwuje procesy, nie bezczynność klawiatury i myszy. Automatyzacje Home Assistant wymagają włączonego i nieuśpionego hosta.</p>
+                        </div>
+                        <div class="case-evidence"><p data-i18n="cases.homelab.privacy">Dokumentacja prywatna · przegląd 08.11.2026. Publiczny opis nie zawiera adresów, nazw hostów, danych dostępowych ani konfiguracji sieci.</p></div>
+                    </details>
+                    <ul class="tags" aria-label="Technologie homelabu" data-i18n-attr="aria-label:projects.homelabTagsAria">
+                        <li class="tag">Ubuntu</li><li class="tag">Ollama</li><li class="tag">KVM / libvirt</li><li class="tag">systemd</li>
+                    </ul>
+                </article>
             </div>
             <div class="project-empty" id="projectEmpty" hidden>
                 <h3 data-i18n="projects.emptyTitle">Brak pasujących projektów</h3>
                 <p data-i18n="projects.emptyHint">Spróbuj innej frazy lub wyczyść filtry powyżej.</p>
+                <button class="button secondary" type="button" data-project-reset data-i18n="projects.resetFilters">Wyczyść filtry</button>
             </div>
         </section>
 
@@ -2692,6 +3022,93 @@
 const translations = {
                 pl: {
                     skipLink: "Przejdź do treści",
+                    explorer: {
+                        hint: "Zajrzyj pod maskę projektu albo wybierz technologię na karcie, aby znaleźć powiązane projekty.",
+                        viewLabel: "Widok projektów",
+                        grid: "Karty",
+                        list: "Lista",
+                        open: "Poznaj projekt od środka",
+                        overview: "Cel i mój wkład",
+                        flow: "Jak to działa",
+                        quality: "Weryfikacja i ograniczenia",
+                        source: "Kod i dokumentacja źródłowa ↗",
+                        snapshot: "Przegląd źródeł: 08.11.2026 · zapis stanu kodu, nie monitoring wdrożenia.",
+                        researchApp: "Aplikacja badawcza · publiczne demo",
+                        visionApp: "Computer vision · publiczne demo",
+                        personalApp: "Aplikacja osobista · logowanie",
+                        prototype: "MVP · publiczny kod",
+                        research: "Badania · wyniki w Cycling",
+                        practice: "Obszar praktyki · nie osobna aplikacja",
+                        website: "Ta strona · statyczny frontend i dane",
+                        privateLab: "Własne laboratorium · dokumentacja prywatna",
+                        results: "Przeglądaj wyniki"
+                    },
+                    cases: {
+                        homelab: {
+                            system: "System",
+                            virtualization: "Wirtualizacja",
+                            role: "Konfiguruję i dokumentuję środowisko, w którym jedna stacja obsługuje lokalną inferencję, maszynę wirtualną Home Assistant i zadania graficzne. Rozwijam narzędzia do zarządzania usługami i sesją, zamiast utrzymywać pulpit aktywny przez cały czas.",
+                            step1: "Ubuntu i systemd → usługi oraz lokalna inferencja Ollama korzystająca z GPU NVIDIA.",
+                            step2: "KVM/libvirt → osobna maszyna Home Assistant OS, z udokumentowanym uruchomieniem i autostartem.",
+                            step3: "Pulpit i Steam na żądanie → licznik braku Steama, gier i UxPlay zwalnia sesję graficzną, nie zatrzymując Ollama.",
+                            limit: "Opis opiera się na dokumentacji, nie na bieżącym audycie maszyny. Zainstalowany model nie musi być załadowany. Licznik sesji obserwuje procesy, nie bezczynność klawiatury i myszy. Automatyzacje Home Assistant wymagają włączonego i nieuśpionego hosta.",
+                            privacy: "Dokumentacja prywatna · przegląd 08.11.2026. Publiczny opis nie zawiera adresów, nazw hostów, danych dostępowych ani konfiguracji sieci."
+                        },
+                        cycling: {
+                            role: "Łączę badania nad danymi kolarskimi z aplikacją do przeglądania wyników. Mój zakres to pipeline analityczny, porównanie modeli i prezentacja metryk oraz pracy magisterskiej w przeglądarce.",
+                            step1: "Telemetria GoldenCheetah OpenData → przygotowanie cech i badawczej etykiety FTP.",
+                            step2: "Porównanie modeli → ocena z podziałem danych po zawodnikach, nie losowo po sesjach.",
+                            step3: "Aplikacja webowa → metryki, wizualizacje SHAP i czytnik pracy."
+                        },
+                        plates: {
+                            role: "Przygotowałem aplikację do odczytywania tablic ze zdjęć i osobną ścieżkę eksperymentów z detektorem. Integracja gotowych modeli w demo nie oznacza, że korzysta ono z mojego wytrenowanego detektora.",
+                            step1: "Zdjęcie → wykrycie obszaru tablicy przez gotowy model ONNX.",
+                            step2: "Wycinek tablicy → rozpoznawanie znaków przez OCR.",
+                            step3: "Wynik w przeglądarce → osobno w repozytorium: trening i ocena detektora."
+                        },
+                        resume: {
+                            role: "Rozwijam analizę ofert, dobór faktów z profilu, walidację treści i eksport dokumentów. Integruję API modeli, nie trenuję własnego LLM. Nowe szkice bazują na źródłach, a użytkownik nadal odpowiada za przegląd wyniku.",
+                            step1: "Oferta pracy → wymagania z cytatami i rozróżnieniem warunków obowiązkowych oraz preferowanych.",
+                            step2: "Lokalny ranking BM25 → fakty z identyfikatorami źródeł → generowanie przez Ollama lub Gemini.",
+                            step3: "Niezależny Truth Lock i przegląd człowieka → PDF/DOCX oraz historia wersji.",
+                            limit: "Dokumentacja opisuje też opcjonalne wyszukiwanie semantyczne, domyślnie wyłączone. Obecność funkcji w kodzie nie potwierdza aktywacji w prywatnym wdrożeniu. Brak deklaracji procentowej poprawy jakości czy szybkości."
+                        },
+                        chat: {
+                            role: "Definiuję wymagania i utrzymuję konfigurację prywatnego wdrożenia. Open WebUI dostarcza interfejs, konta, MFA i historię rozmów. Dodatkowe skrypty i dokumentacja powstały z pomocą Codex.",
+                            step1: "Uwierzytelnienie i MFA → Open WebUI, bez publicznej rejestracji.",
+                            step2: "Bramka polityki → dozwolone modele Ollama, limity kontekstu i generowania.",
+                            step3: "Koordynacja obciążenia GPU z CVTailor → odpowiedź i zwolnienie modelu z pamięci.",
+                            limit: "Dokumentacja opisuje weryfikację odtworzenia szyfrowanych kopii. Koordynacja GPU opiera się na odpytywaniu, więc krótkie nakładanie zadań jest możliwe. To konkretne prywatne wdrożenie, nie uniwersalny instalator ani autorski silnik czatu."
+                        },
+                        lanari: {
+                            role: "Projekt MVP sklepu: łączę frontend z API produktów, koszyka i zamówień. Repozytorium pokazuje praktykę backendu i modelowania danych, a nie potwierdzenie gotowości komercyjnego sklepu.",
+                            step1: "Interfejs HTML/JS → katalog produktów i operacje koszyka przez API.",
+                            step2: "FastAPI i schematy danych → logika zamówień, użytkowników oraz dostawy.",
+                            step3: "Warstwa bazy i migracje Alembic → zapis stanu aplikacji.",
+                            limit: "Kod obejmuje test przepływu API, ale nie jest to potwierdzenie gotowości produkcyjnej. Projekt pozostaje MVP bez zweryfikowanego publicznego demo; sama obecność modułów płatności nie oznacza obsługi realnych transakcji."
+                        },
+                        thesis: {
+                            role: "Część badawcza stojąca za Cycling, a nie drugi niezależny produkt. Przygotowałem analizę telemetrii, porównanie modeli i interpretację wyników dla pracy magisterskiej.",
+                            step1: "Przygotowanie danych → etykieta badawcza 0,95 × MMP20 i warianty cech.",
+                            step2: "Rozdzielenie zawodników między trening i test → kontrola wycieku danych.",
+                            step3: "Porównanie błędów i SHAP → zagregowane wyniki opublikowane w Cycling.",
+                            limit: "Wariant zawierający MMP20 jest kontrolą wycieku, bo ta cecha tworzy etykietę. Publiczne repozytorium Cycling udostępnia wyniki, nie surową telemetrię ani model do nowych predykcji. Wyniki nie są poradą treningową."
+                        },
+                        automation: {
+                            role: "Obszar pracy z systemami i wsparciem IT: diagnostyka, konfiguracja i ograniczanie powtarzalnych czynności. To opis praktyki, nie deklaracja osobnej platformy czy publicznego zestawu skryptów.",
+                            step1: "Rozpoznanie problemu → kontekst, logi, uprawnienia i łączność.",
+                            step2: "Dobór narzędzia → polecenia systemowe lub skrypt dla powtarzalnego zadania.",
+                            step3: "Sprawdzenie efektu → dokumentacja zmiany i możliwość jej cofnięcia.",
+                            limit: "Schemat pokazuje podejście do pracy, nie audyt konkretnej infrastruktury. Nie publikuję konfiguracji klientów, danych zgłoszeń ani prywatnych runbooków. Brak osobnego publicznego repozytorium dla tej karty."
+                        },
+                        banas: {
+                            role: "Rozwijam to portfolio jako lekką statyczną stronę: dwujęzyczny interfejs, przeglądanie projektów i lokalne wykresy danych. Integruję kolektor z publicznymi źródłami i utrzymuję testy oraz proces publikacji.",
+                            step1: "GIOŚ i Open-Meteo → oddzielne źródła jakości powietrza oraz pogody.",
+                            step2: "Kolektor → lokalne pliki JSON i historia; strona odczytuje je bez połączeń z zewnętrznymi API.",
+                            step3: "Interfejs PL/EN → wykresy ładowane na żądanie, tabela danych i ostrzeżenia o nieaktualnych odczytach.",
+                            limit: "Testy kontrolują treści, linki, CSP i wdrażanie z wycofaniem zmian. Dane z repozytorium mogą być historyczne; brak aktualnego pomiaru nie oznacza dobrej jakości powietrza. Przegląd repozytoriów jest zapisany lokalnie, bez śledzenia odwiedzających przez GitHub."
+                        }
+                    },
                     meta: {
                         title: "Rafał Banaś | Technical Support Engineer · Python & AI",
                         description: "Rafał Banaś — Technical Support Engineer Tier 2 w Motorola Solutions, magister informatyki. Wsparcie aplikacji, Python, automatyzacja i własne projekty AI."
@@ -2889,6 +3306,9 @@ const translations = {
                         automation2: "Doświadczenie inżynierskie, które pomaga mi patrzeć na IT systemowo i procesowo."
                     },
                     projects: {
+                        homelabTitle: "Homelab · Linux, lokalne AI i automatyzacja",
+                        homelabSummary: "Moje laboratorium na Ubuntu: lokalne modele przez Ollama, Home Assistant OS w KVM/libvirt oraz pulpit i Steam uruchamiane na żądanie. Łączę zastosowania domowe z praktyką utrzymania usług i zarządzania zasobami GPU.",
+                        homelabTagsAria: "Technologie homelabu",
                         details: "Szczegóły techniczne i ograniczenia",
                         cyclingSummary: "Jak analizować dane z treningów kolarskich? W mojej aplikacji pokazuję wyniki pracy magisterskiej, porównanie modeli i czytnik pracy.",
                         platesSummary: "Odczyt tablic ze zdjęć: przygotowałem publiczne demo z gotowymi modelami oraz osobny pipeline treningu i oceny detektora. Odczyt może zawierać błędy.",
@@ -2899,7 +3319,7 @@ const translations = {
                         itTagsAria: "Obszary administracji IT",
                         kicker: "Projekty",
                         searchLabel: "Znajdź projekt lub technologię",
-                        searchPlaceholder: "np. Python, n8n, dane kolarskie",
+                        searchPlaceholder: "np. Ollama, FastAPI, Home Assistant",
                         filterLabel: "Filtruj projekty według obszaru",
                         filterAll: "Wszystkie",
                         filterData: "Dane i AI",
@@ -2910,7 +3330,7 @@ const translations = {
                         emptyTitle: "Brak pasujących projektów",
                         emptyHint: "Spróbuj innej frazy lub wyczyść filtry powyżej.",
                         title: "Projekty i obszary pracy",
-                        lead: "Zestaw obszarów, które pokazują praktyczne podejście do IT: od prostych aplikacji webowych i backendu, przez computer vision, po automatyzacje, systemy i własną przestrzeń do testów.",
+                        lead: "Nie tylko lista technologii. Poznaj cel, mój wkład i ograniczenia: od aplikacji i analizy danych po prywatny homelab, lokalne AI i utrzymanie systemów.",
                         cyclingText: "Wyniki pracy magisterskiej: estymacja badawczej etykiety FTP z telemetrii GoldenCheetah, porównanie modeli i SHAP. Kalkulator 0,95 × MMP20 jest heurystyką, nie inferencją modelu ani pomiarem progu fizjologicznego.",
                         cyclingCta: "Zobacz projekt",
                         cyclingTagsAria: "Obszary projektu Cycling",
@@ -2990,6 +3410,93 @@ const translations = {
                 },
                 en: {
                     skipLink: "Skip to content",
+                    explorer: {
+                        hint: "Look inside a project, or choose a technology on a card to find related work.",
+                        viewLabel: "Project view",
+                        grid: "Cards",
+                        list: "List",
+                        open: "Explore the project",
+                        overview: "Goal & my contribution",
+                        flow: "How it works",
+                        quality: "Validation & limitations",
+                        source: "Source code & documentation ↗",
+                        snapshot: "Sources reviewed: 8 Nov 2026 · a code snapshot, not deployment monitoring.",
+                        researchApp: "Research application · public demo",
+                        visionApp: "Computer vision · public demo",
+                        personalApp: "Personal application · login required",
+                        prototype: "MVP · public source code",
+                        research: "Research · results in Cycling",
+                        practice: "Area of practice · not a separate application",
+                        website: "This website · static frontend & data",
+                        privateLab: "Personal lab · private documentation",
+                        results: "Explore the results"
+                    },
+                    cases: {
+                        homelab: {
+                            system: "System",
+                            virtualization: "Virtualization",
+                            role: "I configure and document an environment where one workstation handles local inference, a Home Assistant virtual machine and graphical workloads. I develop service and session management tools rather than keeping the desktop active all the time.",
+                            step1: "Ubuntu and systemd → services and local Ollama inference using an NVIDIA GPU.",
+                            step2: "KVM/libvirt → a separate Home Assistant OS virtual machine, with documented startup and autostart.",
+                            step3: "On-demand desktop and Steam → a timer for the absence of Steam, games and UxPlay releases the graphical session without stopping Ollama.",
+                            limit: "This description is based on documentation, not a live machine audit. An installed model is not necessarily loaded. The session timer watches processes, not keyboard and mouse inactivity. Home Assistant automations require the host to remain powered on and awake.",
+                            privacy: "Private documentation · reviewed 8 Nov 2026. The public description excludes addresses, hostnames, credentials and network configuration."
+                        },
+                        cycling: {
+                            role: "I connect cycling data research with an application for exploring the results. My scope covers the analytical pipeline, model comparison and presenting metrics and the MSc thesis in the browser.",
+                            step1: "GoldenCheetah OpenData telemetry → feature preparation and a research FTP label.",
+                            step2: "Model comparison → evaluation split by athlete, not randomly by session.",
+                            step3: "Web application → metrics, SHAP visualizations and a thesis reader."
+                        },
+                        plates: {
+                            role: "I built a photo-based plate recognition application and a separate detector experimentation pipeline. Integrating pretrained models in the demo does not mean it uses my trained detector.",
+                            step1: "Photo → plate region detection using a pretrained ONNX model.",
+                            step2: "Plate crop → character recognition through OCR.",
+                            step3: "Browser result → a separate detector training and evaluation pipeline in the repository."
+                        },
+                        resume: {
+                            role: "I develop offer analysis, profile fact selection, content validation and document exports. I integrate model APIs rather than training an LLM. New drafts are source-grounded; users remain responsible for reviewing the output.",
+                            step1: "Job offer → quoted requirements, separating mandatory and preferred conditions.",
+                            step2: "Local BM25 ranking → facts with source IDs → generation through Ollama or Gemini.",
+                            step3: "Independent Truth Lock and human review → PDF/DOCX and version history.",
+                            limit: "Documentation also describes optional semantic retrieval, disabled by default. A feature in the code does not confirm activation in the private deployment. No percentage improvement in quality or speed is claimed."
+                        },
+                        chat: {
+                            role: "I define requirements and maintain the private deployment configuration. Open WebUI provides the interface, accounts, MFA and conversation history. Additional scripts and documentation were prepared with Codex assistance.",
+                            step1: "Authentication and MFA → Open WebUI, with no public registration.",
+                            step2: "Policy gateway → approved Ollama models, context and generation limits.",
+                            step3: "GPU workload coordination with CVTailor → response and model unloading.",
+                            limit: "Documentation describes encrypted backup restore verification. GPU coordination uses polling, so brief workload overlap remains possible. This is a specific private deployment, not a universal installer or an original chat engine."
+                        },
+                        lanari: {
+                            role: "An MVP store project: I connect the frontend to product, cart and order APIs. The repository demonstrates backend and data modeling practice, not proof of a commercially ready store.",
+                            step1: "HTML/JS interface → product catalog and cart operations through the API.",
+                            step2: "FastAPI and data schemas → order, user and shipping logic.",
+                            step3: "Database layer and Alembic migrations → persistent application state.",
+                            limit: "The code includes an API flow test, but this does not confirm production readiness. The project remains an MVP without a verified public demo; payment modules alone do not mean real transactions are processed."
+                        },
+                        thesis: {
+                            role: "The research behind Cycling, not a second independent product. I prepared telemetry analysis, model comparisons and result interpretation for my MSc thesis.",
+                            step1: "Data preparation → the 0.95 × MMP20 research label and feature variants.",
+                            step2: "Athlete-level train/test separation → data leakage controls.",
+                            step3: "Error comparison and SHAP → aggregated results published in Cycling.",
+                            limit: "The variant containing MMP20 is a leakage control because this feature defines the label. The public Cycling repository shares results, not raw telemetry or a model for new predictions. Results are not training advice."
+                        },
+                        automation: {
+                            role: "An area of systems and IT support practice: diagnostics, configuration and reducing repetitive tasks. This describes my approach, not a separate platform or a public script collection.",
+                            step1: "Understand the issue → context, logs, permissions and connectivity.",
+                            step2: "Choose a tool → system commands or a script for a recurring task.",
+                            step3: "Check the result → document the change and how to revert it.",
+                            limit: "The workflow illustrates an approach, not an audit of specific infrastructure. Customer configurations, ticket data and private runbooks are not published. This card has no separate public repository."
+                        },
+                        banas: {
+                            role: "I develop this portfolio as a lightweight static website: a bilingual interface, project browsing and local data charts. I integrate a collector with public sources and maintain tests and the release process.",
+                            step1: "GIOŚ and Open-Meteo → separate air quality and weather sources.",
+                            step2: "Collector → local JSON files and history; the website reads them without contacting external APIs.",
+                            step3: "PL/EN interface → lazy-loaded charts, a data table and stale-reading warnings.",
+                            limit: "Tests cover content, links, CSP and deployment rollback. Repository data may be historical; missing current measurements do not mean good air quality. The repository review is saved locally, without GitHub tracking website visitors."
+                        }
+                    },
                     meta: {
                         title: "Rafał Banaś | Technical Support Engineer · Python & AI",
                         description: "Rafał Banaś — Technical Support Engineer Tier 2 at Motorola Solutions, MSc in Computer Science. Application support, Python, automation and personal AI projects."
@@ -3187,6 +3694,9 @@ const translations = {
                         automation2: "Engineering experience that helps me look at IT from a systems and process perspective."
                     },
                     projects: {
+                        homelabTitle: "Homelab · Linux, local AI & automation",
+                        homelabSummary: "My Ubuntu lab: local models through Ollama, Home Assistant OS in KVM/libvirt, and an on-demand desktop and Steam. I combine home use cases with service maintenance practice and GPU resource management.",
+                        homelabTagsAria: "Homelab technologies",
                         details: "Technical details and limitations",
                         cyclingSummary: "How can cycling training data be analyzed? My application presents MSc thesis results, model comparisons and a thesis reader.",
                         platesSummary: "Reading plates from photos: I built a public demo using pretrained models and a separate detector training and evaluation pipeline. Recognition may contain errors.",
@@ -3197,7 +3707,7 @@ const translations = {
                         itTagsAria: "IT administration areas",
                         kicker: "Projects",
                         searchLabel: "Find a project or technology",
-                        searchPlaceholder: "e.g. Python, n8n, cycling data",
+                        searchPlaceholder: "e.g. Ollama, FastAPI, Home Assistant",
                         filterLabel: "Filter projects by area",
                         filterAll: "All projects",
                         filterData: "Data & AI",
@@ -3208,7 +3718,7 @@ const translations = {
                         emptyTitle: "No matching projects",
                         emptyHint: "Try another search or clear the filters above.",
                         title: "Projects and focus areas",
-                        lead: "A set of areas showing my practical approach to IT: from simple web applications and backend work, through computer vision, to automation, systems and my own testing space.",
+                        lead: "More than a technology list. Explore the goal, my contribution and the limitations: from applications and data analysis to my private homelab, local AI and systems operations.",
                         cyclingText: "MSc thesis results: estimating a research FTP label from GoldenCheetah telemetry, model comparisons and SHAP. The 0.95 × MMP20 calculator is a heuristic, not model inference or a physiological threshold measurement.",
                         cyclingCta: "View project",
                         cyclingTagsAria: "Cycling project areas",
@@ -4311,6 +4821,92 @@ const translations = {
                 return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ł/g, "l");
             }
 
+            function setupProjectExplorer() {
+                const section = document.getElementById("projects");
+                const viewButtons = [...section.querySelectorAll("[data-project-view]")];
+                viewButtons.forEach((button) => {
+                    button.addEventListener("click", () => {
+                        section.dataset.view = button.dataset.projectView;
+                        viewButtons.forEach((item) => {
+                            item.setAttribute("aria-pressed", String(item === button));
+                        });
+                    });
+                });
+
+                projectCards.forEach((card) => {
+                    const study = card.querySelector("[data-case-study]");
+                    const title = card.querySelector("h3");
+                    title.id = "project-" + card.dataset.projectId;
+                    if (study) {
+                        const panels = [...study.querySelectorAll("[data-case-panel]")];
+                        const tablist = document.createElement("div");
+                        tablist.className = "case-tabs";
+                        tablist.setAttribute("role", "tablist");
+                        tablist.setAttribute("aria-labelledby", title.id);
+                        const tabs = panels.map((panel) => {
+                            const tab = document.createElement("button");
+                            const name = panel.dataset.casePanel;
+                            const prefix = "case-" + card.dataset.projectId + "-" + name;
+                            tab.type = "button";
+                            tab.id = prefix + "-tab";
+                            tab.dataset.i18n = "explorer." + name;
+                            tab.textContent = getValue(tab.dataset.i18n, "pl");
+                            tab.setAttribute("role", "tab");
+                            tab.setAttribute("aria-controls", prefix + "-panel");
+                            panel.id = prefix + "-panel";
+                            panel.setAttribute("role", "tabpanel");
+                            panel.setAttribute("aria-labelledby", tab.id);
+                            panel.tabIndex = 0;
+                            tablist.append(tab);
+                            return tab;
+                        });
+                        function activateTab(index, moveFocus = false) {
+                            tabs.forEach((tab, current) => {
+                                const selected = current === index;
+                                tab.setAttribute("aria-selected", String(selected));
+                                tab.tabIndex = selected ? 0 : -1;
+                                panels[current].hidden = !selected;
+                            });
+                            if (moveFocus) tabs[index].focus();
+                        }
+                        tabs.forEach((tab, index) => {
+                            tab.addEventListener("click", () => activateTab(index));
+                            tab.addEventListener("keydown", (event) => {
+                                let next;
+                                if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+                                if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
+                                if (event.key === "Home") next = 0;
+                                if (event.key === "End") next = tabs.length - 1;
+                                if (next === undefined) return;
+                                event.preventDefault();
+                                activateTab(next, true);
+                            });
+                        });
+                        study.querySelector("summary").after(tablist);
+                        activateTab(0);
+                    }
+
+                    // Keep the static tag text and all study panels usable without JS.
+                    card.querySelectorAll(".tag").forEach((tag) => {
+                        const button = document.createElement("button");
+                        button.type = "button";
+                        button.textContent = tag.textContent;
+                        if (tag.dataset.i18n) {
+                            button.dataset.i18n = tag.dataset.i18n;
+                            tag.removeAttribute("data-i18n");
+                        }
+                        button.addEventListener("click", () => {
+                            selectedProjectFilter = "all";
+                            projectSearch.value = button.textContent.trim();
+                            applyProjectFilters();
+                            projectSearch.focus({ preventScroll: true });
+                            projectTools.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+                        });
+                        tag.replaceChildren(button);
+                    });
+                });
+            }
+
             function applyProjectFilters(lang = document.documentElement.lang || "pl") {
                 if (!projectSearch) return;
                 const terms = normalizeProjectText(projectSearch.value).trim().split(/\s+/).filter(Boolean);
@@ -4318,7 +4914,7 @@ const translations = {
                 projectCards.forEach((card) => {
                     if (!projectSearchIndex.has(card)) {
                         // Search both languages so switching PL/EN keeps the same results.
-                        const text = [...card.querySelectorAll("h3, p, .tag")].flatMap((element) => {
+                        const text = [...card.querySelectorAll("h3, p, li[data-i18n], .tag, .tag [data-i18n], .lab-specs dd")].flatMap((element) => {
                             const key = element.dataset.i18n;
                             return key ? [element.textContent, getValue(key, "pl"), getValue(key, "en")]
                                 : [element.textContent];
@@ -4421,6 +5017,7 @@ const translations = {
                 renderWeatherHistory();
             }
 
+            setupProjectExplorer();
             projectSearch?.addEventListener("input", () => applyProjectFilters());
             projectFilterButtons.forEach((button) => {
                 button.addEventListener("click", () => {
@@ -4428,11 +5025,13 @@ const translations = {
                     applyProjectFilters();
                 });
             });
-            document.getElementById("projectReset")?.addEventListener("click", () => {
-                selectedProjectFilter = "all";
-                projectSearch.value = "";
-                applyProjectFilters();
-                projectSearch.focus();
+            document.querySelectorAll("#projectReset, [data-project-reset]").forEach((button) => {
+                button.addEventListener("click", () => {
+                    selectedProjectFilter = "all";
+                    projectSearch.value = "";
+                    applyProjectFilters();
+                    projectSearch.focus();
+                });
             });
             setLanguage(preferences.get("banas_lang") || "pl");
             if (projectTools) projectTools.hidden = false;

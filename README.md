@@ -76,7 +76,27 @@ atrybutem `data-project-categories` (`data`, `automation`, `web`; możliwe jest
 kilka wartości rozdzielonych spacją). Wyszukiwanie obejmuje tytuł, opis i tagi
 w obu językach, nie rozróżnia wielkości liter ani polskich znaków. Zapytanie
 nie trafia na serwer ani do localStorage. Bez JavaScript wszystkie karty
-pozostają widoczne. Teksty interfejsu są w słownikach `translations.pl/en.projects`.
+pozostają widoczne. Teksty interfejsu są w `translations.pl/en` w grupach
+`projects`, `explorer` i `cases`.
+
+Każda z dziewięciu kart ma rozwijane case study: cel i wkład, przepływ oraz
+weryfikację i ograniczenia. JavaScript dodaje zakładki obsługiwane strzałkami,
+Home/End, klikalne technologie i przełącznik karty/lista. Bez JS wszystkie
+trzy części są dostępne przez natywne `<details>`. Wybór technologii czyści
+filtr obszaru i wpisuje widoczną nazwę w wyszukiwarkę; widok listy nie zmienia
+wyników ani nie zapisuje dodatkowych preferencji.
+
+Nowa karta **Homelab** opisuje Ubuntu, lokalne AI, Home Assistant na KVM/libvirt
+i zarządzanie sesją graficzną. Dokumentacja pozostaje prywatna. Daty przeglądu,
+przypięte publiczne źródła oraz granice opisów: [PROJECT_SOURCES.md](PROJECT_SOURCES.md).
+Przegląd projektów nie wysyła zapytań do GitHuba ani danych wpisywanych w wyszukiwarkę.
+
+Opcjonalne sprawdzenie interakcji (wymaga Playwright i Chromium):
+
+```bash
+python3 scripts/check_project_explorer.py
+python3 scripts/browser_smoke.py
+```
 
 ## Harmonogram
 
