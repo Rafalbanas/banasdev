@@ -77,7 +77,7 @@ kilka wartości rozdzielonych spacją). Wyszukiwanie obejmuje tytuł, opis i tag
 w obu językach, nie rozróżnia wielkości liter ani polskich znaków. Zapytanie
 nie trafia na serwer ani do localStorage. Bez JavaScript wszystkie karty
 pozostają widoczne. Teksty interfejsu są w `translations.pl/en` w grupach
-`projects`, `explorer` i `cases`.
+`projects`, `explorer`, `cases` i `headless`.
 
 Każda z dziewięciu kart ma rozwijane case study: cel i wkład, przepływ oraz
 weryfikację i ograniczenia. JavaScript dodaje zakładki obsługiwane strzałkami,
@@ -86,10 +86,29 @@ trzy części są dostępne przez natywne `<details>`. Wybór technologii czyśc
 filtr obszaru i wpisuje widoczną nazwę w wyszukiwarkę; widok listy nie zmienia
 wyników ani nie zapisuje dodatkowych preferencji.
 
-Nowa karta **Homelab** opisuje Ubuntu, lokalne AI, Home Assistant na KVM/libvirt
+Nowa karta **Homelab** opisuje Ubuntu, Ryzen 5 5500 (6 rdzeni / 12 wątków),
+30,7 GiB RAM raportowanej przez system, lokalne AI, Home Assistant na KVM/libvirt
 i zarządzanie sesją graficzną. Dokumentacja pozostaje prywatna. Daty przeglądu,
 przypięte publiczne źródła oraz granice opisów: [PROJECT_SOURCES.md](PROJECT_SOURCES.md).
 Przegląd projektów nie wysyła zapytań do GitHuba ani danych wpisywanych w wyszukiwarkę.
+
+W zakładce celu homelabu jest porównanie **headless / GUI na żądanie**.
+Przełącznik zmienia opis i zapisany odczyt VRAM, a nie stan zdalnego komputera.
+Właściciel dostarczył parę odczytów z tym samym modelem i pamięcią procesu
+Ollama: 8899 MiB bez GUI oraz 9088 MiB z GUI (różnica 189 MiB). To przykład,
+nie uniwersalny benchmark ani obietnica oszczędności energii.
+
+Kalkulator przyjmuje dwa całkowite odczyty w zakresie 0–12288 MiB, obsługuje
+spadek, wzrost, równość i błędne dane. Początkowo pola są puste; osobny przycisk
+wstawia rzeczywisty przykład właściciela. Nie ma zapisu, wysyłania danych ani
+uruchamiania poleceń. Bez JS oba opisy trybów i wyniki pomiarów są czytelne,
+a nieaktywne kontrolki i kalkulator pozostają ukryte.
+Ogólny schemat **Mac → VPS Mikrus → homelab** objaśnia rolę jumphosta i
+wychodzącego reverse SSH, bez parametrów połączenia. Nie jest to publiczny
+panel dostępu ani informacja o bieżącym stanie tunelu.
+Właściciel potwierdził korzystanie z tej trasy podczas pracy z OpenCode.
+Open WebUI opisano jako gotową warstwę interfejsu do modeli, z zachowaniem
+autorstwa i licencji upstream; nie jest to autorski silnik czatu.
 
 Opcjonalne sprawdzenie interakcji (wymaga Playwright i Chromium):
 

@@ -30,7 +30,8 @@ otwiera zewnętrzny link dopiero własnym kliknięciem.
 ## Homelab — zakres celowo ograniczony
 
 Na wyraźną prośbę właściciela dodano bezpieczne podsumowanie jego prywatnej
-dokumentacji: stacja Ubuntu, RTX 3060 z 12 GB VRAM, Ollama, Home Assistant OS
+dokumentacji: stacja Ubuntu, Ryzen 5 5500 (6 rdzeni / 12 wątków), 30,7 GiB
+całkowitej RAM raportowanej przez system, RTX 3060 z 12 GB VRAM, Ollama, Home Assistant OS
 na KVM/libvirt oraz zarządzanie sesją graficzną i Steamem przez systemd.
 
 Nie kopiowano dokumentów, inventory ani konfiguracji do tego repozytorium.
@@ -42,6 +43,75 @@ bieżącej ekspozycji sieciowej, pełnej gwarancji prywatności czy bezpieczeńs
 Ważne rozróżnienia: zainstalowany model nie musi być załadowany; licznik
 graficznej sesji obserwuje obecność wybranych procesów, nie fizyczną
 bezczynność użytkownika; Home Assistant wymaga włączonego hosta.
+
+Na osobną prośbę właściciela dodano ogólny schemat dostępu z Maca przez
+jumphost VPS Mikrus. Prywatna dokumentacja usług potwierdza administracyjny
+reverse SSH z punktem zwrotnym dostępnym wyłącznie lokalnie na VPS.
+Rozróżniamy wychodzące zestawienie homelab → Mikrus oraz drogę klienta
+Mac → Mikrus → homelab. Nie publikujemy adresów, portów, kont, kluczy,
+parametrów połączenia ani szczegółowej topologii. Ten opis nie jest testem
+aktualnej łączności i nie zakłada, że ten sam tunel udostępnia wszystkie API.
+Zastosowanie właściciela: dostęp do lokalnego AI z Maca również poza domem,
+bez wymogu stałego publicznego IP w domu, osobnego VPN lub przychodzącego
+przekierowania portów na domowym routerze. To nie oznacza braku jakichkolwiek
+otwartych portów: Mikrus potrzebuje osiągalnego SSH. Stacja, VPS i tunel muszą
+działać. Nie deklarujemy konfiguracji Wake-on-LAN ani zdalnego włączania
+wyłączonego hosta. „Bezprzewodowy” dostęp klienta nie dowodzi, że sama stacja
+łączy się przez Wi-Fi.
+Właściciel dodatkowo potwierdził, że trasa Mac → VPS → stacja jest już
+skonfigurowana i używana w bieżącej pracy z OpenCode. To potwierdzenie
+użytkownika, nie niezależny test SSH przeprowadzony w ramach zmian portfolio.
+Nie wywodzimy z tego lokalizacji każdego procesu ani tego, że wszystkie
+modele używane w OpenCode są lokalne; dostawcy chmurowi pozostają odrębną opcją.
+
+Właściciel wskazał również Open WebUI jako interfejs do lokalnego AI. Opis
+pokazuje wariant przeglądarka na Macu → Open WebUI → skonfigurowane Ollama,
+bez zakładania lokalizacji instalacji frontendu/backendu czy nowej instalacji
+Docker na stacji. Gotowe komponenty interfejsu, backendu, kont, MFA, historii,
+Markdown i eksportu pochodzą z Open WebUI. Zachowano wskazane przez właściciela
+autorstwo Open WebUI Inc., Timothy Jaeryang Baek i współtwórców oraz rozdział
+licencji własnych dodatków i upstream. To nie jest deklaracja stworzenia
+silnika czatu, licencji MIT dla Open WebUI ani audyt bieżącego wdrożenia.
+
+## Odczyty VRAM dostarczone przez właściciela
+
+W rozmowie 08.11.2026 właściciel przekazał odczyty `nvidia-smi` i `ollama ps`
+oraz wskazał tryb bez GUI i po uruchomieniu GUI. Publikujemy wyłącznie liczby
+i kontekst potrzebny do interpretacji, nie surowe logi, nazwy maszyn, ścieżki
+ani identyfikatory procesów.
+
+GPU: RTX 3060, 12288 MiB. W obu odczytach Gemma 4 12B Q4_K_M ma kontekst
+65 536, a wskazany proces Ollama zajmuje 8858 MiB.
+
+| Tryb zadeklarowany przez właściciela | Zajęte łącznie | Proces Ollama | Poza procesem Ollama | Wolne |
+| --- | ---: | ---: | ---: | ---: |
+| Headless | 8899 MiB | 8858 MiB | 41 MiB | 3389 MiB |
+| GUI | 9088 MiB | 8858 MiB | 230 MiB | 3200 MiB |
+
+Różnica wynosi **189 MiB**, około **2,08% odczytu z GUI**, nie 2,08% całej
+pojemności karty. GNOME Shell raportuje 167 MiB, Xwayland 2 MiB (łącznie
+169 MiB). Pozostałych 20 MiB różnicy te odczyty nie wyjaśniają. Nie zakładamy,
+że lista procesów idealnie sumuje się do całego zużycia GPU.
+
+Oddzielny odczyt podczas przetwarzania promptu: 8900 MiB, 91% GPU, 165 W.
+Pamięć może pozostawać zaalokowana również przy GPU-Util 0%. Szybkość około
+1200 tokenów/s w tym logu dotyczy **przetwarzania promptu**, nie dekodowania
+odpowiedzi. Moc 165 W jest chwilowym odczytem GPU, nie poborem całego hosta.
+
+Kolejny fragment logu generowania raportuje `tg` 63,09–64,27 tokenów/s,
+96% GPU, 167 W i 8900 MiB. To obserwacja części jednego zadania, nie pomiar
+średniej wydajności całych odpowiedzi ani kontrolowane porównanie trybów.
+
+Nie traktujemy tej pary jako kontrolowanego benchmarku ani dowodu oszczędności
+energii. Różnica VRAM zależy od aplikacji, modeli, kontekstu i ich stanu.
+Przełącznik na stronie przegląda zapisane dane; kalkulator tylko liczy różnicę
+wpisanych wartości, nie mierzy komputera i nie wywołuje poleceń.
+
+`gui_on`, `gui_off` i `steam-tv` opisano na podstawie prywatnej dokumentacji
+konfiguracji. To skrypty specyficzne dla homelabu, nie polecenia dostępne w
+każdej dystrybucji. `gui_on` wymaga już zainstalowanego środowiska, dostępu
+i uprawnień; nie jest instalatorem ani automatycznym logowaniem. `gui_off`
+może zakończyć niezapisaną pracę. Samo RDP nie uruchamia zatrzymanego pulpitu.
 
 ## Aktualizacja opisów
 
