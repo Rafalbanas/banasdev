@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-EV7pgSehuE/cSiRdWGUqyn6+tJQ7iNLeHZ9pcFO/3t8='; script-src-attr 'none'; style-src 'self' 'sha256-MtAeTZ66WQlBh4MeqoPpbNaWhRIyepuIGHnguIGD0H0='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-zo8CbPhhNl1YyM5uh9PhTjsG7DkNnuE1C7FEnmcpxcY='; script-src-attr 'none'; style-src 'self' 'sha256-Um85xxJJhbo2dCxpJRu3J6Ix4CymGJL1P7aHV31RbrU='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rafał Banaś | Technical Support Engineer · Python & AI</title>
@@ -1881,7 +1881,40 @@
         summary:focus-visible, .weather-table-scroll:focus-visible, [tabindex="-1"]:focus {
             outline: 3px solid var(--accent); outline-offset: 4px;
         }
-    </style>
+
+.back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    width: auto;
+    height: auto;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 12px;
+    color: var(--text);
+    background: var(--surface-strong);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.back-to-top:hover {
+    background: var(--bg-soft);
+    transform: translateY(-2px);
+}
+
+.back-to-top:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
+}
+
+</style>
 </head>
 <body>
     <a class="skip-link" href="#main" data-i18n="skipLink">Przejdź do treści</a>
@@ -2531,7 +2564,12 @@
                 </div>
             </div>
         </section>
-    </main>
+
+    <button id="backToTop" class="back-to-top" data-i18n="nav.backToTop" type="button" hidden>
+        Powrót na górę
+    </button>
+
+</main>
 
     <footer>
         <div class="page">
@@ -2639,7 +2677,19 @@
 
             document.body.classList.add("js-ready");
 
-            const translations = {
+
+            const backToTop = document.getElementById('backToTop');
+            backToTop?.addEventListener('click', () => {
+                const behavior = reduceMotion ? 'auto' : 'smooth';
+                window.scrollTo({ top: 0, behavior });
+                const h1 = document.querySelector('h1');
+                if (h1) {
+                    h1.setAttribute('tabindex', '-1');
+                    h1.focus({ preventScroll: true });
+                }
+            });
+
+const translations = {
                 pl: {
                     skipLink: "Przejdź do treści",
                     meta: {
@@ -2654,7 +2704,8 @@
                         experience: "Doświadczenie",
                         projects: "Projekty",
                         skills: "Umiejętności",
-                        contact: "Kontakt"
+                        contact: "Kontakt",
+                        backToTop: "Powrót na górę"
                     },
                     menu: {
                         open: "Otwórz menu",
@@ -2951,7 +3002,8 @@
                         experience: "Experience",
                         projects: "Projects",
                         skills: "Skills",
-                        contact: "Contact"
+                        contact: "Contact",
+                        backToTop: "Back to top"
                     },
                     menu: {
                         open: "Open menu",
@@ -4487,16 +4539,18 @@
 
             syncMobileMenuState();
 
+
             function updateTopbar() {
                 topbar?.classList.toggle("is-scrolled", window.scrollY > 12);
+                if (backToTop) backToTop.hidden = window.scrollY < window.innerHeight;
             }
 
             updateTopbar();
             window.addEventListener("scroll", updateTopbar, { passive: true });
+            window.addEventListener("resize", updateTopbar);
 
             const revealTargets = document.querySelectorAll(".section-heading, .card, .timeline-item, .feature-band, .profile-panel");
             revealTargets.forEach((element) => element.classList.add("reveal"));
-
             if ("IntersectionObserver" in window && !reduceMotion) {
                 const revealObserver = new IntersectionObserver((entries) => {
                     entries.forEach((entry) => {

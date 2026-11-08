@@ -31,6 +31,16 @@ python3 -m unittest discover -s tests -v
 Testy portfolio kontrolują zgodność polskiej treści bez JavaScript ze słownikiem,
 kompletność tłumaczeń PL/EN, aktualny profil i linki projektowe.
 
+## Nowe funkcje
+
+**Przycisk "Powrót na górę"**
+Dodano przycisk „Powrót na górę” (Back to Top), który pojawia się podczas przewijania jednego ekranu, obsługuje PL/EN, klawiaturę, preferencję ograniczenia animacji, bez JS ukryty.
+
+Opcjonalna walidacja (wymaga Playwright i Chromium):
+```bash
+python3 scripts/check_back_to_top.py
+```
+
 ## CI/CD
 
 GitHub Actions sprawdza każdy push i PR. Po udanych testach push do `main`
