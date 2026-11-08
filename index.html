@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-pF9NPXTy9Ozvkgn8v9+6Zzxs9nmvwThBsSSAOZ5TtZ8='; script-src-attr 'none'; style-src 'self' 'sha256-e6ly7uj7uFfFH8HDqhSUmmDdFA1GQsHuuQzEaf8+jxw='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-wrRY6iqijv/iOAN6uBJ2HEPJMWaNueUKC0c88iYhsKI='; script-src-attr 'none'; style-src 'self' 'sha256-SSTIiphw7cudc1UrIR4vopMNGeXNaHnHrXOAO7WhnFA='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rafał Banaś | Technical Support Engineer · Python & AI</title>
@@ -1389,6 +1389,57 @@
         .lab-specs div { padding: 12px; border: 1px solid var(--line); border-radius: 10px; }
         .lab-specs dt { color: var(--muted); font-size: 0.75rem; }
         .lab-specs dd { margin: 4px 0 0; font-weight: 750; font-size: 0.88rem; overflow-wrap: anywhere; }
+        .headless-lab {
+            display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            gap: 20px; margin-top: 22px; border-top: 1px solid var(--line); padding-top: 22px;
+        }
+        .headless-lab > h5, .headless-lab > p { grid-column: 1 / -1; }
+        .lab-operation { min-width: 0; }
+        .headless-lab h5 { margin: 0 0 12px; font-size: 1.1rem; }
+        .lab-mode-switch { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+        .lab-mode-switch .button { min-height: 44px; }
+        .lab-mode-switch [aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+        .lab-mode-panel { padding: 18px; border: 1px solid var(--line); border-radius: 12px; margin: 12px 0; }
+        .lab-mode-panel h6, .lab-measurement h6 { font-size: 1rem; margin: 0 0 12px; color: var(--accent); }
+        .headless-lab p, .headless-lab ul, .headless-lab ol { max-width: 85ch; }
+        .lab-mode-panel ul, .lab-measurement ol { padding-left: 20px; color: var(--muted); font-size: 0.9rem; }
+        .lab-mode-panel li + li, .lab-measurement li + li { margin-top: 10px; }
+        .lab-mode-panel code, .lab-measurement code {
+            display: inline-block; padding: 2px 6px; border-radius: 5px;
+            background: var(--surface-strong); color: var(--code); overflow-wrap: anywhere;
+        }
+        .lab-persistent { border-left: 3px solid var(--accent); padding-left: 14px; margin: 18px 0; }
+        .lab-route { margin: 22px 0; border-top: 1px solid var(--line); padding-top: 18px; }
+        .lab-route h6 { font-size: 1rem; margin: 0 0 16px; color: var(--accent); }
+        .lab-route strong { color: var(--text); }
+        .lab-measurement { min-width: 0; padding: 18px; border: 1px solid var(--line); border-radius: 12px; }
+        .vram-readout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        .lab-vram-delta { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: baseline; }
+        .lab-vram-delta strong { color: var(--accent); font-size: 1.6rem; }
+        .vram-readout dt { color: var(--muted); font-size: 0.78rem; }
+        .vram-readout dd { margin: 6px 0 0; font-size: 1.15rem; font-weight: 750; color: var(--text); }
+        .lab-measurement meter { width: 100%; height: 20px; accent-color: var(--accent); }
+        .lab-measurement meter::-webkit-meter-bar { background: var(--surface-strong); border: 1px solid var(--line); }
+        .lab-measurement meter::-webkit-meter-optimum-value { background: var(--accent); }
+        .lab-vram-calculator { border: 0; border-top: 1px solid var(--line); padding: 18px 0 0; margin: 22px 0 0; min-width: 0; }
+        .lab-vram-calculator legend { font-weight: 750; padding: 0 0 10px; }
+        .lab-vram-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 16px 0; }
+        .lab-vram-fields label { display: block; font-size: 0.85rem; margin-bottom: 8px; }
+        .lab-vram-fields input {
+            width: 100%; min-width: 0; min-height: 48px; padding: 10px;
+            font: inherit; color: var(--text); background: var(--surface-strong);
+            border: 1px solid var(--line); border-radius: 8px;
+        }
+        .lab-vram-fields input:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+        #labVramResult { min-height: 3em; }
+        @media (max-width: 1000px) {
+            .headless-lab { grid-template-columns: minmax(0, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .vram-readout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .lab-vram-fields { grid-template-columns: minmax(0, 1fr); }
+            .lab-mode-switch .button { flex: 1; }
+        }
         @media (max-width: 480px) {
             .lab-specs { grid-template-columns: minmax(0, 1fr); }
             .project-view { width: 100%; }
@@ -2576,9 +2627,11 @@
                     <div class="project-number">09</div>
                     <span class="project-kind" data-i18n="explorer.privateLab">Własne laboratorium · dokumentacja prywatna</span>
                     <h3 data-i18n="projects.homelabTitle">Homelab · Linux, lokalne AI i automatyzacja</h3>
-                    <p data-i18n="projects.homelabSummary">Moje laboratorium na Ubuntu: lokalne modele przez Ollama, Home Assistant OS w KVM/libvirt oraz pulpit i Steam uruchamiane na żądanie. Łączę zastosowania domowe z praktyką utrzymania usług i zarządzania zasobami GPU.</p>
+                    <p data-i18n="projects.homelabSummary">Lokalne AI na Ubuntu, dostępne z Maca również poza domem przez jumphost VPS Mikrus. Obok Ollama działają Home Assistant OS na KVM/libvirt oraz pulpit/Steam na żądanie — bez potrzeby stałego IP w domu, osobnego VPN i przekierowania portów na domowym routerze.</p>
                     <dl class="lab-specs">
                         <div><dt data-i18n="cases.homelab.system">System</dt><dd>Ubuntu</dd></div>
+                        <div><dt>CPU</dt><dd data-i18n="cases.homelab.cpu">AMD Ryzen 5 5500 · 6 rdzeni / 12 wątków</dd></div>
+                        <div><dt>RAM</dt><dd data-i18n="cases.homelab.ram">30,7 GiB łącznie widoczne w systemie</dd></div>
                         <div><dt>GPU</dt><dd>RTX 3060 · 12 GB</dd></div>
                         <div><dt data-i18n="cases.homelab.virtualization">Wirtualizacja</dt><dd>KVM / libvirt</dd></div>
                     </dl>
@@ -2586,6 +2639,93 @@
                         <div class="case-panel" data-case-panel="overview">
                             <h4 data-i18n="explorer.overview">Cel i mój wkład</h4>
                             <p data-i18n="cases.homelab.role">Konfiguruję i dokumentuję środowisko, w którym jedna stacja obsługuje lokalną inferencję, maszynę wirtualną Home Assistant i zadania graficzne. Rozwijam narzędzia do zarządzania usługami i sesją, zamiast utrzymywać pulpit aktywny przez cały czas.</p>
+                            <section class="headless-lab" aria-labelledby="headless-lab-title">
+                                <h5 id="headless-lab-title" data-i18n="headless.title">Serwer na co dzień. Pulpit wtedy, gdy go potrzebuję.</h5>
+                                <p data-i18n="headless.intro">Headless to tryb pracy, nie rezygnacja z GUI na zawsze. Usługi nie potrzebują otwartego pulpitu. W tym homelabie GNOME jest już zainstalowane i można je uruchomić przez SSH, mając działający dostęp i odpowiednie uprawnienia.</p>
+                                <div class="lab-operation">
+                                <p data-i18n="headless.modeHint">Przeglądasz opis i zapisane odczyty. Nie przełączasz zdalnego komputera.</p>
+                                <div class="lab-mode-switch" id="labModeSwitch" role="group" aria-label="Porównaj tryby homelabu" data-i18n-attr="aria-label:headless.modeLabel" hidden>
+                                    <button class="button" type="button" data-lab-mode="headless" aria-pressed="true" aria-controls="labModeHeadless labModeGui labVramBreakdown" data-i18n="headless.headlessButton">Bez GUI</button>
+                                    <button class="button" type="button" data-lab-mode="gui" aria-pressed="false" aria-controls="labModeHeadless labModeGui labVramBreakdown" data-i18n="headless.guiButton">GUI na żądanie</button>
+                                </div>
+                                <section class="lab-mode-panel" id="labModeHeadless" aria-labelledby="lab-headless-title">
+                                    <h6 id="lab-headless-title" data-i18n="headless.headlessTitle">Headless · zasoby dla usług</h6>
+                                    <ul>
+                                        <li data-i18n="headless.headless1">SSH, terminal, skrypty i systemd wystarczają do administracji, logów, aktualizacji i uruchamiania zadań.</li>
+                                        <li data-i18n="headless.headless2">Ollama udostępnia lokalne modele bez sesji GNOME. Home Assistant OS działa w osobnej maszynie KVM/libvirt, dopóki host jest włączony i nieuśpiony.</li>
+                                        <li data-i18n="headless.headless3">Brak uruchomionego pulpitu i jego aplikacji ogranicza ich narzut RAM/VRAM. Nie oznacza wyłączenia GPU ani zwolnienia pamięci załadowanego modelu.</li>
+                                    </ul>
+                                    <p><code>gui_off</code> <span data-i18n="headless.offWarning">zamyka zarządzane sesje graficzne i ich aplikacje, także grę. Najpierw zapisuję pracę; niezapisane dane mogą przepaść.</span></p>
+                                </section>
+                                <section class="lab-mode-panel" id="labModeGui" aria-labelledby="lab-gui-title">
+                                    <h6 id="lab-gui-title" data-i18n="headless.guiTitle">GUI · kiedy potrzebuję obrazu</h6>
+                                    <ul>
+                                        <li data-i18n="headless.gui1">Zainstalowany pulpit można uruchomić na żądanie do pracy graficznej, przeglądarki czy zdalnego pulpitu. Headless nie wymaga reinstalacji systemu, aby wrócić do GUI.</li>
+                                        <li data-i18n="headless.gui2">Steam Big Picture i przechwytywanie przez PipeWire są osobnym zastosowaniem sesji graficznej. Samo uruchomienie Steama w zwykłym SSH nie tworzy pulpitu.</li>
+                                        <li data-i18n="headless.gui3">Pulpit, kompozytor i otwarte aplikacje ponownie zajmują zasoby. Oszczędność po ich zamknięciu zależy od rzeczywiście zakończonych procesów.</li>
+                                    </ul>
+                                    <p><code>gui_on</code> <span data-i18n="headless.onNote">uruchamia skonfigurowany pulpit, ale nie instaluje GUI, nie loguje automatycznie i nie uruchamia Steama.</span></p>
+                                    <p><code>steam-tv</code> <span data-i18n="headless.steamNote">to osobny, skonfigurowany dla tego homelabu start sesji i Steam Big Picture.</span></p>
+                                </section>
+                                <p class="lab-persistent" data-i18n="headless.persistent">Zmienia się sesja graficzna, nie cały serwer: SSH i niezależne usługi, takie jak Ollama, nie są zatrzymywane przez te polecenia. Zatrzymanie pulpitu nie oznacza zatrzymania maszyny Home Assistant.</p>
+                                <section class="lab-route" aria-labelledby="lab-webui-title">
+                                    <h6 id="lab-webui-title" data-i18n="headless.webuiTitle">Interfejs w przeglądarce, nie pulpit na serwerze</h6>
+                                    <p data-i18n="headless.webuiFlow">Przeglądarka na Macu → Open WebUI → skonfigurowane połączenie do Ollama w homelabie. To wariant warstwy interfejsu: model nadal pracuje lokalnie na GPU, a obsługa odbywa się przez stronę. Usługi webowe nie wymagają uruchomienia GNOME na stacji z modelem.</p>
+                                    <p data-i18n="headless.webuiFeatures">Open WebUI dostarcza interfejs czatu, backend, konta, obsługę MFA, historię rozmów, Markdown i eksport. Moja rola to konfiguracja, połączenie usług i utrzymanie. Samo zainstalowanie interfejsu nie konfiguruje automatycznie tunelu ani zasad dostępu.</p>
+                                    <p data-i18n="headless.webuiCredit">Autorzy komponentu: Open WebUI Inc., Timothy Jaeryang Baek i współtwórcy projektu. Nie napisałem tych elementów od zera. W repozytorium Banas Chat licencja MIT dotyczy własnych dodatków, nie zastępuje licencji Open WebUI ani nie nadaje autorstwa upstream.</p>
+                                </section>
+                                <section class="lab-route" aria-labelledby="lab-route-title">
+                                    <h6 id="lab-route-title" data-i18n="headless.routeTitle">Mac → jumphost Mikrus → homelab</h6>
+                                    <p data-i18n="headless.routeUsage">Taką trasą korzystam ze środowiska pracy z OpenCode — to działający przykład zdalnej administracji i programowania. Ollama na stacji może obsługiwać wybrane lokalne modele; inni dostawcy skonfigurowani w OpenCode mogą być chmurowi.</p>
+                                    <ol class="case-flow">
+                                        <li><strong>Mac</strong><p data-i18n="headless.routeMac">Klient dostępu. Łączę się przez SSH do VPS Mikrus, zamiast otwierać bezpośredni dostęp do stacji z internetu.</p></li>
+                                        <li><strong>VPS Mikrus</strong><p data-i18n="headless.routeVps">Punkt pośredni, czyli jumphost. Zwrotny punkt tunelu administracyjnego nasłuchuje tylko lokalnie na VPS, a nie publicznie jako osobna usługa.</p></li>
+                                        <li><strong>Ubuntu / homelab</strong><p data-i18n="headless.routeLab">Usługa reverse SSH zestawia połączenie wychodzące ze stacji do Mikrusa. Tym połączeniem można wrócić do administracji homelabu z Maca przez jumphost.</p></li>
+                                    </ol>
+                                    <p data-i18n="headless.routeDirection">Kierunek zestawienia tunelu: homelab → Mikrus. Droga dostępu użytkownika: Mac → Mikrus → homelab. Nie wymaga to bezpośredniego przekierowania portu stacji na domowym routerze.</p>
+                                    <p data-i18n="headless.routeLimit">Mikrus musi mieć osiągalny punkt SSH. VPS pośredniczy w dostępie, nie dodaje VRAM ani nie przejmuje obliczeń GPU. Tunel nie udostępnia automatycznie API Ollama ani RDP — potrzebują osobnej konfiguracji i uprawnień. Stacja, VPS i tunel muszą działać; to nie jest zdalne włączanie wyłączonego komputera.</p>
+                                </section>
+                                <p data-i18n="headless.demoNote">To interaktywny opis, nie panel sterowania komputerem. Przyciski niczego nie uruchamiają na serwerze. Pokazane polecenia to własne skrypty tego homelabu, wymagające konfiguracji i uprawnień; nie są uniwersalnymi poleceniami Linuxa.</p>
+                                </div>
+                                <section class="lab-measurement" aria-labelledby="lab-vram-title">
+                                    <h6 id="lab-vram-title" data-i18n="headless.vramTitle">VRAM: moje odczyty headless i GUI</h6>
+                                    <div class="lab-mode-switch" id="labReadingSwitch" role="group" aria-label="Wybierz zapisany odczyt VRAM" data-i18n-attr="aria-label:headless.readingLabel" hidden>
+                                        <button class="button" type="button" data-lab-mode="headless" aria-pressed="true" aria-controls="labModeHeadless labModeGui labVramBreakdown" data-i18n="headless.headlessButton">Bez GUI</button>
+                                        <button class="button" type="button" data-lab-mode="gui" aria-pressed="false" aria-controls="labModeHeadless labModeGui labVramBreakdown" data-i18n="headless.guiButton">GUI na żądanie</button>
+                                    </div>
+                                    <p class="lab-vram-delta"><strong>189 MiB</strong><span data-i18n="headless.deltaCaption">mniej bez GUI w tej parze odczytów</span></p>
+                                    <p data-i18n="headless.sampleContext">Dwa odczyty właściciela z 08.11.2026 · RTX 3060 · Gemma 4 12B Q4_K_M · kontekst 65 536. W obu proces Ollama zajmuje 8858 MiB. To zapis pomiarów, nie monitoring na żywo ani pomiar jałowego systemu.</p>
+                                    <p id="labSnapshotMode" role="status" aria-live="polite" aria-atomic="true" data-i18n="headless.snapshotHeadless">Wybrany odczyt: bez GUI · 8899 MiB zajęte.</p>
+                                    <meter id="labVramMeter" min="0" max="12288" value="8899" aria-labelledby="lab-vram-title" aria-describedby="labSnapshotMode labVramBreakdown">8899 / 12288 MiB</meter>
+                                    <dl class="vram-readout" id="labVramBreakdown">
+                                        <div><dt data-i18n="headless.total">Zajęte łącznie</dt><dd id="labSnapshotTotal">8899 MiB</dd></div>
+                                        <div><dt data-i18n="headless.model">Proces Ollama</dt><dd>8858 MiB</dd></div>
+                                        <div><dt data-i18n="headless.other">Poza procesem Ollama</dt><dd id="labSnapshotOther">41 MiB</dd></div>
+                                        <div><dt data-i18n="headless.free">Wolne z 12288 MiB</dt><dd id="labSnapshotFree">3389 MiB</dd></div>
+                                    </dl>
+                                    <p data-i18n="headless.comparison">Bez GUI: 8899 MiB → z GUI: 9088 MiB. Headless zajmuje w tej parze o 189 MiB mniej, czyli około 2,08% odczytu z GUI. Wolna VRAM rośnie z 3200 do 3389 MiB. To konkretny przykład, nie stały zysk dla każdego Linuxa.</p>
+                                    <p data-i18n="headless.interpretation">GNOME Shell raportuje 167 MiB, Xwayland 2 MiB — razem 169 MiB. Całkowita różnica wynosi 189 MiB, więc lista procesów nie wyjaśnia pozostałych 20 MiB. Pamięć modelu pozostaje zajęta; GPU-Util 0% nie oznacza jej zwolnienia. Rozmiar z ollama ps i VRAM procesu w nvidia-smi to różne odczyty.</p>
+                                    <p data-i18n="headless.sampleLimit">Oba odczyty pokazują ten sam model, kontekst i pamięć procesu Ollama, ale nie są kontrolowanym benchmarkiem. Nie przenoszę tej różnicy na inne modele, aplikacje ani zużycie energii.</p>
+                                    <p data-i18n="headless.activeReading">Obciążenie a alokacja: inny odczyt podczas przetwarzania promptu pokazuje 8900 MiB VRAM, 91% GPU i 165 W. Pamięć niemal się nie zmieniła, choć karta pracuje. To chwilowa moc GPU, nie całego komputera; około 1200 tokenów/s w tym logu dotyczy promptu, nie generowania odpowiedzi.</p>
+                                    <p data-i18n="headless.generationReading">Osobny fragment generowania raportuje tg około 63–64 tokenów/s, 96% GPU i 167 W przy 8900 MiB VRAM. To obserwacja części jednego zadania, nie gwarantowane tempo odpowiedzi ani porównanie szybkości GUI i headless.</p>
+                                    <fieldset class="lab-vram-calculator" id="labVramCalculator" hidden>
+                                        <legend data-i18n="headless.calculator">Porównaj własne dwa odczyty</legend>
+                                        <p id="labVramHelp" data-i18n="headless.calculatorHint">Ten sam model, kontekst, załadowanie i brak zmiany obciążenia; zmieniaj tylko sesję graficzną. Pola są puste celowo. Obliczenia pozostają w przeglądarce i nie są zapisywane.</p>
+                                        <div class="lab-vram-fields">
+                                            <div><label for="labVramGui" data-i18n="headless.guiInput">Z GUI · zajęte MiB</label><input id="labVramGui" type="number" min="0" max="12288" step="1" inputmode="numeric" autocomplete="off" aria-describedby="labVramHelp labVramResult"></div>
+                                            <div><label for="labVramHeadless" data-i18n="headless.headlessInput">Bez GUI · zajęte MiB</label><input id="labVramHeadless" type="number" min="0" max="12288" step="1" inputmode="numeric" autocomplete="off" aria-describedby="labVramHelp labVramResult"></div>
+                                        </div>
+                                        <button class="button secondary" type="button" id="labUseSnapshot" data-i18n="headless.useSnapshot">Wstaw odczyty z tego przykładu</button>
+                                        <p id="labVramResult" role="status" aria-live="polite" aria-atomic="true" data-i18n="headless.empty">Wpisz dwa odczyty w MiB, aby obliczyć różnicę.</p>
+                                    </fieldset>
+                                    <ol>
+                                        <li data-i18n="headless.measure1">Zapisz pracę. Odczytaj zajętą VRAM przy uruchomionym GUI, notując model, kontekst i aktywne procesy.</li>
+                                        <li data-i18n="headless.measure2">Zakończ sesję graficzną w kontrolowanych warunkach, nie zmieniając stanu modelu. Wykonaj drugi odczyt po ustabilizowaniu obciążenia.</li>
+                                        <li data-i18n="headless.measure3">Porównaj oba wyniki i listy procesów. Inny model, jego przeładowanie, gra lub niezależny Xorg unieważniają proste przypisanie różnicy wyłącznie GUI.</li>
+                                    </ol>
+                                    <p><code>nvidia-smi</code> · <code>ollama ps</code></p>
+                                </section>
+                            </section>
                         </div>
                         <div class="case-panel" data-case-panel="flow">
                             <h4 data-i18n="explorer.flow">Jak to działa</h4>
@@ -2951,6 +3091,8 @@
             const projectFilterButtons = [...document.querySelectorAll("[data-project-filter]")];
             const projectSearchIndex = new Map();
             let selectedProjectFilter = "all";
+            let selectedLabMode = "headless";
+            const LAB_VRAM_SNAPSHOT = Object.freeze({ capacity: 12288, model: 8858, headless: 8899, gui: 9088 });
             const profilePhoto = document.getElementById("profilePhoto");
             const navLinks = [...document.querySelectorAll(".nav-links a[href^='#']")];
             const langButtons = [...document.querySelectorAll(".lang-button[data-lang]")];
@@ -3022,6 +3164,66 @@
 const translations = {
                 pl: {
                     skipLink: "Przejdź do treści",
+                    headless: {
+                        title: "Serwer na co dzień. Pulpit wtedy, gdy go potrzebuję.",
+                        intro: "Headless to tryb pracy, nie rezygnacja z GUI na zawsze. Usługi nie potrzebują otwartego pulpitu. W tym homelabie GNOME jest już zainstalowane i można je uruchomić przez SSH, mając działający dostęp i odpowiednie uprawnienia.",
+                        modeLabel: "Porównaj tryby homelabu",
+                        readingLabel: "Wybierz zapisany odczyt VRAM",
+                        modeHint: "Przeglądasz opis i zapisane odczyty. Nie przełączasz zdalnego komputera.",
+                        headlessButton: "Bez GUI",
+                        guiButton: "GUI na żądanie",
+                        headlessTitle: "Headless · zasoby dla usług",
+                        headless1: "SSH, terminal, skrypty i systemd wystarczają do administracji, logów, aktualizacji i uruchamiania zadań.",
+                        headless2: "Ollama udostępnia lokalne modele bez sesji GNOME. Home Assistant OS działa w osobnej maszynie KVM/libvirt, dopóki host jest włączony i nieuśpiony.",
+                        headless3: "Brak uruchomionego pulpitu i jego aplikacji ogranicza ich narzut RAM/VRAM. Nie oznacza wyłączenia GPU ani zwolnienia pamięci załadowanego modelu.",
+                        offWarning: "zamyka zarządzane sesje graficzne i ich aplikacje, także grę. Najpierw zapisuję pracę; niezapisane dane mogą przepaść.",
+                        guiTitle: "GUI · kiedy potrzebuję obrazu",
+                        gui1: "Zainstalowany pulpit można uruchomić na żądanie do pracy graficznej, przeglądarki czy zdalnego pulpitu. Headless nie wymaga reinstalacji systemu, aby wrócić do GUI.",
+                        gui2: "Steam Big Picture i przechwytywanie przez PipeWire są osobnym zastosowaniem sesji graficznej. Samo uruchomienie Steama w zwykłym SSH nie tworzy pulpitu.",
+                        gui3: "Pulpit, kompozytor i otwarte aplikacje ponownie zajmują zasoby. Oszczędność po ich zamknięciu zależy od rzeczywiście zakończonych procesów.",
+                        onNote: "uruchamia skonfigurowany pulpit, ale nie instaluje GUI, nie loguje automatycznie i nie uruchamia Steama.",
+                        steamNote: "to osobny, skonfigurowany dla tego homelabu start sesji i Steam Big Picture.",
+                        persistent: "Zmienia się sesja graficzna, nie cały serwer: SSH i niezależne usługi, takie jak Ollama, nie są zatrzymywane przez te polecenia. Zatrzymanie pulpitu nie oznacza zatrzymania maszyny Home Assistant.",
+                        webuiTitle: "Interfejs w przeglądarce, nie pulpit na serwerze",
+                        webuiFlow: "Przeglądarka na Macu → Open WebUI → skonfigurowane połączenie do Ollama w homelabie. To wariant warstwy interfejsu: model nadal pracuje lokalnie na GPU, a obsługa odbywa się przez stronę. Usługi webowe nie wymagają uruchomienia GNOME na stacji z modelem.",
+                        webuiFeatures: "Open WebUI dostarcza interfejs czatu, backend, konta, obsługę MFA, historię rozmów, Markdown i eksport. Moja rola to konfiguracja, połączenie usług i utrzymanie. Samo zainstalowanie interfejsu nie konfiguruje automatycznie tunelu ani zasad dostępu.",
+                        webuiCredit: "Autorzy komponentu: Open WebUI Inc., Timothy Jaeryang Baek i współtwórcy projektu. Nie napisałem tych elementów od zera. W repozytorium Banas Chat licencja MIT dotyczy własnych dodatków, nie zastępuje licencji Open WebUI ani nie nadaje autorstwa upstream.",
+                        routeTitle: "Mac → jumphost Mikrus → homelab",
+                        routeUsage: "Taką trasą korzystam ze środowiska pracy z OpenCode — to działający przykład zdalnej administracji i programowania. Ollama na stacji może obsługiwać wybrane lokalne modele; inni dostawcy skonfigurowani w OpenCode mogą być chmurowi.",
+                        routeMac: "Klient dostępu. Łączę się przez SSH do VPS Mikrus, zamiast otwierać bezpośredni dostęp do stacji z internetu.",
+                        routeVps: "Punkt pośredni, czyli jumphost. Zwrotny punkt tunelu administracyjnego nasłuchuje tylko lokalnie na VPS, a nie publicznie jako osobna usługa.",
+                        routeLab: "Usługa reverse SSH zestawia połączenie wychodzące ze stacji do Mikrusa. Tym połączeniem można wrócić do administracji homelabu z Maca przez jumphost.",
+                        routeDirection: "Kierunek zestawienia tunelu: homelab → Mikrus. Droga dostępu użytkownika: Mac → Mikrus → homelab. Nie wymaga to bezpośredniego przekierowania portu stacji na domowym routerze.",
+                        routeLimit: "Mikrus musi mieć osiągalny punkt SSH. VPS pośredniczy w dostępie, nie dodaje VRAM ani nie przejmuje obliczeń GPU. Tunel nie udostępnia automatycznie API Ollama ani RDP — potrzebują osobnej konfiguracji i uprawnień. Stacja, VPS i tunel muszą działać; to nie jest zdalne włączanie wyłączonego komputera.",
+                        demoNote: "To interaktywny opis, nie panel sterowania komputerem. Przyciski niczego nie uruchamiają na serwerze. Pokazane polecenia to własne skrypty tego homelabu, wymagające konfiguracji i uprawnień; nie są uniwersalnymi poleceniami Linuxa.",
+                        vramTitle: "VRAM: moje odczyty headless i GUI",
+                        deltaCaption: "mniej bez GUI w tej parze odczytów",
+                        sampleContext: "Dwa odczyty właściciela z 08.11.2026 · RTX 3060 · Gemma 4 12B Q4_K_M · kontekst 65 536. W obu proces Ollama zajmuje 8858 MiB. To zapis pomiarów, nie monitoring na żywo ani pomiar jałowego systemu.",
+                        snapshotHeadless: "Wybrany odczyt: bez GUI · 8899 MiB zajęte.",
+                        snapshotGui: "Wybrany odczyt: z GUI · 9088 MiB zajęte.",
+                        total: "Zajęte łącznie",
+                        model: "Proces Ollama",
+                        other: "Poza procesem Ollama",
+                        free: "Wolne z 12288 MiB",
+                        comparison: "Bez GUI: 8899 MiB → z GUI: 9088 MiB. Headless zajmuje w tej parze o 189 MiB mniej, czyli około 2,08% odczytu z GUI. Wolna VRAM rośnie z 3200 do 3389 MiB. To konkretny przykład, nie stały zysk dla każdego Linuxa.",
+                        interpretation: "GNOME Shell raportuje 167 MiB, Xwayland 2 MiB — razem 169 MiB. Całkowita różnica wynosi 189 MiB, więc lista procesów nie wyjaśnia pozostałych 20 MiB. Pamięć modelu pozostaje zajęta; GPU-Util 0% nie oznacza jej zwolnienia. Rozmiar z ollama ps i VRAM procesu w nvidia-smi to różne odczyty.",
+                        sampleLimit: "Oba odczyty pokazują ten sam model, kontekst i pamięć procesu Ollama, ale nie są kontrolowanym benchmarkiem. Nie przenoszę tej różnicy na inne modele, aplikacje ani zużycie energii.",
+                        activeReading: "Obciążenie a alokacja: inny odczyt podczas przetwarzania promptu pokazuje 8900 MiB VRAM, 91% GPU i 165 W. Pamięć niemal się nie zmieniła, choć karta pracuje. To chwilowa moc GPU, nie całego komputera; około 1200 tokenów/s w tym logu dotyczy promptu, nie generowania odpowiedzi.",
+                        generationReading: "Osobny fragment generowania raportuje tg około 63–64 tokenów/s, 96% GPU i 167 W przy 8900 MiB VRAM. To obserwacja części jednego zadania, nie gwarantowane tempo odpowiedzi ani porównanie szybkości GUI i headless.",
+                        calculator: "Porównaj własne dwa odczyty",
+                        calculatorHint: "Ten sam model, kontekst, załadowanie i brak zmiany obciążenia; zmieniaj tylko sesję graficzną. Pola są puste celowo. Obliczenia pozostają w przeglądarce i nie są zapisywane.",
+                        guiInput: "Z GUI · zajęte MiB",
+                        headlessInput: "Bez GUI · zajęte MiB",
+                        useSnapshot: "Wstaw odczyty z tego przykładu",
+                        empty: "Wpisz dwa odczyty w MiB, aby obliczyć różnicę.",
+                        invalid: "Dla tej karty podaj całkowite liczby od 0 do 12288 MiB w obu polach.",
+                        lower: "Według wpisanych danych: bez GUI o {delta} MiB mniej ({percent}% odczytu z GUI). To różnica dwóch odczytów, nie gwarantowana oszczędność.",
+                        equal: "Oba odczyty są takie same: różnica 0 MiB. Nie wykazano spadku VRAM.",
+                        higher: "Według wpisanych danych: bez GUI o {delta} MiB więcej. Sprawdź stan modeli i aplikacji; nie ma tu oszczędności VRAM.",
+                        measure1: "Zapisz pracę. Odczytaj zajętą VRAM przy uruchomionym GUI, notując model, kontekst i aktywne procesy.",
+                        measure2: "Zakończ sesję graficzną w kontrolowanych warunkach, nie zmieniając stanu modelu. Wykonaj drugi odczyt po ustabilizowaniu obciążenia.",
+                        measure3: "Porównaj oba wyniki i listy procesów. Inny model, jego przeładowanie, gra lub niezależny Xorg unieważniają proste przypisanie różnicy wyłącznie GUI."
+                    },
                     explorer: {
                         hint: "Zajrzyj pod maskę projektu albo wybierz technologię na karcie, aby znaleźć powiązane projekty.",
                         viewLabel: "Widok projektów",
@@ -3046,6 +3248,8 @@ const translations = {
                     cases: {
                         homelab: {
                             system: "System",
+                            cpu: "AMD Ryzen 5 5500 · 6 rdzeni / 12 wątków",
+                            ram: "30,7 GiB łącznie widoczne w systemie",
                             virtualization: "Wirtualizacja",
                             role: "Konfiguruję i dokumentuję środowisko, w którym jedna stacja obsługuje lokalną inferencję, maszynę wirtualną Home Assistant i zadania graficzne. Rozwijam narzędzia do zarządzania usługami i sesją, zamiast utrzymywać pulpit aktywny przez cały czas.",
                             step1: "Ubuntu i systemd → usługi oraz lokalna inferencja Ollama korzystająca z GPU NVIDIA.",
@@ -3307,7 +3511,7 @@ const translations = {
                     },
                     projects: {
                         homelabTitle: "Homelab · Linux, lokalne AI i automatyzacja",
-                        homelabSummary: "Moje laboratorium na Ubuntu: lokalne modele przez Ollama, Home Assistant OS w KVM/libvirt oraz pulpit i Steam uruchamiane na żądanie. Łączę zastosowania domowe z praktyką utrzymania usług i zarządzania zasobami GPU.",
+                        homelabSummary: "Lokalne AI na Ubuntu, dostępne z Maca również poza domem przez jumphost VPS Mikrus. Obok Ollama działają Home Assistant OS na KVM/libvirt oraz pulpit/Steam na żądanie — bez potrzeby stałego IP w domu, osobnego VPN i przekierowania portów na domowym routerze.",
                         homelabTagsAria: "Technologie homelabu",
                         details: "Szczegóły techniczne i ograniczenia",
                         cyclingSummary: "Jak analizować dane z treningów kolarskich? W mojej aplikacji pokazuję wyniki pracy magisterskiej, porównanie modeli i czytnik pracy.",
@@ -3410,6 +3614,66 @@ const translations = {
                 },
                 en: {
                     skipLink: "Skip to content",
+                    headless: {
+                        title: "A server every day. A desktop when I need it.",
+                        intro: "Headless is an operating mode, not giving up a GUI forever. Services do not need an open desktop. GNOME is already installed in this homelab and can be started over SSH, with working access and the necessary permissions.",
+                        modeLabel: "Compare homelab modes",
+                        readingLabel: "Select a recorded VRAM reading",
+                        modeHint: "Explore explanations and recorded readings. You are not switching a remote computer.",
+                        headlessButton: "Headless",
+                        guiButton: "On-demand GUI",
+                        headlessTitle: "Headless · resources for services",
+                        headless1: "SSH, a terminal, scripts and systemd handle administration, logs, updates and task execution.",
+                        headless2: "Ollama serves local models without a GNOME session. Home Assistant OS runs in a separate KVM/libvirt virtual machine while the host is powered on and awake.",
+                        headless3: "Not running the desktop and its applications reduces their RAM/VRAM overhead. It does not switch off the GPU or release the memory of a loaded model.",
+                        offWarning: "closes managed graphical sessions and their applications, including games. I save work first; unsaved data can be lost.",
+                        guiTitle: "GUI · when I need a display",
+                        gui1: "The installed desktop can be started on demand for graphical work, a browser or remote desktop. Returning from headless to a GUI does not require reinstalling the OS.",
+                        gui2: "Steam Big Picture and PipeWire capture are separate uses of the graphical session. Starting Steam in an ordinary SSH session does not create a desktop.",
+                        gui3: "The desktop, compositor and open applications consume resources again. The saving when closing them depends on which processes actually stop.",
+                        onNote: "starts the configured desktop, but does not install a GUI, sign in automatically or launch Steam.",
+                        steamNote: "is a separate, homelab-specific session and Steam Big Picture launcher.",
+                        persistent: "The graphical session changes, not the whole server: these commands do not stop SSH or independent services such as Ollama. Stopping the desktop does not mean stopping the Home Assistant virtual machine.",
+                        webuiTitle: "A browser interface, not a server desktop",
+                        webuiFlow: "Mac browser → Open WebUI → a configured connection to Ollama in the homelab. This is an interface-layer option: the model still runs locally on the GPU while interaction happens through a website. Web services do not require GNOME on the model workstation.",
+                        webuiFeatures: "Open WebUI provides the chat interface, backend, accounts, MFA support, conversation history, Markdown and exports. My role is configuration, service integration and maintenance. Installing the interface does not automatically configure the tunnel or access policies.",
+                        webuiCredit: "Component authors: Open WebUI Inc., Timothy Jaeryang Baek and the project's contributors. I did not develop these components from scratch. The Banas Chat repository's MIT license covers my additions; it does not replace the Open WebUI license or claim upstream authorship.",
+                        routeTitle: "Mac → Mikrus jumphost → homelab",
+                        routeUsage: "I use this route to access my OpenCode working environment, a working example of remote administration and development. Ollama on the workstation can serve selected local models; other providers configured in OpenCode may be cloud-based.",
+                        routeMac: "The access client. I connect over SSH to the Mikrus VPS rather than exposing the workstation directly to the internet.",
+                        routeVps: "The intermediary, or jumphost. The administrative reverse-tunnel endpoint listens only locally on the VPS, not publicly as a separate service.",
+                        routeLab: "A reverse SSH service establishes an outbound connection from the workstation to Mikrus. This connection provides a route back to homelab administration from the Mac through the jumphost.",
+                        routeDirection: "Tunnel establishment: homelab → Mikrus. User access path: Mac → Mikrus → homelab. This avoids directly forwarding a workstation port on the home router.",
+                        routeLimit: "Mikrus needs a reachable SSH endpoint. The VPS relays access; it does not add VRAM or take over GPU computation. The tunnel does not automatically expose the Ollama API or RDP; they need separate configuration and permissions. The workstation, VPS and tunnel must be running; this does not power on a switched-off computer.",
+                        demoNote: "This is an interactive explanation, not a computer control panel. Buttons do not run anything on the server. The commands shown are custom scripts requiring configuration and permissions, not universal Linux commands.",
+                        vramTitle: "VRAM: my headless and GUI readings",
+                        deltaCaption: "less without the GUI in this pair of readings",
+                        sampleContext: "Two owner-supplied readings from 8 Nov 2026 · RTX 3060 · Gemma 4 12B Q4_K_M · context 65,536. The Ollama process uses 8858 MiB in both. These are recorded measurements, not live monitoring or an idle-system reading.",
+                        snapshotHeadless: "Selected reading: headless · 8899 MiB used.",
+                        snapshotGui: "Selected reading: GUI · 9088 MiB used.",
+                        total: "Total used",
+                        model: "Ollama process",
+                        other: "Outside the Ollama process",
+                        free: "Free out of 12288 MiB",
+                        comparison: "Headless: 8899 MiB → GUI: 9088 MiB. Headless uses 189 MiB less in this pair, about 2.08% of the GUI reading. Free VRAM rises from 3200 to 3389 MiB. This is one example, not a fixed gain for every Linux system.",
+                        interpretation: "GNOME Shell reports 167 MiB and Xwayland 2 MiB, totaling 169 MiB. The total difference is 189 MiB, so the process list does not explain the remaining 20 MiB. Model memory remains allocated; 0% GPU utilization does not mean it was released. Size in ollama ps and process VRAM in nvidia-smi are different readings.",
+                        sampleLimit: "Both readings show the same model, context and Ollama process memory, but are not a controlled benchmark. I do not extrapolate the difference to other models, applications or energy use.",
+                        activeReading: "Workload versus allocation: another reading during prompt processing shows 8900 MiB VRAM, 91% GPU utilization and 165 W. Memory barely changed while the GPU was working. This is instantaneous GPU power, not whole-computer power; roughly 1200 tokens/s in that log refers to prompt processing, not answer generation.",
+                        generationReading: "A separate generation excerpt reports tg around 63–64 tokens/s, 96% GPU utilization and 167 W with 8900 MiB VRAM. This observes part of one task, not guaranteed response speed or a GUI versus headless speed comparison.",
+                        calculator: "Compare two readings of your own",
+                        calculatorHint: "Keep the same model, context, loaded state and workload; change only the graphical session. Fields are deliberately empty. Calculations stay in your browser and are not saved.",
+                        guiInput: "GUI · used MiB",
+                        headlessInput: "Headless · used MiB",
+                        useSnapshot: "Use the readings from this example",
+                        empty: "Enter two readings in MiB to calculate the difference.",
+                        invalid: "For this GPU, enter whole numbers from 0 to 12288 MiB in both fields.",
+                        lower: "From your inputs: headless uses {delta} MiB less ({percent}% of the GUI reading). This is a difference between two readings, not a guaranteed saving.",
+                        equal: "Both readings are identical: 0 MiB difference. No VRAM reduction was observed.",
+                        higher: "From your inputs: headless uses {delta} MiB more. Check models and applications; these readings show no VRAM saving.",
+                        measure1: "Save your work. Record used VRAM with the GUI running, noting the model, context and active processes.",
+                        measure2: "End the graphical session under controlled conditions without changing model state. Take a second reading once the workload stabilizes.",
+                        measure3: "Compare both readings and process lists. Another model, a model reload, a game or an independent Xorg prevents simply attributing the difference to the GUI alone."
+                    },
                     explorer: {
                         hint: "Look inside a project, or choose a technology on a card to find related work.",
                         viewLabel: "Project view",
@@ -3434,6 +3698,8 @@ const translations = {
                     cases: {
                         homelab: {
                             system: "System",
+                            cpu: "AMD Ryzen 5 5500 · 6 cores / 12 threads",
+                            ram: "30.7 GiB total reported by the OS",
                             virtualization: "Virtualization",
                             role: "I configure and document an environment where one workstation handles local inference, a Home Assistant virtual machine and graphical workloads. I develop service and session management tools rather than keeping the desktop active all the time.",
                             step1: "Ubuntu and systemd → services and local Ollama inference using an NVIDIA GPU.",
@@ -3695,7 +3961,7 @@ const translations = {
                     },
                     projects: {
                         homelabTitle: "Homelab · Linux, local AI & automation",
-                        homelabSummary: "My Ubuntu lab: local models through Ollama, Home Assistant OS in KVM/libvirt, and an on-demand desktop and Steam. I combine home use cases with service maintenance practice and GPU resource management.",
+                        homelabSummary: "Local AI on Ubuntu, accessible from a Mac outside the home through a Mikrus VPS jumphost. Alongside Ollama run Home Assistant OS on KVM/libvirt and an on-demand desktop/Steam, without a fixed home IP, a separate VPN or port forwarding on the home router.",
                         homelabTagsAria: "Homelab technologies",
                         details: "Technical details and limitations",
                         cyclingSummary: "How can cycling training data be analyzed? My application presents MSc thesis results, model comparisons and a thesis reader.",
@@ -4821,6 +5087,77 @@ const translations = {
                 return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ł/g, "l");
             }
 
+            function compareLabVram(guiText, headlessText, capacity = 12288) {
+                const texts = [guiText, headlessText].map((text) => String(text ?? "").trim());
+                if (texts.some((text) => text === "")) return { state: "empty" };
+                const [gui, headless] = texts.map(Number);
+                if (![gui, headless].every((value) => Number.isInteger(value) && value >= 0 && value <= capacity)) {
+                    return { state: "invalid" };
+                }
+                const difference = gui - headless;
+                if (difference === 0) return { state: "equal", delta: 0 };
+                if (difference < 0) return { state: "higher", delta: -difference };
+                return { state: "lower", delta: difference, percent: 100 * difference / gui };
+            }
+
+            function renderHomelabLab(lang = document.documentElement.lang || "pl") {
+                const meter = document.getElementById("labVramMeter");
+                if (!meter) return;
+                const used = LAB_VRAM_SNAPSHOT[selectedLabMode];
+                document.querySelectorAll("[data-lab-mode]").forEach((button) => {
+                    button.setAttribute("aria-pressed", String(button.dataset.labMode === selectedLabMode));
+                });
+                document.getElementById("labModeHeadless").hidden = selectedLabMode !== "headless";
+                document.getElementById("labModeGui").hidden = selectedLabMode !== "gui";
+                meter.value = used;
+                meter.textContent = `${used} / ${LAB_VRAM_SNAPSHOT.capacity} MiB`;
+                document.getElementById("labSnapshotTotal").textContent = `${used} MiB`;
+                document.getElementById("labSnapshotOther").textContent = `${used - LAB_VRAM_SNAPSHOT.model} MiB`;
+                document.getElementById("labSnapshotFree").textContent = `${LAB_VRAM_SNAPSHOT.capacity - used} MiB`;
+                const snapshotLabel = translations[lang].headless[
+                    selectedLabMode === "gui" ? "snapshotGui" : "snapshotHeadless"
+                ];
+                const snapshotStatus = document.getElementById("labSnapshotMode");
+                if (snapshotStatus.textContent !== snapshotLabel) snapshotStatus.textContent = snapshotLabel;
+
+                const gui = document.getElementById("labVramGui");
+                const headless = document.getElementById("labVramHeadless");
+                const result = [gui, headless].some((input) => input.validity.badInput)
+                    ? { state: "invalid" } : compareLabVram(gui.value, headless.value, LAB_VRAM_SNAPSHOT.capacity);
+                [gui, headless].forEach((input) => {
+                    input.setAttribute("aria-invalid", String(!input.validity.valid));
+                });
+                const format = new Intl.NumberFormat(lang === "pl" ? "pl-PL" : "en-GB", { maximumFractionDigits: 2 });
+                const message = interpolate(translations[lang].headless[result.state], {
+                    delta: format.format(result.delta ?? 0), percent: format.format(result.percent ?? 0)
+                });
+                const output = document.getElementById("labVramResult");
+                if (output.textContent !== message) output.textContent = message;
+            }
+
+            function setupHomelabLab() {
+                const controls = document.getElementById("labModeSwitch");
+                if (!controls) return;
+                document.querySelectorAll("[data-lab-mode]").forEach((button) => {
+                    button.addEventListener("click", () => {
+                        selectedLabMode = button.dataset.labMode === "gui" ? "gui" : "headless";
+                        renderHomelabLab();
+                    });
+                });
+                ["labVramGui", "labVramHeadless"].forEach((id) => {
+                    document.getElementById(id).addEventListener("input", () => renderHomelabLab());
+                });
+                document.getElementById("labUseSnapshot").addEventListener("click", () => {
+                    document.getElementById("labVramGui").value = String(LAB_VRAM_SNAPSHOT.gui);
+                    document.getElementById("labVramHeadless").value = String(LAB_VRAM_SNAPSHOT.headless);
+                    renderHomelabLab();
+                });
+                controls.hidden = false;
+                document.getElementById("labReadingSwitch").hidden = false;
+                document.getElementById("labVramCalculator").hidden = false;
+                renderHomelabLab();
+            }
+
             function setupProjectExplorer() {
                 const section = document.getElementById("projects");
                 const viewButtons = [...section.querySelectorAll("[data-project-view]")];
@@ -4967,6 +5304,7 @@ const translations = {
                 });
 
                 updateMenuButtonLabel(selected);
+                renderHomelabLab(selected);
                 applyProjectFilters(selected);
                 renderWeather(selected);
                 renderPrecipitation(selected);
@@ -5017,6 +5355,7 @@ const translations = {
                 renderWeatherHistory();
             }
 
+            setupHomelabLab();
             setupProjectExplorer();
             projectSearch?.addEventListener("input", () => applyProjectFilters());
             projectFilterButtons.forEach((button) => {

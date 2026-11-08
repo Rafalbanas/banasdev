@@ -20,6 +20,89 @@ class QuietHandler(SimpleHTTPRequestHandler):
         pass
 
 
+def check_headless_lab(page):
+    study = page.locator('[data-case-study="homelab"]')
+    expect(page.locator('[data-project-id="homelab"] .lab-specs')).to_contain_text("Ryzen 5 5500")
+    expect(page.locator('[data-project-id="homelab"] .lab-specs')).to_contain_text("30,7 GiB")
+    study.locator("summary").click()
+    study.get_by_role("tab").first.click()
+    controls = page.locator("#labModeSwitch")
+    expect(controls).to_be_visible()
+    expect(page.locator("#lab-route-title")).to_have_text("Mac → jumphost Mikrus → homelab")
+    gui_button = controls.locator('[data-lab-mode="gui"]')
+    headless_button = controls.locator('[data-lab-mode="headless"]')
+    expect(page.locator("#labModeHeadless")).to_be_visible()
+    expect(page.locator("#labModeGui")).to_be_hidden()
+    expect(page.locator("#labVramMeter")).to_have_attribute("value", "8899")
+    gui_button.focus()
+    page.keyboard.press("Enter")
+    expect(gui_button).to_be_focused()
+    expect(gui_button).to_have_attribute("aria-pressed", "true")
+    expect(page.locator("#labModeGui")).to_be_visible()
+    expect(page.locator("#labModeHeadless")).to_be_hidden()
+    expect(page.locator("#labVramMeter")).to_have_attribute("value", "9088")
+    expect(page.locator("#labSnapshotOther")).to_have_text("230 MiB")
+    expect(page.locator("#labSnapshotFree")).to_have_text("3200 MiB")
+    page.locator('#labReadingSwitch [data-lab-mode="headless"]').click()
+    expect(headless_button).to_have_attribute("aria-pressed", "true")
+    expect(gui_button).to_have_attribute("aria-pressed", "false")
+    expect(page.locator("#labVramMeter")).to_have_attribute("value", "8899")
+    page.locator('#labReadingSwitch [data-lab-mode="gui"]').click()
+    expect(gui_button).to_have_attribute("aria-pressed", "true")
+
+    gui = page.locator("#labVramGui")
+    headless = page.locator("#labVramHeadless")
+    result = page.locator("#labVramResult")
+    expect(gui).to_have_value("")
+    expect(headless).to_have_value("")
+    page.locator("#labUseSnapshot").click()
+    expect(result).to_contain_text("189 MiB")
+    expect(result).to_contain_text("2,08%")
+    page.locator('[data-lang="en"]').click()
+    expect(page.locator("#lab-route-title")).to_have_text("Mac → Mikrus jumphost → homelab")
+    expect(page.locator('[data-project-id="homelab"] .lab-specs')).to_contain_text("6 cores / 12 threads")
+    expect(page.locator('[data-project-id="homelab"] .lab-specs')).to_contain_text("30.7 GiB")
+    expect(gui_button).to_have_attribute("aria-pressed", "true")
+    expect(page.locator("#labSnapshotMode")).to_contain_text("GUI · 9088")
+    expect(gui).to_have_value("9088")
+    expect(headless).to_have_value("8899")
+    expect(result).to_contain_text("2.08%")
+    gui.fill("0")
+    headless.fill("0")
+    expect(result).to_contain_text("0 MiB difference")
+    headless.fill("1")
+    expect(result).to_contain_text("1 MiB more")
+    for invalid in ("-1", "12289", "8899.5"):
+        gui.fill(invalid)
+        expect(result).to_contain_text("whole numbers")
+        expect(gui).to_have_attribute("aria-invalid", "true")
+    gui.fill("")
+    expect(result).to_contain_text("Enter two readings")
+    gui.fill("12288")
+    headless.fill("0")
+    expect(result).to_contain_text("100%")
+    expect(gui).to_have_attribute("aria-invalid", "false")
+
+    # Both simulated modes remain usable on a phone and in either theme.
+    for width in (320, 360, 768, 1440):
+        page.set_viewport_size({"width": width, "height": 900})
+        for light in (True, False):
+            if page.locator("body").evaluate("e => e.classList.contains('light')") != light:
+                page.locator("#themeToggle").click()
+            for button, used, free in ((headless_button, "8899", "3389"), (gui_button, "9088", "3200")):
+                button.click()
+                expect(page.locator("#labVramMeter")).to_have_attribute("value", used)
+                expect(page.locator("#labSnapshotFree")).to_have_text(free + " MiB")
+                assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), (width, light)
+    headless_button.click()
+    expect(page.locator("#labSnapshotOther")).to_have_text("41 MiB")
+    gui.fill("")
+    headless.fill("")
+    page.locator('[data-lang="pl"]').click()
+    expect(result).to_contain_text("Wpisz dwa odczyty")
+    study.locator("summary").click()
+
+
 def check():
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(ROOT)))
     worker = Thread(target=server.serve_forever, daemon=True)
@@ -71,6 +154,8 @@ def check():
                     page.locator('[data-lang="pl"]').click()
                     study.locator("summary").click()
 
+                check_headless_lab(page)
+
                 # Search includes the study content, including both languages.
                 search = page.locator("#projectSearch")
                 visible = page.locator("#projects .project-card:visible")
@@ -119,7 +204,7 @@ def check():
                                 study = page.locator('[data-case-study="homelab"]')
                                 study.locator("summary").click()
                                 study.get_by_role("tab").nth(1).click()
-                                expect(study.locator(".case-flow")).to_be_visible()
+                                expect(study.locator('[data-case-panel="flow"] .case-flow')).to_be_visible()
                                 assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
                                 study.locator("summary").click()
                 page.close()
@@ -135,6 +220,12 @@ def check():
                     study.locator("summary").click()
                     expect(study.locator(".case-panel:visible")).to_have_count(3)
                 homelab = page.locator('[data-project-id="homelab"]')
+                expect(page.locator("#labModeHeadless")).to_be_visible()
+                expect(page.locator("#labModeGui")).to_be_visible()
+                expect(page.locator("#labModeSwitch")).to_be_hidden()
+                expect(page.locator("#labReadingSwitch")).to_be_hidden()
+                expect(page.locator("#labVramCalculator")).to_be_hidden()
+                assert "9088 MiB" in homelab.inner_text() and "189 MiB" in homelab.inner_text()
                 expect(homelab.locator("a")).to_have_count(0)
                 assert "KVM / libvirt" in homelab.inner_text()
                 assert page.locator("[data-email-text]").first.inner_text() == "contact [at] banas [dot] dev"
@@ -142,7 +233,7 @@ def check():
                 assert not errors, errors
                 assert not external, external
                 assert not violations, violations
-                print("Project explorer OK: 9 studies, keyboard tabs, filters/tags, PL/EN, 4 widths, 2 themes, cards/list, no JS, privacy, no external requests")
+                print("Project explorer OK: 9 studies, keyboard tabs, headless/GUI readings, VRAM calculator, filters/tags, PL/EN, 4 widths, 2 themes, cards/list, no JS, privacy, no external requests")
             finally:
                 browser.close()
     finally:
