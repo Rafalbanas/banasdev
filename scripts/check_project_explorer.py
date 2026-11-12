@@ -20,6 +20,45 @@ class QuietHandler(SimpleHTTPRequestHandler):
         pass
 
 
+def check_model_profiles(page):
+    controls = page.locator("#labModelSwitch")
+    expect(controls).to_be_visible()
+    expect(page.locator("#labModels [data-lab-model-panel]:visible")).to_have_count(1)
+    expect(page.locator("#labModelGemma")).to_be_visible()
+    expect(page.locator("#labModelGemma .lab-model-facts")).to_contain_text("47 392")
+    expect(page.locator("#labModelGemma .lab-model-evidence")).to_contain_text("09.11.2026")
+    qwen = controls.locator('[data-lab-model="qwen"]')
+    qwen.focus()
+    page.keyboard.press("Enter")
+    expect(qwen).to_be_focused()
+    expect(qwen).to_have_attribute("aria-pressed", "true")
+    expect(page.locator("#labModelGemma")).to_be_hidden()
+    expect(page.locator("#labModelQwen")).to_be_visible()
+    expect(page.locator("#labModelQwen .lab-model-evidence")).to_contain_text("26.10.2026")
+    page.locator('[data-lang="en"]').click()
+    expect(qwen).to_have_attribute("aria-pressed", "true")
+    expect(page.locator("#labModelQwen .lab-model-evidence")).to_contain_text("not proof of being loaded today")
+    controls.locator('[data-lab-model="gptoss"]').click()
+    expect(page.locator("#labModelGptoss")).to_contain_text("12.1 GiB")
+    expect(page.locator("#labModelGptoss")).to_contain_text("RAM/CPU offload")
+
+    for width in (320, 360, 768, 1440):
+        page.set_viewport_size({"width": width, "height": 900})
+        for lang in ("pl", "en"):
+            page.locator(f'[data-lang="{lang}"]').click()
+            for profile in ("gemma", "qwen", "gptoss"):
+                controls.locator(f'[data-lab-model="{profile}"]').click()
+                expect(page.locator(f'[data-lab-model-panel="{profile}"]')).to_be_visible()
+                expect(page.locator("#labModels [data-lab-model-panel]:visible")).to_have_count(1)
+                assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), (width, lang, profile)
+    page.locator("#projectSearch").fill("gpt-oss:20b")
+    expect(page.locator("#projects .project-card:visible")).to_have_count(1)
+    expect(page.locator("#projects .project-card:visible")).to_have_attribute("data-project-id", "homelab")
+    page.locator("#projectReset").click()
+    controls.locator('[data-lab-model="gemma"]').click()
+    page.locator('[data-lang="pl"]').click()
+
+
 def check_headless_lab(page):
     study = page.locator('[data-case-study="homelab"]')
     expect(page.locator('[data-project-id="homelab"] .lab-specs')).to_contain_text("Ryzen 5 5500")
@@ -111,17 +150,23 @@ def check():
     errors, external, violations = [], [], []
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch()
+            # Software rendering keeps this optional check independent of a busy GPU.
+            browser = p.chromium.launch(timeout=60000, args=["--disable-gpu"])
             try:
                 page = browser.new_page(reduced_motion="reduce")
+                page.set_default_timeout(15000)
+                expect.set_options(timeout=15000)
                 page.on("pageerror", lambda error: errors.append(str(error)))
                 page.on("request", lambda request: external.append(request.url)
                         if not request.url.startswith(url + "/") else None)
                 page.on("console", lambda message: violations.append(message.text)
                         if "Content Security Policy" in message.text else None)
                 page.goto(url, wait_until="networkidle")
+                # A loaded shared runner can render static HTML before JS initialization.
+                expect(page.locator("#projectTools")).to_be_visible(timeout=30000)
                 expect(page.locator("#projects .project-card")).to_have_count(9)
                 expect(page.locator("#projectResults")).to_have_text("Projekty: 9 z 9")
+                check_model_profiles(page)
 
                 # All nine studies use the same accessible, keyboard-operated model.
                 for project in PROJECTS:
@@ -225,6 +270,8 @@ def check():
                 expect(page.locator("#labModeSwitch")).to_be_hidden()
                 expect(page.locator("#labReadingSwitch")).to_be_hidden()
                 expect(page.locator("#labVramCalculator")).to_be_hidden()
+                expect(page.locator("#labModelSwitch")).to_be_hidden()
+                expect(homelab.locator("[data-lab-model-panel]:visible")).to_have_count(3)
                 assert "9088 MiB" in homelab.inner_text() and "189 MiB" in homelab.inner_text()
                 expect(homelab.locator("a")).to_have_count(0)
                 assert "KVM / libvirt" in homelab.inner_text()

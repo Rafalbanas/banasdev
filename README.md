@@ -33,6 +33,22 @@ kompletność tłumaczeń PL/EN, aktualny profil i linki projektowe.
 
 ## Nowe funkcje
 
+### Odświeżenie wizualne
+
+Układ inspirowany redakcyjnym rytmem `wkportfolio`: większa typografia,
+numerowane sekcje, więcej przestrzeni i spokojniejsze powierzchnie. Zachowano
+ciemny motyw z zielonym akcentem, techniczny charakter, treści PL/EN i wszystkie
+interakcje. Jasny motyw korzysta z cieplejszego, papierowego tła.
+Zmiana nie wymaga dodatkowych bibliotek, fontów ani zewnętrznych zasobów.
+
+Test układu w obu językach i motywach (Playwright + Chromium):
+
+```bash
+python3 scripts/check_visual_layout.py
+# Opcjonalnie zapisz zrzuty desktop/mobile poza paczką wdrożeniową:
+python3 scripts/check_visual_layout.py --screenshots /tmp/opencode/banasdev-layout
+```
+
 **Przycisk "Powrót na górę"**
 Dodano przycisk „Powrót na górę” (Back to Top), który pojawia się podczas przewijania jednego ekranu, obsługuje PL/EN, klawiaturę, preferencję ograniczenia animacji, bez JS ukryty.
 
@@ -77,7 +93,7 @@ kilka wartości rozdzielonych spacją). Wyszukiwanie obejmuje tytuł, opis i tag
 w obu językach, nie rozróżnia wielkości liter ani polskich znaków. Zapytanie
 nie trafia na serwer ani do localStorage. Bez JavaScript wszystkie karty
 pozostają widoczne. Teksty interfejsu są w `translations.pl/en` w grupach
-`projects`, `explorer`, `cases` i `headless`.
+`projects`, `explorer`, `cases`, `headless` i `models`.
 
 Każda z dziewięciu kart ma rozwijane case study: cel i wkład, przepływ oraz
 weryfikację i ograniczenia. JavaScript dodaje zakładki obsługiwane strzałkami,
@@ -109,6 +125,15 @@ panel dostępu ani informacja o bieżącym stanie tunelu.
 Właściciel potwierdził korzystanie z tej trasy podczas pracy z OpenCode.
 Open WebUI opisano jako gotową warstwę interfejsu do modeli, z zachowaniem
 autorstwa i licencji upstream; nie jest to autorski silnik czatu.
+
+Selektor modeli rozdziela potwierdzone uruchomienie Gemma 4 12B (logi
+właściciela z 09.11.2026) oraz profile Qwen i GPT-OSS ze starszej inwentaryzacji
+26.10.2026. Nie uruchamia ani nie pobiera modeli. Bez JS wszystkie trzy opisy
+są dostępne, a kontrolki są ukryte. Model, kontekst i plik nie oznaczają
+jednakowego zużycia VRAM; opis wyjaśnia kwantyzację i możliwy offload.
+Codzienny tryb headless nie jest deklaracją zmiany domyślnego celu startowego
+systemu. Zmienny domowy IP nie wymaga wpisywania nowego adresu po stronie Maca,
+ale aktywny tunel może wymagać ponownego zestawienia po zmianie adresu.
 
 Opcjonalne sprawdzenie interakcji (wymaga Playwright i Chromium):
 

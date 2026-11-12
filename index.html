@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-wrRY6iqijv/iOAN6uBJ2HEPJMWaNueUKC0c88iYhsKI='; script-src-attr 'none'; style-src 'self' 'sha256-SSTIiphw7cudc1UrIR4vopMNGeXNaHnHrXOAO7WhnFA='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cix/0LmncDSxiveuYC1L8+nMvdsmJuHYhpj6WUc65wU=' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-92POHWL+dk/LdvS89R3pLkLimaauZ2nKMUYvHoVvCWQ='; script-src-attr 'none'; style-src 'self' 'sha256-CGS3sVlcM8ckISk286ql+/xe47K55E9BZUjFOIgYrrE='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rafał Banaś | Technical Support Engineer · Python & AI</title>
@@ -26,30 +26,37 @@
     <meta name="twitter:description" content="Technical Support Engineer Tier 2, magister informatyki, projekty Python, AI i automatyzacja.">
     <meta name="twitter:image" content="https://banas.dev/cv_photo.webp">
 
+    <script data-cfasync="false" id="themeBootstrap">
+        (() => {
+            try {
+                document.documentElement.classList.toggle("light", localStorage.getItem("banas_theme") === "light");
+            } catch { /* Default dark theme when storage is unavailable. */ }
+        })();
+    </script>
     <style>
         :root {
             color-scheme: dark;
             --bg: #101416;
             --bg-soft: #161c1f;
-            --surface: rgba(26, 33, 36, 0.88);
+            --surface: #191f21;
             --surface-strong: #20292d;
             --text: #f0f3ee;
             --muted: #adb9b8;
-            --line: rgba(148, 163, 184, 0.22);
+            --line: rgba(173, 185, 184, 0.19);
             --accent: #bcf280;
             --accent-2: #22c55e;
             --accent-3: #f59e0b;
             --code: #a7f3d0;
             --danger: #fb7185;
             --shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
-            --radius: 16px;
-            --max: 1160px;
+            --radius: 10px;
+            --max: 1240px;
         }
 
-        body.light {
+        html.light {
             color-scheme: light;
-            --bg: #f6f7f9;
-            --bg-soft: #ffffff;
+            --bg: #f5f5ef;
+            --bg-soft: #eeeee7;
             --surface: rgba(255, 255, 255, 0.9);
             --surface-strong: #ffffff;
             --text: #172033;
@@ -79,9 +86,7 @@
             position: relative;
             margin: 0;
             min-height: 100vh;
-            background:
-                radial-gradient(ellipse at 80% 0%, rgba(151, 193, 112, 0.09), transparent 32%),
-                linear-gradient(135deg, var(--bg), var(--bg-soft));
+            background: var(--bg);
             color: var(--text);
             font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             line-height: 1.65;
@@ -96,8 +101,8 @@
             background-image:
                 linear-gradient(rgba(148, 163, 184, 0.055) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px);
-            background-size: 42px 42px;
-            mask-image: linear-gradient(to bottom, black, transparent 78%);
+            background-size: 80px 80px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), transparent 850px);
         }
 
         body.js-ready .reveal {
@@ -134,7 +139,7 @@
         }
 
         .page {
-            width: min(100% - 32px, var(--max));
+            width: min(100% - 64px, var(--max));
             margin: 0 auto;
         }
 
@@ -168,8 +173,8 @@
         }
 
         .nav {
-            width: min(100% - 32px, var(--max));
-            min-height: 68px;
+            width: min(100% - 64px, var(--max));
+            min-height: 76px;
             margin: 0 auto;
             display: flex;
             align-items: center;
@@ -192,11 +197,11 @@
             display: grid;
             place-items: center;
             border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: var(--surface);
-            color: var(--accent);
+            border-radius: 4px;
+            background: var(--accent);
+            color: var(--bg);
             font-size: 0.85rem;
-            box-shadow: inset 0 0 18px color-mix(in srgb, var(--accent) 14%, transparent);
+            box-shadow: none;
         }
 
         .nav-links {
@@ -347,12 +352,12 @@
             --hero-glow-x: 50%;
             --hero-glow-y: 42%;
             position: relative;
-            min-height: min(800px, calc(100svh - 68px));
+            min-height: min(900px, calc(100svh - 76px));
             display: grid;
-            grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+            grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.85fr);
             align-items: center;
-            gap: 64px;
-            padding: 80px 0 64px;
+            gap: clamp(32px, 5vw, 80px);
+            padding: 88px 0 80px;
         }
 
         .hero::before {
@@ -362,7 +367,7 @@
             width: min(440px, 58vw);
             aspect-ratio: 1;
             border-radius: 50%;
-            background: radial-gradient(circle at var(--hero-glow-x) var(--hero-glow-y), rgba(56, 189, 248, 0.20), rgba(34, 197, 94, 0.08) 34%, transparent 68%);
+            background: radial-gradient(circle at var(--hero-glow-x) var(--hero-glow-y), rgba(188, 242, 128, 0.10), transparent 68%);
             filter: blur(18px);
             opacity: 0.86;
             pointer-events: none;
@@ -399,17 +404,18 @@
         }
 
         h1 {
-            margin: 22px 0 18px;
-            font-size: clamp(2.8rem, 7vw, 6.2rem);
-            line-height: 0.98;
-            letter-spacing: -0.055em;
+            margin: 28px 0 24px;
+            font-size: clamp(3.6rem, 8.4vw, 7.3rem);
+            line-height: 0.94;
+            letter-spacing: -0.07em;
+            font-weight: 800;
         }
 
         .hero-role {
             margin-bottom: 24px;
             max-width: 20ch;
             color: var(--accent);
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-size: clamp(1.5rem, 2.8vw, 2.25rem);
             line-height: 1.18;
             letter-spacing: -0.035em;
             font-weight: 650;
@@ -493,8 +499,8 @@
             border: 1px solid var(--line);
             border-radius: var(--radius);
             background: var(--surface);
-            box-shadow: var(--shadow);
-            padding: 14px;
+            box-shadow: none;
+            padding: 18px;
             overflow: hidden;
             min-width: 0;
         }
@@ -506,9 +512,8 @@
             content: "";
             position: absolute;
             inset: 0 0 auto 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 68%, transparent), color-mix(in srgb, var(--accent-2) 42%, transparent), transparent);
-            opacity: 0.75;
+            height: 0;
+            background: var(--accent);
         }
 
         .profile-photo {
@@ -518,31 +523,6 @@
             object-position: center 28%;
             border-radius: var(--radius);
             border: 1px solid var(--line);
-            cursor: pointer;
-            transition: opacity 180ms ease, transform 180ms ease;
-        }
-
-        .profile-photo:hover {
-            transform: translateY(-2px);
-        }
-
-        .photo-switch {
-            display: block;
-            width: 100%;
-            padding: 0;
-            border: 0;
-            border-radius: var(--radius);
-            background: transparent;
-            color: var(--muted);
-            font: inherit;
-            cursor: pointer;
-            text-align: left;
-        }
-
-        .photo-hint {
-            display: block;
-            padding: 8px 2px 0;
-            font-size: 0.75rem;
         }
 
         .profile-meta {
@@ -560,7 +540,7 @@
             font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
         }
 
-        body.light .lab-terminal {
+        html.light .lab-terminal {
             background: var(--bg-soft);
         }
 
@@ -623,7 +603,7 @@
         }
 
         .section {
-            padding: 76px 0;
+            padding: 100px 0;
             border-top: 1px solid var(--line);
         }
 
@@ -632,7 +612,7 @@
             grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr);
             gap: 32px;
             align-items: start;
-            margin-bottom: 28px;
+            margin-bottom: 40px;
         }
 
         .section-kicker {
@@ -645,9 +625,9 @@
 
         h2 {
             margin-bottom: 10px;
-            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-size: clamp(2rem, 4.6vw, 3.65rem);
             line-height: 1.08;
-            letter-spacing: -0.035em;
+            letter-spacing: -0.05em;
         }
 
         .section-lead {
@@ -681,9 +661,9 @@
         }
 
         .card:hover {
-            transform: translateY(-2px);
+            transform: none;
             border-color: color-mix(in srgb, var(--accent) 48%, var(--line));
-            background: color-mix(in srgb, var(--surface) 82%, rgba(56, 189, 248, 0.08));
+            background: color-mix(in srgb, var(--surface) 94%, var(--accent));
         }
 
         .card h3 {
@@ -703,7 +683,7 @@
             border: 1px solid var(--line);
             border-radius: var(--radius);
             background: var(--surface);
-            box-shadow: var(--shadow);
+            box-shadow: none;
             padding: 22px;
         }
 
@@ -1389,6 +1369,20 @@
         .lab-specs div { padding: 12px; border: 1px solid var(--line); border-radius: 10px; }
         .lab-specs dt { color: var(--muted); font-size: 0.75rem; }
         .lab-specs dd { margin: 4px 0 0; font-weight: 750; font-size: 0.88rem; overflow-wrap: anywhere; }
+        .lab-models { margin: 24px 0 0; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-soft); }
+        .lab-models h4 { margin: 0 0 12px; font-size: 1.15rem; }
+        .lab-models h5 { margin: 10px 0 12px; font-size: 1.05rem; overflow-wrap: anywhere; }
+        .lab-models p { max-width: 85ch; color: var(--muted); font-size: 0.9rem; }
+        .lab-model-panel { padding: 16px 0 0; border-top: 1px solid var(--line); }
+        .lab-model-panel code { color: var(--code); overflow-wrap: anywhere; }
+        .lab-model-evidence { color: var(--accent) !important; font-size: 0.8rem !important; font-weight: 750; }
+        .lab-model-panel[data-evidence="inventory"] .lab-model-evidence { color: var(--muted) !important; }
+        .lab-model-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 20px 0; }
+        .lab-model-facts dt { font-size: 0.78rem; color: var(--muted); }
+        .lab-model-facts dd { margin: 6px 0 0; font-weight: 750; overflow-wrap: anywhere; }
+        @media (max-width: 768px) {
+            .lab-model-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
         .headless-lab {
             display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
             gap: 20px; margin-top: 22px; border-top: 1px solid var(--line); padding-top: 22px;
@@ -2025,8 +2019,7 @@
             .icon-button:hover,
             .button:hover,
             .card:hover,
-            .timeline-item:hover,
-            .profile-photo:hover {
+            .timeline-item:hover {
                 transform: none;
             }
 
@@ -2102,6 +2095,123 @@
     outline-offset: 4px;
 }
 
+        /* Editorial rhythm, with the original engineering-lab palette. */
+        ::selection { background: var(--accent); color: var(--bg); }
+
+        .nav-links a {
+            border-color: transparent;
+            background: transparent;
+            border-radius: 4px;
+            padding-inline: 10px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.is-active {
+            background: color-mix(in srgb, var(--accent) 9%, var(--bg));
+            color: var(--accent);
+            border-color: transparent;
+        }
+
+        .hero-actions .button { padding: 12px 18px; }
+        .hero-actions .primary::after { content: "↗"; margin-left: 12px; }
+        .hero-actions a[target="_blank"] {
+            border-color: transparent;
+            padding-inline: 8px;
+            color: var(--muted);
+            text-decoration: underline;
+            text-underline-offset: 5px;
+        }
+
+        .hero-tags .tag {
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            padding: 0 12px 0 0;
+            min-height: 24px;
+            font-size: 0.78rem;
+            font-weight: 500;
+        }
+
+        .lab-chip {
+            border: 0;
+            background: transparent;
+            padding: 0;
+        }
+        .lab-chip + .lab-chip::before {
+            content: "/";
+            margin-right: 8px;
+            color: var(--muted);
+        }
+
+        main { counter-reset: chapter; }
+        .section { counter-increment: chapter; }
+        .section-kicker {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-weight: 500;
+        }
+        .section-kicker::before {
+            content: counter(chapter, decimal-leading-zero);
+            color: var(--muted);
+            font-size: 0.75rem;
+        }
+
+        #about .card {
+            border-width: 1px 0 0;
+            border-radius: 0;
+            background: transparent;
+            padding: 28px 24px 0 0;
+        }
+        #about .card h3 { font-size: 1.25rem; margin-bottom: 14px; }
+
+        .project-card { padding: 32px; }
+        .project-number {
+            font-family: inherit;
+            font-size: 3.5rem;
+            letter-spacing: -0.07em;
+            line-height: 1;
+            font-weight: 500;
+            margin-bottom: 28px;
+        }
+        .project-card h3 {
+            font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+            letter-spacing: -0.04em;
+            margin-bottom: 16px;
+        }
+        .project-card > p { line-height: 1.75; }
+        .project-card[data-project-id="cycling"],
+        .project-card[data-project-id="resume"] {
+            background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+        }
+        #projects[data-view="list"] .project-number { font-size: 1.5rem; margin-bottom: 12px; }
+
+        @media (min-width: 981px) {
+            .profile-panel { margin-top: 16px; }
+            .section-lead { max-width: 62ch; }
+        }
+
+        @media (max-width: 980px) {
+            .hero { padding-top: 56px; }
+            .profile-panel { width: 100%; }
+            .section { padding-block: 64px; }
+        }
+
+        @media (max-width: 620px) {
+            .page, .nav { width: min(100% - 40px, var(--max)); }
+            .hero { padding-block: 40px; }
+            h1 { font-size: clamp(2.75rem, 14.5vw, 5rem); letter-spacing: -0.065em; }
+            .hero-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .hero-actions .button { padding-inline: 10px; font-size: 0.85rem; }
+            .hero-actions .primary::after { margin-left: 0; }
+            .hero-facts { gap: 12px; }
+            .hero-facts strong { font-size: 1rem; }
+            .hero-facts span { font-size: 0.74rem; }
+            .section-heading { gap: 20px; margin-bottom: 28px; }
+            .project-card { padding: 24px; }
+            .project-number { font-size: 2.75rem; margin-bottom: 20px; }
+        }
 </style>
 </head>
 <body>
@@ -2174,10 +2284,7 @@
             </div>
 
             <aside class="profile-panel" aria-label="Profil" data-i18n-attr="aria-label:profile.aria">
-                <button class="photo-switch" id="photoSwitch" type="button" aria-label="Zmień zdjęcie profilowe" data-i18n-attr="aria-label:profile.changePhoto">
-                    <img src="cv_photo.webp" alt="Rafał Banaś" class="profile-photo" id="profilePhoto" fetchpriority="high" width="400" height="300">
-                    <span class="photo-hint" data-i18n="profile.photoHint">Dwie strony tej samej osoby ↗ Zmień zdjęcie</span>
-                </button>
+                <img src="cv_photo.webp?v=20261111" alt="Rafał Banaś" class="profile-photo" id="profilePhoto" fetchpriority="high" width="1125" height="842">
                 <div class="profile-meta">
                     <div class="meta-row">
                         <span data-i18n="profile.locationLabel">Lokalizacja</span>
@@ -2627,7 +2734,7 @@
                     <div class="project-number">09</div>
                     <span class="project-kind" data-i18n="explorer.privateLab">Własne laboratorium · dokumentacja prywatna</span>
                     <h3 data-i18n="projects.homelabTitle">Homelab · Linux, lokalne AI i automatyzacja</h3>
-                    <p data-i18n="projects.homelabSummary">Lokalne AI na Ubuntu, dostępne z Maca również poza domem przez jumphost VPS Mikrus. Obok Ollama działają Home Assistant OS na KVM/libvirt oraz pulpit/Steam na żądanie — bez potrzeby stałego IP w domu, osobnego VPN i przekierowania portów na domowym routerze.</p>
+                    <p data-i18n="projects.homelabSummary">Moja zdalna stacja AI: na co dzień pracuję bez GUI, z lokalną Gemma 4 12B na RTX 3060. Korzystam z niej z laptopa Mac przez VPS Mikrus także poza domem i przy zmiennym IP domowego łącza. Pulpit i Steam uruchamiam na żądanie, a obok modeli działa Home Assistant OS na KVM/libvirt.</p>
                     <dl class="lab-specs">
                         <div><dt data-i18n="cases.homelab.system">System</dt><dd>Ubuntu</dd></div>
                         <div><dt>CPU</dt><dd data-i18n="cases.homelab.cpu">AMD Ryzen 5 5500 · 6 rdzeni / 12 wątków</dd></div>
@@ -2635,10 +2742,45 @@
                         <div><dt>GPU</dt><dd>RTX 3060 · 12 GB</dd></div>
                         <div><dt data-i18n="cases.homelab.virtualization">Wirtualizacja</dt><dd>KVM / libvirt</dd></div>
                     </dl>
+                    <section class="lab-models" id="labModels" aria-labelledby="lab-models-title">
+                        <h4 id="lab-models-title" data-i18n="models.title">Lokalne modele: co naprawdę uruchamiam</h4>
+                        <p data-i18n="models.intro">Potwierdzony profil pracy oddzielam od starszego inwentarza modeli. Poniżej są zapisane fakty, nie lista usług dostępnych publicznie ani przyciski pobierania modeli.</p>
+                        <div class="lab-mode-switch" id="labModelSwitch" role="group" aria-label="Wybierz opis modelu" data-i18n-attr="aria-label:models.selector" hidden>
+                            <button class="button" type="button" data-lab-model="gemma" aria-pressed="true" aria-controls="labModelGemma labModelQwen labModelGptoss" data-i18n="models.gemmaButton">Gemma · potwierdzona</button>
+                            <button class="button" type="button" data-lab-model="qwen" aria-pressed="false" aria-controls="labModelGemma labModelQwen labModelGptoss" data-i18n="models.qwenButton">Qwen · inwentarz</button>
+                            <button class="button" type="button" data-lab-model="gptoss" aria-pressed="false" aria-controls="labModelGemma labModelQwen labModelGptoss" data-i18n="models.gptossButton">GPT-OSS · inwentarz</button>
+                        </div>
+                        <section class="lab-model-panel" id="labModelGemma" data-lab-model-panel="gemma" data-evidence="owner-log" aria-labelledby="lab-gemma-title">
+                            <p class="lab-model-evidence" data-i18n="models.gemmaEvidence">Uruchomienie potwierdzone przez właściciela · 09.11.2026</p>
+                            <h5 id="lab-gemma-title">Gemma 4 12B · Q4_K_M</h5>
+                            <code>gemma4:12b-it-q4_K_M</code>
+                            <p data-i18n="models.gemmaBody">To mój potwierdzony profil lokalnej pracy. W odczycie bez GUI model jest załadowany, a stacja wykonuje inferencję. Wskazanie 100% GPU w ollama ps opisuje rozmieszczenie modelu, nie stałe obciążenie karty.</p>
+                            <dl class="lab-model-facts">
+                                <div><dt data-i18n="models.processVram">VRAM procesu Ollama</dt><dd>8858 MiB</dd></div>
+                                <div><dt data-i18n="models.configuredContext">Ustawiony limit kontekstu</dt><dd>65 536</dd></div>
+                                <div><dt data-i18n="models.taskInput">Wejście zadania w logu</dt><dd>47 392</dd></div>
+                                <div><dt data-i18n="models.placement">Według ollama ps</dt><dd>100% GPU</dd></div>
+                            </dl>
+                            <p data-i18n="models.gemmaLimit">Log raportuje zadanie z 47 392 tokenami wejścia, a nie test wykorzystania całego limitu 65 536. GPU zajmuje łącznie 8899 MiB; pozostaje 3389 MiB. Chwilowe 95% obciążenia i 166 W nie dowodzą oszczędności energii dzięki headless ani jakości odpowiedzi modelu.</p>
+                        </section>
+                        <section class="lab-model-panel" id="labModelQwen" data-lab-model-panel="qwen" data-evidence="inventory" aria-labelledby="lab-qwen-title">
+                            <p class="lab-model-evidence" data-i18n="models.inventoryEvidence">Inwentarz z 26.10.2026 · nie potwierdza dzisiejszego załadowania</p>
+                            <h5 id="lab-qwen-title">Qwen3.5 9B / Qwen3.8 27B IQ2</h5>
+                            <p data-i18n="models.qwenBody">Dokumentacja wymienia qwen3.5:9b o rozmiarze 6,1 GiB oraz warianty Qwen3.8 27B IQ2_XS/IQ2_S o rozmiarach około 8,7–9,3 GiB. To rozmiary z inwentarza, nie pomiary zajętej VRAM. Nie przedstawiam ich jako modeli aktualnie pracujących równocześnie.</p>
+                            <p data-i18n="models.qwenLimit">Większa liczba parametrów nie musi oznaczać większego pliku: silniejsza kwantyzacja zmniejsza wagi, ale wymaga oceny kompromisów jakościowych. Dopasowanie wag do 12 GiB nie gwarantuje miejsca na kontekst, bufory i cały proces.</p>
+                        </section>
+                        <section class="lab-model-panel" id="labModelGptoss" data-lab-model-panel="gptoss" data-evidence="inventory" aria-labelledby="lab-gptoss-title">
+                            <p class="lab-model-evidence" data-i18n="models.inventoryEvidence">Inwentarz z 26.10.2026 · nie potwierdza dzisiejszego załadowania</p>
+                            <h5 id="lab-gptoss-title">gpt-oss:20b</h5>
+                            <p data-i18n="models.gptossBody">Inwentarz zawiera gpt-oss:20b z raportowanym rozmiarem 12,1 GiB. To nie dowód pełnego uruchomienia na karcie z 12 GiB VRAM. W tych materiałach nie ma porównywalnego logu jego aktywnej pracy.</p>
+                            <p data-i18n="models.gptossLimit">Uruchomienie większego profilu może wymagać innej kwantyzacji, krótszego kontekstu lub częściowego offloadu do RAM/CPU, zależnie od backendu. RAM stacji nie sumuje się z VRAM w jedną równie szybką pamięć; offload zmienia profil wydajności.</p>
+                        </section>
+                        <p data-i18n="models.budget">Mój budżet to 12 GiB VRAM: wagi + pamięć kontekstu + bufory + pozostałe procesy. Headless odzyskuje w tej parze 189 MiB, nie dodatkową kartę GPU. Modele i kontekst dobieram do faktycznych pomiarów, a nie samej nazwy „12B” czy „27B”. Przełącznik tylko zmienia opis, nie ładuje modelu.</p>
+                    </section>
                     <details class="project-details" data-case-study="homelab"><summary data-i18n="explorer.open">Poznaj projekt od środka</summary>
                         <div class="case-panel" data-case-panel="overview">
                             <h4 data-i18n="explorer.overview">Cel i mój wkład</h4>
-                            <p data-i18n="cases.homelab.role">Konfiguruję i dokumentuję środowisko, w którym jedna stacja obsługuje lokalną inferencję, maszynę wirtualną Home Assistant i zadania graficzne. Rozwijam narzędzia do zarządzania usługami i sesją, zamiast utrzymywać pulpit aktywny przez cały czas.</p>
+                            <p data-i18n="cases.homelab.role">Na co dzień używam stacji bez uruchomionego pulpitu: lokalne modele i usługi działają niezależnie od GNOME. Z laptopa Mac przez Mikrus korzystam z narzędzi i mocy GPU, a GUI włączam na żądanie. Dokumentuję konfigurację, zarządzam usługami i dobieram obciążenia do zasobów.</p>
                             <section class="headless-lab" aria-labelledby="headless-lab-title">
                                 <h5 id="headless-lab-title" data-i18n="headless.title">Serwer na co dzień. Pulpit wtedy, gdy go potrzebuję.</h5>
                                 <p data-i18n="headless.intro">Headless to tryb pracy, nie rezygnacja z GUI na zawsze. Usługi nie potrzebują otwartego pulpitu. W tym homelabie GNOME jest już zainstalowane i można je uruchomić przez SSH, mając działający dostęp i odpowiednie uprawnienia.</p>
@@ -2678,11 +2820,11 @@
                                     <h6 id="lab-route-title" data-i18n="headless.routeTitle">Mac → jumphost Mikrus → homelab</h6>
                                     <p data-i18n="headless.routeUsage">Taką trasą korzystam ze środowiska pracy z OpenCode — to działający przykład zdalnej administracji i programowania. Ollama na stacji może obsługiwać wybrane lokalne modele; inni dostawcy skonfigurowani w OpenCode mogą być chmurowi.</p>
                                     <ol class="case-flow">
-                                        <li><strong>Mac</strong><p data-i18n="headless.routeMac">Klient dostępu. Łączę się przez SSH do VPS Mikrus, zamiast otwierać bezpośredni dostęp do stacji z internetu.</p></li>
+                                        <li><strong>Mac</strong><p data-i18n="headless.routeMac">Mój laptop jest klientem: daje ekran i narzędzia dostępu, a lokalny model pracuje na stacji z RTX 3060. Łączę się przez SSH do VPS Mikrus, zamiast wystawiać stację bezpośrednio do internetu.</p></li>
                                         <li><strong>VPS Mikrus</strong><p data-i18n="headless.routeVps">Punkt pośredni, czyli jumphost. Zwrotny punkt tunelu administracyjnego nasłuchuje tylko lokalnie na VPS, a nie publicznie jako osobna usługa.</p></li>
                                         <li><strong>Ubuntu / homelab</strong><p data-i18n="headless.routeLab">Usługa reverse SSH zestawia połączenie wychodzące ze stacji do Mikrusa. Tym połączeniem można wrócić do administracji homelabu z Maca przez jumphost.</p></li>
                                     </ol>
-                                    <p data-i18n="headless.routeDirection">Kierunek zestawienia tunelu: homelab → Mikrus. Droga dostępu użytkownika: Mac → Mikrus → homelab. Nie wymaga to bezpośredniego przekierowania portu stacji na domowym routerze.</p>
+                                    <p data-i18n="headless.routeDirection">Tunel wychodzi ze stacji do Mikrusa, a ja korzystam z trasy laptop Mac → VPS → stacja. Nie muszę znać aktualnego IP domu ani przekierowywać portu na domowym routerze. Zmiana IP może zerwać bieżącą sesję; dostęp wymaga wtedy ponownego zestawienia tunelu, nie gwarantuje bezprzerwowego przełączenia.</p>
                                     <p data-i18n="headless.routeLimit">Mikrus musi mieć osiągalny punkt SSH. VPS pośredniczy w dostępie, nie dodaje VRAM ani nie przejmuje obliczeń GPU. Tunel nie udostępnia automatycznie API Ollama ani RDP — potrzebują osobnej konfiguracji i uprawnień. Stacja, VPS i tunel muszą działać; to nie jest zdalne włączanie wyłączonego komputera.</p>
                                 </section>
                                 <p data-i18n="headless.demoNote">To interaktywny opis, nie panel sterowania komputerem. Przyciski niczego nie uruchamiają na serwerze. Pokazane polecenia to własne skrypty tego homelabu, wymagające konfiguracji i uprawnień; nie są uniwersalnymi poleceniami Linuxa.</p>
@@ -2694,7 +2836,7 @@
                                         <button class="button" type="button" data-lab-mode="gui" aria-pressed="false" aria-controls="labModeHeadless labModeGui labVramBreakdown" data-i18n="headless.guiButton">GUI na żądanie</button>
                                     </div>
                                     <p class="lab-vram-delta"><strong>189 MiB</strong><span data-i18n="headless.deltaCaption">mniej bez GUI w tej parze odczytów</span></p>
-                                    <p data-i18n="headless.sampleContext">Dwa odczyty właściciela z 08.11.2026 · RTX 3060 · Gemma 4 12B Q4_K_M · kontekst 65 536. W obu proces Ollama zajmuje 8858 MiB. To zapis pomiarów, nie monitoring na żywo ani pomiar jałowego systemu.</p>
+                                    <p data-i18n="headless.sampleContext">Dwa odczyty właściciela z 09.11.2026 · RTX 3060 · Gemma 4 12B Q4_K_M · kontekst 65 536. W obu proces Ollama zajmuje 8858 MiB. To zapis pomiarów, nie monitoring na żywo ani pomiar jałowego systemu.</p>
                                     <p id="labSnapshotMode" role="status" aria-live="polite" aria-atomic="true" data-i18n="headless.snapshotHeadless">Wybrany odczyt: bez GUI · 8899 MiB zajęte.</p>
                                     <meter id="labVramMeter" min="0" max="12288" value="8899" aria-labelledby="lab-vram-title" aria-describedby="labSnapshotMode labVramBreakdown">8899 / 12288 MiB</meter>
                                     <dl class="vram-readout" id="labVramBreakdown">
@@ -2706,8 +2848,8 @@
                                     <p data-i18n="headless.comparison">Bez GUI: 8899 MiB → z GUI: 9088 MiB. Headless zajmuje w tej parze o 189 MiB mniej, czyli około 2,08% odczytu z GUI. Wolna VRAM rośnie z 3200 do 3389 MiB. To konkretny przykład, nie stały zysk dla każdego Linuxa.</p>
                                     <p data-i18n="headless.interpretation">GNOME Shell raportuje 167 MiB, Xwayland 2 MiB — razem 169 MiB. Całkowita różnica wynosi 189 MiB, więc lista procesów nie wyjaśnia pozostałych 20 MiB. Pamięć modelu pozostaje zajęta; GPU-Util 0% nie oznacza jej zwolnienia. Rozmiar z ollama ps i VRAM procesu w nvidia-smi to różne odczyty.</p>
                                     <p data-i18n="headless.sampleLimit">Oba odczyty pokazują ten sam model, kontekst i pamięć procesu Ollama, ale nie są kontrolowanym benchmarkiem. Nie przenoszę tej różnicy na inne modele, aplikacje ani zużycie energii.</p>
-                                    <p data-i18n="headless.activeReading">Obciążenie a alokacja: inny odczyt podczas przetwarzania promptu pokazuje 8900 MiB VRAM, 91% GPU i 165 W. Pamięć niemal się nie zmieniła, choć karta pracuje. To chwilowa moc GPU, nie całego komputera; około 1200 tokenów/s w tym logu dotyczy promptu, nie generowania odpowiedzi.</p>
-                                    <p data-i18n="headless.generationReading">Osobny fragment generowania raportuje tg około 63–64 tokenów/s, 96% GPU i 167 W przy 8900 MiB VRAM. To obserwacja części jednego zadania, nie gwarantowane tempo odpowiedzi ani porównanie szybkości GUI i headless.</p>
+                                    <p data-i18n="headless.activeReading">Odczyt z 08.11.2026 podczas przetwarzania promptu pokazuje 8900 MiB VRAM, 91% GPU i 165 W. Pamięć niemal się nie zmieniła, choć karta pracuje. To chwilowa moc GPU, nie całego komputera; około 1200 tokenów/s w tym logu dotyczy promptu, nie generowania odpowiedzi.</p>
+                                    <p data-i18n="headless.generationReading">Fragment generowania z 08.11.2026 raportuje tg około 63–64 tokenów/s, 96% GPU i 167 W przy 8900 MiB VRAM. To obserwacja części jednego zadania, nie gwarantowane tempo odpowiedzi ani porównanie szybkości GUI i headless.</p>
                                     <fieldset class="lab-vram-calculator" id="labVramCalculator" hidden>
                                         <legend data-i18n="headless.calculator">Porównaj własne dwa odczyty</legend>
                                         <p id="labVramHelp" data-i18n="headless.calculatorHint">Ten sam model, kontekst, załadowanie i brak zmiany obciążenia; zmieniaj tylko sesję graficzną. Pola są puste celowo. Obliczenia pozostają w przeglądarce i nie są zapisywane.</p>
@@ -2739,7 +2881,7 @@
                             <h4 data-i18n="explorer.quality">Weryfikacja i ograniczenia</h4>
                             <p data-i18n="cases.homelab.limit">Opis opiera się na dokumentacji, nie na bieżącym audycie maszyny. Zainstalowany model nie musi być załadowany. Licznik sesji obserwuje procesy, nie bezczynność klawiatury i myszy. Automatyzacje Home Assistant wymagają włączonego i nieuśpionego hosta.</p>
                         </div>
-                        <div class="case-evidence"><p data-i18n="cases.homelab.privacy">Dokumentacja prywatna · przegląd 08.11.2026. Publiczny opis nie zawiera adresów, nazw hostów, danych dostępowych ani konfiguracji sieci.</p></div>
+                        <div class="case-evidence"><p data-i18n="cases.homelab.privacy">Dokumentacja prywatna · przegląd 09.11.2026. Publiczny opis nie zawiera adresów, nazw hostów, danych dostępowych ani konfiguracji sieci.</p></div>
                     </details>
                     <ul class="tags" aria-label="Technologie homelabu" data-i18n-attr="aria-label:projects.homelabTagsAria">
                         <li class="tag">Ubuntu</li><li class="tag">Ollama</li><li class="tag">KVM / libvirt</li><li class="tag">systemd</li>
@@ -3093,7 +3235,6 @@
             let selectedProjectFilter = "all";
             let selectedLabMode = "headless";
             const LAB_VRAM_SNAPSHOT = Object.freeze({ capacity: 12288, model: 8858, headless: 8899, gui: 9088 });
-            const profilePhoto = document.getElementById("profilePhoto");
             const navLinks = [...document.querySelectorAll(".nav-links a[href^='#']")];
             const langButtons = [...document.querySelectorAll(".lang-button[data-lang]")];
             const mobileMenuQuery = window.matchMedia("(max-width: 920px)");
@@ -3126,8 +3267,6 @@
             const chartLibraryRetry = document.getElementById("chartLibraryRetry");
             const weatherDataDetails = document.getElementById("weatherDataDetails");
             let chartLibraryState = "idle";
-            const photos = ["cv_photo.webp", "cv_photo2.webp"];
-            let photoIndex = 0;
             let weatherData = null;
             let weatherLoadFailed = false;
             let precipitationData = null;
@@ -3164,6 +3303,27 @@
 const translations = {
                 pl: {
                     skipLink: "Przejdź do treści",
+                    models: {
+                        title: "Lokalne modele: co naprawdę uruchamiam",
+                        intro: "Potwierdzony profil pracy oddzielam od starszego inwentarza modeli. Poniżej są zapisane fakty, nie lista usług dostępnych publicznie ani przyciski pobierania modeli.",
+                        selector: "Wybierz opis modelu",
+                        gemmaButton: "Gemma · potwierdzona",
+                        qwenButton: "Qwen · inwentarz",
+                        gptossButton: "GPT-OSS · inwentarz",
+                        gemmaEvidence: "Uruchomienie potwierdzone przez właściciela · 09.11.2026",
+                        inventoryEvidence: "Inwentarz z 26.10.2026 · nie potwierdza dzisiejszego załadowania",
+                        gemmaBody: "To mój potwierdzony profil lokalnej pracy. W odczycie bez GUI model jest załadowany, a stacja wykonuje inferencję. Wskazanie 100% GPU w ollama ps opisuje rozmieszczenie modelu, nie stałe obciążenie karty.",
+                        processVram: "VRAM procesu Ollama",
+                        configuredContext: "Ustawiony limit kontekstu",
+                        taskInput: "Wejście zadania w logu",
+                        placement: "Według ollama ps",
+                        gemmaLimit: "Log raportuje zadanie z 47 392 tokenami wejścia, a nie test wykorzystania całego limitu 65 536. GPU zajmuje łącznie 8899 MiB; pozostaje 3389 MiB. Chwilowe 95% obciążenia i 166 W nie dowodzą oszczędności energii dzięki headless ani jakości odpowiedzi modelu.",
+                        qwenBody: "Dokumentacja wymienia qwen3.5:9b o rozmiarze 6,1 GiB oraz warianty Qwen3.8 27B IQ2_XS/IQ2_S o rozmiarach około 8,7–9,3 GiB. To rozmiary z inwentarza, nie pomiary zajętej VRAM. Nie przedstawiam ich jako modeli aktualnie pracujących równocześnie.",
+                        qwenLimit: "Większa liczba parametrów nie musi oznaczać większego pliku: silniejsza kwantyzacja zmniejsza wagi, ale wymaga oceny kompromisów jakościowych. Dopasowanie wag do 12 GiB nie gwarantuje miejsca na kontekst, bufory i cały proces.",
+                        gptossBody: "Inwentarz zawiera gpt-oss:20b z raportowanym rozmiarem 12,1 GiB. To nie dowód pełnego uruchomienia na karcie z 12 GiB VRAM. W tych materiałach nie ma porównywalnego logu jego aktywnej pracy.",
+                        gptossLimit: "Uruchomienie większego profilu może wymagać innej kwantyzacji, krótszego kontekstu lub częściowego offloadu do RAM/CPU, zależnie od backendu. RAM stacji nie sumuje się z VRAM w jedną równie szybką pamięć; offload zmienia profil wydajności.",
+                        budget: "Mój budżet to 12 GiB VRAM: wagi + pamięć kontekstu + bufory + pozostałe procesy. Headless odzyskuje w tej parze 189 MiB, nie dodatkową kartę GPU. Modele i kontekst dobieram do faktycznych pomiarów, a nie samej nazwy „12B” czy „27B”. Przełącznik tylko zmienia opis, nie ładuje modelu."
+                    },
                     headless: {
                         title: "Serwer na co dzień. Pulpit wtedy, gdy go potrzebuję.",
                         intro: "Headless to tryb pracy, nie rezygnacja z GUI na zawsze. Usługi nie potrzebują otwartego pulpitu. W tym homelabie GNOME jest już zainstalowane i można je uruchomić przez SSH, mając działający dostęp i odpowiednie uprawnienia.",
@@ -3190,15 +3350,15 @@ const translations = {
                         webuiCredit: "Autorzy komponentu: Open WebUI Inc., Timothy Jaeryang Baek i współtwórcy projektu. Nie napisałem tych elementów od zera. W repozytorium Banas Chat licencja MIT dotyczy własnych dodatków, nie zastępuje licencji Open WebUI ani nie nadaje autorstwa upstream.",
                         routeTitle: "Mac → jumphost Mikrus → homelab",
                         routeUsage: "Taką trasą korzystam ze środowiska pracy z OpenCode — to działający przykład zdalnej administracji i programowania. Ollama na stacji może obsługiwać wybrane lokalne modele; inni dostawcy skonfigurowani w OpenCode mogą być chmurowi.",
-                        routeMac: "Klient dostępu. Łączę się przez SSH do VPS Mikrus, zamiast otwierać bezpośredni dostęp do stacji z internetu.",
+                        routeMac: "Mój laptop jest klientem: daje ekran i narzędzia dostępu, a lokalny model pracuje na stacji z RTX 3060. Łączę się przez SSH do VPS Mikrus, zamiast wystawiać stację bezpośrednio do internetu.",
                         routeVps: "Punkt pośredni, czyli jumphost. Zwrotny punkt tunelu administracyjnego nasłuchuje tylko lokalnie na VPS, a nie publicznie jako osobna usługa.",
                         routeLab: "Usługa reverse SSH zestawia połączenie wychodzące ze stacji do Mikrusa. Tym połączeniem można wrócić do administracji homelabu z Maca przez jumphost.",
-                        routeDirection: "Kierunek zestawienia tunelu: homelab → Mikrus. Droga dostępu użytkownika: Mac → Mikrus → homelab. Nie wymaga to bezpośredniego przekierowania portu stacji na domowym routerze.",
+                        routeDirection: "Tunel wychodzi ze stacji do Mikrusa, a ja korzystam z trasy laptop Mac → VPS → stacja. Nie muszę znać aktualnego IP domu ani przekierowywać portu na domowym routerze. Zmiana IP może zerwać bieżącą sesję; dostęp wymaga wtedy ponownego zestawienia tunelu, nie gwarantuje bezprzerwowego przełączenia.",
                         routeLimit: "Mikrus musi mieć osiągalny punkt SSH. VPS pośredniczy w dostępie, nie dodaje VRAM ani nie przejmuje obliczeń GPU. Tunel nie udostępnia automatycznie API Ollama ani RDP — potrzebują osobnej konfiguracji i uprawnień. Stacja, VPS i tunel muszą działać; to nie jest zdalne włączanie wyłączonego komputera.",
                         demoNote: "To interaktywny opis, nie panel sterowania komputerem. Przyciski niczego nie uruchamiają na serwerze. Pokazane polecenia to własne skrypty tego homelabu, wymagające konfiguracji i uprawnień; nie są uniwersalnymi poleceniami Linuxa.",
                         vramTitle: "VRAM: moje odczyty headless i GUI",
                         deltaCaption: "mniej bez GUI w tej parze odczytów",
-                        sampleContext: "Dwa odczyty właściciela z 08.11.2026 · RTX 3060 · Gemma 4 12B Q4_K_M · kontekst 65 536. W obu proces Ollama zajmuje 8858 MiB. To zapis pomiarów, nie monitoring na żywo ani pomiar jałowego systemu.",
+                        sampleContext: "Dwa odczyty właściciela z 09.11.2026 · RTX 3060 · Gemma 4 12B Q4_K_M · kontekst 65 536. W obu proces Ollama zajmuje 8858 MiB. To zapis pomiarów, nie monitoring na żywo ani pomiar jałowego systemu.",
                         snapshotHeadless: "Wybrany odczyt: bez GUI · 8899 MiB zajęte.",
                         snapshotGui: "Wybrany odczyt: z GUI · 9088 MiB zajęte.",
                         total: "Zajęte łącznie",
@@ -3208,8 +3368,8 @@ const translations = {
                         comparison: "Bez GUI: 8899 MiB → z GUI: 9088 MiB. Headless zajmuje w tej parze o 189 MiB mniej, czyli około 2,08% odczytu z GUI. Wolna VRAM rośnie z 3200 do 3389 MiB. To konkretny przykład, nie stały zysk dla każdego Linuxa.",
                         interpretation: "GNOME Shell raportuje 167 MiB, Xwayland 2 MiB — razem 169 MiB. Całkowita różnica wynosi 189 MiB, więc lista procesów nie wyjaśnia pozostałych 20 MiB. Pamięć modelu pozostaje zajęta; GPU-Util 0% nie oznacza jej zwolnienia. Rozmiar z ollama ps i VRAM procesu w nvidia-smi to różne odczyty.",
                         sampleLimit: "Oba odczyty pokazują ten sam model, kontekst i pamięć procesu Ollama, ale nie są kontrolowanym benchmarkiem. Nie przenoszę tej różnicy na inne modele, aplikacje ani zużycie energii.",
-                        activeReading: "Obciążenie a alokacja: inny odczyt podczas przetwarzania promptu pokazuje 8900 MiB VRAM, 91% GPU i 165 W. Pamięć niemal się nie zmieniła, choć karta pracuje. To chwilowa moc GPU, nie całego komputera; około 1200 tokenów/s w tym logu dotyczy promptu, nie generowania odpowiedzi.",
-                        generationReading: "Osobny fragment generowania raportuje tg około 63–64 tokenów/s, 96% GPU i 167 W przy 8900 MiB VRAM. To obserwacja części jednego zadania, nie gwarantowane tempo odpowiedzi ani porównanie szybkości GUI i headless.",
+                        activeReading: "Odczyt z 08.11.2026 podczas przetwarzania promptu pokazuje 8900 MiB VRAM, 91% GPU i 165 W. Pamięć niemal się nie zmieniła, choć karta pracuje. To chwilowa moc GPU, nie całego komputera; około 1200 tokenów/s w tym logu dotyczy promptu, nie generowania odpowiedzi.",
+                        generationReading: "Fragment generowania z 08.11.2026 raportuje tg około 63–64 tokenów/s, 96% GPU i 167 W przy 8900 MiB VRAM. To obserwacja części jednego zadania, nie gwarantowane tempo odpowiedzi ani porównanie szybkości GUI i headless.",
                         calculator: "Porównaj własne dwa odczyty",
                         calculatorHint: "Ten sam model, kontekst, załadowanie i brak zmiany obciążenia; zmieniaj tylko sesję graficzną. Pola są puste celowo. Obliczenia pozostają w przeglądarce i nie są zapisywane.",
                         guiInput: "Z GUI · zajęte MiB",
@@ -3251,12 +3411,12 @@ const translations = {
                             cpu: "AMD Ryzen 5 5500 · 6 rdzeni / 12 wątków",
                             ram: "30,7 GiB łącznie widoczne w systemie",
                             virtualization: "Wirtualizacja",
-                            role: "Konfiguruję i dokumentuję środowisko, w którym jedna stacja obsługuje lokalną inferencję, maszynę wirtualną Home Assistant i zadania graficzne. Rozwijam narzędzia do zarządzania usługami i sesją, zamiast utrzymywać pulpit aktywny przez cały czas.",
+                            role: "Na co dzień używam stacji bez uruchomionego pulpitu: lokalne modele i usługi działają niezależnie od GNOME. Z laptopa Mac przez Mikrus korzystam z narzędzi i mocy GPU, a GUI włączam na żądanie. Dokumentuję konfigurację, zarządzam usługami i dobieram obciążenia do zasobów.",
                             step1: "Ubuntu i systemd → usługi oraz lokalna inferencja Ollama korzystająca z GPU NVIDIA.",
                             step2: "KVM/libvirt → osobna maszyna Home Assistant OS, z udokumentowanym uruchomieniem i autostartem.",
                             step3: "Pulpit i Steam na żądanie → licznik braku Steama, gier i UxPlay zwalnia sesję graficzną, nie zatrzymując Ollama.",
                             limit: "Opis opiera się na dokumentacji, nie na bieżącym audycie maszyny. Zainstalowany model nie musi być załadowany. Licznik sesji obserwuje procesy, nie bezczynność klawiatury i myszy. Automatyzacje Home Assistant wymagają włączonego i nieuśpionego hosta.",
-                            privacy: "Dokumentacja prywatna · przegląd 08.11.2026. Publiczny opis nie zawiera adresów, nazw hostów, danych dostępowych ani konfiguracji sieci."
+                            privacy: "Dokumentacja prywatna · przegląd 09.11.2026. Publiczny opis nie zawiera adresów, nazw hostów, danych dostępowych ani konfiguracji sieci."
                         },
                         cycling: {
                             role: "Łączę badania nad danymi kolarskimi z aplikacją do przeglądania wyników. Mój zakres to pipeline analityczny, porównanie modeli i prezentacja metryk oraz pracy magisterskiej w przeglądarce.",
@@ -3355,8 +3515,6 @@ const translations = {
                         line3: "automation: skrypty, workflowy, usługi"
                     },
                     profile: {
-                        changePhoto: "Zmień zdjęcie profilowe",
-                        photoHint: "Dwie strony tej samej osoby ↗ Zmień zdjęcie",
                         aria: "Profil",
                         locationLabel: "Lokalizacja",
                         location: "Katowice, Polska",
@@ -3511,7 +3669,7 @@ const translations = {
                     },
                     projects: {
                         homelabTitle: "Homelab · Linux, lokalne AI i automatyzacja",
-                        homelabSummary: "Lokalne AI na Ubuntu, dostępne z Maca również poza domem przez jumphost VPS Mikrus. Obok Ollama działają Home Assistant OS na KVM/libvirt oraz pulpit/Steam na żądanie — bez potrzeby stałego IP w domu, osobnego VPN i przekierowania portów na domowym routerze.",
+                        homelabSummary: "Moja zdalna stacja AI: na co dzień pracuję bez GUI, z lokalną Gemma 4 12B na RTX 3060. Korzystam z niej z laptopa Mac przez VPS Mikrus także poza domem i przy zmiennym IP domowego łącza. Pulpit i Steam uruchamiam na żądanie, a obok modeli działa Home Assistant OS na KVM/libvirt.",
                         homelabTagsAria: "Technologie homelabu",
                         details: "Szczegóły techniczne i ograniczenia",
                         cyclingSummary: "Jak analizować dane z treningów kolarskich? W mojej aplikacji pokazuję wyniki pracy magisterskiej, porównanie modeli i czytnik pracy.",
@@ -3614,6 +3772,27 @@ const translations = {
                 },
                 en: {
                     skipLink: "Skip to content",
+                    models: {
+                        title: "Local models: what I actually run",
+                        intro: "I separate a confirmed workload from an older model inventory. These are recorded facts, not a list of public services or buttons for downloading models.",
+                        selector: "Select a model description",
+                        gemmaButton: "Gemma · confirmed",
+                        qwenButton: "Qwen · inventory",
+                        gptossButton: "GPT-OSS · inventory",
+                        gemmaEvidence: "Owner-confirmed run · 9 Nov 2026",
+                        inventoryEvidence: "Inventory from 26 Oct 2026 · not proof of being loaded today",
+                        gemmaBody: "This is my confirmed local workload profile. In the headless reading the model is loaded and the workstation is performing inference. The 100% GPU indicator in ollama ps describes model placement, not constant GPU utilization.",
+                        processVram: "Ollama process VRAM",
+                        configuredContext: "Configured context limit",
+                        taskInput: "Task input reported in the log",
+                        placement: "Reported by ollama ps",
+                        gemmaLimit: "The log reports a task with 47,392 input tokens, not a test of the entire 65,536-token limit. Total GPU memory use is 8899 MiB, leaving 3389 MiB free. Instantaneous 95% utilization and 166 W prove neither headless energy savings nor response quality.",
+                        qwenBody: "Documentation lists qwen3.5:9b at 6.1 GiB and Qwen3.8 27B IQ2_XS/IQ2_S variants at roughly 8.7–9.3 GiB. These are inventory sizes, not measured VRAM use. I do not present them as models currently running together.",
+                        qwenLimit: "More parameters need not mean a larger file: stronger quantization reduces weights but its quality trade-offs need evaluation. Fitting weights into 12 GiB does not guarantee room for context, buffers and the full process.",
+                        gptossBody: "The inventory includes gpt-oss:20b with a reported size of 12.1 GiB. This does not prove a fully GPU-resident run on a 12 GiB card. These materials contain no comparable log of it actively running.",
+                        gptossLimit: "Running a larger profile may require different quantization, a shorter context or partial RAM/CPU offload, depending on the backend. System RAM and VRAM do not combine into one equally fast memory pool; offload changes the performance profile.",
+                        budget: "My budget is 12 GiB VRAM: weights + context memory + buffers + other processes. Headless recovers 189 MiB in this pair, not another GPU. I choose models and context from actual measurements, not just a 12B or 27B label. The selector only changes descriptions; it does not load models."
+                    },
                     headless: {
                         title: "A server every day. A desktop when I need it.",
                         intro: "Headless is an operating mode, not giving up a GUI forever. Services do not need an open desktop. GNOME is already installed in this homelab and can be started over SSH, with working access and the necessary permissions.",
@@ -3640,15 +3819,15 @@ const translations = {
                         webuiCredit: "Component authors: Open WebUI Inc., Timothy Jaeryang Baek and the project's contributors. I did not develop these components from scratch. The Banas Chat repository's MIT license covers my additions; it does not replace the Open WebUI license or claim upstream authorship.",
                         routeTitle: "Mac → Mikrus jumphost → homelab",
                         routeUsage: "I use this route to access my OpenCode working environment, a working example of remote administration and development. Ollama on the workstation can serve selected local models; other providers configured in OpenCode may be cloud-based.",
-                        routeMac: "The access client. I connect over SSH to the Mikrus VPS rather than exposing the workstation directly to the internet.",
+                        routeMac: "My laptop is the client, providing a screen and access tools while the local model runs on the RTX 3060 workstation. I connect over SSH to the Mikrus VPS instead of exposing the workstation directly to the internet.",
                         routeVps: "The intermediary, or jumphost. The administrative reverse-tunnel endpoint listens only locally on the VPS, not publicly as a separate service.",
                         routeLab: "A reverse SSH service establishes an outbound connection from the workstation to Mikrus. This connection provides a route back to homelab administration from the Mac through the jumphost.",
-                        routeDirection: "Tunnel establishment: homelab → Mikrus. User access path: Mac → Mikrus → homelab. This avoids directly forwarding a workstation port on the home router.",
+                        routeDirection: "The workstation establishes the outbound tunnel to Mikrus; I access it along Mac laptop → VPS → workstation. I need neither the current home IP nor a forwarded port on the home router. An IP change can break the current session, so access then requires reconnecting the tunnel, not a guaranteed seamless handover.",
                         routeLimit: "Mikrus needs a reachable SSH endpoint. The VPS relays access; it does not add VRAM or take over GPU computation. The tunnel does not automatically expose the Ollama API or RDP; they need separate configuration and permissions. The workstation, VPS and tunnel must be running; this does not power on a switched-off computer.",
                         demoNote: "This is an interactive explanation, not a computer control panel. Buttons do not run anything on the server. The commands shown are custom scripts requiring configuration and permissions, not universal Linux commands.",
                         vramTitle: "VRAM: my headless and GUI readings",
                         deltaCaption: "less without the GUI in this pair of readings",
-                        sampleContext: "Two owner-supplied readings from 8 Nov 2026 · RTX 3060 · Gemma 4 12B Q4_K_M · context 65,536. The Ollama process uses 8858 MiB in both. These are recorded measurements, not live monitoring or an idle-system reading.",
+                        sampleContext: "Two owner-supplied readings from 9 Nov 2026 · RTX 3060 · Gemma 4 12B Q4_K_M · context 65,536. The Ollama process uses 8858 MiB in both. These are recorded measurements, not live monitoring or an idle-system reading.",
                         snapshotHeadless: "Selected reading: headless · 8899 MiB used.",
                         snapshotGui: "Selected reading: GUI · 9088 MiB used.",
                         total: "Total used",
@@ -3658,8 +3837,8 @@ const translations = {
                         comparison: "Headless: 8899 MiB → GUI: 9088 MiB. Headless uses 189 MiB less in this pair, about 2.08% of the GUI reading. Free VRAM rises from 3200 to 3389 MiB. This is one example, not a fixed gain for every Linux system.",
                         interpretation: "GNOME Shell reports 167 MiB and Xwayland 2 MiB, totaling 169 MiB. The total difference is 189 MiB, so the process list does not explain the remaining 20 MiB. Model memory remains allocated; 0% GPU utilization does not mean it was released. Size in ollama ps and process VRAM in nvidia-smi are different readings.",
                         sampleLimit: "Both readings show the same model, context and Ollama process memory, but are not a controlled benchmark. I do not extrapolate the difference to other models, applications or energy use.",
-                        activeReading: "Workload versus allocation: another reading during prompt processing shows 8900 MiB VRAM, 91% GPU utilization and 165 W. Memory barely changed while the GPU was working. This is instantaneous GPU power, not whole-computer power; roughly 1200 tokens/s in that log refers to prompt processing, not answer generation.",
-                        generationReading: "A separate generation excerpt reports tg around 63–64 tokens/s, 96% GPU utilization and 167 W with 8900 MiB VRAM. This observes part of one task, not guaranteed response speed or a GUI versus headless speed comparison.",
+                        activeReading: "A reading from 8 Nov 2026 during prompt processing shows 8900 MiB VRAM, 91% GPU utilization and 165 W. Memory barely changed while the GPU was working. This is instantaneous GPU power, not whole-computer power; roughly 1200 tokens/s in that log refers to prompt processing, not answer generation.",
+                        generationReading: "A generation excerpt from 8 Nov 2026 reports tg around 63–64 tokens/s, 96% GPU utilization and 167 W with 8900 MiB VRAM. This observes part of one task, not guaranteed response speed or a GUI versus headless speed comparison.",
                         calculator: "Compare two readings of your own",
                         calculatorHint: "Keep the same model, context, loaded state and workload; change only the graphical session. Fields are deliberately empty. Calculations stay in your browser and are not saved.",
                         guiInput: "GUI · used MiB",
@@ -3701,12 +3880,12 @@ const translations = {
                             cpu: "AMD Ryzen 5 5500 · 6 cores / 12 threads",
                             ram: "30.7 GiB total reported by the OS",
                             virtualization: "Virtualization",
-                            role: "I configure and document an environment where one workstation handles local inference, a Home Assistant virtual machine and graphical workloads. I develop service and session management tools rather than keeping the desktop active all the time.",
+                            role: "I use the workstation without a running desktop day to day: local models and services run independently of GNOME. From my Mac laptop through Mikrus I access tools and GPU compute, enabling a GUI on demand. I document configuration, manage services and fit workloads to the available resources.",
                             step1: "Ubuntu and systemd → services and local Ollama inference using an NVIDIA GPU.",
                             step2: "KVM/libvirt → a separate Home Assistant OS virtual machine, with documented startup and autostart.",
                             step3: "On-demand desktop and Steam → a timer for the absence of Steam, games and UxPlay releases the graphical session without stopping Ollama.",
                             limit: "This description is based on documentation, not a live machine audit. An installed model is not necessarily loaded. The session timer watches processes, not keyboard and mouse inactivity. Home Assistant automations require the host to remain powered on and awake.",
-                            privacy: "Private documentation · reviewed 8 Nov 2026. The public description excludes addresses, hostnames, credentials and network configuration."
+                            privacy: "Private documentation · reviewed 9 Nov 2026. The public description excludes addresses, hostnames, credentials and network configuration."
                         },
                         cycling: {
                             role: "I connect cycling data research with an application for exploring the results. My scope covers the analytical pipeline, model comparison and presenting metrics and the MSc thesis in the browser.",
@@ -3805,8 +3984,6 @@ const translations = {
                         line3: "automation: scripts, workflows, services"
                     },
                     profile: {
-                        changePhoto: "Change profile photo",
-                        photoHint: "Two sides of the same person ↗ Change photo",
                         aria: "Profile",
                         locationLabel: "Location",
                         location: "Katowice, Poland",
@@ -3961,7 +4138,7 @@ const translations = {
                     },
                     projects: {
                         homelabTitle: "Homelab · Linux, local AI & automation",
-                        homelabSummary: "Local AI on Ubuntu, accessible from a Mac outside the home through a Mikrus VPS jumphost. Alongside Ollama run Home Assistant OS on KVM/libvirt and an on-demand desktop/Steam, without a fixed home IP, a separate VPN or port forwarding on the home router.",
+                        homelabSummary: "My remote AI workstation: I work headless day to day, with local Gemma 4 12B on an RTX 3060. I access it from a Mac laptop through a Mikrus VPS outside the home, even with a dynamic home IP. Desktop and Steam start on demand, alongside Home Assistant OS on KVM/libvirt.",
                         homelabTagsAria: "Homelab technologies",
                         details: "Technical details and limitations",
                         cyclingSummary: "How can cycling training data be analyzed? My application presents MSc thesis results, model comparisons and a thesis reader.",
@@ -5158,6 +5335,26 @@ const translations = {
                 renderHomelabLab();
             }
 
+            function setupHomelabModels() {
+                const controls = document.getElementById("labModelSwitch");
+                if (!controls) return;
+                const buttons = [...controls.querySelectorAll("[data-lab-model]")];
+                const panels = [...document.querySelectorAll("#labModels [data-lab-model-panel]")];
+                function selectProfile(profile) {
+                    buttons.forEach((button) => {
+                        button.setAttribute("aria-pressed", String(button.dataset.labModel === profile));
+                    });
+                    panels.forEach((panel) => {
+                        panel.hidden = panel.dataset.labModelPanel !== profile;
+                    });
+                }
+                buttons.forEach((button) => {
+                    button.addEventListener("click", () => selectProfile(button.dataset.labModel));
+                });
+                selectProfile("gemma");
+                controls.hidden = false;
+            }
+
             function setupProjectExplorer() {
                 const section = document.getElementById("projects");
                 const viewButtons = [...section.querySelectorAll("[data-project-view]")];
@@ -5251,7 +5448,7 @@ const translations = {
                 projectCards.forEach((card) => {
                     if (!projectSearchIndex.has(card)) {
                         // Search both languages so switching PL/EN keeps the same results.
-                        const text = [...card.querySelectorAll("h3, p, li[data-i18n], .tag, .tag [data-i18n], .lab-specs dd")].flatMap((element) => {
+                        const text = [...card.querySelectorAll("h3, p, li[data-i18n], .tag, .tag [data-i18n], .lab-specs dd, .lab-models h5, .lab-models code, .lab-model-facts dd")].flatMap((element) => {
                             const key = element.dataset.i18n;
                             return key ? [element.textContent, getValue(key, "pl"), getValue(key, "en")]
                                 : [element.textContent];
@@ -5340,10 +5537,37 @@ const translations = {
                 }
             }
 
+            function updateWeatherChartTheme() {
+                if (!weatherChart && !weatherPrecipitationChart) return;
+                const styles = getComputedStyle(document.body);
+                const textColor = styles.getPropertyValue("--muted").trim();
+                const gridColor = styles.getPropertyValue("--line").trim();
+                [weatherChart, weatherPrecipitationChart].forEach((chart) => {
+                    if (!chart) return;
+                    chart.options.plugins.legend.labels.color = textColor;
+                    Object.values(chart.options.scales).forEach((scale) => {
+                        if (scale.ticks) scale.ticks.color = textColor;
+                        if (scale.title) scale.title.color = textColor;
+                        if (scale.grid) scale.grid.color = gridColor;
+                    });
+                    chart.update("none");
+                });
+            }
+
+            let themeChartFrame = null;
+            function scheduleThemeChartUpdate() {
+                if (themeChartFrame !== null) window.cancelAnimationFrame(themeChartFrame);
+                // Let the new page colours paint before updating existing charts.
+                themeChartFrame = window.requestAnimationFrame(() => {
+                    themeChartFrame = null;
+                    window.setTimeout(updateWeatherChartTheme, 0);
+                });
+            }
+
             function applyTheme(theme) {
                 const isLight = theme === "light";
-                document.body.classList.toggle("light", isLight);
-                document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isLight ? "#f6f7f9" : "#101416");
+                document.documentElement.classList.toggle("light", isLight);
+                document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isLight ? "#f5f5ef" : "#101416");
                 if (themeToggle) {
                     themeToggle.textContent = isLight ? "☾" : "☼";
                     themeToggle.setAttribute("aria-pressed", String(isLight));
@@ -5352,9 +5576,10 @@ const translations = {
                     themeToggle.setAttribute("title", label);
                     themeToggle.setAttribute("aria-label", label);
                 }
-                renderWeatherHistory();
+                scheduleThemeChartUpdate();
             }
 
+            setupHomelabModels();
             setupHomelabLab();
             setupProjectExplorer();
             projectSearch?.addEventListener("input", () => applyProjectFilters());
@@ -5427,14 +5652,14 @@ const translations = {
             langButtons.forEach((button) => {
                 button.addEventListener("click", () => {
                     setLanguage(button.dataset.lang);
-                    applyTheme(document.body.classList.contains("light") ? "light" : "dark");
+                    applyTheme(document.documentElement.classList.contains("light") ? "light" : "dark");
                 });
             });
 
             themeToggle?.addEventListener("click", () => {
-                const nextTheme = document.body.classList.contains("light") ? "dark" : "light";
-                preferences.set("banas_theme", nextTheme);
+                const nextTheme = document.documentElement.classList.contains("light") ? "dark" : "light";
                 applyTheme(nextTheme);
+                preferences.set("banas_theme", nextTheme);
             });
 
             mobileMenuToggle?.addEventListener("click", () => {
@@ -5547,20 +5772,6 @@ const translations = {
             if ("ResizeObserver" in window) {
                 new ResizeObserver(scheduleNavigationUpdate).observe(document.body);
             }
-
-            photos.forEach((src) => {
-                const img = new Image();
-                img.src = src;
-            });
-
-            document.getElementById("photoSwitch")?.addEventListener("click", () => {
-                photoIndex = (photoIndex + 1) % photos.length;
-                profilePhoto.style.opacity = "0";
-                window.setTimeout(() => {
-                    profilePhoto.src = photos[photoIndex];
-                    profilePhoto.style.opacity = "1";
-                }, reduceMotion ? 0 : 160);
-            });
 
             if (hero && !reduceMotion && canUsePointerGlow) {
                 hero.addEventListener("pointermove", (event) => {

@@ -17,8 +17,8 @@ import zipfile
 MAX_BYTES = 16 * 1024 * 1024
 FILES = {
     "public/index.html", "public/robots.txt", "public/favicon.png",
-    "public/cv_photo.jpg", "public/cv_photo.webp", "public/cv_photo2.jpg",
-    "public/cv_photo2.webp", "public/revision.txt", "fetch_weather.py",
+    "public/cv_photo.jpg", "public/cv_photo.webp",
+    "public/revision.txt", "fetch_weather.py",
     "public/assets/vendor/chart.umd.min.js", "public/assets/vendor/chart.LICENSE.md",
 }
 LIVE_FILES = ("data.json", "history.json", "weather.json")
