@@ -6,7 +6,6 @@ import zipfile
 
 PUBLIC_FILES = (
     "index.html", "robots.txt", "favicon.png", "cv_photo.jpg", "cv_photo.webp",
-    "cv_photo2.jpg", "cv_photo2.webp",
     "assets/vendor/chart.umd.min.js", "assets/vendor/chart.LICENSE.md",
 )
 

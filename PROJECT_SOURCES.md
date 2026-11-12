@@ -1,4 +1,7 @@
-# Źródła opisów projektów — 8 listopada 2026
+# Źródła opisów projektów
+
+Przegląd publicznych projektów: 08.11.2026. Uzupełnienia homelabu:
+08–09.11.2026. Dat poszczególnych źródeł nie należy mylić z monitoringiem usług.
 
 ## Metoda i granice przeglądu
 
@@ -88,17 +91,22 @@ GPU: RTX 3060, 12288 MiB. W obu odczytach Gemma 4 12B Q4_K_M ma kontekst
 | Headless | 8899 MiB | 8858 MiB | 41 MiB | 3389 MiB |
 | GUI | 9088 MiB | 8858 MiB | 230 MiB | 3200 MiB |
 
+09.11.2026 właściciel ponownie podał tę samą parę 8899/9088 MiB, z procesem
+Ollama 8858 MiB w obu odczytach. Interfejs pokazuje tę nowszą parę. W odczycie
+headless karta raportuje 95% wykorzystania i 166 W, a w odczycie GUI 0% i 35 W.
+Są to różne stany obciążenia, nie dowód oszczędności energii dzięki headless.
+
 Różnica wynosi **189 MiB**, około **2,08% odczytu z GUI**, nie 2,08% całej
 pojemności karty. GNOME Shell raportuje 167 MiB, Xwayland 2 MiB (łącznie
 169 MiB). Pozostałych 20 MiB różnicy te odczyty nie wyjaśniają. Nie zakładamy,
 że lista procesów idealnie sumuje się do całego zużycia GPU.
 
-Oddzielny odczyt podczas przetwarzania promptu: 8900 MiB, 91% GPU, 165 W.
+Oddzielny odczyt z 08.11.2026 podczas przetwarzania promptu: 8900 MiB, 91% GPU, 165 W.
 Pamięć może pozostawać zaalokowana również przy GPU-Util 0%. Szybkość około
 1200 tokenów/s w tym logu dotyczy **przetwarzania promptu**, nie dekodowania
 odpowiedzi. Moc 165 W jest chwilowym odczytem GPU, nie poborem całego hosta.
 
-Kolejny fragment logu generowania raportuje `tg` 63,09–64,27 tokenów/s,
+Fragment logu generowania z 08.11.2026 raportuje `tg` 63,09–64,27 tokenów/s,
 96% GPU, 167 W i 8900 MiB. To obserwacja części jednego zadania, nie pomiar
 średniej wydajności całych odpowiedzi ani kontrolowane porównanie trybów.
 
@@ -112,6 +120,45 @@ konfiguracji. To skrypty specyficzne dla homelabu, nie polecenia dostępne w
 każdej dystrybucji. `gui_on` wymaga już zainstalowanego środowiska, dostępu
 i uprawnień; nie jest instalatorem ani automatycznym logowaniem. `gui_off`
 może zakończyć niezapisaną pracę. Samo RDP nie uruchamia zatrzymanego pulpitu.
+
+## Profile modeli — aktualizacja 09.11.2026
+
+Profil pracy potwierdzony przez właściciela w nowych logach:
+
+- `gemma4:12b-it-q4_K_M`, runner `llamacpp`, według `ollama ps` 100% GPU;
+- kontekst skonfigurowany na 65 536, zadanie raportuje 47 392 tokeny wejścia;
+- proces Ollama 8858 MiB, całe GPU 8899 MiB w odczycie headless;
+- nie wnioskujemy z tego, że przetestowano cały limit kontekstu, wszystkie
+  możliwości modelu lub średnią szybkość całego zadania. `100% GPU` w `ollama ps`
+  jest informacją o rozmieszczeniu, a nie ciągłym wykorzystaniu GPU.
+
+Pozostałe profile pochodzą z prywatnego dokumentu infrastruktury AI ze
+znacznikiem inwentaryzacji **26.10.2026**, przejrzanego 09.11.2026:
+
+| Model / wariant | Rozmiar w inwentarzu | Status dowodu |
+| --- | --- | --- |
+| `qwen3.5:9b` | 6,1 GiB | Wymieniony jako zainstalowany w październikowym zestawieniu, brak bieżącego logu uruchomienia. |
+| Qwen3.8 27B IQ2_XS / IQ2_S, także wariant aliasu | około 8,7–9,3 GiB | Dokumentowane nazwy i rozmiary, nie potwierdzenie równoczesnej pracy czy zmierzonej VRAM. |
+| `gpt-oss:20b` | 12,1 GiB | Wymieniony w inwentarzu, nie dowód pełnego uruchomienia na 12 GiB GPU. |
+
+Zdublowany wpis GPT-OSS oraz techniczny alias backendu nie są liczone jako
+kolejne, odrębnie potwierdzone modele. W tej aktualizacji nie pobierano modeli,
+nie wywoływano inferencji ani nie odpytywano stacji. Aktualna pełna lista
+wymagałaby świeżego `ollama list` od właściciela; starszego inwentarza nie
+przedstawiamy jako takiej listy.
+
+Omawiamy budżet wag, pamięci kontekstu, buforów i innych procesów. Wielkość
+pliku / wpisu inwentarza nie jest zużyciem VRAM. Rozmiar 12,1 GiB nie stanowi
+gwarancji pełnego zmieszczenia procesu na 12 GiB GPU. Mocniejsza kwantyzacja,
+krótszy kontekst i offload do RAM/CPU są kompromisami konfiguracyjnymi, nie
+zmierzonymi tu obietnicami wydajności lub jakości.
+
+Opis codziennej pracy headless oraz trasy laptop Mac → VPS Mikrus → stacja
+opiera się na potwierdzeniu właściciela. Zmienny adres domowego łącza nie musi
+być znany klientowi, ale zmiana adresu może przerwać aktywne połączenie SSH;
+konieczne jest ponowne zestawienie tunelu. Nie deklarujemy nieprzerwanego
+przełączania adresów, automatycznie skonfigurowanego reconnectu ani zmiany
+domyślnego celu startowego systemd.
 
 ## Aktualizacja opisów
 

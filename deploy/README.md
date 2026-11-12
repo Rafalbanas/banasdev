@@ -21,6 +21,13 @@ by the receiver. Both SSH wrapper and receiver are installed once as root-owned
 files and are not updated by subsequent releases. Changes to those files require
 an explicit server installation.
 
+The release no longer includes `cv_photo2.jpg` or `cv_photo2.webp`. Before
+deploying this change, an operator must update the installed
+`/usr/local/sbin/banasdev-deploy` from `deploy.py`: the older receiver requires
+both removed files and will reject the new archive. This is not performed by
+the application release. Historical releases may still contain the old images;
+do not delete active or rollback releases to remove them.
+
 Actions checks that the current live SHA is an ancestor of the requested release,
 preventing queued older runs from replacing a newer release. Deployment prepares
 a separate directory, validates archive names/size/digest/revision, then atomically
