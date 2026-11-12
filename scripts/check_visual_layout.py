@@ -29,7 +29,7 @@ def check_page(page):
         summary.focus()
         page.keyboard.press("Enter")
         expect(detail).to_have_attribute("open", "")
-        expect(detail.locator("p")).to_be_visible()
+        expect(detail.locator(":scope > p")).to_be_visible()
         if secret == "terminalGravel":
             assert detail.locator(".gravel-bike").evaluate(
                 "e => getComputedStyle(e).animationName"
