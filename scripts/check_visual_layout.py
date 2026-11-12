@@ -23,6 +23,8 @@ def check_page(page):
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "Horizontal overflow"
     expect(page.locator("#hero-title")).to_be_visible()
     expect(page.locator("#profilePhoto")).to_be_visible()
+    if not page.locator("#labTerminal").is_visible():
+        page.locator("#terminalRestore").click()
     for secret in ("terminalMotd", "terminalGravel"):
         detail = page.locator(f"#{secret}")
         summary = detail.locator("summary")

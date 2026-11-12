@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cix/0LmncDSxiveuYC1L8+nMvdsmJuHYhpj6WUc65wU=' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-5+S/WRqwQ0f0Pxx8rKNC+oVqs+w7cCL9Ud1hES55mVA='; script-src-attr 'none'; style-src 'self' 'sha256-ZGUip9MuTNF/7I7FJXX7cb/hZad6fchN7UtUiGTtSIc='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cix/0LmncDSxiveuYC1L8+nMvdsmJuHYhpj6WUc65wU=' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-rg+CAat1Jkt9hc+8HL5+8bDqkj555NQsUy+L4cCC69A='; script-src-attr 'none'; style-src 'self' 'sha256-L0EYHw+mzsQpRj8XCNqDxjVGxjiwr3lwzimt2lrCkiQ='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rafał Banaś | Technical Support Engineer · Python & AI</title>
@@ -578,6 +578,8 @@
         .terminal-control:hover span { outline: 2px solid var(--text); outline-offset: 2px; }
         .lab-terminal:has(.terminal-control) .lab-terminal-header { padding: 4px 8px 4px 12px; gap: 4px; }
         .terminal-restore { margin-top: 16px; width: 100%; }
+        .terminal-shell > summary { list-style: none; }
+        .terminal-shell > summary::-webkit-details-marker { display: none; }
         .terminal-console { padding: 12px; border-top: 1px solid var(--line); }
         .terminal-console > p { font-size: 0.74rem; color: var(--muted); margin-bottom: 12px; }
         .terminal-console label { font-size: 0.75rem; color: var(--muted); }
@@ -595,7 +597,17 @@
         .lab-terminal.is-expanded .lab-terminal-body { display: grid; }
         .terminal-pet-scene { margin: 0 12px 12px; padding: 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg-soft); }
         .pet-track { height: 84px; display: flex; align-items: end; padding: 8px; border-bottom: 1px dashed var(--line); margin-bottom: 10px; overflow: hidden; }
-        .terminal-pet { width: 64px; height: 60px; flex-shrink: 0; border: 0; padding: 4px; background: transparent; cursor: pointer; color: #efb67d; }
+        .terminal-pet { width: 64px; height: 60px; flex-shrink: 0; border: 0; padding: 4px; background: transparent; cursor: grab; color: #efb67d; touch-action: none; user-select: none; }
+        .terminal-pet svg { pointer-events: none; }
+        .terminal-pet.is-roaming { position: fixed; z-index: 1001; margin: 0; animation: none; filter: drop-shadow(0 3px 3px #0005); }
+        .terminal-pet.is-dragging, .terminal-pet.is-grabbed { cursor: grabbing; }
+        .pet-running .terminal-pet.is-grabbed { animation-play-state: paused; }
+        .lab-terminal.pet-drop-target { outline: 2px dashed var(--accent); outline-offset: 4px; }
+        .pet-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+        .terminal-secret .pet-help { padding: 0; margin: 0 0 12px; font-size: 0.72rem; }
+        #terminalPetHomeHint { color: var(--muted); font-size: 0.72rem; }
+        .pet-roaming-toolbar { position: fixed; bottom: 88px; left: 16px; z-index: 1002; display: flex; flex-wrap: wrap; gap: 6px; max-width: calc(100vw - 32px); padding: 8px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-strong); box-shadow: var(--shadow); }
+        .pet-roaming-toolbar .button { min-height: 44px; font-size: 0.75rem; padding: 8px; }
         .terminal-pet svg { width: 100%; height: 100%; overflow: visible; }
         .terminal-pet .cat-eye { fill: #20292d; }
         .terminal-pet .cat-nose { fill: #b05c62; }
@@ -2421,7 +2433,8 @@
                         <span data-i18n="profile.direction">AI, Data Science, automatyzacja</span>
                     </div>
                 </div>
-                <button class="button terminal-restore" id="terminalRestore" type="button" aria-controls="labTerminal" data-i18n="terminalDemo.restore" hidden>Otwórz terminal ponownie</button>
+                <details class="terminal-shell" id="terminalShell">
+                <summary class="button terminal-restore" id="terminalRestore" aria-controls="labTerminal" data-i18n="terminalDemo.restore">Otwórz terminal</summary>
                 <div class="lab-terminal" id="labTerminal" aria-label="Osobiste engineering lab" data-i18n-attr="aria-label:terminal.aria">
                     <div class="lab-terminal-header">
                         <span>~/banas.dev/lab</span>
@@ -2441,8 +2454,9 @@
                         <summary><code>$ cat .motd</code></summary>
                         <p data-i18n="easterEggs.motd">Najpierw logi. Potem kawa. Potem jeszcze raz logi. To tylko wiadomość z mojego małego zakątka internetu — niczego tu nie uruchamiasz.</p>
                         <div class="terminal-pet-scene" id="terminalPetScene" hidden>
-                            <div class="pet-track">
-                                <button class="terminal-pet" id="terminalPet" type="button" aria-label="Pogłaszcz kota" data-i18n-attr="aria-label:terminalDemo.pet">
+                            <div class="pet-track" id="terminalPetHome">
+                                <span id="terminalPetHomeHint" data-i18n="terminalDemo.petHomeHint" hidden>Tu mieszka kot. Przeciągnij go z powrotem do terminala.</span>
+                                <button class="terminal-pet" id="terminalPet" type="button" aria-label="Pogłaszcz kota" aria-describedby="terminalPetHelp" data-i18n-attr="aria-label:terminalDemo.pet">
                                     <svg viewBox="0 0 64 52" aria-hidden="true" focusable="false">
                                         <path fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" d="M44 35 Q61 36 55 21"/>
                                         <path fill="currentColor" d="M18 28 Q35 21 46 32 L46 45 H40 L38 39 H26 L24 45 H18Z M8 15 L8 3 L19 11 L30 3 L31 25 Q21 36 10 26Z"/>
@@ -2453,7 +2467,11 @@
                                 </button>
                             </div>
                             <p class="pet-reaction" id="terminalPetReaction" role="status" data-i18n="terminalDemo.petIntro">Mały opiekun logów. Kliknij kota, żeby go pogłaskać.</p>
+                            <p class="pet-help" id="terminalPetHelp" data-i18n="terminalDemo.petHelp">Złap kota i przeciągnij poza terminal, żeby zabrać go na spacer. Upuść w terminalu, żeby wrócił.</p>
+                            <div class="pet-actions">
                             <button class="button secondary pet-pause" id="terminalPetPause" type="button" aria-pressed="false" data-i18n="terminalDemo.pause">Wstrzymaj ruch kota</button>
+                            <button class="button secondary pet-pause" id="terminalPetRelease" type="button" data-i18n="terminalDemo.release">Wypuść kota na stronę</button>
+                            </div>
                         </div>
                     </details>
                     <details class="terminal-secret" id="terminalGravel">
@@ -2476,6 +2494,7 @@
                     </div>
                     </div>
                 </div>
+                </details>
             </aside>
         </section>
 
@@ -3362,6 +3381,11 @@
 
 </main>
 
+    <div class="pet-roaming-toolbar" id="pagePetControls" role="group" aria-label="Kot na spacerze" data-i18n-attr="aria-label:terminalDemo.roamingLabel" hidden>
+        <button class="button secondary" id="pagePetReturn" type="button" data-i18n="terminalDemo.returnHome">Wróć do terminala</button>
+        <button class="button secondary" id="pagePetPause" type="button" aria-pressed="false" data-i18n="terminalDemo.pause">Wstrzymaj ruch kota</button>
+    </div>
+
     <footer>
         <div class="page">
             <span>&copy; 2026 Rafał Banaś. banas.dev</span>
@@ -3585,12 +3609,19 @@ const translations = {
                         results: "Przeglądaj wyniki"
                     },
                     terminalDemo: {
-                        restore: "Otwórz terminal ponownie",
+                        restore: "Otwórz terminal",
                         close: "Zamknij terminal",
                         minimize: "Zminimalizuj / przywróć terminal",
                         expand: "Powiększ / zmniejsz terminal",
                         pet: "Pogłaszcz kota",
                         petIntro: "Mały opiekun logów. Kliknij kota, żeby go pogłaskać.",
+                        petHelp: "Złap kota i przeciągnij poza terminal, żeby zabrać go na spacer. Upuść w terminalu, żeby wrócił.",
+                        petHomeHint: "Tu mieszka kot. Przeciągnij go z powrotem do terminala.",
+                        release: "Wypuść kota na stronę",
+                        returnHome: "Wróć do terminala",
+                        roamingLabel: "Kot na spacerze",
+                        roamPause: "Pauza",
+                        roamResume: "Wznów",
                         petHappy: "Mrrr… Logi pod kontrolą. Można wracać do kodu.",
                         pause: "Wstrzymaj ruch kota",
                         resume: "Wznów ruch kota",
@@ -4092,12 +4123,19 @@ const translations = {
                         results: "Explore the results"
                     },
                     terminalDemo: {
-                        restore: "Reopen terminal",
+                        restore: "Open terminal",
                         close: "Close terminal",
                         minimize: "Minimize / restore terminal",
                         expand: "Expand / shrink terminal",
                         pet: "Pet the cat",
                         petIntro: "A little log keeper. Click the cat to give it a pet.",
+                        petHelp: "Grab the cat and drag it out of the terminal for a walk. Drop it back in the terminal to bring it home.",
+                        petHomeHint: "The cat lives here. Drag it back into the terminal.",
+                        release: "Let the cat explore",
+                        returnHome: "Return to terminal",
+                        roamingLabel: "Cat on a walk",
+                        roamPause: "Pause",
+                        roamResume: "Resume",
                         petHappy: "Purrr… Logs are under control. Back to the code.",
                         pause: "Pause cat movement",
                         resume: "Resume cat movement",
@@ -5606,9 +5644,206 @@ const translations = {
 
             let refreshInteractiveTerminal = () => {};
 
+            function clampPetPosition(x, y, width, height) {
+                return {
+                    x: Math.max(8, Math.min(x, Math.max(8, width - 72))),
+                    y: Math.max(8, Math.min(y, Math.max(8, height - 144)))
+                };
+            }
+
+            function setupPagePet({ pet, terminal, copy, reducedMotion, isPaused, togglePause, onHome, onChange }) {
+                const home = document.getElementById("terminalPetHome");
+                const hint = document.getElementById("terminalPetHomeHint");
+                const release = document.getElementById("terminalPetRelease");
+                const toolbar = document.getElementById("pagePetControls");
+                const returnButton = document.getElementById("pagePetReturn");
+                const pauseButton = document.getElementById("pagePetPause");
+                let away = false;
+                let drag = null;
+                let position = { x: 8, y: 8 };
+                let baselineY = 8;
+                let direction = 1;
+                let phase = 0;
+                let frame = null;
+                let lastTime = 0;
+                let suppressClick = false;
+                const clamp = (x, y) => clampPetPosition(x, y, window.innerWidth, window.innerHeight);
+
+                function paint() {
+                    pet.style.left = position.x + "px";
+                    pet.style.top = position.y + "px";
+                }
+
+                function stopMotion() {
+                    if (frame !== null) window.cancelAnimationFrame(frame);
+                    frame = null;
+                    lastTime = 0;
+                }
+
+                function tick(time) {
+                    const elapsed = lastTime ? Math.min(32, time - lastTime) : 0;
+                    lastTime = time;
+                    phase += elapsed / 900;
+                    const nextX = position.x + direction * elapsed * 0.045;
+                    position = clamp(nextX, baselineY - Math.abs(Math.sin(phase)) * 20);
+                    if (position.x !== nextX) direction *= -1;
+                    paint();
+                    frame = window.requestAnimationFrame(tick);
+                }
+
+                function render() {
+                    toolbar.hidden = !away;
+                    hint.hidden = !away;
+                    release.hidden = away;
+                    pauseButton.textContent = isPaused() ? copy().roamResume : copy().roamPause;
+                    pauseButton.setAttribute("aria-label", isPaused() ? copy().resume : copy().pause);
+                    pauseButton.setAttribute("aria-pressed", String(isPaused()));
+                }
+
+                function sync() {
+                    const running = away && !drag && !isPaused() && !reducedMotion.matches && !document.hidden;
+                    if (!running) stopMotion();
+                    else if (frame === null) frame = window.requestAnimationFrame(tick);
+                    render();
+                }
+
+                function detach(point) {
+                    away = true;
+                    pet.classList.add("is-roaming");
+                    document.body.append(pet);
+                    position = clamp(point.x, point.y);
+                    baselineY = position.y;
+                    phase = 0;
+                    paint();
+                    render();
+                }
+
+                function goHome(focus = false) {
+                    if (drag) {
+                        const id = drag.id;
+                        drag = null;
+                        if (pet.hasPointerCapture(id)) pet.releasePointerCapture(id);
+                        suppressClick = true;
+                    }
+                    stopMotion();
+                    away = false;
+                    pet.classList.remove("is-roaming", "is-dragging", "is-grabbed");
+                    pet.style.removeProperty("left");
+                    pet.style.removeProperty("top");
+                    home.append(pet);
+                    terminal.classList.remove("pet-drop-target");
+                    onHome();
+                    render();
+                    onChange();
+                    if (focus) {
+                        home.scrollIntoView({ block: "nearest", behavior: "instant" });
+                        pet.focus({ preventScroll: true });
+                    }
+                }
+
+                function overTerminal(x, y) {
+                    if (terminal.hidden || document.getElementById("terminalContent").hidden) return false;
+                    const rect = terminal.getBoundingClientRect();
+                    return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+                }
+
+                function finishDrag(event, cancelled = false) {
+                    if (!drag || (event && event.pointerId !== drag.id)) return;
+                    const gesture = drag;
+                    drag = null;
+                    if (pet.hasPointerCapture(gesture.id)) pet.releasePointerCapture(gesture.id);
+                    pet.classList.remove("is-dragging", "is-grabbed");
+                    terminal.classList.remove("pet-drop-target");
+                    if (gesture.moved) {
+                        suppressClick = true;
+                        if ((!cancelled && overTerminal(event.clientX, event.clientY)) || (cancelled && !gesture.fromAway)) {
+                            goHome();
+                            pet.focus({ preventScroll: true });
+                        } else {
+                            if (cancelled) position = clamp(gesture.origin.x, gesture.origin.y);
+                            baselineY = position.y;
+                            phase = 0;
+                            paint();
+                        }
+                    }
+                    onChange();
+                }
+
+                pet.addEventListener("pointerdown", (event) => {
+                    if (!event.isPrimary || event.button !== 0 || drag) return;
+                    suppressClick = false;
+                    const rect = pet.getBoundingClientRect();
+                    drag = {
+                        id: event.pointerId, startX: event.clientX, startY: event.clientY,
+                        offsetX: event.clientX - rect.left, offsetY: event.clientY - rect.top,
+                        origin: { x: rect.left, y: rect.top }, fromAway: away, moved: false
+                    };
+                    pet.setPointerCapture(event.pointerId);
+                    pet.classList.add("is-grabbed");
+                    pet.focus({ preventScroll: true });
+                    onChange();
+                });
+                pet.addEventListener("pointermove", (event) => {
+                    if (!drag || event.pointerId !== drag.id) return;
+                    if (!drag.moved && Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY) < 6) return;
+                    if (!drag.moved) {
+                        drag.moved = true;
+                        detach(drag.origin);
+                        pet.classList.add("is-dragging");
+                        // Reparenting can release capture, so capture again after the move.
+                        pet.setPointerCapture(event.pointerId);
+                    }
+                    event.preventDefault();
+                    position = clamp(event.clientX - drag.offsetX, event.clientY - drag.offsetY);
+                    paint();
+                    terminal.classList.toggle("pet-drop-target", overTerminal(event.clientX, event.clientY));
+                });
+                pet.addEventListener("pointerup", (event) => finishDrag(event));
+                pet.addEventListener("pointercancel", (event) => finishDrag(event, true));
+                pet.addEventListener("lostpointercapture", (event) => {
+                    if (!pet.hasPointerCapture(event.pointerId)) finishDrag(event, true);
+                });
+                pet.addEventListener("dragstart", (event) => event.preventDefault());
+                pet.addEventListener("click", (event) => {
+                    if (suppressClick && event.detail > 0) {
+                        suppressClick = false;
+                        event.preventDefault();
+                        event.stopImmediatePropagation();
+                    }
+                }, true);
+                document.addEventListener("keydown", (event) => {
+                    if (event.key !== "Escape" || !drag) return;
+                    event.preventDefault();
+                    finishDrag(null, true);
+                });
+                window.addEventListener("blur", () => finishDrag(null, true));
+                document.addEventListener("visibilitychange", () => {
+                    if (document.hidden) finishDrag(null, true);
+                    sync();
+                });
+                window.addEventListener("resize", () => {
+                    finishDrag(null, true);
+                    if (!away) return;
+                    position = clamp(position.x, position.y);
+                    baselineY = clamp(position.x, baselineY).y;
+                    paint();
+                });
+                release.addEventListener("click", () => {
+                    finishDrag(null, true);
+                    const rect = pet.getBoundingClientRect();
+                    detach({ x: rect.left, y: rect.top });
+                    onChange();
+                    returnButton.focus({ preventScroll: true });
+                });
+                returnButton.addEventListener("click", () => goHome(true));
+                pauseButton.addEventListener("click", togglePause);
+                return { sync, render, get away() { return away; }, get dragging() { return Boolean(drag); } };
+            }
+
             function setupInteractiveTerminal() {
                 const terminal = document.getElementById("labTerminal");
                 if (!terminal) return;
+                const shell = document.getElementById("terminalShell");
                 const content = document.getElementById("terminalContent");
                 const restore = document.getElementById("terminalRestore");
                 const minimize = document.getElementById("terminalMinimize");
@@ -5629,12 +5864,14 @@ const translations = {
                 let paused = false;
                 let petted = false;
                 let inView = false;
+                let pagePet = null;
                 const copy = () => translations[document.documentElement.lang || "pl"].terminalDemo;
 
                 function syncPetMotion() {
-                    const running = motd.open && !terminal.hidden && !content.hidden &&
+                    const running = !pagePet?.away && shell.open && motd.open && !terminal.hidden && !content.hidden &&
                         !paused && !reducedMotion.matches && !document.hidden && inView;
                     scene.classList.toggle("pet-running", running);
+                    pagePet?.sync();
                 }
 
                 function makeEntry(entry) {
@@ -5653,15 +5890,19 @@ const translations = {
                     pause.setAttribute("aria-pressed", String(paused));
                     reaction.textContent = petted ? copy().petHappy : copy().petIntro;
                     output.replaceChildren(...entries.map(makeEntry));
+                    pagePet?.render();
                 };
 
                 document.getElementById("terminalClose").addEventListener("click", () => {
                     terminal.hidden = true;
+                    shell.open = false;
                     restore.hidden = false;
                     syncPetMotion();
                     restore.focus({ preventScroll: true });
                 });
-                restore.addEventListener("click", () => {
+                restore.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    shell.open = true;
                     terminal.hidden = false;
                     restore.hidden = true;
                     content.hidden = false;
@@ -5691,6 +5932,18 @@ const translations = {
                     pause.textContent = paused ? copy().resume : copy().pause;
                     pause.setAttribute("aria-pressed", String(paused));
                     syncPetMotion();
+                });
+                pagePet = setupPagePet({
+                    pet, terminal, copy, reducedMotion, isPaused: () => paused,
+                    togglePause: () => pause.click(), onChange: syncPetMotion,
+                    onHome: () => {
+                        shell.open = true;
+                        terminal.hidden = false;
+                        restore.hidden = true;
+                        content.hidden = false;
+                        minimize.setAttribute("aria-expanded", "true");
+                        motd.open = true;
+                    }
                 });
                 motd.addEventListener("toggle", syncPetMotion);
                 reducedMotion.addEventListener("change", syncPetMotion);
