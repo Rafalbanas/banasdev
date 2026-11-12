@@ -90,6 +90,65 @@ def check_interactions(page):
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
 
 
+def check_dragging(page):
+    scene = page.locator("#terminalPetScene")
+    pet = page.locator("#terminalPet")
+    scene.scroll_into_view_if_needed()
+    expect(page.locator("body > #terminalPet")).to_have_count(0)
+    petted = pet.evaluate("e => e.classList.contains('is-petted')")
+
+    def start_drag():
+        box = pet.bounding_box()
+        page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+        page.mouse.down()
+
+    start_drag()
+    page.mouse.move(10, 200, steps=12)
+    page.mouse.up()
+    expect(page.locator("body > #terminalPet")).to_have_count(1)
+    expect(page.locator("#pagePetControls")).to_be_visible()
+    assert pet.evaluate("e => e.classList.contains('is-petted')") == petted, "A drag must not also pet the cat"
+
+    # A second real mouse drag returns the same DOM node to its home.
+    scene.scroll_into_view_if_needed()
+    home = page.locator("#terminalPetHome").bounding_box()
+    start_drag()
+    page.mouse.move(home["x"] + home["width"] / 2, home["y"] + home["height"] / 2, steps=12)
+    page.mouse.up()
+    expect(page.locator("#terminalPetHome > #terminalPet")).to_have_count(1)
+    expect(page.locator("#pagePetControls")).to_be_hidden()
+
+    # Escape cancels a drag that began at home.
+    start_drag()
+    page.mouse.move(10, 200, steps=12)
+    page.keyboard.press("Escape")
+    page.mouse.up()
+    expect(page.locator("#terminalPetHome > #terminalPet")).to_have_count(1)
+
+    activate(page, "#terminalPetRelease")
+    expect(page.locator("body > #terminalPet")).to_have_count(1)
+    before = pet.bounding_box()
+    start_drag()
+    page.mouse.move(100, 220, steps=8)
+    page.keyboard.press("Escape")
+    page.mouse.up()
+    expect(page.locator("body > #terminalPet")).to_have_count(1)
+    after = pet.bounding_box()
+    assert abs(before["x"] - after["x"]) < 1 and abs(before["y"] - after["y"]) < 1
+
+    viewport = page.viewport_size
+    page.set_viewport_size({"width": 320, "height": 640})
+    box = pet.bounding_box()
+    assert 8 <= box["x"] <= 248 and 8 <= box["y"] <= 496
+    page.set_viewport_size(viewport)
+    activate(page, "#terminalClose")
+    expect(page.locator("body > #terminalPet")).to_have_count(1)
+    activate(page, "#pagePetReturn")
+    expect(page.locator("#terminalPetHome > #terminalPet")).to_have_count(1)
+    expect(page.locator("#labTerminal")).to_be_visible()
+    assert pet.evaluate("e => e === document.activeElement")
+
+
 def check():
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(ROOT)))
     thread = Thread(target=server.serve_forever, daemon=True)
@@ -104,15 +163,20 @@ def check():
                     errors = []
                     page.on("pageerror", lambda error: errors.append(str(error)))
                     page.goto(url, wait_until="networkidle")
+                    expect(page.locator("#labTerminal")).to_be_hidden()
+                    expect(page.locator("#terminalShell")).not_to_have_attribute("open", "")
+                    activate(page, "#terminalRestore")
                     requests = []
                     page.on("request", lambda request: requests.append(request.url))
                     check_interactions(page)
+                    check_dragging(page)
                     assert not errors, errors
                     assert not requests, f"Terminal must not make network requests: {requests}"
                     page.close()
 
                 page = browser.new_page(viewport={"width": 1440, "height": 1000}, reduced_motion="no-preference")
                 page.goto(url, wait_until="networkidle")
+                activate(page, "#terminalRestore")
                 activate(page, "#terminalMotd summary")
                 scene = page.locator("#terminalPetScene")
                 scene.scroll_into_view_if_needed()
@@ -137,12 +201,30 @@ def check():
                 expect(scene).to_have_class("terminal-pet-scene pet-running")
                 page.locator("#contact").scroll_into_view_if_needed()
                 expect(scene).to_have_class("terminal-pet-scene")
+                activate(page, "#terminalPetRelease")
+                pet = page.locator("#terminalPet")
+                initial = pet.bounding_box()
+                page.wait_for_function("x => Math.abs(document.getElementById('terminalPet').getBoundingClientRect().x - x) > 2", arg=initial["x"])
+                activate(page, "#pagePetPause")
+                frozen = pet.bounding_box()
+                page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+                assert pet.bounding_box() == frozen
+                page.locator('[data-lang="en"]').click()
+                expect(page.locator("#pagePetReturn")).to_have_text("Return to terminal")
+                activate(page, "#pagePetPause")
+                page.emulate_media(reduced_motion="reduce")
+                frozen = pet.bounding_box()
+                page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+                assert pet.bounding_box() == frozen
+                activate(page, "#pagePetReturn")
                 page.close()
 
                 context = browser.new_context(java_script_enabled=False, viewport={"width": 320, "height": 900})
                 page = context.new_page()
                 page.goto(url, wait_until="domcontentloaded")
-                for selector in ("#terminalControls", "#terminalConsole", "#terminalRestore", "#terminalPetScene"):
+                expect(page.locator("#labTerminal")).to_be_hidden()
+                activate(page, "#terminalRestore")
+                for selector in ("#terminalControls", "#terminalConsole", "#terminalPetScene", "#pagePetControls"):
                     expect(page.locator(selector)).to_be_hidden()
                 for selector in ("#terminalMotd", "#terminalGravel"):
                     activate(page, selector + " summary")
@@ -155,7 +237,7 @@ def check():
         server.shutdown()
         server.server_close()
         thread.join()
-    print("Interactive terminal OK: controls, focus, pet, motion, commands, history, PL/EN, 3 widths, no JS, no network")
+    print("Interactive terminal OK: closed by default, window controls, real mouse drag/return, Escape, resize, pet motion/pause, commands, PL/EN, 3 widths, no JS, no network")
 
 
 if __name__ == "__main__":

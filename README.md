@@ -56,8 +56,18 @@ terminal, żółty minimalizuje, a zielony powiększa go wewnątrz karty (nie fu
 Zamknięty terminal można przywrócić. Historia ↑/↓ mieści 20 poleceń, wyjście
 osiem odpowiedzi; po przełączeniu PL/EN odpowiedzi zmieniają język.
 Kontrolki, pet i formularz włączają się tylko z JS. Bez niego treści i natywne
-`<details>` nadal działają. Ruch respektuje `prefers-reduced-motion` i zatrzymuje
+`<details>` nadal działają. Ruch w terminalu respektuje `prefers-reduced-motion` i zatrzymuje
 się, gdy pet jest poza ekranem, terminal jest ukryty lub karta nieaktywna.
+
+Domyślnie terminal jest zamknięty — zajmuje tylko miejsce przycisku „Otwórz
+terminal”, także bez JS (natywne `<details>`). Kot zostaje w środku, dopóki
+użytkownik nie przeciągnie go poza okno albo nie użyje przycisku wypuszczenia.
+Na stronie można go złapać ponownie i upuścić w otwartym terminalu. Escape
+anuluje przeciąganie. Panel spaceru oferuje pauzę i powrót bez przeciągania,
+również z klawiatury; powrót otwiera terminal, nawet jeśli został zamknięty.
+Spacer i podskoki zatrzymują się przy pauzie, ograniczeniu ruchu oraz
+nieaktywnej karcie. Po zmianie rozmiaru okna kot pozostaje w widocznym obszarze.
+Nie zapisujemy jego położenia ani nie wykonujemy dodatkowych żądań sieciowych.
 
 Test układu w obu językach i motywach (Playwright + Chromium):
 
