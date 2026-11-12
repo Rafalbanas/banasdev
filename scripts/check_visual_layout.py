@@ -23,6 +23,19 @@ def check_page(page):
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "Horizontal overflow"
     expect(page.locator("#hero-title")).to_be_visible()
     expect(page.locator("#profilePhoto")).to_be_visible()
+    for secret in ("terminalMotd", "terminalGravel"):
+        detail = page.locator(f"#{secret}")
+        summary = detail.locator("summary")
+        summary.focus()
+        page.keyboard.press("Enter")
+        expect(detail).to_have_attribute("open", "")
+        expect(detail.locator("p")).to_be_visible()
+        if secret == "terminalGravel":
+            assert detail.locator(".gravel-bike").evaluate(
+                "e => getComputedStyle(e).animationName"
+            ) == "none", "Gravel easter egg must respect reduced motion"
+        page.keyboard.press("Enter")
+        expect(detail).not_to_have_attribute("open", "")
     for section in ("about", "experience", "projects", "skills", "weather", "contact"):
         expect(page.locator(f"#{section}")).to_be_visible()
 
@@ -31,7 +44,11 @@ def check_page(page):
     search = page.locator("#projectSearch")
     search.fill("BM25")
     expect(page.locator("#projects .project-card:visible")).to_have_count(1)
-    search.fill("")
+    expect(page.locator("#homelab")).to_be_hidden()
+    page.locator('.lab-jump[href="#homelab"]').click()
+    expect(search).to_have_value("")
+    expect(page.locator("#homelab")).to_be_visible()
+    expect(page.locator(".lab-use-cases article")).to_have_count(3)
     expect(page.locator("#projects .project-card:visible")).to_have_count(total)
 
     menu = page.locator("#mobileMenuToggle")

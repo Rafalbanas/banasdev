@@ -41,6 +41,19 @@ ciemny motyw z zielonym akcentem, techniczny charakter, treści PL/EN i wszystki
 interakcje. Jasny motyw korzysta z cieplejszego, papierowego tła.
 Zmiana nie wymaga dodatkowych bibliotek, fontów ani zewnętrznych zasobów.
 
+Kolejna iteracja UI/UX rozwija ten kierunek bez zmiany kolejności sekcji:
+spokojniejsze wiersze doświadczenia i kontaktu, lżejszy pasek filtrów, mniejsze
+numery projektów i wyraźniejsze rozróżnienie akcji głównej od linku do kodu.
+Aktywna nawigacja ma podkreślenie, a rozwijane opisy projektów oznaczenia +/−.
+Referencją jest lokalne repo `wkportfolio.banas.dev` i jego system „Margines”;
+portfolio zachowuje własną paletę i systemowe fonty.
+
+W terminalu profilu są dwa małe easter eggi: `cat .motd` i `ride --gravel`.
+To natywne `<details>` działające bez JavaScript i z klawiatury, również na
+telefonie. Nie wykonują poleceń ani żądań sieciowych. Rower animuje się tylko
+po otwarciu; przy ograniczeniu ruchu pozostaje nieruchomy. Test układu poniżej
+sprawdza też obsługę obu niespodzianek z klawiatury.
+
 Test układu w obu językach i motywach (Playwright + Chromium):
 
 ```bash
@@ -107,6 +120,12 @@ Nowa karta **Homelab** opisuje Ubuntu, Ryzen 5 5500 (6 rdzeni / 12 wątków),
 i zarządzanie sesją graficzną. Dokumentacja pozostaje prywatna. Daty przeglądu,
 przypięte publiczne źródła oraz granice opisów: [PROJECT_SOURCES.md](PROJECT_SOURCES.md).
 Przegląd projektów nie wysyła zapytań do GitHuba ani danych wpisywanych w wyszukiwarkę.
+
+Wstęp homelabu wyjaśnia trzy zastosowania: lokalne AI, dostęp z Maca i Home
+Assistant. Przed specyfikacją pokazuje zakres własnej integracji oraz kompromis
+wspólnego hosta. Treść jest dostępna bez JavaScript, w wersji PL/EN; trzy kolumny
+na desktopie układają się pionowo na telefonie. Skrót we wstępie strony prowadzi
+bezpośrednio do homelabu i w razie potrzeby usuwa ukrywające go filtry projektów.
 
 W zakładce celu homelabu jest porównanie **headless / GUI na żądanie**.
 Przełącznik zmienia opis i zapisany odczyt VRAM, a nie stan zdalnego komputera.

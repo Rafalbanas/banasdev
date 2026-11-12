@@ -147,7 +147,7 @@ def check():
                 )
                 for light in (True, False):
                     page.locator("#themeToggle").click()
-                    assert page.locator("body").evaluate("e => e.classList.contains('light')") == light
+                    assert page.locator("html").evaluate("e => e.classList.contains('light')") == light
                     for width in (320, 375, 768, 1024, 1440):
                         page.set_viewport_size({"width": width, "height": 900})
                         # Chart.js resizes its canvases asynchronously.
@@ -166,11 +166,10 @@ def check():
             assert page.locator("#projectSearch").evaluate("e => e === document.activeElement")
             check_project_filters(page)
             check_scroll_navigation(page)
-            photo = page.locator("#profilePhoto").get_attribute("src")
-            page.locator("#photoSwitch").focus()
-            page.keyboard.press("Enter")
-            page.wait_for_timeout(100)
-            assert page.locator("#profilePhoto").get_attribute("src") != photo
+            profile_photo = page.locator("#profilePhoto")
+            expect(profile_photo).to_be_visible()
+            assert "cv_photo.webp" in profile_photo.get_attribute("src")
+            assert profile_photo.evaluate("el => el.naturalWidth > 0")
             page.locator("#weatherHistoryPanel").scroll_into_view_if_needed()
             page.locator('#weatherHistoryPanel[data-chart-state="ready"]').wait_for(state="attached")
             assert page.evaluate("Chart.version") == "4.4.7"
@@ -217,7 +216,7 @@ def check():
             page.locator('[data-lang="en"]').click()
             page.locator("#themeToggle").click()
             assert page.locator("html").get_attribute("lang") == "en"
-            assert page.locator("body").evaluate("e => e.classList.contains('light')")
+            assert page.locator("html").evaluate("e => e.classList.contains('light')")
             assert "could not be loaded" in page.locator("#chartLibraryStatus").inner_text()
             page.unroute(chart_route)
             page.locator("#chartLibraryRetry").click()
