@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cix/0LmncDSxiveuYC1L8+nMvdsmJuHYhpj6WUc65wU=' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-JSPeJW14/AfRp1wKwWQSuK3Lx03xcIW7TVqWY5riLBE='; script-src-attr 'none'; style-src 'self' 'sha256-M3DobhkZlGENRktq7jHW/jreWqfSvzv+VLF6m3mTcBI='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cix/0LmncDSxiveuYC1L8+nMvdsmJuHYhpj6WUc65wU=' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-5+S/WRqwQ0f0Pxx8rKNC+oVqs+w7cCL9Ud1hES55mVA='; script-src-attr 'none'; style-src 'self' 'sha256-ZGUip9MuTNF/7I7FJXX7cb/hZad6fchN7UtUiGTtSIc='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rafał Banaś | Technical Support Engineer · Python & AI</title>
@@ -565,12 +565,49 @@
             gap: 5px;
         }
 
-        .lab-terminal-dots span {
-            width: 7px;
-            height: 7px;
-            border-radius: 999px;
-            background: var(--accent);
-            opacity: 0.72;
+        .lab-terminal-header > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .lab-terminal-dots { flex-shrink: 0; gap: 0; }
+        .terminal-control {
+            width: 44px; height: 44px; display: grid; place-items: center;
+            border: 0; padding: 0; background: transparent; cursor: pointer;
+        }
+        .terminal-control span { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; color: #15191b; font: 700 15px/1 monospace; }
+        .terminal-control--close span { background: #ff7e78; }
+        .terminal-control--minimize span { background: #f3cd65; }
+        .terminal-control--expand span { background: #9ddc87; }
+        .terminal-control:hover span { outline: 2px solid var(--text); outline-offset: 2px; }
+        .lab-terminal:has(.terminal-control) .lab-terminal-header { padding: 4px 8px 4px 12px; gap: 4px; }
+        .terminal-restore { margin-top: 16px; width: 100%; }
+        .terminal-console { padding: 12px; border-top: 1px solid var(--line); }
+        .terminal-console > p { font-size: 0.74rem; color: var(--muted); margin-bottom: 12px; }
+        .terminal-console label { font-size: 0.75rem; color: var(--muted); }
+        .terminal-command-row { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
+        .terminal-command-row > span { color: var(--code); }
+        .terminal-command-row input { min-width: 0; width: 100%; min-height: 44px; border: 1px solid var(--line); background: var(--bg); color: var(--text); border-radius: 4px; padding: 8px; font: inherit; font-size: 0.8rem; }
+        .terminal-command-row button { min-width: 44px; min-height: 44px; padding: 6px; }
+        .terminal-output { max-height: 170px; overflow-y: auto; overflow-wrap: anywhere; font-size: 0.78rem; }
+        .terminal-output p { margin: 0 0 12px; white-space: pre-wrap; }
+        .terminal-output code { display: block; color: var(--code); margin-bottom: 4px; }
+        .lab-terminal.is-expanded .terminal-output { max-height: 360px; }
+        .lab-terminal.is-expanded .terminal-console { padding-block: 20px; }
+        .lab-terminal.is-expanded .terminal-output { min-height: 120px; }
+        #terminalCommandHint { display: block; margin-top: 8px; font-size: 0.7rem; color: var(--muted); }
+        .lab-terminal.is-expanded .lab-terminal-body { display: grid; }
+        .terminal-pet-scene { margin: 0 12px 12px; padding: 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg-soft); }
+        .pet-track { height: 84px; display: flex; align-items: end; padding: 8px; border-bottom: 1px dashed var(--line); margin-bottom: 10px; overflow: hidden; }
+        .terminal-pet { width: 64px; height: 60px; flex-shrink: 0; border: 0; padding: 4px; background: transparent; cursor: pointer; color: #efb67d; }
+        .terminal-pet svg { width: 100%; height: 100%; overflow: visible; }
+        .terminal-pet .cat-eye { fill: #20292d; }
+        .terminal-pet .cat-nose { fill: #b05c62; }
+        .terminal-pet.is-petted .cat-eye { transform: scaleY(0.4); transform-origin: center; transform-box: fill-box; }
+        .pet-running .terminal-pet { animation: terminal-prowl 6s ease-in-out infinite alternate; }
+        .terminal-pet.is-petted svg { animation: terminal-hop 550ms ease-out; }
+        .terminal-secret .pet-reaction { padding: 0; margin-bottom: 10px; min-height: 2.8em; }
+        .pet-pause { min-height: 44px; padding: 6px 10px; font-size: 0.75rem; }
+        @keyframes terminal-prowl { to { transform: translateX(110px); } }
+        @keyframes terminal-hop { 40% { transform: translateY(-16px) rotate(-6deg); } }
+        @media (prefers-reduced-motion: reduce) {
+            .pet-running .terminal-pet, .terminal-pet.is-petted svg { animation: none; }
         }
 
         .lab-terminal-body {
@@ -2384,11 +2421,17 @@
                         <span data-i18n="profile.direction">AI, Data Science, automatyzacja</span>
                     </div>
                 </div>
-                <div class="lab-terminal" aria-label="Osobiste engineering lab" data-i18n-attr="aria-label:terminal.aria">
+                <button class="button terminal-restore" id="terminalRestore" type="button" aria-controls="labTerminal" data-i18n="terminalDemo.restore" hidden>Otwórz terminal ponownie</button>
+                <div class="lab-terminal" id="labTerminal" aria-label="Osobiste engineering lab" data-i18n-attr="aria-label:terminal.aria">
                     <div class="lab-terminal-header">
                         <span>~/banas.dev/lab</span>
-                        <span class="lab-terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                        <div class="lab-terminal-dots" id="terminalControls" hidden>
+                            <button class="terminal-control terminal-control--close" id="terminalClose" type="button" aria-controls="labTerminal" aria-label="Zamknij terminal" data-i18n-attr="aria-label:terminalDemo.close"><span aria-hidden="true">×</span></button>
+                            <button class="terminal-control terminal-control--minimize" id="terminalMinimize" type="button" aria-controls="terminalContent" aria-expanded="true" aria-label="Zminimalizuj / przywróć terminal" data-i18n-attr="aria-label:terminalDemo.minimize"><span aria-hidden="true">−</span></button>
+                            <button class="terminal-control terminal-control--expand" id="terminalExpand" type="button" aria-controls="terminalContent" aria-pressed="false" aria-label="Powiększ / zmniejsz terminal" data-i18n-attr="aria-label:terminalDemo.expand"><span aria-hidden="true">+</span></button>
+                        </div>
                     </div>
+                    <div id="terminalContent">
                     <div class="lab-terminal-body">
                         <span data-i18n="terminal.line1">ops: wsparcie systemów i aplikacji</span>
                         <span data-i18n="terminal.line2">data: telemetryka, SQL, eksperymenty ML</span>
@@ -2397,12 +2440,41 @@
                     <details class="terminal-secret" id="terminalMotd">
                         <summary><code>$ cat .motd</code></summary>
                         <p data-i18n="easterEggs.motd">Najpierw logi. Potem kawa. Potem jeszcze raz logi. To tylko wiadomość z mojego małego zakątka internetu — niczego tu nie uruchamiasz.</p>
+                        <div class="terminal-pet-scene" id="terminalPetScene" hidden>
+                            <div class="pet-track">
+                                <button class="terminal-pet" id="terminalPet" type="button" aria-label="Pogłaszcz kota" data-i18n-attr="aria-label:terminalDemo.pet">
+                                    <svg viewBox="0 0 64 52" aria-hidden="true" focusable="false">
+                                        <path fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" d="M44 35 Q61 36 55 21"/>
+                                        <path fill="currentColor" d="M18 28 Q35 21 46 32 L46 45 H40 L38 39 H26 L24 45 H18Z M8 15 L8 3 L19 11 L30 3 L31 25 Q21 36 10 26Z"/>
+                                        <path fill="#f6d5ad" d="M10 9 L10 18 L16 14Z M28 9 L23 14 L29 18Z"/>
+                                        <circle class="cat-eye" cx="15" cy="20" r="2"/><circle class="cat-eye" cx="25" cy="20" r="2"/>
+                                        <path class="cat-nose" d="M18 24 H22 L20 27Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="pet-reaction" id="terminalPetReaction" role="status" data-i18n="terminalDemo.petIntro">Mały opiekun logów. Kliknij kota, żeby go pogłaskać.</p>
+                            <button class="button secondary pet-pause" id="terminalPetPause" type="button" aria-pressed="false" data-i18n="terminalDemo.pause">Wstrzymaj ruch kota</button>
+                        </div>
                     </details>
                     <details class="terminal-secret" id="terminalGravel">
                         <summary><code>$ ride --gravel</code></summary>
                         <p data-i18n="easterEggs.gravel">Tryb gravel: mniej powiadomień, więcej przewyższeń. Ten rower jedzie tylko po stronie. Ja wolę po szutrze.</p>
                         <div class="gravel-track" aria-hidden="true"><span class="gravel-bike">🚲</span></div>
                     </details>
+                    <div class="terminal-console" id="terminalConsole" hidden>
+                        <p data-i18n="terminalDemo.hint">Mały terminal portfolio, nie zdalna powłoka. Wpisz help. Historia: ↑ / ↓.</p>
+                        <div class="terminal-output" id="terminalOutput" role="log" aria-live="polite" aria-relevant="additions" tabindex="0" aria-label="Wyniki poleceń" data-i18n-attr="aria-label:terminalDemo.output"></div>
+                        <form id="terminalForm">
+                            <label for="terminalCommand" data-i18n="terminalDemo.command">Polecenie</label>
+                            <div class="terminal-command-row">
+                                <span aria-hidden="true">$</span>
+                                <input id="terminalCommand" type="text" maxlength="100" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="help" aria-describedby="terminalCommandHint">
+                                <button class="button secondary" id="terminalRun" type="submit" aria-label="Wykonaj lokalne polecenie" data-i18n-attr="aria-label:terminalDemo.run">↵</button>
+                            </div>
+                            <span id="terminalCommandHint" data-i18n="terminalDemo.localOnly">Działa tylko w tej karcie. Bez połączenia z serwerem.</span>
+                        </form>
+                    </div>
+                    </div>
                 </div>
             </aside>
         </section>
@@ -3512,6 +3584,28 @@ const translations = {
                         privateLab: "Własne laboratorium · dokumentacja prywatna",
                         results: "Przeglądaj wyniki"
                     },
+                    terminalDemo: {
+                        restore: "Otwórz terminal ponownie",
+                        close: "Zamknij terminal",
+                        minimize: "Zminimalizuj / przywróć terminal",
+                        expand: "Powiększ / zmniejsz terminal",
+                        pet: "Pogłaszcz kota",
+                        petIntro: "Mały opiekun logów. Kliknij kota, żeby go pogłaskać.",
+                        petHappy: "Mrrr… Logi pod kontrolą. Można wracać do kodu.",
+                        pause: "Wstrzymaj ruch kota",
+                        resume: "Wznów ruch kota",
+                        hint: "Mały terminal portfolio, nie zdalna powłoka. Wpisz help. Historia: ↑ / ↓.",
+                        output: "Wyniki poleceń",
+                        command: "Polecenie",
+                        run: "Wykonaj lokalne polecenie",
+                        localOnly: "Działa tylko w tej karcie. Bez połączenia z serwerem.",
+                        help: "help — lista poleceń\nwhoami — o mnie\nls — sekcje portfolio\ncat .motd — obudź kota\nride --gravel — czas na rower\nclear — wyczyść terminal",
+                        whoami: "Rafał Banaś · wsparcie IT, Python, AI i gravel po godzinach.",
+                        sections: "O mnie / Doświadczenie / Projekty / Homelab / Umiejętności / Kontakt — znajdziesz je na tej stronie.",
+                        cat: "Opiekun logów obudzony. Zajrzyj do cat .motd powyżej i pogłaszcz kota.",
+                        ride: "Rower gotowy. Szutrowy przerywnik znajdziesz powyżej.",
+                        unknown: "Nie znam tego polecenia. Wpisz help — to zabawka w portfolio, nie prawdziwa powłoka."
+                    },
                     easterEggs: {
                         motd: "Najpierw logi. Potem kawa. Potem jeszcze raz logi. To tylko wiadomość z mojego małego zakątka internetu — niczego tu nie uruchamiasz.",
                         gravel: "Tryb gravel: mniej powiadomień, więcej przewyższeń. Ten rower jedzie tylko po stronie. Ja wolę po szutrze."
@@ -3996,6 +4090,28 @@ const translations = {
                         website: "This website · static frontend & data",
                         privateLab: "Personal lab · private documentation",
                         results: "Explore the results"
+                    },
+                    terminalDemo: {
+                        restore: "Reopen terminal",
+                        close: "Close terminal",
+                        minimize: "Minimize / restore terminal",
+                        expand: "Expand / shrink terminal",
+                        pet: "Pet the cat",
+                        petIntro: "A little log keeper. Click the cat to give it a pet.",
+                        petHappy: "Purrr… Logs are under control. Back to the code.",
+                        pause: "Pause cat movement",
+                        resume: "Resume cat movement",
+                        hint: "A little portfolio terminal, not a remote shell. Type help. History: ↑ / ↓.",
+                        output: "Command output",
+                        command: "Command",
+                        run: "Run local command",
+                        localOnly: "Runs only in this tab. No server connection.",
+                        help: "help — list commands\nwhoami — about me\nls — portfolio sections\ncat .motd — wake the cat\nride --gravel — time for a ride\nclear — clear terminal",
+                        whoami: "Rafał Banaś · IT support, Python, AI and gravel after hours.",
+                        sections: "About / Experience / Projects / Homelab / Skills / Contact — all on this page.",
+                        cat: "Log keeper awake. Open cat .motd above and pet the cat.",
+                        ride: "Bike ready. Your gravel break is just above.",
+                        unknown: "Unknown command. Type help — this is a portfolio toy, not a real shell."
                     },
                     easterEggs: {
                         motd: "First, logs. Then coffee. Then logs again. Just a message from my little corner of the internet — no commands run here.",
@@ -5474,6 +5590,163 @@ const translations = {
                 renderHomelabLab();
             }
 
+            function resolveTerminalCommand(value) {
+                const command = String(value).slice(0, 100).trim().replace(/\s+/g, " ").toLowerCase();
+                if (!command) return null;
+                switch (command) {
+                    case "help": return { command, key: "help" };
+                    case "whoami": return { command, key: "whoami" };
+                    case "ls": return { command, key: "sections" };
+                    case "cat .motd": return { command, key: "cat" };
+                    case "ride --gravel": return { command, key: "ride" };
+                    case "clear": return { command, key: "clear" };
+                    default: return { command, key: "unknown" };
+                }
+            }
+
+            let refreshInteractiveTerminal = () => {};
+
+            function setupInteractiveTerminal() {
+                const terminal = document.getElementById("labTerminal");
+                if (!terminal) return;
+                const content = document.getElementById("terminalContent");
+                const restore = document.getElementById("terminalRestore");
+                const minimize = document.getElementById("terminalMinimize");
+                const expand = document.getElementById("terminalExpand");
+                const motd = document.getElementById("terminalMotd");
+                const gravel = document.getElementById("terminalGravel");
+                const scene = document.getElementById("terminalPetScene");
+                const pet = document.getElementById("terminalPet");
+                const pause = document.getElementById("terminalPetPause");
+                const reaction = document.getElementById("terminalPetReaction");
+                const output = document.getElementById("terminalOutput");
+                const input = document.getElementById("terminalCommand");
+                const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+                const entries = [];
+                const history = [];
+                let historyIndex = 0;
+                let draft = "";
+                let paused = false;
+                let petted = false;
+                let inView = false;
+                const copy = () => translations[document.documentElement.lang || "pl"].terminalDemo;
+
+                function syncPetMotion() {
+                    const running = motd.open && !terminal.hidden && !content.hidden &&
+                        !paused && !reducedMotion.matches && !document.hidden && inView;
+                    scene.classList.toggle("pet-running", running);
+                }
+
+                function makeEntry(entry) {
+                    const paragraph = document.createElement("p");
+                    const command = document.createElement("code");
+                    command.textContent = "$ " + entry.command;
+                    paragraph.append(command, document.createTextNode(copy()[entry.key]));
+                    return paragraph;
+                }
+
+                refreshInteractiveTerminal = () => {
+                    [["terminalClose", "close"], ["terminalMinimize", "minimize"], ["terminalExpand", "expand"]].forEach(([id, key]) => {
+                        document.getElementById(id).setAttribute("title", copy()[key]);
+                    });
+                    pause.textContent = paused ? copy().resume : copy().pause;
+                    pause.setAttribute("aria-pressed", String(paused));
+                    reaction.textContent = petted ? copy().petHappy : copy().petIntro;
+                    output.replaceChildren(...entries.map(makeEntry));
+                };
+
+                document.getElementById("terminalClose").addEventListener("click", () => {
+                    terminal.hidden = true;
+                    restore.hidden = false;
+                    syncPetMotion();
+                    restore.focus({ preventScroll: true });
+                });
+                restore.addEventListener("click", () => {
+                    terminal.hidden = false;
+                    restore.hidden = true;
+                    content.hidden = false;
+                    minimize.setAttribute("aria-expanded", "true");
+                    syncPetMotion();
+                    document.getElementById("terminalClose").focus({ preventScroll: true });
+                });
+                minimize.addEventListener("click", () => {
+                    content.hidden = !content.hidden;
+                    minimize.setAttribute("aria-expanded", String(!content.hidden));
+                    syncPetMotion();
+                });
+                expand.addEventListener("click", () => {
+                    const expanded = terminal.classList.toggle("is-expanded");
+                    expand.setAttribute("aria-pressed", String(expanded));
+                    content.hidden = false;
+                    minimize.setAttribute("aria-expanded", "true");
+                    syncPetMotion();
+                });
+                pet.addEventListener("click", () => {
+                    petted = !petted;
+                    pet.classList.toggle("is-petted", petted);
+                    reaction.textContent = petted ? copy().petHappy : copy().petIntro;
+                });
+                pause.addEventListener("click", () => {
+                    paused = !paused;
+                    pause.textContent = paused ? copy().resume : copy().pause;
+                    pause.setAttribute("aria-pressed", String(paused));
+                    syncPetMotion();
+                });
+                motd.addEventListener("toggle", syncPetMotion);
+                reducedMotion.addEventListener("change", syncPetMotion);
+                document.addEventListener("visibilitychange", syncPetMotion);
+                if ("IntersectionObserver" in window) {
+                    const observer = new IntersectionObserver(([entry]) => {
+                        inView = entry.isIntersecting;
+                        syncPetMotion();
+                    });
+                    observer.observe(scene);
+                }
+
+                document.getElementById("terminalForm").addEventListener("submit", (event) => {
+                    event.preventDefault();
+                    const entry = resolveTerminalCommand(input.value);
+                    if (!entry) return;
+                    history.push(input.value.slice(0, 100));
+                    if (history.length > 20) history.shift();
+                    historyIndex = history.length;
+                    draft = "";
+                    input.value = "";
+                    if (entry.key === "clear") {
+                        entries.length = 0;
+                        output.replaceChildren();
+                    } else {
+                        entries.push(entry);
+                        if (entries.length > 8) {
+                            entries.shift();
+                            output.firstElementChild?.remove();
+                        }
+                        output.append(makeEntry(entry));
+                        output.scrollTop = output.scrollHeight;
+                    }
+                    if (entry.key === "cat") motd.open = true;
+                    if (entry.key === "ride") {
+                        gravel.open = false;
+                        void gravel.offsetHeight;
+                        gravel.open = true;
+                    }
+                });
+                input.addEventListener("keydown", (event) => {
+                    if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return;
+                    if (!history.length) return;
+                    event.preventDefault();
+                    if (historyIndex === history.length) draft = input.value;
+                    historyIndex = Math.max(0, Math.min(history.length,
+                        historyIndex + (event.key === "ArrowUp" ? -1 : 1)));
+                    input.value = historyIndex === history.length ? draft : history[historyIndex];
+                });
+
+                document.getElementById("terminalControls").hidden = false;
+                document.getElementById("terminalConsole").hidden = false;
+                scene.hidden = false;
+                refreshInteractiveTerminal();
+            }
+
             function setupHomelabModels() {
                 const controls = document.getElementById("labModelSwitch");
                 if (!controls) return;
@@ -5640,6 +5913,7 @@ const translations = {
                 });
 
                 updateMenuButtonLabel(selected);
+                refreshInteractiveTerminal();
                 renderHomelabLab(selected);
                 applyProjectFilters(selected);
                 renderWeather(selected);
@@ -5721,6 +5995,7 @@ const translations = {
             setupHomelabModels();
             setupHomelabLab();
             setupProjectExplorer();
+            setupInteractiveTerminal();
             document.querySelector('.lab-jump')?.addEventListener("click", () => {
                 if (!document.getElementById("homelab")?.hidden) return;
                 selectedProjectFilter = "all";

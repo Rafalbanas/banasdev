@@ -69,7 +69,8 @@ class TestSiteIntegrity(unittest.TestCase):
 
     def test_button_types(self):
         for btn in self.parser.buttons:
-            self.assertEqual(btn.get('type'), 'button', f"Button missing type='button': {btn}")
+            expected = 'submit' if btn.get('id') == 'terminalRun' else 'button'
+            self.assertEqual(btn.get('type'), expected, f"Incorrect explicit button type: {btn}")
 
     def test_blank_links_noopener(self):
         for link in self.parser.links:

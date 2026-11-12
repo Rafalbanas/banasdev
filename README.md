@@ -48,16 +48,23 @@ Aktywna nawigacja ma podkreślenie, a rozwijane opisy projektów oznaczenia +/�
 Referencją jest lokalne repo `wkportfolio.banas.dev` i jego system „Margines”;
 portfolio zachowuje własną paletę i systemowe fonty.
 
-W terminalu profilu są dwa małe easter eggi: `cat .motd` i `ride --gravel`.
-To natywne `<details>` działające bez JavaScript i z klawiatury, również na
-telefonie. Nie wykonują poleceń ani żądań sieciowych. Rower animuje się tylko
-po otwarciu; przy ograniczeniu ruchu pozostaje nieruchomy. Test układu poniżej
-sprawdza też obsługę obu niespodzianek z klawiatury.
+Terminal oferuje lokalne, symulowane komendy: `help`, `whoami`, `ls`,
+`cat .motd`, `ride --gravel` i `clear` — bez shella, sieci, `eval` ani zapisu.
+`cat .motd` odkrywa kota-peta; kliknięcie lub Enter na kocie zmienia jego stan.
+Ruch można wstrzymać i wznowić osobnym przyciskiem. Czerwony przycisk zamyka
+terminal, żółty minimalizuje, a zielony powiększa go wewnątrz karty (nie fullscreen).
+Zamknięty terminal można przywrócić. Historia ↑/↓ mieści 20 poleceń, wyjście
+osiem odpowiedzi; po przełączeniu PL/EN odpowiedzi zmieniają język.
+Kontrolki, pet i formularz włączają się tylko z JS. Bez niego treści i natywne
+`<details>` nadal działają. Ruch respektuje `prefers-reduced-motion` i zatrzymuje
+się, gdy pet jest poza ekranem, terminal jest ukryty lub karta nieaktywna.
 
 Test układu w obu językach i motywach (Playwright + Chromium):
 
 ```bash
 python3 scripts/check_visual_layout.py
+# Kontrolki okna, pet, polecenia, historia, brak JS i brak żądań sieciowych:
+python3 scripts/check_interactive_terminal.py
 # Opcjonalnie zapisz zrzuty desktop/mobile poza paczką wdrożeniową:
 python3 scripts/check_visual_layout.py --screenshots /tmp/opencode/banasdev-layout
 ```
