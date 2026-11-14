@@ -41,6 +41,36 @@ ciemny motyw z zielonym akcentem, techniczny charakter, treści PL/EN i wszystki
 interakcje. Jasny motyw korzysta z cieplejszego, papierowego tła.
 Zmiana nie wymaga dodatkowych bibliotek, fontów ani zewnętrznych zasobów.
 
+Iteracja z 14 listopada 2026 dopracowuje osobisty charakter portfolio:
+większe nazwisko i asymetryczny pierwszy ekran, szersza karta prawdziwego
+zdjęcia, wyraźniejsze powierzchnie trzech obszarów pracy oraz akcentowane
+karty Cycling, Plates i CVTailor. Zachowano treści, ograniczenia projektów,
+PL/EN, oba motywy i interakcje. Nie dodano bibliotek ani żądań do GitHuba.
+Zmiany w repozytorium nie oznaczają ich publikacji na stronie produkcyjnej.
+
+### Ścieżka dla rekrutera i zleceniodawcy
+
+Sekcja „W czym mogę pomóc Twojemu zespołowi?” poprzedza szczegółowe CV
+i łączy trzy obszary współpracy z dowodami: wsparcie IT z doświadczeniem,
+automatyzację z projektami, a integracje AI z homelabem. Skrót w hero
+prowadzi bezpośrednio do tej sekcji. Kontakt rozróżnia rozmowę o etacie,
+B2B i freelance oraz podpowiada, co zawrzeć w pierwszej wiadomości.
+Nie deklaruje natychmiastowej dostępności, stawek ani komercyjnych wyników
+projektów własnych. Treści działają w PL/EN, z polskim fallbackiem bez JS.
+
+Test nowej ścieżki, w tym powrotu do homelabu ukrytego filtrem projektów:
+
+```bash
+python3 scripts/check_hiring_story.py
+# Opcjonalnie zrzuty sekcji na telefonie i desktopie:
+python3 scripts/check_hiring_story.py --screenshots /tmp/opencode/banasdev-hiring
+```
+
+CI uruchamia testy jednostkowe oraz osobny job `browser-test` z Playwright
+1.63.0 i Chromium. Ten drugi sprawdza ścieżkę współpracy, układ PL/EN
+w obu motywach i interakcje strony. Wdrożenie z `main` wymaga powodzenia
+obu jobów; samo otwarcie PR-a nie wdraża strony.
+
 Kolejna iteracja UI/UX rozwija ten kierunek bez zmiany kolejności sekcji:
 spokojniejsze wiersze doświadczenia i kontaktu, lżejszy pasek filtrów, mniejsze
 numery projektów i wyraźniejsze rozróżnienie akcji głównej od linku do kodu.
