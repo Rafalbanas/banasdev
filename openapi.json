@@ -1,0 +1,42 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "banas.dev public data exports",
+    "version": "1.0.0",
+    "description": "Existing read-only JSON files served by the static site, not a transactional backend. Inspect payload timestamps; HTTP 200 does not guarantee fresh or complete observations."
+  },
+  "servers": [{"url": "https://banas.dev"}],
+  "externalDocs": {"url": "https://banas.dev/api.md"},
+  "paths": {
+    "/data.json": {
+      "get": {
+        "operationId": "getAirQuality",
+        "summary": "Latest collected GIOŚ air-quality export for Katowice",
+        "responses": {
+          "200": {"description": "JSON export; measured_at and fetched_at indicate data age.", "content": {"application/json": {"schema": {"type": "object", "additionalProperties": true}}}},
+          "404": {"description": "Export unavailable"}
+        }
+      }
+    },
+    "/history.json": {
+      "get": {
+        "operationId": "getAirQualityHistory",
+        "summary": "Collected PM2.5 and PM10 history",
+        "responses": {
+          "200": {"description": "Historical air-quality data, not a live health signal.", "content": {"application/json": {"schema": {"type": "object", "additionalProperties": true}}}},
+          "404": {"description": "Export unavailable"}
+        }
+      }
+    },
+    "/weather.json": {
+      "get": {
+        "operationId": "getWeather",
+        "summary": "Open-Meteo weather model, history and short-term forecast",
+        "responses": {
+          "200": {"description": "Inspect current.data_time_utc, fetched_at_utc and forecast.issued_at_utc under locations.kat04bapp.", "content": {"application/json": {"schema": {"type": "object", "additionalProperties": true}}}},
+          "404": {"description": "Export unavailable"}
+        }
+      }
+    }
+  }
+}

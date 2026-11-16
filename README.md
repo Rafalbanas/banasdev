@@ -33,6 +33,81 @@ kompletność tłumaczeń PL/EN, aktualny profil i linki projektowe.
 
 ## Nowe funkcje
 
+### Zawodowo / Po godzinach — 16 listopada 2026
+
+Domyślna strona jest ścieżką zawodową: profil, doświadczenie, dowody w projektach
+i główna akcja „Porozmawiajmy na LinkedIn”. Przełącznik prowadzi do `hobby.html`:
+roweru oraz prywatnego warsztatu homelab / lokalne AI. Opisy nie dodają nowych
+zainteresowań ani niepotwierdzonych osiągnięć. Karty case studies mają odrębne
+akcenty i nawigację do kolejnego projektu.
+
+Strona hobby współdzieli język i motyw z portfolio. Ładuje wyłącznie istniejące
+`weather.json` i `data.json`, korzystając z tego samego modułu reguł rowerowych.
+Oś dwóch godzin pokazuje kwadranse z opisanymi tekstowo stanami, obrysem
+ocenianego okna i jawnymi lukami danych. Nie jest osobną prognozą jakości
+powietrza. Brak aktualnych danych ukrywa oś zamiast przedstawiać stare dane
+jako dobre warunki. Historyczny widżet na stronie głównej zostaje zachowany
+w domyślnie zwiniętym podglądzie, by nie wydłużać ścieżki do kontaktu.
+Wejście przez `#weather` otwiera podgląd; bez JS można go rozwinąć natywną
+kontrolką. Główna nawigacja prowadzi już do części „Po godzinach”.
+
+Kontrolki hobby są nieaktywne bez JS; treść i linki pozostają dostępne.
+Nie dodano analityki, zewnętrznych bibliotek, fontów ani nowych API.
+
+```bash
+python3 scripts/check_site_routes.py
+python3 scripts/check_ride_and_stories.py
+```
+
+Paczka dodaje także `hobby.html`, `assets/hobbies.css` i `assets/hobbies.js`;
+zaktualizowana allowlista odbiornika wymaga ręcznej instalacji przez operatora
+przed wdrożeniem. Samo otwarcie PR-a nie publikuje strony.
+
+### Wybrane projekty i „Kato ride check” — 15 listopada 2026
+
+Portfolio ma teraz dodatkową stronę `projekty.html`: trzy wizualne case studies
+CVTailor, Cycling i Plates, z opisem decyzji, przepływu oraz ograniczeń.
+Odnośnik projektowy i link w katalogu prowadzą do tej strony; pełen katalog i CV pozostają na
+stronie głównej. Obie strony współdzielą zapisane preferencje PL/EN i motywu.
+Nowa strona działa także bez JS, z polską treścią.
+
+Panel „A może na rower?” w sekcji pogody używa już pobranych danych — bez
+nowego API, geolokalizacji, zapisu preferencji przejażdżki lub dodatkowych żądań.
+Wybór 30/60/90 minut uruchamia szukanie ciągłego komfortowego okna w najbliższych
+2 godzinach. Ocenę przeliczamy po pobraniu danych, zmianie wyboru lub języka
+i co minutę. Godziny są zawsze podawane dla Katowic.
+
+- Komfort: 10–26°C, wiatr ≤20 km/h, opady <0,1 mm/15 min, prawdopodobieństwo
+  opadów <40%, GIOŚ dobry/bardzo dobry. Wiatr w eksporcie ma domyślną jednostkę
+  Open-Meteo km/h; prawdopodobieństwo dotyczy godziny, nie osobnego kwadransa.
+- ≤2°C / ≥32°C, wiatr ≥35 km/h, opady ≥0,5 mm/15 min, szansa ≥70%,
+  burza, śnieg lub oblodzenie wykluczają komfortowe okno; łagodniejsze
+  przekroczenia i mgła dają zastrzeżenia.
+- Pogoda bieżąca i wydanie prognozy muszą być nie starsze niż 30 minut,
+  a pomiar GIOŚ niż 3 godziny. Braki, błędy pobrania, nieprawidłowe liczby
+  i luki w wymaganym oknie skutkują brakiem oceny, nie „dobrą pogodą”.
+- Najgorszy indeks stacji i indeks zbiorczy zapobiegają ukryciu gorszego odczytu.
+  Przyszłe okno korzysta z **obecnej**, nie prognozowanej jakości powietrza.
+
+To jawna, autorska heurystyka komfortu, nie model ML, gwarancja bezpieczeństwa
+ani porada zdrowotna. Nie uwzględnia światła dziennego, porywów, ruchu i stanu
+nawierzchni. Reguły i ograniczenia są dostępne w panelu; bez JS pozostaje
+komunikat o braku oceny, nieaktywny wybór i czytelne objaśnienie.
+Wersjonowane JSON-y są archiwalne — lokalnie bez świeżych danych panel
+prawidłowo nie wyda rekomendacji.
+
+```bash
+python3 -m unittest tests.test_ride_planner -v
+python3 scripts/check_ride_and_stories.py
+# Zrzuty mobilne i desktopowe, poza paczką wdrożeniową:
+python3 scripts/check_ride_and_stories.py --screenshots /tmp/opencode/banasdev-stories-ride
+```
+
+Paczka obejmuje nową stronę i cztery zasoby CSS/JS. Przed przyszłym wdrożeniem
+operator musi uaktualnić root-owned odbiornik `deploy.py`, którego allowlista
+obejmuje teraz te pliki; szczegóły w `deploy/README.md`. Publikację potwierdza
+udany workflow na `main` i publiczny `revision.txt`, nie sam zapis zmian.
+
 ### Odświeżenie wizualne
 
 Układ inspirowany redakcyjnym rytmem `wkportfolio`: większa typografia,
@@ -116,6 +191,15 @@ Opcjonalna walidacja (wymaga Playwright i Chromium):
 ```bash
 python3 scripts/check_back_to_top.py
 ```
+
+### Automatyzacja i odkrywczość
+
+Wprowadzono system automatycznego odkrywania treści przez agentów (Sitemap oraz `.well-known/api-catalog`). Od teraz:
+- `sitemap.xml` zawiera listę wszystkich dostępnych stron i treści.
+- Automatyczna walidacja (Python 3) sprawdza spójność treści, tłumaczeń i linków.
+- Deklaracje `Content-Signal` w `robots.txt` definiują reguły dostępu dla agentów.
+- API jest dostępne w trybie read-only przez `openapi.json`.
+- Wdrożenie wymaga konfiguracji reguły NGINX dla obsługi standardowych ścieżek Discovery.
 
 ## CI/CD
 

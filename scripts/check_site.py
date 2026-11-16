@@ -6,8 +6,10 @@ import tempfile
 from urllib.parse import unquote, urlsplit
 if __package__:
     from . import security_policy
+    from . import agent_content
 else:
     import security_policy
+    import agent_content
 
 
 class Site(HTMLParser):
@@ -42,23 +44,34 @@ class Site(HTMLParser):
 
 def check(root):
     security_policy.check(root)
-    site = Site()
-    site.feed((root / "index.html").read_text())
-    for url in site.urls:
-        parsed = urlsplit(url)
-        if parsed.scheme or parsed.netloc:
-            continue
-        if parsed.path:
-            if not (root / unquote(parsed.path).lstrip("/")).is_file():
+    agent_content.check_or_write(root)
+    pages = {}
+    for path in root.glob("*.html"):
+        site = Site()
+        site.feed(path.read_text())
+        pages[path.name] = site
+    external_scripts = set()
+    for name, site in pages.items():
+        for url in site.urls:
+            parsed = urlsplit(url)
+            if parsed.scheme or parsed.netloc:
+                continue
+            target = unquote(parsed.path).lstrip("/")
+            if target and not (root / target).is_file():
                 raise ValueError("Missing asset: " + url)
-        elif parsed.fragment and parsed.fragment not in site.ids:
-            raise ValueError("Missing fragment: " + url)
+            destination = pages.get(target or name)
+            if parsed.fragment and destination and parsed.fragment not in destination.ids:
+                raise ValueError("Missing fragment: " + url)
+            if target.endswith(".js"):
+                external_scripts.add(root / target)
     with tempfile.TemporaryDirectory() as directory:
-        for index, script in enumerate(site.scripts):
+        for index, script in enumerate(script for site in pages.values() for script in site.scripts):
             path = Path(directory) / f"inline-{index}.js"
             path.write_text(script)
             subprocess.run(["node", "--check", str(path)], check=True)
-    print("HTML assets, anchors and inline JavaScript OK")
+    for path in sorted(external_scripts):
+        subprocess.run(["node", "--check", str(path)], check=True)
+    print("HTML pages, assets, cross-page anchors and JavaScript OK")
 
 
 if __name__ == "__main__":

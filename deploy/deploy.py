@@ -17,6 +17,12 @@ import zipfile
 MAX_BYTES = 16 * 1024 * 1024
 FILES = {
     "public/index.html", "public/robots.txt", "public/favicon.png",
+    "public/projekty.html",
+    "public/hobby.html", "public/assets/hobbies.css", "public/assets/hobbies.js",
+    "public/sitemap.xml", "public/index.md", "public/projekty.md", "public/hobby.md",
+    "public/.well-known/api-catalog", "public/openapi.json", "public/api.md",
+    "public/assets/project-stories.css", "public/assets/project-stories.js",
+    "public/assets/ride-planner.css", "public/assets/ride-planner.js",
     "public/cv_photo.jpg", "public/cv_photo.webp",
     "public/revision.txt", "fetch_weather.py",
     "public/assets/vendor/chart.umd.min.js", "public/assets/vendor/chart.LICENSE.md",

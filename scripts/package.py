@@ -5,7 +5,12 @@ import re
 import zipfile
 
 PUBLIC_FILES = (
-    "index.html", "robots.txt", "favicon.png", "cv_photo.jpg", "cv_photo.webp",
+    "index.html", "projekty.html", "hobby.html", "robots.txt", "favicon.png", "cv_photo.jpg", "cv_photo.webp",
+    "assets/project-stories.css", "assets/project-stories.js",
+    "assets/ride-planner.css", "assets/ride-planner.js",
+    "assets/hobbies.css", "assets/hobbies.js",
+    "sitemap.xml", "index.md", "projekty.md", "hobby.md",
+    ".well-known/api-catalog", "openapi.json", "api.md",
     "assets/vendor/chart.umd.min.js", "assets/vendor/chart.LICENSE.md",
 )
 
