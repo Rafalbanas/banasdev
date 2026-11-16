@@ -26,6 +26,13 @@ def check():
         public.mkdir(mode=0o755)
         (public / "index.html").write_text("<!doctype html><title>Local header check</title>")
         (public / "favicon.png").write_bytes(b"header-test")
+        for name in ("index", "projekty", "hobby"):
+            (public / f"{name}.md").write_text(f"# Markdown {name}\n")
+            if name != "index":
+                (public / f"{name}.html").write_text(f"<!doctype html><title>{name}</title>")
+        (public / ".well-known").mkdir()
+        for name in ("sitemap.xml", "robots.txt", "openapi.json", "api.md", ".well-known/api-catalog"):
+            (public / name).write_bytes((ROOT / name).read_bytes())
         certificate, key = base / "cert.pem", base / "key.pem"
         subprocess.run(["openssl", "req", "-x509", "-newkey", "rsa:2048", "-nodes", "-days", "1",
                         "-subj", "/CN=localhost", "-keyout", str(key), "-out", str(certificate)],
@@ -42,7 +49,7 @@ def check():
         source = source.replace("/var/lib/banasdev/current/public", str(public))
         config = base / "nginx.conf"
         config.write_text(f"pid {base / 'nginx.pid'};\nerror_log {base / 'error.log'};\n"
-                          "events {}\nhttp { access_log off;\n" + source + "\n}\n")
+                          "events {}\nhttp { include /etc/nginx/mime.types; access_log off;\n" + source + "\n}\n")
         command = ["nginx", "-p", str(base), "-c", str(config)]
         subprocess.run(command + ["-t"], check=True)
         process = subprocess.Popen(command + ["-g", "daemon off;"])
@@ -69,7 +76,36 @@ def check():
                 assert headers["x-content-type-options"] == "nosniff", path
                 assert headers["referrer-policy"] == "strict-origin-when-cross-origin", path
                 if path in ("/", "/index.html"):
-                    assert headers["link"] == '<https://banas.dev/>; rel="canonical"'
+                    assert '<https://banas.dev/>; rel="canonical"' in headers["link"]
+                    for relation in ("api-catalog", "service-desc", "service-doc", "describedby"):
+                        assert f'rel="{relation}"' in headers["link"]
+                response.read()
+                connection.close()
+            for path in ("/", "/index.html", "/projekty.html", "/hobby.html", "/hobby.html?lang=en"):
+                for accept, markdown in (("text/markdown", True), ("text/html", False),
+                                         ("text/markdown;q=0", False),
+                                         ("text/markdown; q=0.0, text/html", False),
+                                         ("text/markdown;q=0.8, text/html;q=0.5", True)):
+                    connection = http.client.HTTPSConnection("127.0.0.1", https_port, context=context, timeout=5)
+                    connection.request("GET", path, headers={"Host": "banas.dev", "Accept": accept})
+                    response = connection.getresponse()
+                    body = response.read().decode()
+                    assert response.status == 200, (path, accept, response.status)
+                    expected_type = "text/markdown" if markdown else "text/html"
+                    assert response.getheader("Content-Type").startswith(expected_type), (path, accept, response.getheaders())
+                    assert body.startswith("# Markdown" if markdown else "<!doctype html>"), (path, accept, body)
+                    assert response.getheader("Vary") == "Accept"
+                    assert response.getheader("Cache-Control") == "no-store"
+                    connection.close()
+            for path, content_type in (("/sitemap.xml", "text/xml"),
+                                       ("/.well-known/api-catalog", "application/linkset+json"),
+                                       ("/openapi.json", "application/vnd.oai.openapi+json"),
+                                       ("/api.md", "text/markdown")):
+                connection = http.client.HTTPSConnection("127.0.0.1", https_port, context=context, timeout=5)
+                connection.request("GET", path, headers={"Host": "banas.dev"})
+                response = connection.getresponse()
+                assert response.status == 200, (path, response.status)
+                assert response.getheader("Content-Type").startswith(content_type), (path, response.getheaders())
                 response.read()
                 connection.close()
             connection = http.client.HTTPConnection("127.0.0.1", http_port, timeout=5)
@@ -79,7 +115,7 @@ def check():
             assert response.getheader("Location") == "https://banas.dev/?test=1"
             response.read()
             connection.close()
-            print("Nginx OK: isolated syntax, HTTPS headers on pages/assets/404 and HTTP redirect")
+            print("Nginx OK: headers, redirects, sitemap/API catalog, HTML/Markdown negotiation, q=0 and cache isolation")
         finally:
             process.terminate()  # Only the test Nginx instance started above.
             process.wait(timeout=10)

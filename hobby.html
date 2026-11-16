@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Rafał Banaś po godzinach: rower, pogoda na przejażdżkę, domowy homelab i lokalne AI.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <title>Po godzinach — Rafał Banaś</title>
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" href="assets/project-stories.css">
+    <link rel="stylesheet" href="assets/ride-planner.css">
+    <link rel="stylesheet" href="assets/hobbies.css">
+    <script src="assets/project-stories.js" data-cfasync="false" defer></script>
+    <script src="assets/ride-planner.js" data-cfasync="false" defer></script>
+    <script src="assets/hobbies.js" data-cfasync="false" defer></script>
+</head>
+<body data-page="hobbies">
+    <a class="skip-link" href="#main"><span class="lang-pl">Przejdź do treści</span><span class="lang-en">Skip to content</span></a>
+    <header class="story-header">
+        <a class="brand" href="index.html">RB / banas.dev</a>
+        <nav class="story-nav" aria-label="Portfolio">
+            <a href="index.html"><span class="lang-pl">Zawodowo</span><span class="lang-en">Professional</span></a>
+            <a href="projekty.html"><span class="lang-pl">Projekty</span><span class="lang-en">Projects</span> ↗</a>
+            <button class="js-control" id="storyLanguage" type="button" hidden>EN</button>
+            <button class="js-control" id="storyTheme" type="button" aria-label="Jasny motyw" aria-pressed="false" hidden>◐</button>
+        </nav>
+    </header>
+    <main id="main" class="story-page" tabindex="-1">
+        <nav class="hobby-routes" aria-label="Portfolio">
+            <a href="index.html">01 / <span class="lang-pl">Zawodowo</span><span class="lang-en">Professional</span></a>
+            <a href="hobby.html" aria-current="page">02 / <span class="lang-pl">Po godzinach</span><span class="lang-en">After hours</span></a>
+        </nav>
+        <section class="story-intro" aria-labelledby="hobbies-title">
+            <p class="eyebrow"><span class="lang-pl">Poza opisem stanowiska</span><span class="lang-en">Beyond the job title</span></p>
+            <h1 id="hobbies-title"><span class="lang-pl">Po godzinach.</span><span class="lang-en">After hours.</span></h1>
+            <p class="intro-copy"><span class="lang-pl">Rower, dane i domowy warsztat. Sprawdzam pomysły w praktyce — także poza pracą.</span><span class="lang-en">Cycling, data and a home workshop. Testing ideas in practice — outside work, too.</span></p>
+        </section>
+        <article class="hobby-intro">
+            <div>
+                <p class="eyebrow"><span class="lang-pl">01 / Rower</span><span class="lang-en">01 / Cycling</span></p>
+                <h2><span class="lang-pl">Najpierw pogoda.<br>Potem trasa.</span><span class="lang-en">Weather first.<br>Route next.</span></h2>
+            </div>
+            <div>
+                <p><span class="lang-pl">Kolarstwo spotyka się u mnie z analizą danych. Projekt Cycling wyrósł z pracy magisterskiej, a tutaj można sprawdzić prostszą rzecz: czy najbliższe godziny sprzyjają przejażdżce w Katowicach.</span><span class="lang-en">Cycling meets data analysis here. The Cycling project grew out of my master's thesis. Here, you can check something simpler: whether the next few hours look promising for a ride in Katowice.</span></p>
+                <div class="case-links">
+                    <a href="https://www.strava.com/athletes/9698049" target="_blank" rel="noopener"><span class="lang-pl">Mój profil na Stravie</span><span class="lang-en">My Strava profile</span> ↗</a>
+                    <a href="https://cycling.banas.dev/" target="_blank" rel="noopener"><span class="lang-pl">Projekt Cycling</span><span class="lang-en">Cycling project</span> ↗</a>
+                </div>
+            </div>
+        </article>
+        <section class="ride-planner" id="ridePlanner" data-state="unknown" aria-labelledby="ride-title">
+            <div class="ride-topline">
+                <p class="eyebrow" id="ride-title"><span class="lang-pl">A może na rower? / Kato ride check</span><span class="lang-en">How about a ride? / Kato ride check</span></p>
+                <label for="rideDuration"><span class="lang-pl">Długość przejażdżki</span><span class="lang-en">Ride duration</span>
+                    <select id="rideDuration" disabled><option value="30">30 min</option><option value="60" selected>60 min</option><option value="90">90 min</option></select>
+                </label>
+            </div>
+            <div role="status" aria-live="polite" aria-atomic="true">
+                <h3 id="rideVerdict"><span class="lang-pl">Bez świeżych danych nie zgaduję.</span><span class="lang-en">No fresh data? No guessing.</span></h3>
+                <p class="ride-window" id="rideWindow"></p>
+                <ul class="ride-reasons" id="rideReasons"></ul>
+                <p class="ride-updated" id="rideUpdated"></p>
+            </div>
+            <p class="ride-timeline-heading" id="ride-timeline-title"><span class="lang-pl">Najbliższe 2 godziny — krok po kroku</span><span class="lang-en">The next 2 hours — step by step</span></p>
+            <p class="ride-timeline-note"><span class="lang-pl">Prognoza w odcinkach 15-minutowych. Obrys wskazuje oceniane okno; opis wyjaśnia kolor. Powietrze: obecny pomiar GIOŚ.</span><span class="lang-en">Forecast in 15-minute slots. The outline marks the assessed window; each label explains its colour. Air quality uses the current GIOŚ reading.</span></p>
+            <ol class="ride-timeline" id="rideTimeline" aria-labelledby="ride-timeline-title" hidden></ol>
+            <p class="ride-timeline-note" id="rideTimelineStatus"><span class="lang-pl">Oś prognozy pojawi się po otrzymaniu kompletnych, świeżych danych.</span><span class="lang-en">The forecast timeline needs complete, fresh data.</span></p>
+            <details>
+                <summary><span class="lang-pl">Jak to liczę i czego nie wiem?</span><span class="lang-en">How is this calculated, and what is missing?</span></summary>
+                <p><span class="lang-pl">Szukam ciągłego okna w najbliższych 2 godzinach. Komfort: 10–26°C, wiatr ≤20 km/h, opady &lt;0,1 mm / 15 min, szansa opadów &lt;40%, indeks GIOŚ dobry lub bardzo dobry. Chłód, upał, mgła i opady obniżają ocenę. ≤2°C, ≥32°C, wiatr ≥35 km/h, opady ≥0,5 mm / 15 min, szansa ≥70%, śnieg, burza i oblodzenie wykluczają komfortowe okno.</span><span class="lang-en">Looking for a continuous window in the next 2 hours. Comfort: 10–26°C, wind ≤20 km/h, precipitation &lt;0.1 mm / 15 min, chance &lt;40%, good or very good GIOŚ index. Cold, heat, fog and rain lower the rating. ≤2°C, ≥32°C, wind ≥35 km/h, precipitation ≥0.5 mm / 15 min, chance ≥70%, snow, storms and icing rule out a comfortable window.</span></p>
+                <p><span class="lang-pl">To autorska heurystyka komfortu, nie gwarancja bezpieczeństwa ani porada zdrowotna. Pogoda i prognoza: do 30 min, GIOŚ: do 3 h. W przyszłym oknie używam obecnej jakości powietrza, z najgorszym indeksem stacji lub zbiorczym. Brak pełnych danych oznacza brak oceny. Nie uwzględniam pory dnia, porywów, ruchu i stanu nawierzchni — sprawdź je przed wyjściem. Bez JavaScript ocena jest niedostępna.</span><span class="lang-en">A personal comfort heuristic, not a safety guarantee or medical advice. Weather and forecast: up to 30 min old; GIOŚ: up to 3 h. Future windows use current air quality, taking the worst station or aggregate index. Incomplete data means no rating. Daylight, gusts, traffic and road conditions are not included — check before leaving. JavaScript is required for a rating.</span></p>
+            </details>
+        </section>
+        <p class="ride-timeline-note" id="hobbyDataStatus"><span class="lang-pl">Interaktywna ocena wymaga JavaScript.</span><span class="lang-en">The interactive rating requires JavaScript.</span></p>
+        <article class="hobby-lab">
+            <p class="eyebrow">02 / Homelab</p>
+            <h2><span class="lang-pl">Domowy warsztat.<br>Prawdziwe eksperymenty.</span><span class="lang-en">A home workshop.<br>Real experiments.</span></h2>
+            <p class="intro-copy"><span class="lang-pl">Miejsce do łączenia gotowych narzędzi, testowania lokalnych modeli i poznawania kompromisów wspólnego hosta. To opis warsztatu, nie publiczny panel ani monitoring usług.</span><span class="lang-en">A place to integrate existing tools, test local models and explore the trade-offs of a shared host. This is a workshop description, not a public control panel or service monitor.</span></p>
+            <div class="hobby-lab-grid">
+                <div><span class="hobby-symbol" aria-hidden="true">[AI]</span><h3><span class="lang-pl">Lokalne AI</span><span class="lang-en">Local AI</span></h3><p><span class="lang-pl">Ubuntu i Ollama. Praktyczne sprawdzanie modeli oraz ograniczeń pamięci GPU.</span><span class="lang-en">Ubuntu and Ollama. Exploring models and GPU memory limits in practice.</span></p></div>
+                <div><span class="hobby-symbol" aria-hidden="true">[HA]</span><h3><span class="lang-pl">Automatyzacja</span><span class="lang-en">Automation</span></h3><p><span class="lang-pl">Home Assistant na KVM/libvirt — obok innych zadań na wspólnej stacji.</span><span class="lang-en">Home Assistant on KVM/libvirt, alongside other tasks on a shared workstation.</span></p></div>
+                <div><span class="hobby-symbol" aria-hidden="true">[SSH]</span><h3><span class="lang-pl">Dostęp z Maca</span><span class="lang-en">Access from a Mac</span></h3><p><span class="lang-pl">Praca z domowym warsztatem przez jumphost VPS. Bez publikowania parametrów dostępu.</span><span class="lang-en">Working with the home workshop through a VPS jumphost, without publishing connection details.</span></p></div>
+            </div>
+            <a class="primary-link" href="index.html#homelab"><span class="lang-pl">Zajrzyj do opisu homelabu</span><span class="lang-en">Explore the homelab write-up</span> ↗</a>
+        </article>
+        <section class="story-contact">
+            <p class="eyebrow"><span class="lang-pl">Druga strona warsztatu</span><span class="lang-en">The other side of the workshop</span></p>
+            <h2><span class="lang-pl">Ciekawi Cię też mój warsztat zawodowy?</span><span class="lang-en">Curious about my professional work, too?</span></h2>
+            <div class="case-links">
+                <a class="primary-link" href="index.html#work"><span class="lang-pl">Zobacz, w czym mogę pomóc</span><span class="lang-en">See how I can help</span> ↗</a>
+                <a href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener"><span class="lang-pl">Porozmawiajmy na LinkedIn</span><span class="lang-en">Let's talk on LinkedIn</span> ↗</a>
+            </div>
+        </section>
+    </main>
+    <footer class="story-footer"><a href="index.html">← <span class="lang-pl">Wróć do części zawodowej</span><span class="lang-en">Back to professional work</span></a></footer>
+</body>
+</html>

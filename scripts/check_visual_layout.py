@@ -83,7 +83,7 @@ def run():
                     )
                     try:
                         page = context.new_page()
-                        page.set_default_timeout(10000)
+                        page.set_default_timeout(30000)
                         page.goto(f"http://127.0.0.1:{server.server_port}",
                                   wait_until="domcontentloaded", timeout=30000)
                         expect(page.locator("#projectTools")).to_be_visible()

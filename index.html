@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cix/0LmncDSxiveuYC1L8+nMvdsmJuHYhpj6WUc65wU=' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-KnnP9T3ZYXiaQs1X4evKeQLdwEXckBIVUkUcRytX1+U='; script-src-attr 'none'; style-src 'self' 'sha256-cBRlBrUJAAUP70l7HclGDG2+KTMynIpRMrdglZ8KkMI='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cix/0LmncDSxiveuYC1L8+nMvdsmJuHYhpj6WUc65wU=' 'sha256-/ls9Q8HCJYpp3PVbi4fZhuwLBGHOBhRHlkICfas5RRY=' 'sha256-Wenj0E4Q6/0LwK/9pojwKkf8Ddr0ndfxORGPlgFtTPw='; script-src-attr 'none'; style-src 'self' 'sha256-JtoEswJCXM+7z17+wUXGcJ0W+1iBure/nCQfIGyS0nQ='; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rafał Banaś | Technical Support Engineer · Python & AI</title>
@@ -358,7 +358,7 @@
             grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.85fr);
             align-items: center;
             gap: clamp(32px, 5vw, 80px);
-            padding: 88px 0 80px;
+            padding: 48px 0 64px;
         }
 
         .hero::before {
@@ -410,7 +410,7 @@
 
         h1 {
             margin: 28px 0 24px;
-            font-size: clamp(4rem, 9vw, 8.5rem);
+            font-size: clamp(4rem, 7vw, 7rem);
             line-height: 0.94;
             letter-spacing: -0.07em;
             font-weight: 800;
@@ -2231,7 +2231,7 @@
 
         .hero-actions .button { padding: 12px 18px; }
         .hero-actions .primary::after { content: "↗"; margin-left: 12px; }
-        .hero-actions a[target="_blank"] {
+        .hero-actions a[target="_blank"]:not(.primary) {
             border-color: transparent;
             padding-inline: 8px;
             color: var(--muted);
@@ -2396,7 +2396,14 @@
         .work-card .work-evidence { margin-top: auto; padding-top: 20px; color: var(--accent); text-underline-offset: 5px; font-size: 0.88rem; }
         .work-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 24px; padding: 24px 0; border-block: 1px solid var(--line); }
         .work-footer p { margin: 0; max-width: 68ch; color: var(--muted); font-size: 0.9rem; }
-        .hero-work-link { display: inline-block; margin-top: 12px; color: var(--accent); text-underline-offset: 5px; font-size: 0.85rem; }
+        .hero-work-link, .story-entry { display: inline-block; margin-top: 12px; color: var(--accent); text-underline-offset: 5px; font-size: 0.85rem; }
+        .site-sections { display: flex; gap: 8px; padding-top: 20px; flex-wrap: wrap; }
+        .site-sections a { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 18px; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; font-size: .85rem; color: var(--muted); }
+        .site-sections a[aria-current="page"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+        .site-sections a:hover { border-color: var(--accent); }
+        .site-sections span[aria-hidden] { font: .7rem ui-monospace, monospace; opacity: .7; }
+        .weather-archive { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 20px; }
+        .weather-archive > summary { color: var(--muted); cursor: pointer; min-height: 44px; padding-block: 12px; }
         #contact .contact-layout { padding: clamp(24px, 4vw, 48px); border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(135deg, var(--surface-strong), var(--bg)); }
         .contact-modes { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; margin: 0 0 24px; }
         .contact-modes li { border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; color: var(--accent); font: 0.8rem ui-monospace, monospace; }
@@ -2415,6 +2422,7 @@
             #contact .contact-layout { padding: 22px 18px; }
         }
 </style>
+    <link rel="stylesheet" href="assets/ride-planner.css">
 </head>
 <body>
     <a class="skip-link" href="#main" data-i18n="skipLink">Przejdź do treści</a>
@@ -2430,7 +2438,7 @@
                 <a href="#experience" data-i18n="nav.experience">Doświadczenie</a>
                 <a href="#projects" data-i18n="nav.projects">Projekty</a>
                 <a href="#skills" data-i18n="nav.skills">Umiejętności</a>
-                <a href="#weather" data-i18n="nav.weather">Pogoda</a>
+                <a href="hobby.html" data-hobby-link data-i18n="routes.hobby">Po godzinach</a>
                 <a href="#contact" data-i18n="nav.contact">Kontakt</a>
             </div>
             <div class="nav-actions">
@@ -2447,6 +2455,10 @@
     </header>
 
     <main id="main" tabindex="-1">
+        <nav class="page site-sections" aria-label="Dwie strony mojego świata" data-i18n-attr="aria-label:routes.label">
+            <a href="index.html" aria-current="page"><span aria-hidden="true">01</span><span data-i18n="routes.work">Zawodowo</span></a>
+            <a href="hobby.html" data-hobby-link><span aria-hidden="true">02</span><span data-i18n="routes.hobby">Po godzinach</span><span aria-hidden="true">↗</span></a>
+        </nav>
         <section class="page hero" id="top" aria-labelledby="hero-title">
             <div>
                 <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> <span data-i18n="hero.eyebrow">Technical Support Engineer · Python · AI</span></div>
@@ -2458,10 +2470,10 @@
                 </p>
                 <a class="hero-work-link" href="#work" data-i18n="work.heroLink">Etat, B2B czy projekt? Zobacz, w czym mogę pomóc ↓</a>
                 <div class="hero-actions">
-                    <a class="button primary" href="#projects" data-i18n="hero.projectsCta">Zobacz projekty</a>
+                    <a class="button primary" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener" data-i18n="recruiter.linkedinCta">Porozmawiajmy na LinkedIn</a>
+                    <a class="button secondary" href="projekty.html" data-story-link data-i18n="hero.projectsCta">Zobacz projekty</a>
                     <a class="button secondary" href="#contact" data-i18n="hero.contactCta">Napisz do mnie</a>
                     <a class="button secondary" href="https://github.com/Rafalbanas" target="_blank" rel="noopener">GitHub</a>
-                    <a class="button secondary" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener">LinkedIn</a>
                 </div>
                 <div class="hero-facts" aria-label="W skrócie" data-i18n-attr="aria-label:hero.factsAria">
                     <div><strong>3+</strong><span data-i18n="hero.factExperience">lata wsparcia i operacji IT</span></div>
@@ -2727,6 +2739,7 @@
                     <p class="section-lead" data-i18n="projects.lead">
                         Nie tylko lista technologii. Poznaj cel, mój wkład i ograniczenia: od aplikacji i analizy danych po prywatny homelab, lokalne AI i utrzymanie systemów.
                     </p>
+                    <a class="story-entry" href="projekty.html" data-story-link data-i18n="stories.link">Trzy projekty, trzy historie — zajrzyj pod maskę ↗</a>
                 </div>
             </div>
 
@@ -3325,6 +3338,33 @@
                 </div>
             </div>
 
+            <a class="story-entry" href="hobby.html#ridePlanner" data-hobby-link data-i18n="routes.rideLink">Rower i pogoda mieszkają teraz w części „Po godzinach” ↗</a>
+            <details class="weather-archive" id="weatherArchive">
+                <summary data-i18n="routes.weatherPreview">Rozwiń pełny podgląd pogody na tej stronie</summary>
+            <section class="ride-planner" id="ridePlanner" data-state="unknown" aria-labelledby="ride-title">
+                <div class="ride-topline">
+                    <div class="section-kicker" id="ride-title" data-i18n="ride.title">A może na rower? / Kato ride check</div>
+                    <label for="rideDuration"><span data-i18n="ride.duration">Długość przejażdżki</span>
+                        <select id="rideDuration" disabled><option value="30">30 min</option><option value="60" selected>60 min</option><option value="90">90 min</option></select>
+                    </label>
+                </div>
+                <div role="status" aria-live="polite" aria-atomic="true">
+                    <h3 id="rideVerdict" data-i18n="ride.fallback">Bez świeżych danych nie zgaduję.</h3>
+                    <p class="ride-window" id="rideWindow"></p>
+                    <ul class="ride-reasons" id="rideReasons"></ul>
+                    <p class="ride-updated" id="rideUpdated"></p>
+                </div>
+                <p class="ride-timeline-heading" id="ride-timeline-title" data-i18n="ride.timelineTitle">Najbliższe 2 godziny — krok po kroku</p>
+                <p class="ride-timeline-note" data-i18n="ride.timelineNote">Prognoza w odcinkach 15-minutowych. Obrys wskazuje oceniane okno; opis w każdym polu wyjaśnia kolor. Powietrze: obecny pomiar GIOŚ.</p>
+                <ol class="ride-timeline" id="rideTimeline" aria-labelledby="ride-timeline-title" hidden></ol>
+                <p class="ride-timeline-note" id="rideTimelineStatus" data-i18n="ride.timelineFallback">Oś prognozy pojawi się po otrzymaniu kompletnych, świeżych danych.</p>
+                <details>
+                    <summary data-i18n="ride.rulesTitle">Jak to liczę i czego nie wiem?</summary>
+                    <p data-i18n="ride.rules">Szukam ciągłego okna w najbliższych 2 godzinach. Komfort: 10–26°C, wiatr ≤20 km/h, opady &lt;0,1 mm / 15 min, szansa opadów &lt;40%, indeks GIOŚ dobry lub bardzo dobry. Chłód, upał, opady i silniejszy wiatr obniżają ocenę; ≤2°C, ≥32°C, wiatr ≥35 km/h, opady ≥0,5 mm / 15 min, szansa ≥70%, śnieg, burza lub oblodzenie wykluczają komfortowe okno.</p>
+                    <p data-i18n="ride.limits">To autorska heurystyka komfortu, nie gwarancja bezpieczeństwa ani porada zdrowotna. Pogoda i prognoza: do 30 min, pomiar GIOŚ: do 3 h. Dla przyszłego okna używam obecnej jakości powietrza, nie jej prognozy; wybieram najgorszy dostępny indeks stacji. Brak pełnych danych oznacza brak oceny. Nie uwzględniam pory dnia, porywów, ruchu drogowego ani stanu nawierzchni — sprawdź je przed wyjściem. Bez JavaScript ocena jest niedostępna.</p>
+                </details>
+            </section>
+
             <div class="weather-widget" id="weatherWidget" data-state="loading" aria-live="polite">
                 <div class="weather-summary">
                     <div>
@@ -3456,6 +3496,7 @@
                     </div>
                 </details>
             </div>
+            </details>
         </section>
 
         <section class="page section" id="contact" aria-labelledby="contact-title">
@@ -3475,6 +3516,7 @@
                         <h3 data-i18n="contact.briefTitle">Od czego zacząć wiadomość?</h3>
                         <p data-i18n="contact.briefProject">Projekt: opisz problem, obecne narzędzia i oczekiwany rezultat. Nie potrzebujesz gotowej specyfikacji — na początek wystarczy kilka zdań.</p>
                         <p data-i18n="contact.briefRole">Rekrutacja: podeślij rolę, kontekst zespołu i proponowaną formę współpracy. Zakres i dostępność ustalimy w rozmowie.</p>
+                        <a class="button primary" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener" data-i18n="recruiter.linkedinCta">Porozmawiajmy na LinkedIn</a>
                     </div>
                 </div>
                 <div class="contact-links">
@@ -3519,6 +3561,7 @@
         </div>
     </footer>
 
+    <script src="assets/ride-planner.js" data-cfasync="false"></script>
     <script data-cfasync="false">
         (() => {
             const mailbox = "contact";
@@ -3862,6 +3905,24 @@ const translations = {
                     menu: {
                         open: "Otwórz menu",
                         close: "Zamknij menu"
+                    },
+                    stories: { link: "Trzy projekty, trzy historie — zajrzyj pod maskę ↗" },
+                    routes: {
+                        label: "Dwie strony mojego świata", work: "Zawodowo", hobby: "Po godzinach",
+                        weatherPreview: "Rozwiń pełny podgląd pogody na tej stronie",
+                        rideLink: "Rower i pogoda mieszkają teraz w części „Po godzinach” ↗"
+                    },
+                    recruiter: { linkedinCta: "Porozmawiajmy na LinkedIn" },
+                    ride: {
+                        title: "A może na rower? / Kato ride check",
+                        duration: "Długość przejażdżki",
+                        fallback: "Bez świeżych danych nie zgaduję.",
+                        rulesTitle: "Jak to liczę i czego nie wiem?",
+                        timelineTitle: "Najbliższe 2 godziny — krok po kroku",
+                        timelineNote: "Prognoza w odcinkach 15-minutowych. Obrys wskazuje oceniane okno; opis w każdym polu wyjaśnia kolor. Powietrze: obecny pomiar GIOŚ.",
+                        timelineFallback: "Oś prognozy pojawi się po otrzymaniu kompletnych, świeżych danych.",
+                        rules: "Szukam ciągłego okna w najbliższych 2 godzinach. Komfort: 10–26°C, wiatr ≤20 km/h, opady <0,1 mm / 15 min, szansa opadów <40%, indeks GIOŚ dobry lub bardzo dobry. Chłód, upał, opady i silniejszy wiatr obniżają ocenę; ≤2°C, ≥32°C, wiatr ≥35 km/h, opady ≥0,5 mm / 15 min, szansa ≥70%, śnieg, burza lub oblodzenie wykluczają komfortowe okno.",
+                        limits: "To autorska heurystyka komfortu, nie gwarancja bezpieczeństwa ani porada zdrowotna. Pogoda i prognoza: do 30 min, pomiar GIOŚ: do 3 h. Dla przyszłego okna używam obecnej jakości powietrza, nie jej prognozy; wybieram najgorszy dostępny indeks stacji. Brak pełnych danych oznacza brak oceny. Nie uwzględniam pory dnia, porywów, ruchu drogowego ani stanu nawierzchni — sprawdź je przed wyjściem. Bez JavaScript ocena jest niedostępna."
                     },
                     hero: {
                         eyebrow: "Technical Support Engineer · Python · AI",
@@ -4400,6 +4461,24 @@ const translations = {
                         open: "Open menu",
                         close: "Close menu"
                     },
+                    stories: { link: "Three projects, three stories — look under the hood ↗" },
+                    routes: {
+                        label: "Two sides of my world", work: "Professional", hobby: "After hours",
+                        weatherPreview: "Expand the full weather preview on this page",
+                        rideLink: "Cycling and weather now live in the After hours section ↗"
+                    },
+                    recruiter: { linkedinCta: "Let's talk on LinkedIn" },
+                    ride: {
+                        title: "How about a ride? / Kato ride check",
+                        duration: "Ride duration",
+                        fallback: "No fresh data? No guessing.",
+                        rulesTitle: "How is this calculated, and what is missing?",
+                        timelineTitle: "The next 2 hours — step by step",
+                        timelineNote: "Forecast in 15-minute slots. The outline marks the assessed window; each label explains its colour. Air quality uses the current GIOŚ reading.",
+                        timelineFallback: "The forecast timeline needs complete, fresh data.",
+                        rules: "Looking for a continuous window in the next 2 hours. Comfort: 10–26°C, wind ≤20 km/h, precipitation <0.1 mm / 15 min, precipitation chance <40%, good or very good GIOŚ index. Cold, heat, rain and stronger wind lower the rating; ≤2°C, ≥32°C, wind ≥35 km/h, precipitation ≥0.5 mm / 15 min, chance ≥70%, snow, storms or icing rule out a comfortable window.",
+                        limits: "A personal comfort heuristic, not a safety guarantee or medical advice. Weather and forecast: up to 30 min old; GIOŚ reading: up to 3 h. Future windows use current air quality, not an air forecast; the worst available station index is used. Incomplete data means no rating. Daylight, gusts, traffic and road conditions are not included — check before leaving. JavaScript is required for the rating."
+                    },
                     hero: {
                         eyebrow: "Technical Support Engineer · Python · AI",
                         subtitle: "I support WAVE PTX partners across EMEA as a Technical Support Engineer Tier 2 at Motorola Solutions. I hold an MSc in Computer Science. Outside work, I build Python tools, automate tasks and develop personal AI projects.",
@@ -4789,6 +4868,7 @@ const translations = {
                     renderWeather();
                 } finally {
                     window.clearTimeout(timeout);
+                    renderRidePlanner();
                 }
             }
 
@@ -4825,6 +4905,7 @@ const translations = {
             }
 
             function renderPrecipitation(lang = document.documentElement.lang || "pl") {
+                renderRidePlanner();
                 if (!precipitationStatus || !precipitationIcon || !precipitationLabel || !precipitationDetails) return;
                 const selected = translations[lang] ? lang : "pl";
                 const copy = translations[selected].weather;
@@ -4857,6 +4938,10 @@ const translations = {
                 precipitationDetails.textContent = precipitationIsStale
                     ? interpolate(copy.precipitationStaleDetails, { date: formattedTime })
                     : interpolate(copy.precipitationUpdated, { date: formattedTime });
+            }
+
+            function renderRidePlanner() {
+                window.RidePlanner?.render(precipitationData, weatherData, weatherLoadFailed || precipitationLoadFailed);
             }
 
             function schedulePrecipitationRefresh(delay = PRECIPITATION_REFRESH_MS) {
@@ -6333,6 +6418,13 @@ const translations = {
                     button.classList.toggle("is-active", isActive);
                     button.setAttribute("aria-pressed", String(isActive));
                 });
+                document.querySelectorAll("[data-story-link]").forEach(link => {
+                    link.href = `projekty.html?lang=${selected}`;
+                });
+                document.querySelectorAll("[data-hobby-link]").forEach(link => {
+                    const hash = new URL(link.href, window.location.href).hash;
+                    link.href = `hobby.html?lang=${selected}${hash}`;
+                });
 
                 updateMenuButtonLabel(selected);
                 refreshInteractiveTerminal();
@@ -6439,12 +6531,28 @@ const translations = {
                     projectSearch.focus();
                 });
             });
-            setLanguage(preferences.get("banas_lang") || "pl");
+            setLanguage(new URLSearchParams(window.location.search).get("lang") || preferences.get("banas_lang") || "pl");
+            const weatherArchive = document.getElementById("weatherArchive");
+            if (weatherArchive && window.location.hash.startsWith("#weather")) weatherArchive.open = true;
+            const rideDuration = document.getElementById("rideDuration");
+            if (rideDuration && window.RidePlanner) {
+                rideDuration.disabled = false;
+                rideDuration.addEventListener("change", renderRidePlanner);
+            }
             if (projectTools) projectTools.hidden = false;
             applyTheme(preferences.get("banas_theme") || "dark");
-            loadWeather();
-            loadPrecipitation();
-            loadWeatherHistory();
+            let weatherArchiveStarted = false;
+            function startWeatherArchive() {
+                if (weatherArchiveStarted) return;
+                weatherArchiveStarted = true;
+                loadWeather();
+                loadPrecipitation();
+                loadWeatherHistory();
+            }
+            weatherArchive?.addEventListener("toggle", () => {
+                if (weatherArchive.open) startWeatherArchive();
+            });
+            if (weatherArchive?.open) startWeatherArchive();
             chartLibraryRetry?.addEventListener("click", loadChartLibrary);
             weatherDataDetails?.addEventListener("toggle", () => renderAccessibleHistory());
             if (weatherHistoryPanel && "IntersectionObserver" in window) {
@@ -6458,14 +6566,15 @@ const translations = {
                 loadChartLibrary();
             }
             window.setInterval(() => {
+                if (!weatherArchiveStarted) return;
                 loadWeather();
                 loadWeatherHistory();
             }, 60 * 60 * 1000);
-            window.setInterval(() => { if (weatherData) renderWeather(); }, 60 * 1000);
+            window.setInterval(() => { renderWeather(); renderRidePlanner(); }, 60 * 1000);
 
-            window.addEventListener("online", () => loadPrecipitation());
+            window.addEventListener("online", () => { if (weatherArchiveStarted) loadPrecipitation(); });
             document.addEventListener("visibilitychange", () => {
-                if (document.visibilityState !== "visible") return;
+                if (document.visibilityState !== "visible" || !weatherArchiveStarted) return;
                 loadPrecipitation();
             });
 
@@ -6513,6 +6622,7 @@ const translations = {
                     const target = document.querySelector(link.getAttribute("href"));
                     if (!target) return;
                     event.preventDefault();
+                    if (weatherArchive && target.closest("#weather")) weatherArchive.open = true;
                     setMobileMenu(false);
                     target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
                     const focusTarget = target.querySelector("h1, h2") || target;

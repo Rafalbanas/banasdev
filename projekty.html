@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Trzy projekty Rafała Banasia: CVTailor, Cycling i Plates. Problem, przepływ danych i granice rozwiązania.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <title>Wybrane projekty — Rafał Banaś</title>
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" href="assets/project-stories.css">
+    <script src="assets/project-stories.js" data-cfasync="false" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main"><span class="lang-pl">Przejdź do treści</span><span class="lang-en">Skip to content</span></a>
+    <header class="story-header">
+        <a class="brand" href="index.html">RB / banas.dev</a>
+        <nav class="story-nav" aria-label="Portfolio">
+            <a href="index.html#projects"><span class="lang-pl">Wszystkie projekty</span><span class="lang-en">All projects</span> ↗</a>
+            <a href="hobby.html#ridePlanner"><span class="lang-pl">Po godzinach</span><span class="lang-en">After hours</span></a>
+            <button class="js-control" id="storyLanguage" type="button" hidden>EN</button>
+            <button class="js-control" id="storyTheme" type="button" aria-label="Jasny motyw" aria-pressed="false" hidden>◐</button>
+        </nav>
+    </header>
+    <main id="main" class="story-page" tabindex="-1">
+        <section class="story-intro" aria-labelledby="stories-title">
+            <p class="eyebrow"><span class="lang-pl">Wybrane realizacje / 01 — 03</span><span class="lang-en">Selected work / 01 — 03</span></p>
+            <h1 id="stories-title"><span class="lang-pl">Od problemu<br>do działającego narzędzia.</span><span class="lang-en">From a problem<br>to a working tool.</span></h1>
+            <p class="intro-copy"><span class="lang-pl">Nie tylko lista technologii. Trzy historie o danych, decyzjach i tym, gdzie kończą się możliwości rozwiązania.</span><span class="lang-en">More than a technology list. Three stories about data, decisions and where each solution reaches its limits.</span></p>
+        </section>
+        <nav class="story-index" aria-label="Case studies">
+            <a href="#cvtailor"><span>01 / AI + Python</span><strong>CVTailor ↘</strong><small class="lang-pl">CV oparte na faktach</small><small class="lang-en">Fact-grounded resumes</small></a>
+            <a href="#cycling"><span>02 / Data + ML</span><strong>Cycling ↘</strong><small class="lang-pl">Dane z treningu pod lupą</small><small class="lang-en">Training data, examined</small></a>
+            <a href="#plates"><span>03 / Computer vision</span><strong>Plates ↘</strong><small class="lang-pl">Od obrazu do tekstu</small><small class="lang-en">From image to text</small></a>
+        </nav>
+        <article class="case-story" id="cvtailor" data-story="resume" aria-labelledby="cvtailor-title">
+            <div class="case-heading"><span class="case-number">01</span><div><p class="eyebrow">CVTailor / Python · BM25 · AI</p><h2 id="cvtailor-title"><span class="lang-pl">Lepsze CV.<br>Nie zmyślone CV.</span><span class="lang-en">A better resume.<br>Not a fictional one.</span></h2><p class="case-lead"><span class="lang-pl">Dopasowanie dokumentu do oferty, bez dopisywania doświadczenia, którego nie było.</span><span class="lang-en">Tailoring a document to a role without inventing experience.</span></p></div></div>
+            <div class="case-layout">
+                <div class="case-visual" data-kind="resume" aria-hidden="true"><div class="visual-label">FACTS → DOCUMENT</div><div class="flow-node">01 / CV + oferta / job</div><span class="flow-arrow">↓</span><div class="flow-node">02 / BM25 + fact IDs</div><span class="flow-arrow">↓</span><div class="flow-node">03 / Truth Lock → PDF / DOCX</div><p class="visual-caption"><span class="lang-pl">Generowanie ≠ weryfikacja</span><span class="lang-en">Generation ≠ verification</span></p></div>
+                <div class="case-content">
+                    <h3><span class="lang-pl">Problem → decyzja</span><span class="lang-en">Problem → decision</span></h3>
+                    <p><span class="lang-pl">Model językowy potrafi napisać przekonujący tekst — również wtedy, gdy nie ma racji. Dlatego wyszukiwanie BM25 wybiera fakty, a osobna warstwa Truth Lock kontroluje wynik.</span><span class="lang-en">A language model can write convincing text even when it is wrong. BM25 retrieves facts, while a separate Truth Lock layer checks the result.</span></p>
+                    <h3><span class="lang-pl">Co składa się na rozwiązanie</span><span class="lang-en">What makes up the solution</span></h3>
+                    <ul><li><span class="lang-pl">Identyfikatory faktów zamiast swobodnego wymyślania historii.</span><span class="lang-en">Fact identifiers rather than freely invented claims.</span></li><li><span class="lang-pl">Edycja, historia oraz eksport PDF i DOCX.</span><span class="lang-en">Editing, history and PDF / DOCX export.</span></li></ul>
+                    <div class="case-note"><span class="lang-pl">Granice: wymagane logowanie i sprawdzenie dokumentu przez człowieka. Opcjonalne wyszukiwanie semantyczne w kodzie nie potwierdza jego aktywacji na produkcji.</span><span class="lang-en">Limits: sign-in and human review are required. Optional semantic retrieval in the code does not confirm that it is enabled in production.</span></div>
+                </div>
+            </div>
+            <div class="case-links"><a class="primary-link" href="https://cv.banas.dev/"><span class="lang-pl">Otwórz aplikację · logowanie</span><span class="lang-en">Open app · sign-in required</span> ↗</a><a href="https://github.com/Rafalbanas/ai-resume-tailoring-platform"><span class="lang-pl">Kod i dokumentacja</span><span class="lang-en">Code and documentation</span> ↗</a><nav class="case-next" aria-label="Nawigacja projektów"><a href="#cycling"><span class="lang-pl">Następny: Cycling</span><span class="lang-en">Next: Cycling</span></a></nav></div>
+        </article>
+        <article class="case-story" id="cycling" data-story="cycling" aria-labelledby="cycling-title">
+            <div class="case-heading"><span class="case-number">02</span><div><p class="eyebrow">Cycling / Python · ML · SHAP</p><h2 id="cycling-title"><span class="lang-pl">Rower spotyka<br>analizę danych.</span><span class="lang-en">Cycling meets<br>data analysis.</span></h2><p class="case-lead"><span class="lang-pl">Projekt z pracy magisterskiej: porównanie modeli i interpretacja wyników, nie tylko jedna liczba na ekranie.</span><span class="lang-en">A master's thesis project: comparing models and interpreting results, not just a number on a screen.</span></p></div></div>
+            <div class="case-layout">
+                <div class="case-visual" data-kind="cycling" aria-hidden="true"><div class="visual-label">DATA → UNDERSTANDING</div><div class="flow-node">01 / MMP20 + features</div><span class="flow-arrow">↓</span><div class="flow-node">02 / Models + validation</div><span class="flow-arrow">↓</span><div class="flow-node">03 / SHAP + results</div><p class="visual-caption"><span class="lang-pl">Wynik potrzebuje kontekstu</span><span class="lang-en">A result needs context</span></p></div>
+                <div class="case-content">
+                    <h3><span class="lang-pl">Problem → decyzja</span><span class="lang-en">Problem → decision</span></h3>
+                    <p><span class="lang-pl">Dobry wynik modelu nie wystarcza, jeśli dane przeciekają między treningiem a testem. Opis badań uwzględnia podział po zawodnikach i wariant kontrolujący wyciek etykiety.</span><span class="lang-en">A strong model score is not enough if data leaks between training and testing. The research description includes athlete-level splits and a label-leakage control variant.</span></p>
+                    <h3><span class="lang-pl">Co można obejrzeć</span><span class="lang-en">What you can explore</span></h3>
+                    <ul><li><span class="lang-pl">Porównanie modeli oraz interpretację SHAP.</span><span class="lang-en">Model comparisons and SHAP interpretation.</span></li><li><span class="lang-pl">Wyniki pracy i osobny kalkulator heurystyczny.</span><span class="lang-en">Research results and a separate heuristic calculator.</span></li></ul>
+                    <div class="case-note"><span class="lang-pl">Granice: kalkulator nie uruchamia modelu ML ani nie mierzy progu fizjologicznego. Publiczne repozytorium nie zawiera całego warsztatu badawczego.</span><span class="lang-en">Limits: the calculator does not run ML inference or measure a physiological threshold. The public repository does not include the entire research workflow.</span></div>
+                </div>
+            </div>
+            <div class="case-links"><a class="primary-link" href="https://cycling.banas.dev/"><span class="lang-pl">Zobacz projekt</span><span class="lang-en">Explore project</span> ↗</a><a href="https://github.com/Rafalbanas/Cycling"><span class="lang-pl">Kod i dokumentacja</span><span class="lang-en">Code and documentation</span> ↗</a><nav class="case-next" aria-label="Nawigacja projektów"><a href="#cvtailor"><span class="lang-pl">Poprzedni: CVTailor</span><span class="lang-en">Previous: CVTailor</span></a><a href="#plates"><span class="lang-pl">Następny: Plates</span><span class="lang-en">Next: Plates</span></a></nav></div>
+        </article>
+        <article class="case-story" id="plates" data-story="vision" aria-labelledby="plates-title">
+            <div class="case-heading"><span class="case-number">03</span><div><p class="eyebrow">Plates / Computer vision · ONNX · OCR</p><h2 id="plates-title"><span class="lang-pl">Najpierw znajdź.<br>Potem odczytaj.</span><span class="lang-en">First locate it.<br>Then read it.</span></h2><p class="case-lead"><span class="lang-pl">Rozpoznawanie tablic rejestracyjnych jako przepływ dwóch różnych zadań: detekcji i OCR.</span><span class="lang-en">License plate recognition as two distinct tasks: detection and OCR.</span></p></div></div>
+            <div class="case-layout">
+                <div class="case-visual" data-kind="vision" aria-hidden="true"><div class="visual-label">IMAGE → TEXT</div><div class="flow-node">01 / Image input</div><span class="flow-arrow">↓</span><div class="flow-node">02 / Plate detection</div><span class="flow-arrow">↓</span><div class="flow-node">03 / OCR → text</div><p class="visual-caption"><span class="lang-pl">Detekcja ≠ dokładność OCR</span><span class="lang-en">Detection ≠ OCR accuracy</span></p></div>
+                <div class="case-content">
+                    <h3><span class="lang-pl">Problem → decyzja</span><span class="lang-en">Problem → decision</span></h3>
+                    <p><span class="lang-pl">Odnalezienie tablicy na zdjęciu nie oznacza jeszcze poprawnego odczytu znaków. Demo korzysta z gotowych modeli ONNX przez FastALPR; pipeline treningowy jest osobnym elementem projektu.</span><span class="lang-en">Locating a plate in an image does not guarantee correctly reading its characters. The demo uses pretrained ONNX models through FastALPR; the training pipeline is separate.</span></p>
+                    <h3><span class="lang-pl">Ważne rozróżnienie</span><span class="lang-en">An important distinction</span></h3>
+                    <ul><li><span class="lang-pl">Przepływ obrazu przez detektor i odczyt tekstu.</span><span class="lang-en">An image pipeline covering detection and text recognition.</span></li><li><span class="lang-pl">Jawna możliwość przełączenia detektora.</span><span class="lang-en">An explicit option to switch detectors.</span></li></ul>
+                    <div class="case-note"><span class="lang-pl">Granice: metryki detekcji nie opisują dokładności OCR. Nie potwierdzam tutaj, który detektor jest aktualnie aktywny na serwerze.</span><span class="lang-en">Limits: detection metrics do not describe OCR accuracy. This page does not confirm which detector is currently active on the server.</span></div>
+                </div>
+            </div>
+            <div class="case-links"><a class="primary-link" href="https://plates.banas.dev"><span class="lang-pl">Otwórz demo</span><span class="lang-en">Open demo</span> ↗</a><a href="https://github.com/Rafalbanas/automatic_plate_number_recognition"><span class="lang-pl">Kod i dokumentacja</span><span class="lang-en">Code and documentation</span> ↗</a><nav class="case-next" aria-label="Nawigacja projektów"><a href="#cycling"><span class="lang-pl">Poprzedni: Cycling</span><span class="lang-en">Previous: Cycling</span></a><a href="#story-contact"><span class="lang-pl">Kontakt</span><span class="lang-en">Contact</span></a></nav></div>
+        </article>
+        <section id="story-contact" class="story-contact">
+            <p class="eyebrow"><span class="lang-pl">A co budujemy dalej?</span><span class="lang-en">What should we build next?</span></p>
+            <h2><span class="lang-pl">Widzisz miejsce dla mnie w swoim zespole?</span><span class="lang-en">See a place for me on your team?</span></h2>
+            <p><span class="lang-pl">Podeślij rolę i kilka zdań o zespole. Porozmawiajmy o wsparciu IT, automatyzacji lub integracji AI.</span><span class="lang-en">Send me the role and a few words about the team. Let's talk IT support, automation or AI integration.</span></p>
+            <div class="case-links">
+                <a class="primary-link" href="https://linkedin.com/in/rafał-banaś-251583152" target="_blank" rel="noopener"><span class="lang-pl">Porozmawiajmy na LinkedIn</span><span class="lang-en">Let's talk on LinkedIn</span> ↗</a>
+                <a href="index.html#contact"><span class="lang-pl">Inne formy kontaktu</span><span class="lang-en">Other ways to get in touch</span> ↗</a>
+            </div>
+        </section>
+    </main>
+    <footer class="story-footer"><a href="index.html">← <span class="lang-pl">Wróć do portfolio</span><span class="lang-en">Back to portfolio</span></a><p><span class="lang-pl">Opisy na podstawie przeglądu źródeł z 08.11.2026. Nie są monitoringiem usług.</span><span class="lang-en">Descriptions based on a source review on 8 Nov 2026. Not live service monitoring.</span></p></footer>
+</body>
+</html>

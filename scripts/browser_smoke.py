@@ -94,8 +94,19 @@ def check_scroll_navigation(page):
                     window.scrollTo({top: scrollY + section.getBoundingClientRect().top - 100,
                                      behavior: 'instant'});
                 }""", href)
-                expect(active).to_have_count(1)
-                expect(active).to_have_attribute("href", href)
+                try:
+                    expect(active).to_have_count(1)
+                    expect(active).to_have_attribute("href", href)
+                except AssertionError:
+                    print("Scroll navigation diagnostics:", page.evaluate("""href => ({
+                        href, width:innerWidth, lang:document.documentElement.lang, scrollY,
+                        height:document.documentElement.scrollHeight, viewport:innerHeight,
+                        sections:[...document.querySelectorAll('.nav-links a[href^="#"]')].map(a=>({
+                            href:a.getAttribute('href'), active:a.getAttribute('aria-current'),
+                            top:document.querySelector(a.getAttribute('href')).getBoundingClientRect().top
+                        }))
+                    })""", href), flush=True)
+                    raise
                 expect(active).to_have_attribute("aria-current", "location")
                 expect(page.locator('.nav-links a[aria-current="location"]')).to_have_count(1)
                 if href == "#projects":
@@ -129,13 +140,8 @@ def check():
             page.on("pageerror", lambda error: errors.append(str(error)))
             page.add_init_script("window.cspViolations = []; document.addEventListener('securitypolicyviolation', e => window.cspViolations.push(e.violatedDirective))")
             page.goto(url, wait_until="networkidle")
-            # Repository fixtures may intentionally be old; old data must not look current.
-            try:
-                page.locator('#weatherWidget[data-state="ready"], #weatherWidget[data-state="stale"]').wait_for(state="attached")
-            except Exception:
-                print("Initial page diagnostics:", {"errors": errors, "csp": page.evaluate("window.cspViolations"),
-                                                     "weather": page.locator("#weatherWidget").get_attribute("data-state")}, flush=True)
-                raise
+            # The professional entry must not fetch/render the hidden weather history.
+            assert page.locator("#weatherWidget").get_attribute("data-state") == "loading"
             assert not chart_requests, "Charts must not load on the first screen"
             assert page.evaluate("typeof Chart") == "undefined"
             for lang in ("en", "pl"):
@@ -163,6 +169,8 @@ def check():
             assert page.locator("#mobileMenuToggle").get_attribute("aria-expanded") == "false"
             assert page.locator("#projects-title").evaluate("e => e === document.activeElement")
             page.keyboard.press("Tab")
+            assert page.locator("#projects .story-entry").evaluate("e => e === document.activeElement")
+            page.keyboard.press("Tab")
             assert page.locator("#projectSearch").evaluate("e => e === document.activeElement")
             check_project_filters(page)
             check_scroll_navigation(page)
@@ -170,6 +178,8 @@ def check():
             expect(profile_photo).to_be_visible()
             assert "cv_photo.webp" in profile_photo.get_attribute("src")
             assert profile_photo.evaluate("el => el.naturalWidth > 0")
+            page.locator("#weatherArchive").evaluate("e => e.open = true")
+            page.locator('#weatherWidget[data-state="ready"], #weatherWidget[data-state="stale"]').wait_for(state="attached")
             page.locator("#weatherHistoryPanel").scroll_into_view_if_needed()
             page.locator('#weatherHistoryPanel[data-chart-state="ready"]').wait_for(state="attached")
             assert page.evaluate("Chart.version") == "4.4.7"
@@ -184,7 +194,7 @@ def check():
             page.locator('[data-weather-range="30d"]').click()
             expect(page.locator("#weatherTableBody tr")).to_have_count(30)
             page.locator('[data-lang="en"]').click()
-            assert page.locator("nav").get_attribute("aria-label") == "Main navigation"
+            assert page.locator("nav.nav").get_attribute("aria-label") == "Main navigation"
             assert "Warsaw time" in page.locator("#weatherTableCaption").inner_text()
             page.locator('[data-lang="pl"]').click()
             assert not page.evaluate("window.cspViolations"), page.evaluate("window.cspViolations")
@@ -207,6 +217,7 @@ def check():
             chart_route = "**/assets/vendor/chart.umd.min.js"
             page.route(chart_route, lambda route: route.abort())
             page.goto(url, wait_until="networkidle")
+            page.locator("#weatherArchive > summary").click()
             page.locator("#weatherHistoryPanel").scroll_into_view_if_needed()
             page.locator('#weatherHistoryPanel[data-chart-state="error"]').wait_for(state="attached")
             assert page.locator("#chartLibraryRetry").is_visible()
@@ -232,6 +243,7 @@ def check():
             page = context.new_page()
             page.on("pageerror", lambda error: errors.append(str(error)))
             page.goto(url, wait_until="networkidle")
+            page.locator("#weatherArchive > summary").click()
             page.locator('#weatherHistoryPanel[data-chart-state="ready"]').wait_for(state="attached")
             assert page.evaluate("!!Chart.getChart('weatherHistoryChart')")
             check_scroll_navigation(page)

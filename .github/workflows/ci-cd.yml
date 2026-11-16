@@ -20,6 +20,13 @@ jobs:
           bash -n deploy/ssh-command.sh
       - name: Validate site assets, anchors and inline JavaScript
         run: python scripts/check_site.py
+      - name: Validate content negotiation and discovery headers in isolated Nginx
+        run: |
+          if ! command -v nginx >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends nginx openssl
+          fi
+          python scripts/check_nginx.py
       - name: Test deployments, rollback and persistent weather storage
         run: python -m unittest discover -s tests -v
       - name: Package tested source
@@ -47,6 +54,8 @@ jobs:
         run: |
           python scripts/check_hiring_story.py
           python scripts/check_visual_layout.py
+          python scripts/check_ride_and_stories.py
+          python scripts/check_site_routes.py
           python scripts/browser_smoke.py
   deploy:
     needs: [test, browser-test]

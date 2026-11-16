@@ -1,0 +1,21 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://banas.dev/",
+      "service-desc": [
+        {
+          "href": "https://banas.dev/openapi.json",
+          "type": "application/vnd.oai.openapi+json",
+          "title": "Public weather and air-quality JSON exports"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://banas.dev/api.md",
+          "type": "text/markdown",
+          "title": "Read-only data documentation and limitations"
+        }
+      ]
+    }
+  ]
+}

@@ -21,6 +21,40 @@ by the receiver. Both SSH wrapper and receiver are installed once as root-owned
 files and are not updated by subsequent releases. Changes to those files require
 an explicit server installation.
 
+The 15 November 2026 project-stories / ride-check release adds `public/projekty.html`,
+`public/assets/project-stories.css`, `public/assets/project-stories.js`,
+`public/assets/ride-planner.css` and `public/assets/ride-planner.js` to the strict
+archive allowlist. **Before deploying it**, an authorized operator must update
+the installed `/usr/local/sbin/banasdev-deploy` from this repository's `deploy.py`.
+An older receiver will safely reject this archive as unexpected entries.
+Updating source or packaging does not update the installed receiver, and no
+server installation or deployment is performed by local validation.
+
+The 16 November 2026 professional / after-hours split also adds `public/hobby.html`,
+`public/assets/hobbies.css` and `public/assets/hobbies.js` to that allowlist.
+The same operator update is required before releasing this iteration.
+
+Agent-discovery assets additionally include `sitemap.xml`, the three generated
+Markdown pages, `api.md`, `openapi.json` and `.well-known/api-catalog`. These names
+are explicitly allowlisted; no arbitrary files can enter the release.
+After changing HTML, regenerate with `python3 scripts/agent_content.py --write`.
+CI verifies sitemap coverage and rejects stale Markdown.
+
+Install the reviewed `nginx-public.conf` only after backing up the active virtual
+host and running `nginx -t`. Its HTTP-level maps negotiate Markdown, disable
+negotiation when `q=0`, add discovery Link headers and serve the catalog with
+`application/linkset+json`. HTML/Markdown page responses carry `Vary: Accept`
+and `Cache-Control: no-store` because Cloudflare does not generally key arbitrary
+Vary headers. Do not add an edge rule that overrides this cache policy.
+`python3 scripts/check_nginx.py` exercises the rules in an isolated Nginx instance;
+it does not install or reload production configuration.
+
+The chosen robots Content Signals allow search and AI input but decline model
+training. They communicate preferences; they do not enforce bot authentication
+or network access controls. No Cloudflare dashboard setting is required for the
+origin implementation. The external scripts opt out of Rocket Loader through
+`data-cfasync="false"`; do not weaken CSP to accommodate rewritten scripts.
+
 The release no longer includes `cv_photo2.jpg` or `cv_photo2.webp`. Before
 deploying this change, an operator must update the installed
 `/usr/local/sbin/banasdev-deploy` from `deploy.py`: the older receiver requires
